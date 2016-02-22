@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Chicago',
 
     /*
     |--------------------------------------------------------------------------
@@ -156,6 +156,21 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /*
+         * Third-party Service Providers
+         */
+        // 'Aws\Laravel\AwsServiceProvider',
+        // 'Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
+        // 'Chumper\Zipper\ZipperServiceProvider',
+        'Vinkla\Hashids\HashidsServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
+        //'Collective\Html\HtmlServiceProvider',
+        'Former\FormerServiceProvider',
+        // 'Intervention\Image\ImageServiceProvider',
+        'HieuLe\Active\ActiveServiceProvider'
+
     ],
 
     /*
@@ -202,6 +217,20 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Third-party Aliases
+         */
+        // 'AWS'       => 'Aws\Laravel\AwsFacade',
+        'Flash'     => 'Laracasts\Flash\Flash',
+        // 'Zipper'    => 'Chumper\Zipper\Zipper',
+        'Hashids'   => 'Vinkla\Hashids\Facades\Hashids',
+        'Debugbar'  => 'Barryvdh\Debugbar\Facade',
+        'Form'      => 'Collective\Html\FormFacade',
+        //'Html'      => 'Collective\Html\HtmlFacade',
+        'Former'    =>  'Former\Facades\Former',
+        // 'Image'     => 'Intervention\Image\Facades\Image',
+        'Active' => 'HieuLe\Active\Facades\Active',
+        'Carbon' => Carbon\Carbon::class
     ],
 
 ];
