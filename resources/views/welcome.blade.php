@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>FOCUS League</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -43,7 +43,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">F.O.C.U.S. League</div>
-                <div class="subtitle"><strong>F</strong>un <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>Sgit</strong>eries</div>
+                <div class="subtitle"><strong>F</strong>ocused <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</div>
             </div>
         </div>
     </body>
