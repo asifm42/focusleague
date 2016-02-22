@@ -11,7 +11,7 @@
 {{--    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}"> --}}
 
         <style>
-/*            html, body {
+            html, body {
                 height: 100%;
             }
 
@@ -20,13 +20,15 @@
                 padding: 0;
                 width: 100%;
                 display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }*/
+                /*font-weight: 100;
+                font-family: 'Lato';*/
+            }
 
             .container {
+                margin: 4px;
+                padding: 2px;
                 text-align: center;
-                /*display: table-cell;*/
+                display: table-cell;
                 vertical-align: middle;
             }
 
@@ -40,20 +42,24 @@
             }
 
             .subtitle {
-                font-size: 48px;
+                font-size: 42px;
             }
 
             .jumbotron {
                 font-weight:350;
+            }
+
+            .nowrap {
+                white-space: nowrap;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">F.O.C.U.S. League</div>
-                <div class="subtitle"><strong>F</strong>oster <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</div>
-                <div><h4>Every Tuesday 8p-10p starting March 15 at the Houston Sports Park</h4></div>
+                <div class="title nowrap">F.O.C.U.S. League</div>
+                <div class="subtitle nowrap"><strong>F</strong>ostering <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</div>
+                <div class="nowrap"><h4>Every Tuesday, 8p-10p, starting March 15 at the Houston Sports Park</h4></div>
                 <div class="jumbotron">
                     <h1>The Mission</h1>
                     <p>To structure would-be pickup games into a league and increase the availability of competitive Ultimate in Houston.</p>
