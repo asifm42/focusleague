@@ -1,72 +1,32 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>FOCUS League</title>
-
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/bootstrap/dist/css/bootstrap.min.css') }}">
- {{--    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/font-awesome.min.css') }}"> --}}
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/paper.bootstrap.min.css') }}">
-{{--    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}"> --}}
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-            }
-
-            .container {
-                margin: 4px;
-                padding: 2px;
-                /*text-align: center;*/
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-                text-align: center;
-            }
-
+@extends('layouts.default')
+@section('title','FOCUS League – FAQ')
+@section('styles')
+    <style>
             .subtitle {
                 font-size: 42px;
                 text-align: center;
-            }
-
-            .nowrap {
                 white-space: nowrap;
             }
-
-            .panel {
-                margin:10px;
-            }
         </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title nowrap">F.O.C.U.S. League</div>
-                <div class="subtitle nowrap">Frequently Asked Questions</div>
+@stop
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class="subtitle text-center">Frequently Asked Questions</div>
                 <div class="panel panel-default">
                     <div class="panel-heading">What is Ultimate?</div>
                     <div class="panel-body">
-                        <p style="font-style:italic">Ultimate, originally known as ultimate frisbee, is a non-contact team field sport played with a flying disc. Points are scored by passing the disc to a teammate in the opposing end zone. Other basic rules are that players must not take steps while holding the disc, and interceptions, incomplete passes, and passes out of bounds are turnovers. Rain, wind, or occasionally other adversities can make for a testing match with rapid turnovers, heightening the pressure of play.</p>
-                        <p>- <a href="https://en.wikipedia.org/wiki/Ultimate_(sport)">Wikipedia Ultimate (sport)</a></p>
+                        <blockquote>
+                            <p>Ultimate, originally known as ultimate frisbee, is a non-contact team field sport played with a flying disc. Points are scored by passing the disc to a teammate in the opposing end zone. Other basic rules are that players must not take steps while holding the disc, and interceptions, incomplete passes, and passes out of bounds are turnovers. Rain, wind, or occasionally other adversities can make for a testing match with rapid turnovers, heightening the pressure of play.</p>
+                            <footer><a href="https://en.wikipedia.org/wiki/Ultimate_(sport)">Wikipedia <cite title="Ultimate (sport)">Ultimate (sport)<cite></a></footer>
+                        </blockquote>
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">What is the FOCUS League?</div>
                     <div class="panel-body">
-                        <p>The FOCUS League is a competitive Ultimate league in Houston intended for players with intermediate to advanced skills in the sport of Ultimate. The purpose of this league is to structure would-be pick-up games into a series of 4 week cycles and increase the availability of competitive Ultimate in Houston. Registered players will be divided into X number of teams and remain together for a 4 week cycle. Each team will have a team captain(s) who will lead the team in developing the team offense and defense (i.e., teams will call offensive plays, call defenses with a marking direction, work on zones, crumbles, and any other strategic points of interest of the team)</p>
+                        <p>The FOCUS League is a competitive Ultimate league in Houston intended for players with intermediate to advanced skills in the sport of Ultimate. The purpose of this league is to structure would-be pick-up games into a series of 4 week cycles and increase the availability of competitive Ultimate in Houston. Registered players will be divided into X number of teams and remain together for a 4 week cycle. Each team will have a team captain(s) who will lead the team in developing the team offense and defense (i.e., teams will call offensive plays, call defenses with a marking direction, work on zones, crumbles, and any other strategic points of interest of the team).</p>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -109,5 +69,5 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@stop
