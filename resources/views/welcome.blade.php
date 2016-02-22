@@ -52,8 +52,8 @@
         <div class="container">
             <div class="content">
                 <div class="title">F.O.C.U.S. League</div>
-                <div class="subtitle"><strong>F</strong>ocused <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</div>
-                <div><h5>Every Tuesday 8p-10p starting March 15 at the Houston Sports Park</h5></div>
+                <div class="subtitle"><strong>F</strong>oster <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</div>
+                <div><h4>Every Tuesday 8p-10p starting March 15 at the Houston Sports Park</h4></div>
                 <div class="jumbotron">
                     <h1>The Mission</h1>
                     <p>To structure would-be pickup games into a league and increase the availability of competitive Ultimate in Houston.</p>
