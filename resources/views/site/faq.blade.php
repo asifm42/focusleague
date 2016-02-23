@@ -44,7 +44,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">What if I am a beginner?</div>
                     <div class="panel-body">
-                        <p>You are still able to play as The FOCUS league does not exclude anyone (unless registration is capped due to capacity). However, the FOCUS league is intended for the experienced player. If you do not understand terms/concepts like force, flick, backhand, hammer, scoober, huck, cut, vertical stack offense, horizontal offense, man defense, zone defense, zone crumble, zone cup, foul, pick, poach, etc, as they relate to Ultimate then you may not find the FOCUS league an enjoyable experience. If you cannot throw a 15 yard leading flick and backhand with accuracy to a receiver then you may not find the FOCUS league an enjoyable experience.</p>
+                        <p>You are still able to play as The FOCUS league does not exclude anyone (unless registration is capped due to capacity). However, the FOCUS league is intended for the experienced player. If you do not understand terms/concepts like force, flick, backhand, hammer, scoober, huck, cut, vertical stack offense, horizontal offense, man defense, zone defense, zone crumble, zone cup, foul, pick, poach, etc, as they relate to Ultimate then you may not find the FOCUS league an enjoyable experience. If you cannot throw a 15 yard leading flick and backhand with accuracy to a receiver, then you may not find the FOCUS league an enjoyable experience.</p>
 
                         <p>If you feel that the FOCUS League is not for you, the <a href="http://www.houstonultimate.org">Houston Ultimate Community (HUC)</a> hosts a variety of beginner/recreational leagues and tournaments.</p>
                     </div>
@@ -52,7 +52,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Why are you charging money?</div>
                     <div class="panel-body">
-                        <p>A lot of time, effort and resources are needed into producing this experience. Additionally, the Houston Sports Park is the premier sports park in Houston with professional sports field maintenance and their field rental prices reflect that.</p>
+                        <p>A lot of time, effort and resources are required for producing this league. Additionally, the Houston Sports Park is the premier sports park in Houston with professional sports field maintenance and their field rental prices reflect that.</p>
                     </div>
                 </div>
                 <div class="panel panel-default">

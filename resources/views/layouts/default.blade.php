@@ -18,9 +18,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url('assets/core/images/appicon/apple-touch-icon-76.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ url('assets/core/images/appicon/apple-touch-icon-57.png') }}">
 --}}
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/bootstrap/dist/css/bootstrap.min.css') }}">
-{{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/css/font-awesome.min.css') }}"> --}}
+{{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/bootstrap/dist/css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/paper.bootstrap.min.css') }}">
+{{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/css/font-awesome.min.css') }}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}"> --}}
     @yield('styles')
 
