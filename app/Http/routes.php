@@ -37,14 +37,45 @@ Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesControll
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
 
+/*
+ * Session Routes
+ */
+Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
+
+
+/*
+ * User non-auth Routes
+ */
+Route::group(['middleware' => ['web','guest']], function() {
+
+    /*
+     * Session Routes
+     */
+    Route::get(     'signin',               ['as' => 'sessions.create', 'uses' => 'SessionsController@create']);
+    Route::post(    'signin',               ['as' => 'sessions.signin', 'uses' => 'SessionsController@signIn']);
+
+    // Password reset link request routes...
+    Route::get(     'password/email',       ['as' => 'password.emailForm', 'uses' => 'Auth\PasswordController@getEmail']);
+    Route::post(    'password/email',       ['as' => 'password.email', 'uses' => 'Auth\PasswordController@postEmail']);
+
+    // Password reset routes...
+    Route::get(     'password/reset/{token}',           ['as' => 'password.resetForm', 'uses' => 'Auth\PasswordController@getReset']);
+    Route::post(    'password/reset',                   ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
 
     // User registration routes
-    Route::get(     'signup',       ['as' => 'users.create', 'uses' => 'UsersController@create']);
-    Route::post(    'users',        ['as' => 'users.store', 'uses' => 'UsersController@store']);
+    Route::get(     'signup',                           ['as' => 'users.create', 'uses' => 'UsersController@create']);
+    Route::post(    'signup',                           ['as' => 'users.store', 'uses' => 'UsersController@store']);
+
+    // User verification routes
+    Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
+    Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
+    Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
+});
 
 
+
+Route::group(['middleware' => ['web']], function () {
     //
     Route::get('/token', function () {
         throw new TokenMismatchException;
