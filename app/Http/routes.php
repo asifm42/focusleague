@@ -38,6 +38,13 @@ Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesControll
 */
 
 Route::group(['middleware' => ['web']], function () {
+
+
+    // User registration routes
+    Route::get(     'signup',       ['as' => 'users.create', 'uses' => 'UsersController@create']);
+    Route::post(    'users',        ['as' => 'users.store', 'uses' => 'UsersController@store']);
+
+
     //
     Route::get('/token', function () {
         throw new TokenMismatchException;

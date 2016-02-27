@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTeamsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('teams', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('division');
+            $table->integer('cycle_id')->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
+
+            // Foreign keys
+            $table->foreign('cycle_id')
+                ->references('id')
+                ->on('cycles');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('teams');
+    }
+}
