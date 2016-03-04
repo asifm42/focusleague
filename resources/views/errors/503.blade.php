@@ -1,47 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('layouts.default')
+@section('title','FOCUS League – Scheduled Maintenance')
+@section('content')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <h4>
+                <i class="fa fa-wrench"></i>&nbsp;FOCUS League is down for scheduled maintenance
+            </h4>
+            <div class="well error">
+                <p>We are currently performing maintenance tasks and will be back online shortly. Thank you for your patience.</p>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+
+@endsection
