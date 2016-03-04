@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('title','Obsidian Black – 403')
+@extends('layouts.default')
+@section('title','FOCUS League – 403')
 @section('content')
 
 <div class="container">
