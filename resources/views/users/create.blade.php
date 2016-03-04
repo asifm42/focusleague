@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6">
-                @include('users.forms.create')
+                @include('users.forms.create', ['edit'=>false])
             </div>
         </div>
     </div>

@@ -94,17 +94,29 @@
             ->options(['mens' => 'Mens', 'mixed' => 'Mixed', 'womens' => 'Womens'])
             ->placeholder('Optional second division preference')
         !!}
-        {!! Former::password('password')
-            ->addClass('form-control')
-            ->placeholder('Required password')
-            ->required()
-        !!}
-        {!! Former::password('password_confirmation')
-            ->addClass('form-control')
-            ->label('Password (again)')
-            ->placeholder('Required password confirmation')
-            ->required()
-        !!}
+        @if($edit === true)
+            {!! Former::password('password')
+                ->addClass('form-control')
+                ->placeholder('Fill out if changing')
+            !!}
+            {!! Former::password('password_confirmation')
+                ->addClass('form-control')
+                ->label('Password (again)')
+                ->placeholder('Fill out if changing')
+            !!}
+        @else
+            {!! Former::password('password')
+                ->addClass('form-control')
+                ->placeholder('Required password')
+                ->required()
+            !!}
+            {!! Former::password('password_confirmation')
+                ->addClass('form-control')
+                ->label('Password (again)')
+                ->placeholder('Required password confirmation')
+                ->required()
+            !!}
+        @endif
     </div>
 
     <div class="panel-footer">

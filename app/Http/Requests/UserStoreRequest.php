@@ -30,10 +30,11 @@ class UserStoreRequest extends Request
     {
         return [
             'name'                          => 'required|max:255',
-            'email'                         => 'required|email',
+            'email'                         => 'required|email|unique:users,email',
+            'nickname'                      => 'unique:users,nickname|min:3',
             'gender'                        => 'required|in:male,female',
             'birthday'                      => 'required|date',
-            'cell_number'                   => 'required|max:30|numeric',
+            'cell_number'                   => 'required|numeric',
             'dominant_hand'                 => 'required|in:left,right',
             'height'                        => 'required|min:48|max:84|numeric',
             'division_preference_first'     => 'required|in:mens,mixed,womens',
