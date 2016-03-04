@@ -91,8 +91,9 @@ class UsersController extends Controller
 
     protected function resetVerificationCodeForm(Request $request)
     {
-        if($request->input('error') == 'UnverifiedAccount')
+        if($request->input('error') == 'UnverifiedAccount') {
             flash()->error('Your email address has not been verified. Please verify your account by clicking the verification link in the welcome email.');
+        }
 
         return view('auth.user.verify');
     }
