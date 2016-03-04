@@ -5,3 +5,5 @@ Homestead.json
 .env
 
 /bower_components
+composer.phar
+composer.lock
