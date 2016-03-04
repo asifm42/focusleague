@@ -7,7 +7,6 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "watson/validating": "~1.0",
         "laracasts/flash": "~1.3",
         "anahkiasen/former": "4.0.x-dev",
         "vinkla/hashids":"1.x",
