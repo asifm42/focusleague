@@ -6,7 +6,8 @@
 @section('content')
     <div class="page-header">
         <div class="container">
-            <h>Edit Profile</h2>
+            <h4 class="hidden-md hidden-lg">Edit Profile</h4>
+            <h3 class="hidden-xs hidden-sm">Edit Profile</h3>
             <p>Make changes to your profile.</p>
         </div>
     </div>

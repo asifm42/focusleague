@@ -1,12 +1,11 @@
 @extends('layouts.default')
 @section('title','FOCUS League – Player Registration')
-@section('styles')
 
-@stop
 @section('content')
     <div class="page-header">
         <div class="container">
-            <h2>Sign up</h2>
+            <h4 class="hidden-md hidden-lg">Sign up</h4>
+            <h3 class="hidden-xs hidden-sm">Sign up</h3>
             <p>Create a new account</p>
         </div>
     </div>
@@ -17,4 +16,4 @@
             </div>
         </div>
     </div>
-@stop
+@endsection

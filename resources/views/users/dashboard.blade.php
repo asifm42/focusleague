@@ -1,12 +1,11 @@
 @extends('layouts.default')
 @section('title','FOCUS League – Player Dashboard')
-@section('styles')
 
-@stop
 @section('content')
     <div class="page-header">
         <div class="container">
-            <h2>Dashboard</h2>
+            <h4 class="hidden-md hidden-lg">Dashboard</h4>
+            <h3 class="hidden-xs hidden-sm">Dashboard</h3>
             <p>Overview of your account.</p>
         </div>
     </div>

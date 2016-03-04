@@ -4,10 +4,16 @@
 
 @stop
 @section('content')
+    <div class="page-header">
+        <div class="container">
+            <h4 class="hidden-md hidden-lg">Frequently Asked Questions</h4>
+            <h3 class="hidden-xs hidden-sm">Frequently Asked Questions</h3>
+            <p>Helpful information about the league</p>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <h3 class="text-center">Frequently Asked Questions</h3>
                 <div class="panel panel-default">
                     <div class="panel-heading">What is Ultimate?</div>
                     <div class="panel-body">

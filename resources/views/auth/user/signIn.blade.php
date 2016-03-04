@@ -4,7 +4,8 @@
 @section('content')
     <div class="page-header">
         <div class="container">
-            <h2>Sign in</h2>
+            <h4 class="hidden-md hidden-lg">Sign in</h4>
+            <h3 class="hidden-xs hidden-sm">Sign in</h3>
             <p>Sign in to access your account.</p>
         </div>
     </div>
