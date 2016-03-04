@@ -166,7 +166,7 @@ return [
         // 'Chumper\Zipper\ZipperServiceProvider',
         'Vinkla\Hashids\HashidsServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
-        //'Collective\Html\HtmlServiceProvider',
+        'Collective\Html\HtmlServiceProvider',
         'Former\FormerServiceProvider',
         // 'Intervention\Image\ImageServiceProvider',
         'HieuLe\Active\ActiveServiceProvider'
@@ -226,7 +226,7 @@ return [
         'Hashids'   => 'Vinkla\Hashids\Facades\Hashids',
         'Debugbar'  => 'Barryvdh\Debugbar\Facade',
         'Form'      => 'Collective\Html\FormFacade',
-        //'Html'      => 'Collective\Html\HtmlFacade',
+        'Html'      => 'Collective\Html\HtmlFacade',
         'Former'    =>  'Former\Facades\Former',
         // 'Image'     => 'Intervention\Image\Facades\Image',
         'Active' => 'HieuLe\Active\Facades\Active',
