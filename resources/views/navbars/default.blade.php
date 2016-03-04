@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ URL::route('site.home') }}">FOCUS League</a>
+            <a class="navbar-brand" href="{{ URL::route('site.home') }}"><img src="{{ asset('assets/img/logo.png') }}" style="height:45px; margin-top:-10px;"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
