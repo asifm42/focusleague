@@ -1,0 +1,12 @@
+.alert {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.navbar-default{
+    margin-bottom: 0;
+}
+
+.page-header {
+    margin-top: 0;
+}
