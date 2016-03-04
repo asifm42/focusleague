@@ -12,18 +12,10 @@
 */
 
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
-
-/*
- * Site Pages Route
- */
-Route::get(     '/',        ['as' => 'site.home',       'uses' => 'PagesController@welcome']);
-Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PagesController@news']);
-Route::get(     'faq',      ['as' => 'site.faq',        'uses' => 'PagesController@faq']);
-Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesController@pricing']);
 
 
 /*
@@ -39,21 +31,23 @@ Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesControll
 
 
 /*
- * Session Routes
- */
-Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
-
-
-/*
  * User non-auth Routes
  */
-Route::group(['middleware' => ['web','guest']], function() {
+Route::group(['middleware' => ['web']], function() {
+    /*
+     * Site Pages Route
+     */
+    Route::get(     '/',        ['as' => 'site.home',       'uses' => 'PagesController@welcome']);
+    Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PagesController@news']);
+    Route::get(     'faq',      ['as' => 'site.faq',        'uses' => 'PagesController@faq']);
+    Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesController@pricing']);
 
     /*
      * Session Routes
      */
     Route::get(     'signin',               ['as' => 'sessions.create', 'uses' => 'SessionsController@create']);
     Route::post(    'signin',               ['as' => 'sessions.signin', 'uses' => 'SessionsController@signIn']);
+    Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
 
     // Password reset link request routes...
     Route::get(     'password/email',       ['as' => 'password.emailForm', 'uses' => 'Auth\PasswordController@getEmail']);
@@ -71,14 +65,32 @@ Route::group(['middleware' => ['web','guest']], function() {
     Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
     Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
     Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
-});
 
-
-
-Route::group(['middleware' => ['web']], function () {
     //
     Route::get('/token', function () {
         throw new TokenMismatchException;
         return view('welcome');
     });
+});
+
+Route::group(['middleware' => ['web','auth']], function() {
+
+    /*
+     * User Routes
+     */
+    Route::get(     'users/{id}',       ['as' => 'users.view', 'uses' => 'UsersController@show']);
+    Route::get(     'profile',       ['as' => 'users.profile', 'uses' => 'UsersController@profile']);
+    Route::get(     'users/{id}/edit',  ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
+    Route::patch(   'users/{id}',       ['as' => 'users.update', 'uses' => 'UsersController@update']);
+    Route::put(     'users/{id}',       ['as' => 'users.put', 'uses' => 'UsersController@update']);
+    Route::delete(  'users/{id}',       ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
+});
+
+Route::group(['middleware' => ['web','auth','admin']], function() {
+    // Route::get(     'users',            ['as' => 'users.list', 'uses' => 'UsersController@index']);
+});
+Route::group(['middleware' => 'web'], function () {
+    // Route::auth();
+
+    // Route::get('/home', 'HomeController@index');
 });
