@@ -33,7 +33,6 @@ class UserFactory extends AbstractFactory implements Factory
         $user['email']                  = $data['email'];
         $user['password']               = Hash::make($data['password']);
         $user['confirmation_code']      = str_random(32);
-        // $user['promotion_code']         = $data['promotion'];
 
         if (! $user->save() ){
             throw new SaveModelException($user);

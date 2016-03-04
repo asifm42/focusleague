@@ -5,9 +5,16 @@
     </div>
 
     <div class="panel-body">
-        {!! Former::vertical_open()
-            ->action(route('users.store'))
-        !!}
+        @if($edit === true)
+            {!! Former::vertical_open()
+                ->method('PATCH')
+                ->action(route('users.update', $user->id))
+            !!}
+        @else
+            {!! Former::vertical_open()
+                ->action(route('users.store'))
+            !!}
+        @endif
 
         {!! Former::text('name')
             ->addClass('form-control')
@@ -19,11 +26,18 @@
             ->addClass('form-control')
             ->placeholder('Optional nickname')
         !!}
-        {!! Former::text('email')
-            ->addClass('form-control')
-            ->placeholder('Required email')
-            ->required()
-        !!}
+        @if($edit === true)
+            {!! Former::text('email')
+                ->addClass('form-control')
+                ->disabled('');
+            !!}
+        @else
+            {!! Former::text('email')
+                ->addClass('form-control')
+                ->placeholder('Required email')
+                ->required()
+            !!}
+        @endif
         {!! Former::text('cell_number')
             ->addClass('form-control')
             ->placeholder('Required cell number')
@@ -120,10 +134,17 @@
     </div>
 
     <div class="panel-footer">
-        {!! Former::submit()
-            ->addClass('btn btn-primary')
-            ->value('Sign up')
-        !!}
+        @if($edit === true)
+            {!! Former::submit()
+                ->addClass('btn btn-primary')
+                ->value('Save')
+            !!}
+        @else
+            {!! Former::submit()
+                ->addClass('btn btn-primary')
+                ->value('Sign up')
+            !!}
+        @endif
     </div>
     {!! Former::close() !!}
 </div>

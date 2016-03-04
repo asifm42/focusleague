@@ -4,20 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Factories\UserFactory;
 use App\Http\Requests;
+use App\Http\Requests\UserEditFormRequest;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\VerificationCodeResetRequest;
 use App\Http\Requests\VerifyUserEmailRequest;
 use App\Http\Controllers\Controller;
 use App\Jobs\ResetVerificationCode;
 use App\Jobs\VerifyUser;
 use App\Models\User;
+use App\Updaters\UserUpdater;
 use Illuminate\Http\Request;
+use Former;
 
 class UsersController extends Controller
 {
-    public function __construct(UserFactory $userFactory)
+    public function __construct(UserFactory $userFactory, UserUpdater $userUpdater)
     {
         $this->userFactory = $userFactory;
+        $this->userUpdater = $userUpdater;
     }
 
     /**
@@ -78,6 +83,32 @@ class UsersController extends Controller
         // }
 
         return view('users.dashboard', $data );
+    }
+
+    /**
+     * Show the user's profile edit form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(UserEditFormRequest $request) {
+        $user = User::findOrFail($request->id);
+        $data['user'] = $user;
+        Former::populate($user);
+        return view('users.edit', $data );
+    }
+
+    /**
+     * Update the user's information
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UserUpdateRequest $request, $id)
+    {
+        $user = $this->userUpdater->update($id, $request->all());
+
+        flash()->success('Update Saved');
+
+        return redirect()->back();
     }
 
     protected function verify(VerifyUserEmailRequest $request)

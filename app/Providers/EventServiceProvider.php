@@ -25,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\VerificationCodeReset' => [
             'App\Listeners\SendVerificationEmail',
         ],
+        'App\Events\UserUpdated' => [
+            // 'App\Listeners\UpdateUserInAnnouncementEmailList',
+        ],
     ];
 
     /**

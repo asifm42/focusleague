@@ -4,13 +4,8 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class UserStoreRequest extends Request
+class UserUpdateRequest extends Request
 {
-    /**
-     * Message to be displayed if authorization fails
-     *
-    */
-    protected $forbiddenMsg = 'You do not have permission to register an account.';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -18,7 +13,7 @@ class UserStoreRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->id === (int) $this->route('id');
     }
 
     /**
@@ -30,15 +25,14 @@ class UserStoreRequest extends Request
     {
         return [
             'name'                          => 'required|max:255',
-            'email'                         => 'required|max:255|email|unique:users,email',
-            'nickname'                      => 'unique:users,nickname|min:3',
+            'nickname'                      => 'min:3|unique:users,nickname,'.$this->route('id'),
             'gender'                        => 'required|in:male,female',
             'birthday'                      => 'required|date',
             'cell_number'                   => 'required|numeric',
             'dominant_hand'                 => 'required|in:left,right',
             'height'                        => 'required|min:48|max:84|numeric',
             'division_preference_first'     => 'required|in:mens,mixed,womens',
-            'password'                      => 'required|confirmed|min:8'
+            'password'                      => 'confirmed|min:8'
         ];
     }
 

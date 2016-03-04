@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Profile</div>
+                    <div class="panel-heading">Profile - <a href="{{ route('users.edit', $user->id) }}">Edit</a></div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
