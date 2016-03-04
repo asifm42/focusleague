@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"20",
+				"20:00:00"
+			],
+			[
+				"da",
+				"dateTime"
+			],
+			[
+				"confirm",
+				"confirmation_code"
+			],
+			[
 				"url",
 				"urldecode〔function〕"
 			],
@@ -502,31 +514,11 @@
 			[
 				"previe",
 				"previewElement"
-			],
-			[
-				"qu",
-				"querySelector"
-			],
-			[
-				"qui",
-				"quickPost"
-			],
-			[
-				"tex",
-				"text-align"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "resources/views/welcome.blade.php",
-			"settings":
-			{
-				"buffer_size": 1277,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -535,10 +527,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 67.0,
-		"last_filter": "Snippet: html",
+		"height": 392.0,
+		"last_filter": "Laravel ",
 		"selected_items":
 		[
+			[
+				"Laravel ",
+				"Set Syntax: Laravel Blade"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Lorem ipsum"
+			],
 			[
 				"Snippet: html",
 				"Snippet: html"
@@ -562,10 +562,6 @@
 			[
 				"install",
 				"Package Control: Install Package"
-			],
-			[
-				"Snippet: ",
-				"Snippet: html"
 			],
 			[
 				"pac",
@@ -610,20 +606,136 @@
 	"expanded_folders":
 	[
 		"/Library/WebServer/Documents/focusleague",
-		"/Library/WebServer/Documents/focusleague/resources",
-		"/Library/WebServer/Documents/focusleague/resources/views"
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/Auth",
+		"/Library/WebServer/Documents/focusleague/app/Http/Middleware",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests",
+		"/Library/WebServer/Documents/focusleague/resources/views",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/emails",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords",
+		"/Library/WebServer/Documents/focusleague/storage/framework",
+		"/Library/WebServer/Documents/focusleague/storage/framework/views"
 	],
 	"file_history":
 	[
-		"/Library/WebServer/Documents/focusleague/.env",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/.env.example",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/.env",
-		"/Users/Asif/.ssh/id_rsa.pub",
-		"/Library/WebServer/Documents/focusleague/.gitignore",
-		"/Users/Asif/.bash_profile",
 		"/Library/WebServer/Documents/focusleague/app/Http/routes.php",
-		"/Users/Asif/Library/Caches/Cleanup At Startup/Transmit/F0AD49FD-EB84-44CF-ACB1-27AB609BBD01/.htaccess",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/Auth/PasswordController.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/layouts/email.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords/reset.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms/resetPassword.blade.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Foundation/Auth/ResetsPasswords.php",
+		"/Library/WebServer/Documents/focusleague/storage/framework/views/b9712171ab6f6d0668a47653b1fa46bd0f157ec8.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/emails/password.blade.php",
+		"/Library/WebServer/Documents/focusleague/vendor/symfony/console/Tests/Fixtures/TestCommand.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/navbars/default.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Factories/SessionFactory.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/UsersController.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/SessionsController.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/create.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords/forgotPassword.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms/forgotPassword.blade.php",
+		"/Library/WebServer/Documents/focusleague/.env",
+		"/Library/WebServer/Documents/focusleague/composer.json",
+		"/Library/WebServer/Documents/focusleague/config/mail.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/verify.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms/signIn.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/profile.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/forms/create.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Factories/AbstractFactory.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/SignInRequest.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/signIn.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/view.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Contracts/Updater.php",
+		"/Library/WebServer/Documents/focusleague/app/Events/VerificationCodeReset.php",
+		"/Library/WebServer/Documents/focusleague/app/Events/UserVerified.php",
+		"/Library/WebServer/Documents/focusleague/app/Events/UserRegistered.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/UserRegistered.php",
+		"/Library/WebServer/Documents/focusleague/app/Events/UserUpdated.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/VerificationCodeReset.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/UserVerified.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/UserUpdated.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/Event.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/layouts/default.blade.php",
+		"/Library/WebServer/Documents/focusleague/.gitignore",
+		"/Library/WebServer/Documents/focusleague/app/Factories/SessionsFactory.php",
+		"/Library/WebServer/Documents/focusleague/config/app.php",
+		"/Library/WebServer/Documents/focusleague/config/auth.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/ConvertToImageException.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/InvalidConfirmationCodeException.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/SaveModelException.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/UnauthorizedAccessException.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/UnverifiedAccountException.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/UserVerifiedException.php",
+		"/Library/WebServer/Documents/focusleague/app/Contracts/Factory.php",
+		"/Library/WebServer/Documents/focusleague/app/Factories/AbsractFactory.php",
+		"/Library/WebServer/Documents/focusleague/database/factories/ModelFactory.php",
+		"/Library/WebServer/Documents/focusleague/bower.json",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/bower.json",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144357_create_cycle_user_table.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/UsersTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/UserStoreRequest.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/User.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2014_10_12_000000_create_users_table.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/CyclesTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/GamesTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/WeeksTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/DatabaseSeeder.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/Week.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/Cycle.php",
+		"/Library/WebServer/Documents/focusleague/vendor/fzaninotto/faker/readme.md",
+		"/Library/WebServer/Documents/focusleague/.git/MERGE_MSG",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144034_create_weeks_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144649_create_posts_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144621_create_transactions_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144103_create_teams_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144045_create_games_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_143953_create_cycles_table.php",
+		"/Library/WebServer/Documents/focusleague/app/Game.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Database/Seeder.php",
+		"/Library/WebServer/Documents/focusleague/app/Week.php",
+		"/Library/WebServer/Documents/focusleague/app/Cycle.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_145021_create_contacts_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_145003_create_logs_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144539_create_subs_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144250_create_game_team_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144915_create_checkins_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144950_create_attendances_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144426_create_cycle_subs_table.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/PagesController.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2015_08_18_151144_add_cashier_columns.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2015_09_25_122342_add_billing_info_columns_to_users_table.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2014_12_11_155200_create_users_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_081336_create_users_table.php",
+		"/Users/Asif/.bash_profile",
+		"/Users/Asif/.bashrc",
+		"/Library/WebServer/Documents/focusleague/resources/views/layouts/footer.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/site/news.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/site/faq.blade.php",
+		"/Library/WebServer/Documents/focusleague/.env.example",
+		"/Library/WebServer/Documents/focusleague/resources/views/site/welcome.blade.php",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/routes.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/faq.blade.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/PagesController.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/site/welcome2.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/welcome2.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/faq.txt",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/site/pricing.blade.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/layouts/default.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/navbars/app.blade.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/navbars/app.blade.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/.env",
+		"/private/etc/hosts",
+		"/Library/WebServer/Documents/focusleague/public/assets/styles/paper.bootstrap.min.css",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/layouts/app.blade.php",
+		"/private/etc/apache2/extra/httpd-vhosts.conf",
+		"/private/etc/group",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/composer.json",
+		"/Library/WebServer/Documents/focusleague/paper.bootstrap.css",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/.env.example",
+		"/Users/Asif/.ssh/id_rsa.pub",
+		"/Users/Asif/Library/Caches/Cleanup At Startup/Transmit/F0AD49FD-EB84-44CF-ACB1-27AB609BBD01/.htaccess",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/cashier/src/Laravel/Cashier/WebhookController.php",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Middleware/VerifyCsrfToken.php",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/.git/COMMIT_EDITMSG",
@@ -633,116 +745,9 @@
 		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/traits/TrimScalarValues.php",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Auth/EloquentUserProvider.php",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/config/auth.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/composer.json",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/api/UsersApiController.php",
 		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/users/settings.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/public/assets/scripts/userSettings.js",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/billing/subscribe.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/public/assets/scripts/subscribe.js",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/public/assets/scripts/billing.js",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/billing/default.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/gruntfile.js",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/TestController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/watson/validating/src/ValidatingModel.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/models/BlackModel.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/api/BillingsApiController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/users/create.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Updaters/UserUpdater.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Console/Commands/SendQueueConfirmationEmail.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Jobs/SendSubscriptionStatusReminderEmails.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Jobs/SendTrialStatusReminderEmails.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Console/Kernel.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Requests/RegisterUserRequest.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Support/Facades/Password.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Requests/EditUserRequest.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/alert/registration.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2016_02_18_151849_add_referral_to_users_table.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2015_09_19_191244_add_account_type_to_users_table.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2014_12_11_155200_create_users_table.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/watson/validating/src/ValidatingInterface.php",
-		"/Users/Asif/Documents/pandoc-test/test1.md",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Mailers/UserMailer.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Mailers/Mailer.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/layout.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/reminders/subscription/just_expired.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/reminders/subscription/expiring.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/reminders/subscription/expired.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/reminders/trial/expired.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/reminders/trial/expiring.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/reminders/trial/just_expired.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2016_02_17_124540_create_failed_jobs_table.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/config/queue.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Console/Commands/SendStatusReminderEmails.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/.env-mail",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/navbars/app.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/BillingsController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Middleware/Environment.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/config/session.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/errors/generic.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/tests/TestCase.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/tests/ExampleTest.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/tests/UsersTest.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/ProjectsController.php",
-		"/Library/WebServer/Documents/phpinfo.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/ellipsesynergie/api-response/src/AbstractResponse.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/api/ProjectsApiController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Exceptions/Handler.php",
-		"/Users/Asif/Downloads/phprftlite-1.1.1/phprftlite-1.1.1/samples/images.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Requests/UpdateSlideSortOrderRequest.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/reports/project/notes.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Support/MessageBag.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Reports/NotesReport.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Reports/AbstractReport.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/assets/js/phantom_processes/report.js",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/alert/queueConfirmation.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Factories/SessionFactory.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Jobs/DeleteSlide.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Console/Commands/DeleteOldResources.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Console/Commands/DeleteOldProjects.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Console/Commands/DeleteOldSlides.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Jobs/DeleteProject.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/.git/MERGE_MSG",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/public/assets/css/resources.css",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Jobs/DeleteResource.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Jobs/DeleteProjectAndSlides.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Foundation/Auth/ResetsPasswords.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Jobs/ResetVerificationCode.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/Auth/PasswordController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/config/app.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordResetServiceProvider.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/docs/files/PagesController.html",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/Auth/AuthController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/alert/exception.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Listeners/SendObsidianNotification.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/verification.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/PagesController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/traits/FreshdeskTrait.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/ResourcesController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/TeamsController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/SessionsController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/api/ResourcesApiController.php",
-		"/Users/Asif/Library/Caches/Cleanup At Startup/Transmit/6596415B-E82F-4FE6-AEFF-2BDDE52DF5BF/.env",
-		"/Users/Asif/Library/Caches/Cleanup At Startup/Transmit/66A0D41D-63B3-4C13-81E1-B9F4507A2379/.env",
-		"/Users/Asif/Library/Caches/Cleanup At Startup/Transmit/1D47E05F-271E-480C-B194-EB03EC127DBC/.env",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/traits/AwsUploaderTrait.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Contracts/Debug/ExceptionHandler.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/models/Resource.php",
-		"/Users/Asif/Downloads/sample.liquidpromptrc",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/traits/SerializesDeletedModels.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Factories/ResourceFactory.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Queue/SerializesModels.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/traits/SerialisesDeletedModels.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Contracts/Factory.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/storage/logs/laravel.log",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Console/Commands/Inspire.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/cashier/src/Laravel/Cashier/Billable.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/emails/simple/reminders/trial/expired_trial.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/projects/create.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Factories/ProjectFactory.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/projects/edit.blade.php"
+		"/Library/WebServer/Documents/obi-black/obsidian-black/public/assets/scripts/userSettings.js"
 	],
 	"find":
 	{
@@ -761,6 +766,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"password.reset",
+			"h5",
+			"2015",
+			"phone",
+			"title",
+			"nowrap",
 			"stripe",
 			"ajax",
 			"key",
@@ -882,13 +893,7 @@
 			"resume",
 			"}\n",
 			"create",
-			"resume",
-			"subscribe",
-			"subscribe\n",
-			".');\n",
-			"isFreeLi",
-			"process-menu-dropdown",
-			"onGra"
+			"resume"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -896,6 +901,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"h6",
 			"rtf",
 			"$this->resource->",
 			"$resource",
@@ -1022,8 +1028,7 @@
 			"				<li><a href=\"solutions_gas-detection.html\">Gas Detection</a></li>\n				<li><a href=\"solutions_specialized-safety-personnel.html\">Specialized Safety Personnel</a></li>\n				<li><a href=\"solutions_turnaround-and-shutdown.html\">Turnaround &amp; Shutdown</a></li>",
 			"<a href=\"mailto:hr@obsidianlearning.com\">",
 			"' )",
-			"( '",
-			"( a"
+			"( '"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1034,98 +1039,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "resources/views/welcome.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1277,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								186,
-								186
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1160,6 +1075,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 66.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -1178,6 +1097,114 @@
 		"selected_items":
 		[
 			[
+				"routes",
+				"app/Http/routes.php"
+			],
+			[
+				"testcon",
+				"vendor/symfony/console/Tests/Fixtures/TestCommand.php"
+			],
+			[
+				"mail",
+				"config/mail.php"
+			],
+			[
+				"compo",
+				"composer.json"
+			],
+			[
+				"compos",
+				"composer.json"
+			],
+			[
+				"def",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				"signin",
+				"resources/views/auth/forms/signIn.blade.php"
+			],
+			[
+				"session",
+				"app/Http/Controllers/SessionsController.php"
+			],
+			[
+				"rou",
+				"app/Http/routes.php"
+			],
+			[
+				"usercon",
+				"app/Http/Controllers/UsersController.php"
+			],
+			[
+				"auth",
+				"config/auth.php"
+			],
+			[
+				"app.p",
+				"config/app.php"
+			],
+			[
+				"defau",
+				"resources/views/layouts/default.blade.php"
+			],
+			[
+				"confiapp",
+				"config/app.php"
+			],
+			[
+				"",
+				"app/Http/Controllers/SessionsController.php"
+			],
+			[
+				"create",
+				"resources/views/users/create.blade.php"
+			],
+			[
+				"user",
+				"app/Models/User.php"
+			],
+			[
+				"rout",
+				"app/Http/routes.php"
+			],
+			[
+				"pages",
+				"app/Http/Controllers/PagesController.php"
+			],
+			[
+				".e",
+				".env.example"
+			],
+			[
+				".env",
+				".env"
+			],
+			[
+				"comp",
+				"composer.json"
+			],
+			[
+				"faq.bl",
+				"resources/views/site/faq.blade.php"
+			],
+			[
+				"default",
+				"resources/views/layouts/default.blade.php"
+			],
+			[
+				"sitewel",
+				"resources/views/site/welcome.blade.php"
+			],
+			[
+				"defaul",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				"navbdef",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
 				"verify",
 				"app/Http/Middleware/VerifyCsrfToken.php"
 			],
@@ -1192,10 +1219,6 @@
 			[
 				"userf",
 				"app/black/Factories/UserFactory.php"
-			],
-			[
-				"comp",
-				"composer.json"
 			],
 			[
 				"trims",
@@ -1214,14 +1237,6 @@
 				"app/black/models/User.php"
 			],
 			[
-				"testcon",
-				"app/Http/Controllers/TestController.php"
-			],
-			[
-				"routes",
-				"app/Http/routes.php"
-			],
-			[
 				"bill",
 				"app/Http/Controllers/api/BillingsApiController.php"
 			],
@@ -1236,14 +1251,6 @@
 			[
 				"testcontr",
 				"app/Http/Controllers/TestController.php"
-			],
-			[
-				"user",
-				"app/black/models/User.php"
-			],
-			[
-				"usercon",
-				"app/Http/Controllers/UsersController.php"
 			],
 			[
 				"userm",
@@ -1308,10 +1315,6 @@
 			[
 				"pagescon",
 				"docs/files/PagesController.html"
-			],
-			[
-				"auth",
-				"app/Http/Controllers/Auth/AuthController.php"
 			],
 			[
 				"excepblad",
@@ -1506,20 +1509,12 @@
 				"app/Http/Controllers/ProjectsController.php"
 			],
 			[
-				"",
-				"untitled"
-			],
-			[
 				"rescontr",
 				"app/Http/Controllers/ResourcesController.php"
 			],
 			[
 				"apikey",
 				"app/black/Factories/ApiKeyFactory.php"
-			],
-			[
-				"pages",
-				"app/Http/Controllers/PagesController.php"
 			],
 			[
 				"userfac",
@@ -1612,82 +1607,6 @@
 			[
 				"list.bla",
 				"resources/views/projects/list.blade.php"
-			],
-			[
-				"player",
-				"public/assets/core/scripts/player.js"
-			],
-			[
-				"screenshot.bla",
-				"resources/views/slides/screenshot.blade.php"
-			],
-			[
-				"slidescon",
-				"app/Http/Controllers/SlidesController.php"
-			],
-			[
-				"slide2im",
-				"resources/assets/js/phantom_processes/slide2image.js"
-			],
-			[
-				"slide2",
-				"public/assets/scripts/imageshot/slide2image.js"
-			],
-			[
-				"phanwri",
-				"app/black/traits/PhantomWriterTrait.php"
-			],
-			[
-				"scree",
-				"app/black/Utilities/Screenshot.php"
-			],
-			[
-				"appservi",
-				"app/Providers/AppServiceProvider.php"
-			],
-			[
-				"confapp",
-				"config/app.php"
-			],
-			[
-				"screenbl",
-				"resources/views/slides/screenshot.blade.php"
-			],
-			[
-				"list.bl",
-				"resources/views/projects/list.blade.php"
-			],
-			[
-				"slide",
-				"app/black/models/Slide.php"
-			],
-			[
-				"projecapi",
-				"app/Http/Controllers/api/ProjectsApiController.php"
-			],
-			[
-				"comments",
-				"resources/views/projects/comments.blade.php"
-			],
-			[
-				"slidetran",
-				"app/black/transformers/SlideTransformer.php"
-			],
-			[
-				"authser",
-				"app/Providers/AuthServiceProvider.php"
-			],
-			[
-				"slidesapi",
-				"app/Http/Controllers/api/SlidesApiController.php"
-			],
-			[
-				"viewbilldef",
-				"resources/views/billing/default.blade copy.php"
-			],
-			[
-				".en",
-				".env"
 			]
 		],
 		"width": 0.0
@@ -1718,7 +1637,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 319.0,
+	"side_bar_width": 348.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
