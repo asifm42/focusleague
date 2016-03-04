@@ -12,9 +12,14 @@
 */
 
 
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
+Route::get('/welcomeemail', function () {
+    $data = [
+    'name' =>'asif',
+    'email' => 'asif@test.com',
+    'confirmation_code' => '11111',
+    ];
+    return view('emails.verification', $data);
+});
 
 
 
@@ -65,12 +70,12 @@ Route::group(['middleware' => ['web']], function() {
     Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
     Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
     Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
-
     //
     Route::get('/token', function () {
-        throw new TokenMismatchException;
-        return view('welcome');
+        throw new TokenMismatchException();
+        return view('site.welcome');
     });
+
 });
 
 Route::group(['middleware' => ['web','auth']], function() {

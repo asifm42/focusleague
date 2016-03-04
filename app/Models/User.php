@@ -23,4 +23,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Set the user's email as confirmed
+     *
+     * @return bool
+     */
+    public function confirmEmailAddress()
+    {
+        // Set the confirmed flag to true
+        $this->confirmed = 1;
+
+        // Remove the confirmation code
+        $this->confirmation_code = null;
+
+        return $this->save();
+    }
 }

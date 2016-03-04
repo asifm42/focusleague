@@ -2,15 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\Event;
+use App\Events\UserVerified;
 use App\Mailers\UserMailer as Mailer;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendVerificationEmail
+class SendWelcomeEmail
 {
-    protected $mailer;
-
     /**
      * Create the event listener.
      *
@@ -21,14 +19,13 @@ class SendVerificationEmail
         $this->mailer = $mailer;
     }
 
-
     /**
      * Handle the event.
      *
-     * @param  UserRegistered  $event
+     * @param  UserVerified  $event
      * @return void
      */
-    public function handle(Event $event)
+    public function handle(UserVerified $event)
     {
         $this->mailer->verification($event->user);
     }
