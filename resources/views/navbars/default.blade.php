@@ -17,7 +17,7 @@
 
             <ul class="nav navbar-nav">
                 <li class={{ Active::pattern(['/'], 'active') }}><a href="{{ route('site.home') }}">Home</a></li>
-                <li class={{ Active::pattern(['news'], 'active') }}><a href="{{ route('site.news') }}">News</a></li>
+                {{-- <li class={{ Active::pattern(['news'], 'active') }}><a href="{{ route('site.news') }}">News</a></li> --}}
                 <li class={{ Active::pattern(['faq'], 'active') }}><a href="{{ route('site.faq') }}">FAQ</a></li>
                 {{-- <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signin'], ' active') }}"><a href="{{ url('signin') }}">Sign in</a></li> --}}
                 {{-- <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signup'], ' active') }}"><a href="{!! url('users/register') !!}">Sign Up</a></li> --}}

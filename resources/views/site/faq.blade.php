@@ -4,10 +4,16 @@
 
 @stop
 @section('content')
+    <div class="page-header">
+        <div class="container">
+            <h4 class="hidden-md hidden-lg">Frequently Asked Questions</h4>
+            <h3 class="hidden-xs hidden-sm">Frequently Asked Questions</h3>
+            <p>Helpful information about the league</p>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <h3 class="text-center">Frequently Asked Questions</h3>
                 <div class="panel panel-default">
                     <div class="panel-heading">What is Ultimate?</div>
                     <div class="panel-body">
@@ -50,9 +56,33 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
+                    <div class="panel-heading">How much does it cost?</div>
+                    <div class="panel-body">
+                        <p>Subs - $10/week</p>
+                        <p>Sign up for 2 weeks - $18</p>
+                        <p>Sign up for 3 weeks - $21</p>
+                        <p>Sign up for 4 weeks - $24</p>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">How do I make a payment?</div>
+                    <div class="panel-body">
+                        <p>Paypal, Chase Quickpay, Square Cash, Check or Cash</p>
+                        <p>More TBD</p>
+                    </div>
+                </div>
+                <div class="panel panel-default">
                     <div class="panel-heading">Why are you charging money?</div>
                     <div class="panel-body">
                         <p>A lot of time, effort and resources are required for producing this league. Additionally, the Houston Sports Park is the premier sports park in Houston with professional sports field maintenance and their field rental prices reflect that.</p>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">What are the captain's duties and benefits?</div>
+                    <div class="panel-body">
+                        <p>TBD</p>
+                        <p>Must be able to sign up for all 4 weeks</p>
+                        <p>Get a 30% discount on cycle fees</p>
                     </div>
                 </div>
                 <div class="panel panel-default">

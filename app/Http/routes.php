@@ -21,7 +21,7 @@
  * Site Pages Route
  */
 Route::get(     '/',        ['as' => 'site.home',       'uses' => 'PagesController@welcome']);
-Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PagesController@news']);
+// Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PagesController@news']);
 Route::get(     'faq',      ['as' => 'site.faq',        'uses' => 'PagesController@faq']);
 Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesController@pricing']);
 
