@@ -38,7 +38,7 @@
                         <i class="fa fa-user"></i>&nbsp; {{ auth()->user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="account-menu">
-                        <li class="{{ Active::pattern('profile', 'active') }}"><a href="{{ route('users.profile') }}"><i class="fa fa-cog"></i>&nbsp; Profile</a></li>
+                        <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-cog"></i>&nbsp; Dashboard</a></li>
                         <li class="{{ Active::pattern('signout', 'active') }}"><a href="{{ route('sessions.signout') }}"><i class="fa fa-cog"></i>&nbsp; Sign out</a></li>
                     </ul>
                 </li>

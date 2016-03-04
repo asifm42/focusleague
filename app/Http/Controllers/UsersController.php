@@ -52,11 +52,11 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the user's profile.
+     * Show the user's dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-    public function profile(Request $request)
+    public function dashboard(Request $request)
     {
         $user = auth()->user();
         $data['user'] = $user;
@@ -77,7 +77,7 @@ class UsersController extends Controller
         //     $data['navigation_select']['#tags'] = 'Tags';
         // }
 
-        return view('users.profile', $data );
+        return view('users.dashboard', $data );
     }
 
     protected function verify(VerifyUserEmailRequest $request)

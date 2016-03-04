@@ -40,7 +40,7 @@ class SessionsController extends Controller
         $session = $this->sessionFactory->make($data);
 
         if ($session) {
-            return redirect()->intended('profile');
+            return redirect()->intended('dashboard');
         }
 
         // Set up error flash message

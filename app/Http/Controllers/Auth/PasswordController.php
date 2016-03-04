@@ -30,7 +30,7 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/dashboard';
     protected $sessionFactory;
     protected $linkRequestView = 'auth.passwords.forgotPassword';
     protected $resetView = 'auth.passwords.reset';

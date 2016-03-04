@@ -84,7 +84,7 @@ Route::group(['middleware' => ['web','auth']], function() {
      * User Routes
      */
     Route::get(     'users/{id}',       ['as' => 'users.view', 'uses' => 'UsersController@show']);
-    Route::get(     'profile',       ['as' => 'users.profile', 'uses' => 'UsersController@profile']);
+    Route::get(     'dashboard',        ['as' => 'users.dashboard', 'uses' => 'UsersController@dashboard']);
     Route::get(     'users/{id}/edit',  ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
     Route::patch(   'users/{id}',       ['as' => 'users.update', 'uses' => 'UsersController@update']);
     Route::put(     'users/{id}',       ['as' => 'users.put', 'uses' => 'UsersController@update']);
