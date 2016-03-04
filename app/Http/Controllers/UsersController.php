@@ -82,7 +82,7 @@ class UsersController extends Controller
 
     protected function verify(VerifyUserEmailRequest $request)
     {
-        $this->dispatchNow(new VerifyUser($request->input('confirmation_code')));
+        $this->dispatch(new VerifyUser($request->input('confirmation_code')));
 
         flash()->success('You have successfully verified your account.');
 
