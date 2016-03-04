@@ -96,7 +96,6 @@ $factory->define(App\Models\Week::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(App\Models\Game::class, function (Faker\Generator $faker) {
     return [
         'week_id' => 1,
@@ -106,5 +105,16 @@ $factory->define(App\Models\Game::class, function (Faker\Generator $faker) {
         'division'=> 'mens',
         'format'=> '7v7',
         'created_by' => 1,
+    ];
+});
+
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    return [
+        'type' => 'news',
+        'title' => $faker->realText($maxNbChars = 20, $indexSize = 2),
+        'content' => $faker->realText($maxNbChars = 200, $indexSize = 2),
+        'posted_by' => 1,
+        'created_at' => $created = $faker->dateTimeBetween($startDate = '2016-03-05', $endDate = '1 week'),
+        'updated_at'=> $created,
     ];
 });

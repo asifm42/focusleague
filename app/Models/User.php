@@ -42,4 +42,12 @@ class User extends Authenticatable
 
         return $this->save();
     }
+
+    /**
+     * Get the posts the user has posted
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Models\User', 'posted_by');
+    }
 }
