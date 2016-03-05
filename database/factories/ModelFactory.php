@@ -64,7 +64,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'confirmed' => 1,
         'confirmation_code' => null,
         'gender' => $gender,
-        'birthday' => $faker->dateTimeBetween($startDate = '-40 years', $endDate = '-18 years'),
+        'birthday' => $faker->date($format = 'Y-m-d', $min = '-18 years'),
         'cell_number' => $faker->phoneNumber(),
         'dominant_hand' => $dominateHand,
         'height' => $faker->numberBetween($min = 46, $max = 84),
