@@ -34,7 +34,7 @@ class UserStoreRequest extends Request
             'nickname'                      => 'unique:users,nickname|min:3',
             'gender'                        => 'required|in:male,female',
             'birthday'                      => 'required|date',
-            'cell_number'                   => 'required|numeric',
+            'cell_number'                   => 'required|phone:LENIENT,US',
             'dominant_hand'                 => 'required|in:left,right',
             'height'                        => 'required|min:48|max:84|numeric',
             'division_preference_first'     => 'required|in:mens,mixed,womens',
