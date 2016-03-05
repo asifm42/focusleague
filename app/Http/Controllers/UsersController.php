@@ -126,7 +126,13 @@ class UsersController extends Controller
             flash()->error('Your email address has not been verified. Please verify your account by clicking the verification link in the welcome email.');
         }
 
-        return view('auth.user.verify');
+        if($request->has('email')) {
+            $data = [ 'email' => $request->input('email') ];
+        } else {
+            $data = [ 'email' => '' ];
+        }
+
+        return view('auth.user.verify', $data);
     }
 
     protected function resetVerificationCode(VerificationCodeResetRequest $request)

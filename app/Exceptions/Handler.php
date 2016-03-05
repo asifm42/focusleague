@@ -82,11 +82,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof \App\Exceptions\UnverifiedAccountException) {
-            return redirect()->route('users.resetVerificationCodeForm', ['error'=>'UnverifiedAccount']);
-        }
-
-        if ($e instanceof \App\Exceptions\UnverifiedAccountException) {
-            return redirect()->route('users.resetVerificationCodeForm', ['error'=>'UnverifiedAccount']);
+            return redirect()->route('users.resetVerificationCodeForm', ['error'=>'UnverifiedAccount', 'email'=>$e->user()->email]);
         }
 
         return parent::render($request, $e);

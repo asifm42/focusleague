@@ -42,10 +42,12 @@ class SessionFactory extends AbstractFactory implements Factory
 
         // Check if the user's email is confirmed.
         if (! auth()->user()->confirmed) {
+            // Get a reference to the user
+            $user = auth()->user();
             // Log the user out.
             auth()->logout();
 
-            throw new UnverifiedAccountException();
+            throw new UnverifiedAccountException($user);
         }
 
         // Log the request ip address and a timestamp for last_login

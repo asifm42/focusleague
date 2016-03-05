@@ -21,10 +21,11 @@
                     !!}
 
                     <div class="panel-body">
-                        <p class="text-muted">Haven't received the verification email? Not finding it in your spam/junk folder? Don't worry, enter your email below and we'll resend it.</p>
+                        <p class="text-warning">Haven't received the verification email? Not finding it in your spam/junk folder? Don't worry, enter your email below and we'll resend it.</p>
                         {!! Former::text('email')
                             ->addClass('form-control')
                             ->placeholder('Required email address')
+                            ->value($email)
                             ->autofocus('autofocus')
                         !!}
                     </div>
