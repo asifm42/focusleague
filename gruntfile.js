@@ -56,7 +56,7 @@ module.exports = function (grunt) {
             },
             sitecss: {
                 files: {
-                    'public/assets/css/site.min.css': [
+                    'public/assets/css/site.css': [
                         'bower_components/bootswatch-dist/css/bootstrap.css',
                         'bower_components/fontawesome/css/font-awesome.css',
                         'bower_components/build/css/bootstrap-datetimepicker.css',
