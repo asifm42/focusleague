@@ -9,20 +9,17 @@
 
 <?php
 
-    // if (isset($message)){
-    //     $src = $message->embed(public_path('assets/img/black_logo_email.png'));
-    // } else {
-    //     $src = url('assets/img/black_logo_email.png');
-    // }
+    if (isset($message)){
+        $src = $message->embed(public_path('assets/img/logo.png'));
+    } else {
+        $src = url('assets/img/logo.png');
+    }
 
 ?>
 
-<div class="header" style="background-color: #333; color: #fff;">
-    {{-- <img alt="Obsidian Black" src="{{ $src }}" height="60" width="135" style="height:60px; width:135px;"/> --}}
-    FOCUS League
+<div class="header" style="text-align: center; border-bottom: 1px solid #ddd;">
+    <img alt="FOCUS League" src="{{ $src }}" height="68" width="190" style="margin:10px; height:68px; width:190px;"/>
 </div>
-
-
 
 <div class="content" style="color: #000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
     <p>
@@ -47,9 +44,8 @@
 
 <div class="footer" style="border-top: 1px solid #ddd; color: #888; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
     <p>Sent from &ndash; <a href="{!! url('') !!}">FOCUS League</a>.</p>
-@yield('unsubscribe')
+{{-- @yield('unsubscribe') --}}
 </div>
-
 
 </body>
 </html>
