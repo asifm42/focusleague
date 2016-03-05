@@ -169,8 +169,8 @@ return [
         'Collective\Html\HtmlServiceProvider',
         'Former\FormerServiceProvider',
         // 'Intervention\Image\ImageServiceProvider',
-        'HieuLe\Active\ActiveServiceProvider'
-
+        'HieuLe\Active\ActiveServiceProvider',
+        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class
     ],
 
     /*

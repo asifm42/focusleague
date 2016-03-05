@@ -13,7 +13,8 @@
         "laravelcollective/html": "~5.0",
         "mailgun/mailgun-php": "~1.7.2",
         "hieu-le/active": "~2.0",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "propaganistas/laravel-phone": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
