@@ -39,21 +39,22 @@
             !!}
         @endif
         {!! Former::text('cell_number')
-            ->addClass('form-control')
+            ->addClass('form-control cell_number-js')
             ->placeholder('Required cell number')
             ->help('for last-minute text communications')
             ->required()
         !!}
         {!! Former::select('gender')
-            ->addClass('form-control')
+            ->addClass('form-control gender-js')
             ->options(['male' => 'Male', 'female' => 'Female'])
             ->placeholder('Required gender')
             ->required()
         !!}
         {!! Former::text('birthday')
-            ->id('birthday_picker')
+            ->id('birthday_picker-js')
             ->addClass('form-control')
             ->placeholder('Required birthday')
+            ->help('MM/DD/YYYY')
             ->required()
         !!}
         {!! Former::select('dominant_hand')
@@ -99,13 +100,13 @@
             ->required()
         !!}
         {!! Former::select('division_preference_first')
-            ->addClass('form-control')
+            ->addClass('form-control div_pref_1-js')
             ->options(['mens' => 'Mens', 'mixed' => 'Mixed', 'womens' => 'Womens'])
             ->placeholder('Required first division preference')
             ->required()
         !!}
         {!! Former::select('division_preference_second')
-            ->addClass('form-control')
+            ->addClass('form-control div_pref_2-js')
             ->options(['mens' => 'Mens', 'mixed' => 'Mixed', 'womens' => 'Womens'])
             ->placeholder('Optional second division preference')
         !!}
@@ -157,10 +158,42 @@
             // $('[data-toggle="popover"]').popover();
             console.log('hello');
             $(function () {
-                $('#birthday_picker').datetimepicker({
+                $('#birthday_picker-js').datetimepicker({
                     format: 'MM/DD/YYYY',
                     viewMode: 'years'
                 });
+            });
+
+            var maleOptions = {
+                "mens":"Mens",
+                "mixed" : "Mixed"
+            };
+
+            var femaleOptions = {
+                "womens":"Womens",
+                "mixed" : "Mixed"
+            };
+
+            $('.gender-js').change(function(){
+                $('.div_pref_1-js option:gt(0)').remove();
+                $('.div_pref_2-js option:gt(0)').remove();
+                if ($(this).val() === 'male') {
+                    var options = maleOptions;
+                }
+                if ($(this).val() === 'female') {
+                    var options = femaleOptions;
+                }
+
+                $.each(options, function(value,key) {
+                    $('.div_pref_1-js').append($("<option></option>")
+                    .attr("value", value).text(key));
+                    $('.div_pref_2-js').append($("<option></option>")
+                    .attr("value", value).text(key));
+                });
+            })
+
+            $('.cell_number-js').keyup(function(){
+
             });
         })
     </script>
