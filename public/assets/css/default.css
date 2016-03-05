@@ -31,3 +31,7 @@
     color:000;
     font-weight:800;
 }
+
+#faq_list .panel {
+    margin-bottom: 15px;
+}
