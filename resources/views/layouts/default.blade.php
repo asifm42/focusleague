@@ -7,13 +7,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-
-{{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/bootstrap/dist/css/bootstrap.min.css') }}"> --}}
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/paper.bootstrap.min.css') }}">
-{{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/css/font-awesome.min.css') }}"> --}}
-{{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}"> --}}
+@if (App::environment('production'))
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}">
+@else
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.css') }}">
-    @yield('styles')
+@endif
+
+@yield('styles')
 
 </head>
 <body id="@yield('bodyID')" class="@yield('class')">
@@ -26,9 +26,11 @@
 
 @include('layouts.footer')
 
-{{-- <script type='text/javascript' src="{{ url('assets/js/jquery.min.js') }}"></script> --}}
-<script type='text/javascript' src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script type='text/javascript' src="{{ url('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+@if (App::environment('production'))
+    <script type='text/javascript' src="{{ url('assets/js/site.min.js') }}"></script>
+@else
+    <script type='text/javascript' src="{{ url('assets/js/site.js') }}"></script>
+@endif
 
 <script>
     $(document).ready( function () {
