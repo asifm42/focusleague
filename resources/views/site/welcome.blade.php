@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="text-center hidden-md hidden-lg">
-                    <div><img src="{{ asset('assets/img/logo.png') }}" style="height:100px; margin-top:15px"></div>
+                    <div><img src="{{ asset('assets/img/logo.png') }}" class="logo-welcome-mobile"></div>
                     <!-- <h3 style="color:000; font-weight:800;">FOCUS League</h3> -->
                     <h5>Fostering Organized Competitive Ultimate Series</h5>
                     <!-- <h5><strong>F</strong>ostering <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</h5> -->
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="text-center hidden-xs hidden-sm">
-                    <div><img src="{{ asset('assets/img/logo.png') }}" style="height:150px; margin-top:15px;"></div>
+                    <div><img src="{{ asset('assets/img/logo.png') }}" class="logo-welcome-desktop"></div>
                     <!-- <h1 style="color:000; font-weight:800;">FOCUS League</h1> -->
                     <!-- <h3><strong>F</strong>ostering <strong>O</strong>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</h3> -->
                     <h3>Fostering Organized Competitive Ultimate Series</h3>
