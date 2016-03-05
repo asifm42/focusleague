@@ -41,7 +41,7 @@ module.exports = function (grunt) {
 
         // @see https://www.npmjs.org/package/grunt-contrib-concat
         concat: {
-            site: {
+            sitejs: {
                 files: {
                     'public/assets/js/site.js': [
                         'bower_components/jquery/dist/jquery.js',
@@ -53,7 +53,18 @@ module.exports = function (grunt) {
                         // 'bower_components/underscore.string/dist/underscore.string.js',
                     ]
                 }
+            },
+            sitecss: {
+                files: {
+                    'public/assets/css/site.min.css': [
+                        'bower_components/bootswatch-dist/css/bootstrap.css',
+                        'bower_components/fontawesome/css/font-awesome.css',
+                        'bower_components/build/css/bootstrap-datetimepicker.css',
+                        'public/assets/css/default.css'
+                    ]
+                }
             }
+
         },
 
         // @see https://www.npmjs.com/package/grunt-contrib-cssmin
@@ -65,9 +76,6 @@ module.exports = function (grunt) {
             site: {
                 files: {
                     'public/assets/css/site.min.css': [
-                        'bower_components/bootswatch-dist/css/bootstrap.css',
-                        'bower_components/fontawesome/css/font-awesome.css',
-                        'bower_components/build/css/bootstrap-datetimepicker.css',
                         'public/assets/css/site.css'
                     ]
                 }
