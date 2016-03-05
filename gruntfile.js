@@ -59,7 +59,7 @@ module.exports = function (grunt) {
                     'public/assets/css/site.css': [
                         'bower_components/bootswatch-dist/css/bootstrap.css',
                         'bower_components/fontawesome/css/font-awesome.css',
-                        'bower_components/build/css/bootstrap-datetimepicker.css',
+                        'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
                         'public/assets/css/default.css'
                     ]
                 }

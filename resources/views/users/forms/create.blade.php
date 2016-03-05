@@ -50,7 +50,8 @@
             ->placeholder('Required gender')
             ->required()
         !!}
-        {!! Former::date('birthday')
+        {!! Former::text('birthday')
+            ->id('birthday_picker')
             ->addClass('form-control')
             ->placeholder('Required birthday')
             ->required()
@@ -148,3 +149,19 @@
     </div>
     {!! Former::close() !!}
 </div>
+
+@section('scripts')
+    <script>
+        $(document).ready( function () {
+            // For popovers on the navbar
+            // $('[data-toggle="popover"]').popover();
+            console.log('hello');
+            $(function () {
+                $('#birthday_picker').datetimepicker({
+                    format: 'MM/DD/YYYY',
+                    viewMode: 'years'
+                });
+            });
+        })
+    </script>
+@stop
