@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-// use Watson\Validating\ValidatingTrait;
 
 class User extends Authenticatable
 {
-    // use ValidatingTrait;
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['season_pass_ends_on', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +30,120 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the user's birthday.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getBirthdayAttribute($value)
+    {
+        $originalDate = $value;
+        return date("m-d-Y", strtotime($originalDate));
+    }
+
+    /**
+     * Set the user's birthday.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function setBirthdayAttribute($value)
+    {
+        $this->attributes['birthday'] = date("Y-m-d", strtotime($value));
+    }
+
+    /**
+     * Get the user's birthday.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getBirthdayString()
+    {
+        $originalDate = $this->attributes['birthday'];
+        return date("M j, Y", strtotime($originalDate));
+    }
+
+    /**
+     * Get the user's phone number.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getCellNumberAttribute($value)
+    {
+        // add the dashes
+        return preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $value);
+    }
+
+    /**
+     * Set the user's phone number.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function setCellNumberAttribute($value)
+    {
+        // sanitize the cell number
+        $numbers_only = preg_replace("/[^\d]/", "", $value);
+        $this->attributes['cell_number'] =  preg_replace("/^1?(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $numbers_only);
+    }
+
+    /**
+     * Get the user's gender.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getGenderAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    /**
+     * Get the user's dominant hand.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getDominantHandAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    /**
+     * Get the user's first division preference.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getDivisionPreferenceFirstAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    /**
+     * Get the user's second division preference.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getDivisionPreferenceSecondAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    /**
+     * Get the height as a formatted string.
+     *
+     * @return string
+     */
+    public function heightString()
+    {
+        return floor($this->height / 12) . "' " . $this->height % 12 . '"';
+    }
 
     /**
      * Set the user's email as confirmed

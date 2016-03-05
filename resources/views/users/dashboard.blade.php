@@ -26,7 +26,7 @@
                                 <h6>Gender</h6>
                                 <p>{{ $user->gender }}</p>
                                 <h6>Birthday</h6>
-                                <p>{{ $user->birthday }}</p>
+                                <p>{{ $user->getBirthdayString() }}</p>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <h6>Cell Number</h6>
@@ -34,13 +34,13 @@
                                 <h6>Dominant Hand</h6>
                                 <p>{{ $user->dominant_hand }}</p>
                                 <h6>Height</h6>
-                                <p>{{ $user->height }}</p>
+                                <p>{{ $user->heightString() }}</p>
                                 <h6>Division Preference First</h6>
                                 <p>{{ $user->division_preference_first }}</p>
                                 <h6>Division Preference Second</h6>
                                 <p>{{ $user->division_preference_second }}</p>
                                 <h6>Season Pass</h6>
-                                <p>{{ $user->season_pass_ends_on }}</p>
+                                <p>Valid through {{ $user->season_pass_ends_on->toFormattedDateString() }}</p>
                             </div>
                         </div>
                     </div>
