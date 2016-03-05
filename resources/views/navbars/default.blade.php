@@ -16,18 +16,18 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav">
-                <li class={{ Active::pattern(['/'], 'active') }}><a href="{{ route('site.home') }}">Home</a></li>
-                <li class={{ Active::pattern(['news'], 'active') }}><a href="{{ route('site.news') }}">News</a></li>
-                <li class={{ Active::pattern(['faq'], 'active') }}><a href="{{ route('site.faq') }}">FAQ</a></li>
+                <li class={{ Active::pattern(['/'], 'active') }}><a href="{{ route('site.home') }}"><i class="fa fa-fw fa-home"></i>&nbsp; Home</a></li>
+                <li class={{ Active::pattern(['news'], 'active') }}><a href="{{ route('site.news') }}"><i class="fa fa-fw fa-newspaper-o"></i>&nbsp; News</a></li>
+                <li class={{ Active::pattern(['faq'], 'active') }}><a href="{{ route('site.faq') }}"><i class="fa fa-fw fa-question"></i>&nbsp; FAQ</a></li>
         @if(! auth()->check())
-                <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signin'], ' active') }}"><a href="{{ route('sessions.create') }}">Sign in</a></li>
-                <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signup'], ' active') }}"><a href="{!! route('users.create') !!}">Sign Up</a></li>
+                <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signin'], ' active') }}"><a href="{{ route('sessions.create') }}"><i class="fa fa-sign-in fa-fw"></i>&nbsp; Sign In</a></li>
+                <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signup'], ' active') }}"><a href="{!! route('users.create') !!}"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Sign Up</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
 
-                <li><a href="{{ route('sessions.create') }}" class="">Sign In</a></li>
-                <li><a href="{!! route('users.create') !!}" class="">Sign Up</a></li>
+                <li><a href="{{ route('sessions.create') }}" class=""><i class="fa fa-sign-in"></i>&nbsp; Sign In</a></li>
+                <li><a href="{!! route('users.create') !!}" class=""><i class="fa fa-user-plus"></i>&nbsp; Sign Up</a></li>
 
             </ul>
         @else
@@ -38,8 +38,8 @@
                         <i class="fa fa-user"></i>&nbsp; {{ auth()->user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="account-menu">
-                        <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-cog"></i>&nbsp; Dashboard</a></li>
-                        <li class="{{ Active::pattern('signout', 'active') }}"><a href="{{ route('sessions.signout') }}"><i class="fa fa-cog"></i>&nbsp; Sign out</a></li>
+                        <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>
+                        <li class="{{ Active::pattern('signout', 'active') }}"><a href="{{ route('sessions.signout') }}"><i class="fa fa-sign-out"></i>&nbsp; Sign out</a></li>
                     </ul>
                 </li>
             </ul>
