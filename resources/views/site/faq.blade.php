@@ -11,9 +11,9 @@
             <p>Helpful information about the league</p>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <div class="col-xs-12 col-md-10">
                 <div class="panel-group" id="faq_list" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="heading_1">
@@ -26,6 +26,23 @@
                         <div id="faq_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_1">
                             <div class="panel-body">
                                 <p>The FOCUS League is a competitive Ultimate league in Houston intended for players with intermediate to advanced skills in the sport of Ultimate. The purpose of this league is to structure would-be pick-up games into a series of 4 week cycles and increase the availability of competitive Ultimate in Houston. Registered players will be divided into X number of teams and remain together for a 4 week cycle. Each team will have a team captain(s) who will lead the team in developing the team offense and defense (i.e., teams will call offensive plays, call defenses with a marking direction, work on zones, crumbles, and any other strategic points of interest of the team).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading_1a">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#faq_list" href="#faq_1a" aria-expanded="false" aria-controls="faq_1a">
+                                    What is the spirit of the FOCUS League?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="faq_1a" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_1a">
+                            <div class="panel-body">
+                                <p>The spirit of the FOCUS league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
+
+                                </p>Note: Anyone not accounting for themselves in accordance with the spirit of the league may be asked by the League Organizers to excuse themselves from the league indefinitely.</p>
                             </div>
                         </div>
                     </div>
@@ -85,7 +102,11 @@
                         </div>
                         <div id="faq_5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_5">
                             <div class="panel-body">
-                                <p>The FOCUS league is open to competitive male and female players who want to improve their skills through playing high level Ultimate in the framework of a team by practicing the same skills for 4 weeks with the same group of similarly minded players. We may cap the number of signups on a given cycle depending on availability</p>
+                                <p>The FOCUS league is open to spirited, competitive male and female players who want to improve their skills through playing high level Ultimate in the framework of a team by practicing the same skills for 4 weeks with the same group of similarly minded players. We may cap the number of signups on a given cycle depending on availability.</p>
+
+                                <p>The FOCUS League takes the “Spirit of the Game” (http://www.usaultimate.org/spirit/) very seioursly. The league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
+
+                                <p>Note: Anyone not accounting for themselves in accordance with the spirit of the league may be asked by the League Organizers to excuse themselves from the league indefinitely.</p>
                             </div>
                         </div>
                     </div>
@@ -100,9 +121,13 @@
                         </div>
                         <div id="faq_6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_6">
                             <div class="panel-body">
-                            <p>You are still able to play as The FOCUS league does not exclude anyone (unless registration is capped due to capacity). However, the FOCUS league is intended for the experienced player. If you do not understand terms/concepts like force, flick, backhand, hammer, scoober, huck, cut, vertical stack offense, horizontal offense, man defense, zone defense, zone crumble, zone cup, foul, pick, poach, etc, as they relate to Ultimate then you may not find the FOCUS league an enjoyable experience. If you cannot throw a 15 yard leading flick and backhand with accuracy to a receiver, then you may not find the FOCUS league an enjoyable experience.</p>
+                                <p>You are still able to sign up and give the FOCUS league a try. However, keep in mind that the FOCUS league is intended for the experienced player. If you do not understand terms/concepts like force, flick, backhand, hammer, scoober, huck, cut, vertical stack offense, horizontal offense, man defense, zone defense, zone crumble, zone cup, foul, pick, poach, etc, as they relate to Ultimate then you may not find the FOCUS league an enjoyable experience. If you cannot throw a 15 yard leading flick and backhand with accuracy to a receiver, then you may not find the FOCUS league an enjoyable experience.</p>
 
-                            <p>If you feel that the FOCUS League is not for you, the <a href="http://www.houstonultimate.org">Houston Ultimate Community (HUC)</a> hosts a variety of beginner/recreational leagues and tournaments.</p>
+                                <p>If you are still unsure if this league is for you, feel free to get in touch with us to discuss it.</p>
+
+                                <p>If you feel that the FOCUS League is not for you, the <a href="http://www.houstonultimate.org">Houston Ultimate Community (HUC)</a> hosts a variety of beginner/recreational leagues and tournaments.</p>
+
+                                <p>Note: While the league organizers do not want to exclude anyone, if a large disparity in level of play develops, the league organizers may request less skilled players to excuse themselves. In the unlikely event this occurs it will include a refund of the remaining game fees.</p>
                             </div>
                         </div>
                     </div>
@@ -210,7 +235,7 @@
                         </div>
                         <div id="faq_13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_13">
                             <div class="panel-body">
-                                <p>You get help split up the teams. You will have influence over what the team will be working on that current cycle. And you get a 25% discount on the respective cycle fee.</p>
+                                <p>A chance to practice your team captain and leadership skills. You get to help split up the teams. You will have influence over what the team will be working on that current cycle. And you get a 25% discount on the respective cycle fee.</p>
                             </div>
                         </div>
                     </div>
