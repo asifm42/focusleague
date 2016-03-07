@@ -40,7 +40,7 @@
                         </div>
                         <div id="faq_1a" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_1a">
                             <div class="panel-body">
-                                <p>The spirit of the FOCUS league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
+                                <p>The spirit of the FOCUS League stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
 
                                 </p>Note: Anyone not accounting for themselves in accordance with the spirit of the league may be asked by the League Organizers to excuse themselves from the league indefinitely.</p>
                             </div>
@@ -102,7 +102,7 @@
                         </div>
                         <div id="faq_5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_5">
                             <div class="panel-body">
-                                <p>The FOCUS league is open to spirited, competitive male and female players who want to improve their skills through playing high level Ultimate in the framework of a team by practicing the same skills for 4 weeks with the same group of similarly minded players. We may cap the number of signups on a given cycle depending on availability.</p>
+                                <p>The FOCUS League is open to spirited, competitive male and female players who want to improve their skills through playing high level Ultimate in the framework of a team by practicing the same skills for 4 weeks with the same group of similarly minded players. We may cap the number of signups on a given cycle depending on availability.</p>
 
                                 <p>The FOCUS League takes the “Spirit of the Game” (http://www.usaultimate.org/spirit/) very seioursly. The league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
 
@@ -121,7 +121,7 @@
                         </div>
                         <div id="faq_6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_6">
                             <div class="panel-body">
-                                <p>You are still able to sign up and give the FOCUS league a try. However, keep in mind that the FOCUS league is intended for the experienced player. If you do not understand terms/concepts like force, flick, backhand, hammer, scoober, huck, cut, vertical stack offense, horizontal offense, man defense, zone defense, zone crumble, zone cup, foul, pick, poach, etc, as they relate to Ultimate then you may not find the FOCUS league an enjoyable experience. If you cannot throw a 15 yard leading flick and backhand with accuracy to a receiver, then you may not find the FOCUS league an enjoyable experience.</p>
+                                <p>You are still able to sign up and give the FOCUS League a try. However, keep in mind that the FOCUS League is intended for the experienced player. If you do not understand terms/concepts like force, flick, backhand, hammer, scoober, huck, cut, vertical stack offense, horizontal offense, man defense, zone defense, zone crumble, zone cup, foul, pick, poach, etc, as they relate to Ultimate then you may not find the FOCUS League an enjoyable experience. If you cannot throw a 15 yard leading flick and backhand with accuracy to a receiver, then you may not find the FOCUS League an enjoyable experience.</p>
 
                                 <p>If you are still unsure if this league is for you, feel free to get in touch with us to discuss it.</p>
 
