@@ -89,6 +89,11 @@ Route::group(['middleware' => ['web','auth']], function() {
     Route::patch(   'users/{id}',       ['as' => 'users.update', 'uses' => 'UsersController@update']);
     Route::put(     'users/{id}',       ['as' => 'users.put', 'uses' => 'UsersController@update']);
     Route::delete(  'users/{id}',       ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
+
+    /*
+     * Cycle Routes
+     */
+    Route::get(     'cycles/{id}',       ['as' => 'cycles.view', 'uses' => 'CyclesController@show']);
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
