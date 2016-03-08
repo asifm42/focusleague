@@ -17,14 +17,13 @@ class CreateCycleUserTable extends Migration
             $table->integer('cycle_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('div_pref_first');
-            $table->string('div_pref-second')->nullable();
-            $table->string('availability');
+            $table->string('div_pref_second')->nullable();
             $table->longtext('note')->nullable();
             $table->integer('team_id')->unsigned()->nullable();
             $table->boolean('captain')->default(false);
             $table->boolean('willing_to_captain')->default(false);
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign keys
             $table->foreign('cycle_id')

@@ -59,7 +59,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name($gender),
-        'nickname' => $faker->name($gender),
+        'nickname' => $faker->unique()->firstName($gender),
         'email' => $faker->email,
         'confirmed' => 1,
         'confirmation_code' => null,
@@ -81,9 +81,12 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Cycle::class, function (Faker\Generator $faker) {
     return [
         'created_by' => 1,
+        'signup_opens_at' => '2016-03-09 00:00:00',
+        'signup_closes_at' => '2016-03-14 20:00:00',
         'starts_at' => '2016-03-15 20:00:00',
         'ends_at' => '2016-04-05 22:00:00',
         'name' => '2016-01',
+        'format' => 'TBD',
     ];
 });
 

@@ -14,7 +14,7 @@ class CreateCheckinsTable extends Migration
     {
         Schema::create('checkins', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('game_id')->unsigned();
+            $table->integer('game_id')->unsigned(); // should this be week_id???
             $table->integer('user_id')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->timestamp('checkin');

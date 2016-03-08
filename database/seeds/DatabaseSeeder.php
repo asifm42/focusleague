@@ -16,5 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CyclesTableSeeder::class);
         $this->call(WeeksTableSeeder::class);
         $this->call(GamesTableSeeder::class);
+        $this->call(CycleUserTableSeeder::class);
+        $this->call(AvailabilityTableSeeder::class);
+        $this->call(SubsTableSeeder::class);
     }
 }

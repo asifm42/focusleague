@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttendancesTable extends Migration
+class CreateAvailabilityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,23 +12,19 @@ class CreateAttendancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendences', function (Blueprint $table) {
+        Schema::create('availability', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('game_id')->unsigned(); // should this be week_id???
+            $table->integer('week_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('created_by')->unsigned();
-            $table->timestamp('checkin');
+            $table->boolean('attending')->default(false);
             $table->timestamps();
-            $table->softDeletes();
+            $table->softdeletes();
 
             // Foreign keys
-            $table->foreign('game_id')
+            $table->foreign('week_id')
                 ->references('id')
-                ->on('games');
+                ->on('weeks');
             $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
-            $table->foreign('created_by')
                 ->references('id')
                 ->on('users');
         });
@@ -41,6 +37,6 @@ class CreateAttendancesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('attendences');
+        Schema::drop('availability');
     }
 }

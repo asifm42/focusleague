@@ -168,4 +168,40 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\User', 'posted_by');
     }
+
+    /**
+     * Get the cycles the user has signed up for
+     */
+    public function cycles()
+    {
+        return $this->belongsToMany('App\Models\Cycle');
+    }
+
+    /**
+     * Get the weeks the user has signed up for
+     */
+    public function availability()
+    {
+        return $this->belongsToMany('App\Models\Week', 'availability')->withPivot('attending')->withTimestamps();
+    }
+
+    /**
+     * Scope a query to only male users.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeMale($query)
+    {
+        return $query->where('gender', 'male');
+    }
+
+    /**
+     * Scope a query to only female users.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFemale($query)
+    {
+        return $query->where('gender', 'female');
+    }
 }

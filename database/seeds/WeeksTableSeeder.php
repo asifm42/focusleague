@@ -11,7 +11,11 @@ class WeeksTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Week::class)->create();
+        factory(App\Models\Week::class)->create([
+            'cycle_id' => 1,
+            'starts_at' => '2016-03-15 20:00:00',
+            'ends_at' => '2016-03-15 22:00:00',
+        ]);
 
         factory(App\Models\Week::class)->create([
             'cycle_id' => 1,

@@ -15,9 +15,12 @@ class CreateCyclesTable extends Migration
         Schema::create('cycles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('created_by')->unsigned();
+            $table->timestamp('signup_opens_at')->nullable();;
+            $table->timestamp('signup_closes_at')->nullable();;
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
             $table->string('name');
+            $table->string('format');
             $table->timestamps();
             $table->softDeletes();
 
