@@ -14,7 +14,7 @@
 
     <p><a href="{{ $link = url('users/verify').'?confirmation_code='.$confirmation_code }}" class="btn-primary" itemprop="url" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 15px; color: #FFF; text-decoration: none; line-height: 1.4; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; text-transform: capitalize; background: #43ac6a; margin: 0; border-color: #3c9a5f; border-style: solid; border-width: 1px; padding: 8px 12px;">Confirm email address</a></p>
 
-    <p>Or copy &amp; paste this link in your browser: {{ $link }}
+    <p>Or copy &amp; paste this link in your browser: {{ $link }}</p>
 
     <p>If this was not you, then please disregard this email.</p>
 @endsection
