@@ -21,7 +21,7 @@ class CreateCycleUserTable extends Migration
             $table->longtext('note')->nullable();
             $table->integer('team_id')->unsigned()->nullable();
             $table->boolean('captain')->default(false);
-            $table->boolean('willing_to_captain')->default(false);
+            $table->boolean('will_captain')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
