@@ -98,7 +98,7 @@
                                 <td>{{ $current_cycle_signup->pivot->div_pref_second }}</td>
 
 
-                                @foreach($user->availability()->get() as $week)
+                                @foreach($user->availability()->where('cycle_id', $current_cycle->id)->get() as $week)
                                     @if($week->pivot->attending)
                                         <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
                                     @else
@@ -186,7 +186,7 @@
                                 <td>{{ $current_cycle_signup->pivot->div_pref_second }}</td>
 
 
-                                @foreach($user->availability()->get() as $week)
+                                @foreach($user->availability()->where('cycle_id',$next_cycle->id)->get() as $week)
                                     @if($week->pivot->attending)
                                         <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
                                     @else

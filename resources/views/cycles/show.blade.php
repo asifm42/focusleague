@@ -97,7 +97,7 @@
                                     <td>{{ $signup->nickname }}</td>
                                     <td>{{ $signup->pivot->div_pref_first }}</td>
                                     <td>{{ $signup->pivot->div_pref_second }}</td>
-                                    @foreach($signup->availability()->orderBy('pivot_week_id')->get() as $week)
+                                    @foreach($signup->availability()->where('cycle_id',$cycle->id)->orderBy('pivot_week_id')->get() as $week)
                                         @if($week->pivot->attending)
                                             <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
                                         @else
@@ -136,7 +136,7 @@
                                     <td>{{ $signup->nickname }}</td>
                                     <td>{{ $signup->pivot->div_pref_first }}</td>
                                     <td>{{ $signup->pivot->div_pref_second }}</td>
-                                    @foreach($signup->availability()->orderBy('pivot_week_id')->get() as $week)
+                                    @foreach($signup->availability()->where('cycle_id',$cycle->id)->orderBy('pivot_week_id')->get() as $week)
                                         @if($week->pivot->attending)
                                             <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
                                         @else
@@ -149,10 +149,10 @@
                                 <th class="text-center" colspan=3>Total</th>
                                 <!-- <th></th> -->
                                 <!-- <th></th> -->
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[0]->signups()->female()->where('attending',true)->count() }}</th>
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[1]->signups()->female()->where('attending',true)->count() }}</th>
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[2]->signups()->female()->where('attending',true)->count() }}</th>
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[3]->signups()->female()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[0]->signups()->female()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[1]->signups()->female()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[2]->signups()->female()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[3]->signups()->female()->where('attending',true)->count() }}</th>
                             </tr>
                         </table>
                     </div>
