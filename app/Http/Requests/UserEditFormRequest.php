@@ -13,6 +13,10 @@ class UserEditFormRequest extends Request
      */
     public function authorize()
     {
+        if (auth()->user()->isAdmin()){
+            return true;
+        }
+
         return auth()->user()->id === (int) $this->route('id');
     }
 
