@@ -15,7 +15,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">Details</h4>
@@ -25,21 +25,40 @@
                             <dt>Name:</dt>
                             <dd>{{ $cycle->name }}</dd>
                             <dt>Format</dt>
-                            <dd>TBD</dd>
+                            <dd>{{ $cycle->format }}</dd>
                             <dt>Current Status</dt>
-                            @if ($cycle->status() === 'SIGNUP_OPENS_LATER')
-                                <dd>Sign up opens at {{ $cycle->signup_opens_at->toDayDateTimeString() }}</dd>
-                            @elseif ($cycle->status() === 'SIGNUP_OPEN')
-                                <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-                                <button class="btn btn-primary">Sign up</button>
-                            @elseif ($cycle->status() === 'SIGNUP_CLOSED')
-                                <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
-                                <button class="btn btn-primary">Sign up as sub</button>
-                            @elseif ($cycle->status() === 'IN_PROGRESS')
-                                <dd>In progess</dd>
-                                <button class="btn btn-primary">Sign up as sub</button>
-                            @elseif ($cycle->status() === 'COMPLETED')
-                                <dd>Completed</dd>
+                            @if ($current_cycle_signup)
+                                @if (is_null($current_cycle_signup->pivot->team_id))
+                                    <dd>You are signed up but not placed on a team yet.</dd>
+                                @else
+                                    <dd>You are on team: <em>TEAM NAME</em></dd>
+                                @endif
+                                @if ($current_cycle_signup->pivot->will_captain == true)
+                                    <dd>You are willing to captain.</dd>
+                                @else
+                                    <dd>You are NOT willing to captain.</dd>
+                                @endif
+                                @if ($cycle->status() === 'SIGNUP_OPEN')
+                                    <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
+                                    <a class="btn btn-default btn-block" href="{{ route('cycle.signup.edit', $cycle->id) }}">Edit sign up</a>
+                                @elseif ($cycle->status() === 'SIGNUP_CLOSED')
+                                    <dd>Sign up is currently closed.</dd>
+                                @endif
+                            @else
+                                @if ($cycle->status() === 'SIGNUP_OPENS_LATER')
+                                    <dd>Sign up opens at {{ $cycle->signup_opens_at->toDayDateTimeString() }}</dd>
+                                @elseif ($cycle->status() === 'SIGNUP_OPEN')
+                                    <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
+                                    <button class="btn btn-primary block-">Sign up</button>
+                                @elseif ($cycle->status() === 'SIGNUP_CLOSED')
+                                    <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
+                                    <button class="btn btn-primary">Sign up as sub</button>
+                                @elseif ($cycle->status() === 'IN_PROGRESS')
+                                    <dd>In progess</dd>
+                                    <button class="btn btn-primary">Sign up as sub</button>
+                                @elseif ($cycle->status() === 'COMPLETED')
+                                    <dd>Completed</dd>
+                                @endif
                             @endif
                         </dl>
                     </div>
@@ -49,19 +68,21 @@
                         <h4 class="panel-title">Schedule</h4>
                     </div>
                     <div class="panel-body">
-                        @foreach( $cycle->weeks as $week )
-                            <p>{{ $week->starts_at->toFormattedDateString() }}</p>
-                        @endforeach
+                        <ul class='list-unstyled'>
+                        @for( $i=0, $len = $cycle->weeks()->count(); $i < $len; $i++)
+                            <li>{{'Week ' . ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</li>
+                        @endfor
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-5">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">Male Signups <span class="badge pull-right">{{ $cycle->signups()->male()->count() }}</span></h4>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-condensed table-striped">
+                        <table class="table table-condensed table-striped table-responsive">
                             <tr>
                                 <th>Name</th>
                                 <th>Div1</th>
@@ -87,33 +108,14 @@
                             @endforeach
                             <tr class="info">
                                 <th class="text-center" colspan=3>Total</th>
-                                <!-- <th></th> -->
-                                <!-- <th></th> -->
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[0]->signups()->male()->where('attending',true)->count() }}</th>
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[1]->signups()->male()->where('attending',true)->count() }}</th>
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[2]->signups()->male()->where('attending',true)->count() }}</th>
-                                <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[3]->signups()->male()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[0]->signups()->male()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[1]->signups()->male()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[2]->signups()->male()->where('attending',true)->count() }}</th>
+                                <th class="text-center">{{$cycle->weeks[3]->signups()->male()->where('attending',true)->count() }}</th>
                             </tr>
                         </table>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">Male Subs</h4>
-                    </div>
-                    <div class="panel-body">
-                        @for($i=0, $len=$cycle->weeks()->count(); $i < $len; $i++ )
-                        <ul class="list-unstyled">
-                            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
-                            @foreach($cycle->weeks[$i]->subs()->male()->get() as $sub)
-                                <li>{{$sub->name}}</li>
-                            @endforeach
-                        </ul>
-                        @endfor
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">Female Signups <span class="badge pull-right">{{ $cycle->signups()->female()->count() }}</span></h4>
@@ -153,6 +155,23 @@
                                 <th class="text-center">{{$cycle->weeks->sortBy('starts_at')[3]->signups()->female()->where('attending',true)->count() }}</th>
                             </tr>
                         </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Male Subs</h4>
+                    </div>
+                    <div class="panel-body">
+                        @for($i=0, $len=$cycle->weeks()->count(); $i < $len; $i++ )
+                        <ul class="list-unstyled">
+                            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
+                            @foreach($cycle->weeks[$i]->subs()->male()->get() as $sub)
+                                <li>{{$sub->name}}</li>
+                            @endforeach
+                        </ul>
+                        @endfor
                     </div>
                 </div>
                 <div class="panel panel-default">

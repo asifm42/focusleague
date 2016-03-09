@@ -174,15 +174,30 @@ class User extends Authenticatable
      */
     public function cycles()
     {
-        return $this->belongsToMany('App\Models\Cycle');
+        return $this->belongsToMany('App\Models\Cycle')
+                    ->withPivot('id','div_pref_first', 'div_pref_second', 'note', 'team_id', 'captain', 'will_captain')
+                    ->whereNull('cycle_user.deleted_at') // for soft deletes
+                ->withTimestamps();
     }
+
+    /**
+     * Get the cycles the user has signed up for
+     */
+    public function current_cycle_signup()
+    {
+        return $this->cycles()->current()->first();
+    }
+
 
     /**
      * Get the weeks the user has signed up for
      */
     public function availability()
     {
-        return $this->belongsToMany('App\Models\Week', 'availability')->withPivot('attending')->withTimestamps();
+        return $this->belongsToMany('App\Models\Week', 'availability')
+                    ->withPivot('attending')
+                    ->orderBy('pivot_week_id')
+                    ->withTimestamps();
     }
 
     /**
@@ -203,5 +218,35 @@ class User extends Authenticatable
     public function scopeFemale($query)
     {
         return $query->where('gender', 'female');
+    }
+
+    /**
+     * Checks if the user is male.
+     *
+     * @return bool
+     */
+    public function isMale()
+    {
+        return strtolower($this->gender) === 'male';
+    }
+
+    /**
+     * Checks if the user is female.
+     *
+     * @return bool
+     */
+    public function isFemale()
+    {
+        return strtolower($this->gender) === 'female';
+    }
+
+    /**
+     * Checks if the user is an admin.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->admin == true;
     }
 }

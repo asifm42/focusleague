@@ -109,6 +109,7 @@
             ->addClass('form-control div_pref_2-js')
             ->options(['mens' => 'Mens', 'mixed' => 'Mixed', 'womens' => 'Womens'])
             ->placeholder('Optional second division preference')
+            ->help('Leave this blank or select the same as your first preference if you prefer to sit out this cycle if your division is not available.')
         !!}
         @if($edit === true)
             {!! Former::password('password')

@@ -12,6 +12,7 @@ use App\Http\Requests\VerifyUserEmailRequest;
 use App\Http\Controllers\Controller;
 use App\Jobs\ResetVerificationCode;
 use App\Jobs\VerifyUser;
+use App\Models\Cycle;
 use App\Models\User;
 use App\Updaters\UserUpdater;
 use Illuminate\Http\Request;
@@ -64,7 +65,22 @@ class UsersController extends Controller
     public function dashboard(Request $request)
     {
         $user = auth()->user();
+        // dd($user->current_cycle_signup()->pivot->team_id);
         $data['user'] = $user;
+        $data['current_cycle'] = Cycle::current_cycle();
+        $data['next_cycle'] = Cycle::next_cycle();
+        if ($data['current_cycle']) {
+            $data['current_cycle_signup'] = $user->current_cycle_signup();
+            // dd($data['current_cycle_signup']);
+        } else {
+            $data['current_cycle_signup'] = [];
+        }
+        if ($data['next_cycle']) {
+            $data['next_cycle_signup'] = $user->cycles()->where('cycle_id', $data['next_cycle']->id)->first();
+        } else {
+            $data['next_cycle_signup'] = [];
+        }
+
         // $data['invoices'] = $user->invoices();
         // $data['upcomingInvoice'] = $user->upcomingInvoice();
 

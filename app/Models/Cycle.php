@@ -46,7 +46,7 @@ class Cycle extends Model
     public function signups()
     {
         return $this->belongsToMany('App\Models\User')
-                    ->withPivot('div_pref_first', 'div_pref_second', 'note', 'team_id', 'captain', 'willing_to_captain')
+                    ->withPivot('id', 'div_pref_first', 'div_pref_second', 'note', 'team_id', 'captain', 'will_captain')
                     ->whereNull('cycle_user.deleted_at') // for soft deletes
                     ->withTimestamps();
 
@@ -67,6 +67,44 @@ class Cycle extends Model
         } elseif ($now->gt($this->ends_at)) {
             return 'COMPLETED';
         }
+    }
+
+    /**
+     * Scope a query to the current cycle.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeCurrent($query)
+    {
+        $now = Carbon::now();
+        return $query->where('signup_opens_at', '<', $now)
+                    ->where('ends_at', '>', $now);
+    }
+
+    /**
+     * Get the current cycle.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function current_cycle()
+    {
+        $now = Carbon::now();
+        return Cycle::where('signup_opens_at', '<', $now)
+                    ->where('ends_at', '>', $now)
+                    ->first();
+    }
+
+    /**
+     * Scope a query to the current cycle.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function next_cycle()
+    {
+
+        $now = Carbon::now();
+        return Cycle::where('signup_opens_at', '>', $now)
+                    ->orderBy('signup_opens_at', 'asc')->first();
     }
 
 }

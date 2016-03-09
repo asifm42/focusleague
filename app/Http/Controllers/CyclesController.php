@@ -48,9 +48,14 @@ class CyclesController extends Controller
      */
     public function show($id)
     {
-        $cycle = Cycle::find(1);
-        return $cycle->subs();
-        return view('cycles.show')->withCycle($cycle);
+        $cycle = Cycle::findOrFail($id);
+        $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability');
+
+        $data['cycle'] = $cycle;
+        $data['user'] = $user = auth()->user();
+        $data['current_cycle_signup'] = $user->current_cycle_signup();
+
+        return view('cycles.show', $data);
     }
 
     /**
