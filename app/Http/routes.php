@@ -93,7 +93,27 @@ Route::group(['middleware' => ['web','auth']], function() {
     /*
      * Cycle Routes
      */
-    Route::get(     'cycles/{id}',       ['as' => 'cycles.view', 'uses' => 'CyclesController@show']);
+    Route::get(     'cycles/{id}',          ['as' => 'cycles.view', 'uses' => 'CyclesController@show']);
+
+    /*
+     * Cycle Signup Routes
+     */
+    Route::get(     'cycles/{id}/signup',       ['as' => 'cycle.signup.create', 'uses' => 'CycleSignupsController@create']);
+    Route::post(    'cycles/{id}/signup',       ['as' => 'cycle.signup.store', 'uses' => 'CycleSignupsController@store']);
+    Route::get(     'cycles/{id}/signup/edit',  ['as' => 'cycle.signup.edit', 'uses' => 'CycleSignupsController@edit']);
+    Route::patch(   'cycles/{id}/signup',       ['as' => 'cycle.signup.update', 'uses' => 'CycleSignupsController@update']);
+    Route::put(     'cycles/{id}/signup',       ['as' => 'cycle.signup.put', 'uses' => 'CycleSignupsController@update']);
+    Route::delete(  'cycles/{id}/signup',       ['as' => 'cycle.signup.destroy', 'uses' => 'CycleSignupsController@destroy']);
+
+    /*
+        Admin cycle signup routes
+     */
+    // How do we know which id, cycle or user?
+    // Route::get(     'cyclesignups/{id}',         ['as' => 'cyclesignups.view', 'uses' => 'CycleSignupsController@show']);
+    Route::get(     'cyclesignups/{id}/edit',    ['as' => 'cyclesignup.edit', 'uses' => 'CycleSignupsController@edit']);
+    Route::patch(   'cyclesignups/{id}',         ['as' => 'cyclesignups.update', 'uses' => 'CycleSignupsController@update']);
+    Route::put(     'cyclesignups/{id}',         ['as' => 'cyclesignups.put', 'uses' => 'CycleSignupsController@update']);
+    // Route::delete(  'cyclesignups/{id}',         ['as' => 'cyclesignups.destroy', 'uses' => 'CycleSignupsController@destroy']);
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
