@@ -22,7 +22,7 @@ class CycleUserTableSeeder extends Seeder
                 'div_pref_first' => $user->division_preference_first,
                 'div_pref_second' => $user->division_preference_second,
                 'note' => 'I love this game',
-                'willing_to_captain' => false,
+                'will_captain' => false,
             ]);
         }
     }
