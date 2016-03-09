@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"div",
+				"div_pref_2"
+			],
+			[
+				"Cycle",
+				"CycleSignup〔namespace〕"
+			],
+			[
+				"Stor",
+				"StoreCycleSignupRequest"
+			],
+			[
+				"Cyc",
+				"CycleSignup〔class〕"
+			],
+			[
+				"current_cycle",
+				"current_cycle_signup"
+			],
+			[
+				"fe",
+				"female"
+			],
+			[
+				"V",
+				"VerifyUser"
+			],
+			[
 				"20",
 				"20:00:00"
 			],
@@ -210,10 +238,6 @@
 			[
 				"Ver",
 				"VerifyUserEmailRequest〔namespace〕"
-			],
-			[
-				"V",
-				"VerificationCodeReset"
 			],
 			[
 				"fo",
@@ -490,35 +514,27 @@
 			[
 				"del",
 				"deleteResource"
-			],
-			[
-				"Re",
-				"ResourceTransformer〔namespace〕"
-			],
-			[
-				"row",
-				"rowElement〔variable〕"
-			],
-			[
-				"o",
-				"$originalPresentation〔variable〕"
-			],
-			[
-				"ori",
-				"$originalPresentation〔variable〕"
-			],
-			[
-				"preview",
-				"previewelement"
-			],
-			[
-				"previe",
-				"previewElement"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "app/Models/CycleSignup.php",
+			"settings":
+			{
+				"buffer_size": 1155,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/traits/trimScalerValues.php",
+			"settings":
+			{
+				"buffer_size": 597,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -533,7 +549,7 @@
 		[
 			[
 				"Laravel ",
-				"Set Syntax: Laravel Blade"
+				"Laravel Artisan 5: Make:Seeder"
 			],
 			[
 				"Snippet: ",
@@ -606,148 +622,155 @@
 	"expanded_folders":
 	[
 		"/Library/WebServer/Documents/focusleague",
+		"/Library/WebServer/Documents/focusleague/app",
 		"/Library/WebServer/Documents/focusleague/app/Http/Controllers",
-		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/Auth",
 		"/Library/WebServer/Documents/focusleague/app/Http/Middleware",
 		"/Library/WebServer/Documents/focusleague/app/Http/Requests",
+		"/Library/WebServer/Documents/focusleague/config",
+		"/Library/WebServer/Documents/focusleague/database/factories",
+		"/Library/WebServer/Documents/focusleague/database/migrations",
+		"/Library/WebServer/Documents/focusleague/database/seeds",
+		"/Library/WebServer/Documents/focusleague/public/assets",
+		"/Library/WebServer/Documents/focusleague/resources",
 		"/Library/WebServer/Documents/focusleague/resources/views",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/emails",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords",
+		"/Library/WebServer/Documents/focusleague/resources/views/cycles",
+		"/Library/WebServer/Documents/focusleague/resources/views/cycles/signups",
+		"/Library/WebServer/Documents/focusleague/resources/views/users",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/forms",
+		"/Library/WebServer/Documents/focusleague/storage",
 		"/Library/WebServer/Documents/focusleague/storage/framework",
 		"/Library/WebServer/Documents/focusleague/storage/framework/views"
 	],
 	"file_history":
 	[
-		"/Library/WebServer/Documents/focusleague/app/Http/routes.php",
-		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/Auth/PasswordController.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/layouts/email.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords/reset.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms/resetPassword.blade.php",
-		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Foundation/Auth/ResetsPasswords.php",
-		"/Library/WebServer/Documents/focusleague/storage/framework/views/b9712171ab6f6d0668a47653b1fa46bd0f157ec8.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/emails/password.blade.php",
-		"/Library/WebServer/Documents/focusleague/vendor/symfony/console/Tests/Fixtures/TestCommand.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/navbars/default.blade.php",
-		"/Library/WebServer/Documents/focusleague/app/Factories/SessionFactory.php",
-		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/UsersController.php",
-		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/SessionsController.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/users/create.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords/forgotPassword.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms/forgotPassword.blade.php",
-		"/Library/WebServer/Documents/focusleague/.env",
-		"/Library/WebServer/Documents/focusleague/composer.json",
-		"/Library/WebServer/Documents/focusleague/config/mail.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/verify.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms/signIn.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/users/profile.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/users/forms/create.blade.php",
-		"/Library/WebServer/Documents/focusleague/app/Factories/AbstractFactory.php",
-		"/Library/WebServer/Documents/focusleague/app/Http/Requests/SignInRequest.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/auth/signIn.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/users/view.blade.php",
-		"/Library/WebServer/Documents/focusleague/app/Contracts/Updater.php",
-		"/Library/WebServer/Documents/focusleague/app/Events/VerificationCodeReset.php",
-		"/Library/WebServer/Documents/focusleague/app/Events/UserVerified.php",
-		"/Library/WebServer/Documents/focusleague/app/Events/UserRegistered.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/UserRegistered.php",
-		"/Library/WebServer/Documents/focusleague/app/Events/UserUpdated.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/VerificationCodeReset.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/UserVerified.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/UserUpdated.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Events/Event.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/layouts/default.blade.php",
-		"/Library/WebServer/Documents/focusleague/.gitignore",
-		"/Library/WebServer/Documents/focusleague/app/Factories/SessionsFactory.php",
-		"/Library/WebServer/Documents/focusleague/config/app.php",
-		"/Library/WebServer/Documents/focusleague/config/auth.php",
-		"/Library/WebServer/Documents/focusleague/app/Exceptions/ConvertToImageException.php",
-		"/Library/WebServer/Documents/focusleague/app/Exceptions/InvalidConfirmationCodeException.php",
-		"/Library/WebServer/Documents/focusleague/app/Exceptions/SaveModelException.php",
-		"/Library/WebServer/Documents/focusleague/app/Exceptions/UnauthorizedAccessException.php",
-		"/Library/WebServer/Documents/focusleague/app/Exceptions/UnverifiedAccountException.php",
-		"/Library/WebServer/Documents/focusleague/app/Exceptions/UserVerifiedException.php",
-		"/Library/WebServer/Documents/focusleague/app/Contracts/Factory.php",
-		"/Library/WebServer/Documents/focusleague/app/Factories/AbsractFactory.php",
-		"/Library/WebServer/Documents/focusleague/database/factories/ModelFactory.php",
-		"/Library/WebServer/Documents/focusleague/bower.json",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/bower.json",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144357_create_cycle_user_table.php",
-		"/Library/WebServer/Documents/focusleague/database/seeds/UsersTableSeeder.php",
-		"/Library/WebServer/Documents/focusleague/app/Http/Requests/UserStoreRequest.php",
-		"/Library/WebServer/Documents/focusleague/app/Models/User.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2014_10_12_000000_create_users_table.php",
-		"/Library/WebServer/Documents/focusleague/database/seeds/CyclesTableSeeder.php",
-		"/Library/WebServer/Documents/focusleague/database/seeds/GamesTableSeeder.php",
-		"/Library/WebServer/Documents/focusleague/database/seeds/WeeksTableSeeder.php",
-		"/Library/WebServer/Documents/focusleague/database/seeds/DatabaseSeeder.php",
-		"/Library/WebServer/Documents/focusleague/app/Models/Week.php",
 		"/Library/WebServer/Documents/focusleague/app/Models/Cycle.php",
-		"/Library/WebServer/Documents/focusleague/vendor/fzaninotto/faker/readme.md",
-		"/Library/WebServer/Documents/focusleague/.git/MERGE_MSG",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144034_create_weeks_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144649_create_posts_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144621_create_transactions_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144103_create_teams_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144045_create_games_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_143953_create_cycles_table.php",
-		"/Library/WebServer/Documents/focusleague/app/Game.php",
-		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Database/Seeder.php",
-		"/Library/WebServer/Documents/focusleague/app/Week.php",
-		"/Library/WebServer/Documents/focusleague/app/Cycle.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_145021_create_contacts_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_145003_create_logs_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144539_create_subs_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144250_create_game_team_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144915_create_checkins_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144950_create_attendances_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144426_create_cycle_subs_table.php",
-		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/PagesController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2015_08_18_151144_add_cashier_columns.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2015_09_25_122342_add_billing_info_columns_to_users_table.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/database/migrations/2014_12_11_155200_create_users_table.php",
-		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_081336_create_users_table.php",
-		"/Users/Asif/.bash_profile",
-		"/Users/Asif/.bashrc",
-		"/Library/WebServer/Documents/focusleague/resources/views/layouts/footer.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/site/news.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/trimScalerValues.php",
+		"/Library/WebServer/Documents/focusleague/app/Providers/AuthServiceProvider.php",
+		"/Library/WebServer/Documents/focusleague/app/Policies/CycleSignupPolicy.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/CycleSignup.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/routes.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/CycleSignupsController.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/Handler.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/UserEditFormRequest.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/forms/create.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/User.php",
+		"/Library/WebServer/Documents/focusleague/storage/framework/views/a99185f1ce98cfa0aa2b0be5fa402c62f45fb886.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/cycles/signups/edit.blade.php",
+		"/Library/WebServer/Documents/focusleague/storage/framework/views/25d996688d2750440bee2ece7e85fb86dabbc94d.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/UsersController.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/dashboard.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/cycles/signups/forms/create.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/cycles/show.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/CyclesController.php",
 		"/Library/WebServer/Documents/focusleague/resources/views/site/faq.blade.php",
-		"/Library/WebServer/Documents/focusleague/.env.example",
+		"/Library/WebServer/Documents/focusleague/resources/views/cycles/signups/create.blade.php",
+		"/Library/WebServer/Documents/focusleague/storage/framework/views/4fb54b7087e501eb247a00ed0739b84f2be97af9.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/StoreCycleSignupRequest.php",
+		"/Library/WebServer/Documents/focusleague/config/former.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/navbars/default.blade.php",
+		"/Library/WebServer/Documents/focusleague/database/factories/ModelFactory.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/Week.php",
+		"/Library/WebServer/Documents/focusleague/storage/framework/views/f446487c221bb2c262f2404d2e196aa2bf1d34ee.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144357_create_cycle_user_table.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/CycleUserTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/DatabaseSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/UsersTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/AvailabilityTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/SubsTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/CyclesTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_03_07_180437_create_availability_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_143953_create_cycles_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144950_create_attendances_table.php",
+		"/Library/WebServer/Documents/focusleague/database/migrations/2016_02_25_144915_create_checkins_table.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/posts/index.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/layouts/footer.blade.php",
 		"/Library/WebServer/Documents/focusleague/resources/views/site/welcome.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/routes.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/faq.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/PagesController.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/site/welcome2.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/welcome2.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/faq.txt",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/site/pricing.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/layouts/default.blade.php",
-		"/Library/WebServer/Documents/focusleague/resources/views/navbars/app.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/navbars/app.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/.env",
-		"/private/etc/hosts",
-		"/Library/WebServer/Documents/focusleague/public/assets/styles/paper.bootstrap.min.css",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/layouts/app.blade.php",
-		"/private/etc/apache2/extra/httpd-vhosts.conf",
-		"/private/etc/group",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/composer.json",
-		"/Library/WebServer/Documents/focusleague/paper.bootstrap.css",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/.env.example",
-		"/Users/Asif/.ssh/id_rsa.pub",
-		"/Users/Asif/Library/Caches/Cleanup At Startup/Transmit/F0AD49FD-EB84-44CF-ACB1-27AB609BBD01/.htaccess",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/cashier/src/Laravel/Cashier/WebhookController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Middleware/VerifyCsrfToken.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/.git/COMMIT_EDITMSG",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/UsersController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/models/User.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/Factories/UserFactory.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/black/traits/TrimScalarValues.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/vendor/laravel/framework/src/Illuminate/Auth/EloquentUserProvider.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/config/auth.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Http/Controllers/api/UsersApiController.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/resources/views/users/settings.blade.php",
-		"/Library/WebServer/Documents/obi-black/obsidian-black/public/assets/scripts/userSettings.js"
+		"/Library/WebServer/Documents/focusleague/node_modules/browser-sync-ui/static/components/footer.html",
+		"/Library/WebServer/Documents/focusleague/public/assets/css/default.css",
+		"/Library/WebServer/Documents/focusleague/app/Http/Middleware/Authenticate.php",
+		"/Library/WebServer/Documents/focusleague/.git/COMMIT_EDITMSG",
+		"/Library/WebServer/Documents/focusleague/.gitignore",
+		"/Library/WebServer/Documents/focusleague/resources/views/layouts/default.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/UserStoreRequest.php",
+		"/Library/WebServer/Documents/focusleague/database/seeds/PostsTableSeeder.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/UserUpdateRequest.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Foundation/Auth/User.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/Library/WebServer/Documents/focusleague/composer.json",
+		"/Library/WebServer/Documents/focusleague/config/app.php",
+		"/Library/WebServer/Documents/focusleague/resources/lang/en/validation.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/phone.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/PagesController.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/TestRequest.php",
+		"/Library/WebServer/Documents/focusleague/bower.json",
+		"/Library/WebServer/Documents/focusleague/gruntfile.js",
+		"/Library/WebServer/Documents/focusleague/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker-standalone.css",
+		"/Library/WebServer/Documents/focusleague/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/user/verify.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/SessionsController.php",
+		"/Library/WebServer/Documents/focusleague/app/Factories/SessionFactory.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/SignInRequest.php",
+		"/Library/WebServer/Documents/focusleague/app/Exceptions/UnverifiedAccountException.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/layouts/email.blade.php",
+		"/Library/WebServer/Documents/focusleague/package.json",
+		"/Library/WebServer/Documents/focusleague/public/assets/js/site.js",
+		"/Library/WebServer/Documents/focusleague/public/assets/css/paper33.bootstrap.min.css",
+		"/Library/WebServer/Documents/focusleague/grunt-try.js",
+		"/Library/WebServer/Documents/focusleague/bower_components/eonasdan-bootstrap-datetimepicker/Gruntfile.js",
+		"/Library/WebServer/Documents/focusleague/resources/views/emails/welcome.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/PostsController.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/Post.php",
+		"/Library/WebServer/Documents/focusleague/public/assets/css/site.css",
+		"/Library/WebServer/Documents/focusleague/app/Updaters/UserUpdater.php",
+		"/Library/WebServer/Documents/focusleague/app/Factories/UserFactory.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/edit.blade.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Contracts/Auth/Authenticatable.php",
+		"/Library/WebServer/Documents/focusleague/app/Updaters/AbstractUpdater.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/UserEditFormRequest2.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/BaseModel.php",
+		"/Library/WebServer/Documents/focusleague/app/Models/AuthUser.php",
+		"/Library/WebServer/Documents/focusleague/app/Providers/EventServiceProvider.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords/forgotPassword.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/site/news.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/user/signIn.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/create.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/passwords/reset.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/forms/signIn.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Providers/AppServiceProvider.php",
+		"/Library/WebServer/Documents/focusleague/profile.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/users/profile.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/Auth/PasswordController.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/VerifyUserEmailRequest.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/Controller.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Foundation/Bus/DispatchesJobs.php",
+		"/Library/WebServer/Documents/focusleague/app/Jobs/ResetVerificationCode.php",
+		"/Library/WebServer/Documents/focusleague/app/Listeners/SendVerificationEmail.php",
+		"/Library/WebServer/Documents/focusleague/.env",
+		"/Library/WebServer/Documents/focusleague/app/Jobs/VerifyUser.php",
+		"/Library/WebServer/Documents/focusleague/app/Listeners/SendWelcomeEmail.php",
+		"/Library/WebServer/Documents/focusleague/app/Mailers/Mailer.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/emails/verification.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Requests/VerificationCodeResetRequest.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/errors/403.blade.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/errors/503.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/errors/missing.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/errors/generic.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/errors/unauthorizedAccessAttempt.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/errors/nonPublicAccessAttempt.blade.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/errors/missingModel.blade.php",
+		"/Library/WebServer/Documents/focusleague/vendor/symfony/debug/ExceptionHandler.php",
+		"/Library/WebServer/Documents/focusleague/vendor/laravel/framework/src/Illuminate/Contracts/Debug/ExceptionHandler.php",
+		"/Library/WebServer/Documents/focusleague/SessionsFactory.php",
+		"/Library/WebServer/Documents/focusleague/app/Mailers/UserMailer.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/auth/emails/password.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Listeners/SendNewUserRegisteredNotification.php",
+		"/Library/WebServer/Documents/focusleague/resources/views/emails/alert/registration.blade.php",
+		"/Library/WebServer/Documents/focusleague/app/Http/Controllers/HomeController.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Providers/EventServiceProvider.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Providers/FormServiceProvider.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Providers/AuthServiceProvider.php",
+		"/Library/WebServer/Documents/obi-black/obsidian-black/app/Providers/AppServiceProvider.php"
 	],
 	"find":
 	{
@@ -763,9 +786,40 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"willing_to_captain",
+			"badge",
+			"maleSig",
+			"FOCUS league",
+			"league",
+			"_15",
+			"_14",
+			"_13",
+			"_12",
+			"_11",
+			"_10",
+			"_9",
+			"_8",
+			"_7",
+			"_6",
+			"_5",
+			"_4",
+			"_3",
+			"cash",
+			"moment",
+			"(jquery)",
+			"glyp",
+			"UserUpdateRequest",
+			"users.edi",
+			"confirmed_code ==",
+			"confirmed_code===0",
+			"profile",
+			"Illuminate\\Bus\\Dispatcher",
+			"Illuminate\\Bus\\BusServiceProvider::class",
+			"convertExceptionToResponse",
+			"conv",
 			"password.reset",
 			"h5",
 			"2015",
@@ -862,38 +916,7 @@
 			"phantom",
 			"getTria",
 			".subscri",
-			"subscri",
-			"product",
-			"vendor",
-			"footer",
-			"meta",
-			"header",
-			"signout",
-			">pdf",
-			"extens",
-			"vendor",
-			"$user",
-			"billab",
-			"downl",
-			"resetCred",
-			"save",
-			"showBill",
-			"showBillin",
-			"bill_name",
-			"validateBillin",
-			".key",
-			"paymentsCach",
-			"validate",
-			"showBillingInfoPane",
-			"showBillingInfo",
-			"showPayme",
-			"url(",
-			"billings/change",
-			"form-submit-with-cc",
-			"resume",
-			"}\n",
-			"create",
-			"resume"
+			"subscri"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -901,6 +924,19 @@
 		"regex": false,
 		"replace_history":
 		[
+			"_16",
+			"_15",
+			"_14",
+			"_13",
+			"_12",
+			"_11",
+			"_10",
+			"_9",
+			"_8",
+			"_7",
+			"_6",
+			"_5",
+			"_4",
 			"h6",
 			"rtf",
 			"$this->resource->",
@@ -1015,20 +1051,7 @@
 			":",
 			"id3Results",
 			"Authorization: 60d960ca51751a8c3348321197b36b6420fbc227",
-			"60d960ca51751a8c3348321197b36b6420fbc227",
-			"div",
-			"->userRepo",
-			"->",
-			"",
-			"->",
-			"",
-			"->",
-			"\"",
-			"sales@obsidianlearning.com",
-			"				<li><a href=\"solutions_gas-detection.html\">Gas Detection</a></li>\n				<li><a href=\"solutions_specialized-safety-personnel.html\">Specialized Safety Personnel</a></li>\n				<li><a href=\"solutions_turnaround-and-shutdown.html\">Turnaround &amp; Shutdown</a></li>",
-			"<a href=\"mailto:hr@obsidianlearning.com\">",
-			"' )",
-			"( '"
+			"60d960ca51751a8c3348321197b36b6420fbc227"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1039,8 +1062,188 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/Models/CycleSignup.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								175,
+								175
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
+							],
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/traits/trimScalerValues.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 597,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								107,
+								107
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
+							],
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1097,8 +1300,360 @@
 		"selected_items":
 		[
 			[
+				"cyclesig",
+				"app/Models/CycleSignup.php"
+			],
+			[
+				"handler",
+				"app/Exceptions/Handler.php"
+			],
+			[
+				"cyclesign",
+				"app/Models/CycleSignup.php"
+			],
+			[
 				"routes",
 				"app/Http/routes.php"
+			],
+			[
+				"cyclesigncon",
+				"app/Http/Controllers/CycleSignupsController.php"
+			],
+			[
+				"userformcre",
+				"resources/views/users/forms/create.blade.php"
+			],
+			[
+				"user",
+				"app/Models/User.php"
+			],
+			[
+				"userscon",
+				"app/Http/Controllers/UsersController.php"
+			],
+			[
+				"cycl",
+				"app/Models/Cycle.php"
+			],
+			[
+				"dashboar",
+				"resources/views/users/dashboard.blade.php"
+			],
+			[
+				"hand",
+				"app/Exceptions/Handler.php"
+			],
+			[
+				"default.bl",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				"model",
+				"database/factories/ModelFactory.php"
+			],
+			[
+				"usercon",
+				"app/Http/Controllers/UsersController.php"
+			],
+			[
+				"dashboa",
+				"resources/views/users/dashboard.blade.php"
+			],
+			[
+				"user.php",
+				"app/Models/User.php"
+			],
+			[
+				"week",
+				"app/Models/Week.php"
+			],
+			[
+				"cyclcon",
+				"app/Http/Controllers/CyclesController.php"
+			],
+			[
+				"cycle",
+				"app/Models/Cycle.php"
+			],
+			[
+				"user.ph",
+				"app/Models/User.php"
+			],
+			[
+				"faq.bl",
+				"resources/views/site/faq.blade.php"
+			],
+			[
+				"dashbo",
+				"resources/views/users/dashboard.blade.php"
+			],
+			[
+				"postindex.bl",
+				"resources/views/posts/index.blade.php"
+			],
+			[
+				"footer.bl",
+				"resources/views/layouts/footer.blade.php"
+			],
+			[
+				"welcom",
+				"resources/views/site/welcome.blade.php"
+			],
+			[
+				"footer.blad",
+				"resources/views/layouts/footer.blade.php"
+			],
+			[
+				"footer",
+				"node_modules/browser-sync-ui/static/components/footer.html"
+			],
+			[
+				"navbarde",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				"default.cs",
+				"public/assets/css/default.css"
+			],
+			[
+				"faq",
+				"resources/views/site/faq.blade.php"
+			],
+			[
+				"gitig",
+				".gitignore"
+			],
+			[
+				"laydef",
+				"resources/views/layouts/default.blade.php"
+			],
+			[
+				"routes.",
+				"app/Http/routes.php"
+			],
+			[
+				".gitig",
+				".gitignore"
+			],
+			[
+				".git",
+				".gitignore"
+			],
+			[
+				"navbar",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				"edireques",
+				"app/Http/Requests/UserEditFormRequest.php"
+			],
+			[
+				"usup",
+				"app/Http/Requests/UserUpdateRequest.php"
+			],
+			[
+				"userst",
+				"app/Http/Requests/UserStoreRequest.php"
+			],
+			[
+				"create.blade.php",
+				"resources/views/users/forms/create.blade.php"
+			],
+			[
+				"testre",
+				"app/Http/Requests/TestRequest.php"
+			],
+			[
+				"pages",
+				"app/Http/Controllers/PagesController.php"
+			],
+			[
+				"route",
+				"app/Http/routes.php"
+			],
+			[
+				"userstore",
+				"app/Http/Requests/UserStoreRequest.php"
+			],
+			[
+				"conapp.",
+				"config/app.php"
+			],
+			[
+				"comp",
+				"composer.json"
+			],
+			[
+				"gruntfil",
+				"gruntfile.js"
+			],
+			[
+				"default.bla",
+				"resources/views/layouts/default.blade.php"
+			],
+			[
+				"confapp",
+				"config/app.php"
+			],
+			[
+				"verify.bla",
+				"resources/views/auth/user/verify.blade.php"
+			],
+			[
+				"sessioncon",
+				"app/Http/Controllers/SessionsController.php"
+			],
+			[
+				"users",
+				"app/Http/Controllers/UsersController.php"
+			],
+			[
+				"email",
+				"resources/views/layouts/email.blade.php"
+			],
+			[
+				"defaulbl",
+				"resources/views/layouts/default.blade.php"
+			],
+			[
+				"navdef",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				"welcome",
+				"resources/views/site/welcome.blade.php"
+			],
+			[
+				"default.css",
+				"public/assets/css/default.css"
+			],
+			[
+				"bower",
+				"bower.json"
+			],
+			[
+				"default",
+				"resources/views/layouts/default.blade.php"
+			],
+			[
+				"welco",
+				"resources/views/site/welcome.blade.php"
+			],
+			[
+				"navbardef",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				"gruntfile",
+				"bower_components/eonasdan-bootstrap-datetimepicker/Gruntfile.js"
+			],
+			[
+				"bower.jo",
+				"bower.json"
+			],
+			[
+				"composer",
+				"composer.json"
+			],
+			[
+				"defaul",
+				"resources/views/layouts/default.blade.php"
+			],
+			[
+				"defa",
+				"resources/views/navbars/default.blade.php"
+			],
+			[
+				".gi",
+				".gitignore"
+			],
+			[
+				"userfa",
+				"app/Factories/UserFactory.php"
+			],
+			[
+				"eventser",
+				"app/Providers/EventServiceProvider.php"
+			],
+			[
+				"session",
+				"app/Factories/SessionFactory.php"
+			],
+			[
+				"rou",
+				"app/Http/routes.php"
+			],
+			[
+				".giti",
+				".gitignore"
+			],
+			[
+				"app.ph",
+				"config/app.php"
+			],
+			[
+				"compo",
+				"composer.json"
+			],
+			[
+				"sendwe",
+				"app/Listeners/SendWelcomeEmail.php"
+			],
+			[
+				"app",
+				"config/app.php"
+			],
+			[
+				"config/app",
+				"config/app.php"
+			],
+			[
+				"even",
+				"app/Providers/EventServiceProvider.php"
+			],
+			[
+				"verify",
+				"app/Jobs/VerifyUser.php"
+			],
+			[
+				"veri",
+				"app/Jobs/VerifyUser.php"
+			],
+			[
+				".en",
+				".env"
+			],
+			[
+				"configapp",
+				"config/app.php"
+			],
+			[
+				"send",
+				"app/Listeners/SendVerificationEmail.php"
+			],
+			[
+				"verif",
+				"resources/views/emails/verification.blade.php"
+			],
+			[
+				"configap",
+				"config/app.php"
+			],
+			[
+				"routes.php",
+				"app/Http/routes.php"
+			],
+			[
+				"verificaion",
+				"resources/views/emails/verification.blade.php"
+			],
+			[
+				"verifi",
+				"resources/views/emails/verification.blade.php"
+			],
+			[
+				"homecon",
+				"app/Http/Controllers/HomeController.php"
 			],
 			[
 				"testcon",
@@ -1107,10 +1662,6 @@
 			[
 				"mail",
 				"config/mail.php"
-			],
-			[
-				"compo",
-				"composer.json"
 			],
 			[
 				"compos",
@@ -1123,18 +1674,6 @@
 			[
 				"signin",
 				"resources/views/auth/forms/signIn.blade.php"
-			],
-			[
-				"session",
-				"app/Http/Controllers/SessionsController.php"
-			],
-			[
-				"rou",
-				"app/Http/routes.php"
-			],
-			[
-				"usercon",
-				"app/Http/Controllers/UsersController.php"
 			],
 			[
 				"auth",
@@ -1161,16 +1700,8 @@
 				"resources/views/users/create.blade.php"
 			],
 			[
-				"user",
-				"app/Models/User.php"
-			],
-			[
 				"rout",
 				"app/Http/routes.php"
-			],
-			[
-				"pages",
-				"app/Http/Controllers/PagesController.php"
 			],
 			[
 				".e",
@@ -1181,40 +1712,16 @@
 				".env"
 			],
 			[
-				"comp",
-				"composer.json"
-			],
-			[
-				"faq.bl",
-				"resources/views/site/faq.blade.php"
-			],
-			[
-				"default",
-				"resources/views/layouts/default.blade.php"
-			],
-			[
 				"sitewel",
 				"resources/views/site/welcome.blade.php"
-			],
-			[
-				"defaul",
-				"resources/views/navbars/default.blade.php"
 			],
 			[
 				"navbdef",
 				"resources/views/navbars/default.blade.php"
 			],
 			[
-				"verify",
-				"app/Http/Middleware/VerifyCsrfToken.php"
-			],
-			[
 				"cashweb",
 				"vendor/laravel/cashier/src/Laravel/Cashier/WebhookController.php"
-			],
-			[
-				"route",
-				"app/Http/routes.php"
 			],
 			[
 				"userf",
@@ -1231,10 +1738,6 @@
 			[
 				"eloqu",
 				"vendor/laravel/framework/src/Illuminate/Auth/EloquentUserProvider.php"
-			],
-			[
-				"user.php",
-				"app/black/models/User.php"
 			],
 			[
 				"bill",
@@ -1289,10 +1792,6 @@
 				"app/Http/Controllers/api/ProjectsApiController.php"
 			],
 			[
-				"hand",
-				"app/Exceptions/Handler.php"
-			],
-			[
 				"usermail",
 				"app/black/Mailers/UserMailer.php"
 			],
@@ -1311,302 +1810,6 @@
 			[
 				"passco",
 				"app/Http/Controllers/Auth/PasswordController.php"
-			],
-			[
-				"pagescon",
-				"docs/files/PagesController.html"
-			],
-			[
-				"excepblad",
-				"resources/views/emails/alert/exception.blade.php"
-			],
-			[
-				"fres",
-				"app/black/traits/FreshdeskTrait.php"
-			],
-			[
-				"user.ph",
-				"app/black/models/User.php"
-			],
-			[
-				"pag",
-				"app/Http/Controllers/PagesController.php"
-			],
-			[
-				"testcontro",
-				"app/Http/Controllers/TestController.php"
-			],
-			[
-				"resouphp",
-				"app/black/models/Resource.php"
-			],
-			[
-				"awsup",
-				"app/black/traits/AwsUploaderTrait.php"
-			],
-			[
-				"resourceapi",
-				"app/Http/Controllers/api/ResourcesApiController.php"
-			],
-			[
-				"resourcecontro",
-				"app/Http/Controllers/ResourcesController.php"
-			],
-			[
-				"routes.php",
-				"app/Http/routes.php"
-			],
-			[
-				"sess",
-				"app/Http/Controllers/SessionsController.php"
-			],
-			[
-				"billab",
-				"vendor/laravel/cashier/src/Laravel/Cashier/Billable.php"
-			],
-			[
-				"usercont",
-				"app/Http/Controllers/UsersController.php"
-			],
-			[
-				"authcon",
-				"app/Http/Controllers/Auth/AuthController.php"
-			],
-			[
-				"projcre",
-				"resources/views/projects/create.blade.php"
-			],
-			[
-				"proj",
-				"app/black/models/Project.php"
-			],
-			[
-				"projedi",
-				"resources/views/projects/edit.blade.php"
-			],
-			[
-				"procon",
-				"app/Http/Controllers/ProjectsController.php"
-			],
-			[
-				"projectcont",
-				"app/Http/Controllers/ProjectsController.php"
-			],
-			[
-				"libbr",
-				"resources/views/resources/library.blade.php"
-			],
-			[
-				"app.bl",
-				"resources/views/layouts/app.blade.php"
-			],
-			[
-				"navbapp",
-				"resources/views/navbars/app.blade.php"
-			],
-			[
-				"subscribe",
-				"resources/views/billing/subscribe.blade.php"
-			],
-			[
-				"handl",
-				"app/Exceptions/Handler.php"
-			],
-			[
-				"verifysub",
-				"app/Http/Middleware/VerifySubscription.php"
-			],
-			[
-				"footer",
-				"resources/views/layouts/footer.blade.php"
-			],
-			[
-				"footer.php",
-				"core/bower_components/autocompletejs/pages/footer.php"
-			],
-			[
-				"browser.ph",
-				"resources/views/resources/browser.blade.php"
-			],
-			[
-				"navbaapp",
-				"resources/views/navbars/app.blade.php"
-			],
-			[
-				"browser.bl",
-				"resources/views/resources/browser.blade.php"
-			],
-			[
-				"rescon",
-				"app/Http/Controllers/ResourcesController.php"
-			],
-			[
-				"projcon",
-				"app/Http/Controllers/ProjectsController.php"
-			],
-			[
-				"coregrun",
-				"core/gruntfile.js"
-			],
-			[
-				"resourcss",
-				"public/assets/css/resources.css"
-			],
-			[
-				"projcontr",
-				"app/Http/Controllers/ProjectsController.php"
-			],
-			[
-				"sessionscon",
-				"app/Http/Controllers/SessionsController.php"
-			],
-			[
-				"userscon",
-				"app/Http/Controllers/UsersController.php"
-			],
-			[
-				"han",
-				"app/Exceptions/Handler.php"
-			],
-			[
-				"resource.js",
-				"core/js/models/Resource.js"
-			],
-			[
-				"resouupl",
-				"core/js/views/ResourceUploads.js"
-			],
-			[
-				"resourdeta",
-				"core/js/views/ResourceDetails.js"
-			],
-			[
-				"gurn",
-				"gruntfile.js"
-			],
-			[
-				"coregru",
-				"core/gruntfile.js"
-			],
-			[
-				"gruntfile",
-				"gruntfile.js"
-			],
-			[
-				"resourtr",
-				"app/black/transformers/ResourceTransformer.php"
-			],
-			[
-				"userapi",
-				"app/Http/Controllers/api/UsersApiController.php"
-			],
-			[
-				"resource.php",
-				"app/black/models/Resource.php"
-			],
-			[
-				"projecon",
-				"app/Http/Controllers/ProjectsController.php"
-			],
-			[
-				"rescontr",
-				"app/Http/Controllers/ResourcesController.php"
-			],
-			[
-				"apikey",
-				"app/black/Factories/ApiKeyFactory.php"
-			],
-			[
-				"userfac",
-				"app/black/Factories/UserFactory.php"
-			],
-			[
-				"configapp",
-				"config/app.php"
-			],
-			[
-				"authcontro",
-				"app/Http/Controllers/Auth/AuthController.php"
-			],
-			[
-				"passwordcon",
-				"app/Http/Controllers/Auth/PasswordController.php"
-			],
-			[
-				"sessionscont",
-				"app/Http/Controllers/SessionsController.php"
-			],
-			[
-				"sessioncon",
-				"vendor/aws/aws-sdk-php/src/DynamoDb/SessionConnectionInterface.php"
-			],
-			[
-				"projcommen",
-				"resources/views/reports/project/comments.blade.php"
-			],
-			[
-				"slidecon",
-				"app/Http/Controllers/SlidesController.php"
-			],
-			[
-				"resourviewres",
-				"resources/views/resources/standalone.blade.php"
-			],
-			[
-				"list.blad",
-				"resources/views/projects/list.blade.php"
-			],
-			[
-				"billing",
-				"public/assets/scripts/billing.js"
-			],
-			[
-				"billingdef",
-				"resources/views/billing/default.blade.php"
-			],
-			[
-				"projno",
-				"resources/views/projects/notes.blade.php"
-			],
-			[
-				"projcomm",
-				"resources/views/projects/comments.blade.php"
-			],
-			[
-				"edit.bla",
-				"resources/views/projects/edit.blade.php"
-			],
-			[
-				"slide.php",
-				"app/black/models/Slide.php"
-			],
-			[
-				"commen",
-				"resources/views/projects/comments.blade.php"
-			],
-			[
-				"proedibl",
-				"resources/views/projects/edit.blade.php"
-			],
-			[
-				"edit.",
-				"resources/views/projects/edit.blade.php"
-			],
-			[
-				"list",
-				"resources/views/projects/list.blade.php"
-			],
-			[
-				"projlist",
-				"resources/views/projects/list.blade.php"
-			],
-			[
-				"edit.bl",
-				"resources/views/projects/edit.blade.php"
-			],
-			[
-				"list.bla",
-				"resources/views/projects/list.blade.php"
 			]
 		],
 		"width": 0.0
@@ -1637,7 +1840,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 348.0,
+	"side_bar_width": 337.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
