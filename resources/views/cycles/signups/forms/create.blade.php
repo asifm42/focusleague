@@ -93,7 +93,7 @@
         <div class='will_captain_group-js' style="display:none;">
             {!! Former::checkbox('will_captain')
                 ->label('Are you willing to captain this cycle?')
-                ->text('Yes')
+                ->text('&nbsp;&nbsp;'.'Yes')
                 ->class('form control will_captain-js')
                 ->help('You must be available 3 out of the 4 weeks to be a captain')
             !!}
