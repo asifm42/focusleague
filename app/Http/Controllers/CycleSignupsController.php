@@ -35,6 +35,11 @@ class CycleSignupsController extends Controller
         $cycle = Cycle::findOrFail($id);
         $user = auth()->user();
 
+        // If user already has a signup redirect to edit form
+        if ($user->cycles()->find($cycle->id)) {
+            return redirect()->route('cycle.signup.edit', $cycle->id);
+        }
+
         return view('cycles.signups.create')
                 ->withCycle($cycle)
                 ->withUser($user);

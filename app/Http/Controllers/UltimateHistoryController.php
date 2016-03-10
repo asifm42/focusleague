@@ -30,7 +30,11 @@ class UltimateHistoryController extends Controller
      */
     public function create()
     {
-        return view('ultimate_history.create')->withUser(auth()->user());
+        if (auth()->user()->ultimateHistory) {
+            return redirect()->route('users.ultimate_history.edit', auth()->user()->id);
+        } else {
+            return view('ultimate_history.create')->withUser(auth()->user());
+        }
     }
 
     /**
