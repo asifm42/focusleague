@@ -11,81 +11,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Profile - <a href="{{ route('users.edit', $user->id) }}">Edit</a></div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <h6>Name</h6>
-                                <p>{{ ucwords($user->name) }}</p>
-                                <h6>Nickname</h6>
-                                <p>{{ ucwords($user->getNicknameOrFirstName()) }}</p>
-                                <h6>Email</h6>
-                                <p>{{ $user->email }}</p>
-                                <h6>Gender</h6>
-                                <p>{{ $user->gender }}</p>
-                                <h6>Birthday</h6>
-                                <p>{{ $user->getBirthdayString() }}</p>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <h6>Cell Number</h6>
-                                <p>{{ $user->cell_number }}</p>
-                                <h6>Carrier</h6>
-                                <p>{{ $user->mobile_carrier }}</p>
-                                <h6>Dominant Hand</h6>
-                                <p>{{ $user->dominant_hand }}</p>
-                                <h6>Height</h6>
-                                <p>{{ $user->heightString() }}</p>
-                                <h6>Division Preference First</h6>
-                                <p>{{ $user->division_preference_first }}</p>
-                                <h6>Division Preference Second</h6>
-                                <p>{{ $user->division_preference_second }}</p>
-{{--                                 <h6>Season Pass</h6>
-                                <p>Valid through {{ $user->season_pass_ends_on->toFormattedDateString() }}</p> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Ultimate History - <a href="{{ route('users.ultimate_history.edit', $user->id) }}">Edit</a></div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <h6>Club affiliation</h6>
-                                <p>{{ $user->ultimateHistory->club_affiliation }}</p>
-                                <h6>Years played</h6>
-                                <p>{{ $user->ultimateHistory->years_played }}</p>
-                                <h6>Summary</h6>
-                                <p>{{ $user->ultimateHistory->summary }}</p>
-                                <h6>Favorite defensive position</h6>
-                                <p>{{ $user->ultimateHistory->fav_defensive_position }}</p>
-                                <h6>Favorite offensive position</h6>
-                                <p>{{ $user->ultimateHistory->fav_offensive_position }}</p>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <h6>Defensive or Offensive player</h6>
-                                <p>{{ $user->ultimateHistory->def_or_off }}</p>
-                                <h6>your best skill</h6>
-                                <p>{{ $user->ultimateHistory->best_skill }}</p>
-                                <h6>Skill you most want to improve</h6>
-                                <p>{{ $user->ultimateHistory->skill_to_improve }}</p>
-                                <h6>Your best throw</h6>
-                                <p>{{ $user->ultimateHistory->best_throw }}</p>
-                                <h6>Throw you most want to improve</h6>
-                                <p>{{ $user->ultimateHistory->throw_to_improve }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default hidden">
-                    <div class="panel-heading">Balance</div>
-                    <div class="panel-body">
-                        Account Balance
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-6 col-md-push-6">
             @if(!empty($current_cycle))
                 <div class="panel panel-default">
                     <div class="panel-heading">Current Cycle</div>
@@ -267,6 +193,81 @@
                 </div>
             @endif
             </div>
+            <div class="col-xs-12 col-md-6 col-md-pull-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Profile - <a href="{{ route('users.edit', $user->id) }}">Edit</a></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <h6>Name</h6>
+                                <p>{{ ucwords($user->name) }}</p>
+                                <h6>Nickname</h6>
+                                <p>{{ ucwords($user->getNicknameOrFirstName()) }}</p>
+                                <h6>Email</h6>
+                                <p>{{ $user->email }}</p>
+                                <h6>Gender</h6>
+                                <p>{{ $user->gender }}</p>
+                                <h6>Birthday</h6>
+                                <p>{{ $user->getBirthdayString() }}</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <h6>Cell Number</h6>
+                                <p>{{ $user->cell_number }}</p>
+                                <h6>Carrier</h6>
+                                <p>{{ $user->mobile_carrier }}</p>
+                                <h6>Dominant Hand</h6>
+                                <p>{{ $user->dominant_hand }}</p>
+                                <h6>Height</h6>
+                                <p>{{ $user->heightString() }}</p>
+                                <h6>Division Preference First</h6>
+                                <p>{{ $user->division_preference_first }}</p>
+                                <h6>Division Preference Second</h6>
+                                <p>{{ $user->division_preference_second }}</p>
+{{--                                 <h6>Season Pass</h6>
+                                <p>Valid through {{ $user->season_pass_ends_on->toFormattedDateString() }}</p> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ultimate History - <a href="{{ route('users.ultimate_history.edit', $user->id) }}">Edit</a></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <h6>Club affiliation</h6>
+                                <p>{{ $user->ultimateHistory->club_affiliation }}</p>
+                                <h6>Years played</h6>
+                                <p>{{ $user->ultimateHistory->years_played }}</p>
+                                <h6>Summary</h6>
+                                <p>{{ $user->ultimateHistory->summary }}</p>
+                                <h6>Favorite defensive position</h6>
+                                <p>{{ $user->ultimateHistory->fav_defensive_position }}</p>
+                                <h6>Favorite offensive position</h6>
+                                <p>{{ $user->ultimateHistory->fav_offensive_position }}</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <h6>Defensive or Offensive player</h6>
+                                <p>{{ $user->ultimateHistory->def_or_off }}</p>
+                                <h6>your best skill</h6>
+                                <p>{{ $user->ultimateHistory->best_skill }}</p>
+                                <h6>Skill you most want to improve</h6>
+                                <p>{{ $user->ultimateHistory->skill_to_improve }}</p>
+                                <h6>Your best throw</h6>
+                                <p>{{ $user->ultimateHistory->best_throw }}</p>
+                                <h6>Throw you most want to improve</h6>
+                                <p>{{ $user->ultimateHistory->throw_to_improve }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default hidden">
+                    <div class="panel-heading">Balance</div>
+                    <div class="panel-body">
+                        Account Balance
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection
