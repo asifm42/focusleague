@@ -139,7 +139,7 @@ class UsersController extends Controller
 
         flash()->success('Update Saved');
 
-        return redirect()->back();
+        return redirect()->route('users.dashboard');
     }
 
     protected function verify(VerifyUserEmailRequest $request)
