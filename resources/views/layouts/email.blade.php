@@ -22,7 +22,14 @@
 </div>
 
 <div class="content" style="color: #000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-    <p>Hi {{ ucwords($nickname) }},</p>
+{{-- have to check these because of password reset --}}
+    @if(isset($nickname))
+        <p>Hi {{ ucwords($nickname) }},</p>
+    @elseif(isset($name))
+        <p>Hi {{ ucwords($name) }},</p>
+    @else
+        <p>Hi,</p>
+    @endif
 
 @yield('content')
 
