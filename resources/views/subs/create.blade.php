@@ -6,7 +6,7 @@
         <div class="container">
             <h4 class="hidden-md hidden-lg">Sub Sign up</h4>
             <h3 class="hidden-xs hidden-sm">Sub Sign up</h3>
-            <p>Sign up as a sub</p>
+            <p>Sign up as a weekly sub.</p>
         </div>
     </div>
     <div class="container">

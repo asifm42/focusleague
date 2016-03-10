@@ -50,7 +50,7 @@
             ->required()
         !!}
 
-        <div class="cost-stmt text-info"><p>Your account will be charged $10 if and when you are placed on a team.</p></div>
+        <div class="cost-stmt text-info"><p>Signing up does not guarantee a spot. We will let you know if a spot opens. Your account will be charged $10 if and when you are placed on a team.</p></div>
 
         {!! Former::textarea('note')
             ->label('Note')
