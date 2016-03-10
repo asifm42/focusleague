@@ -1,7 +1,11 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
+    @if($edit === true)
+        <h3 class="panel-title">Edit your cycle sign-up</h3>
+    @else
         <h3 class="panel-title">Sign up for the cycle</h3>
+    @endif
     </div>
 
     <div class="panel-body">
