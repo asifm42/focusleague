@@ -142,7 +142,7 @@
                         </div>
                         <div id="faq_7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_7">
                             <div class="panel-body">
-                                <p>You will need a player account and each cycle will have its own registration form online.</p>
+                                <p>You will need a player account (<a href="{{ route('users.create') }}">get one here</a>) and each cycle will have its own registration form online. You can find a link to sign up as a player or a sub for the current cycle on the cycle details page or the <a href="{{ route('users.dashboard') }}">player dashboard</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -158,6 +158,36 @@
                         <div id="faq_8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_8">
                             <div class="panel-body">
                                 <p>Sign ups for player accounts and the first cycle will open on March 9th. After that, each cycle sign up will open 6-7 days prior to the first day of that cycle.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading_8a">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#faq_list" href="#faq_8a" aria-expanded="false" aria-controls="faq_8a">
+                                    What if I can't play all 4 weeks?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="faq_8a" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_8a">
+                            <div class="panel-body">
+                                <p>You must be available at least 2 of the 4 weeks to sign up. Otherwise, you can sign up as a weekly sub. Weekly subs are not guaranteed play until they notified.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading_8b">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#faq_list" href="#faq_8b" aria-expanded="false" aria-controls="faq_8b">
+                                    What's a sub?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="faq_8b" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_8b">
+                            <div class="panel-body">
+                                <p>If a player can't make at least 2 of the 4 weeks in the cycle or they have missed the sign-up period, then they can sign up as a weekly sub. If there is a spot open for that night, the sub will be notified via email or phone. Sub sign-up links can be found on the cycle details page or on the <a href="{{ route('users.dashboard')}}">player dashboard</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -206,6 +236,26 @@
                         <div id="faq_11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_11">
                             <div class="panel-body">
                                 <p>Most of the funds go towards securing fields at the Houston Sports Park which is the premier sports park in Houston with professional sports field maintenance and their field rental prices reflect that. The remaining funds go towards administrative costs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading_11a">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#faq_list" href="#faq_11a" aria-expanded="false" aria-controls="faq_11a">
+                                    What do I bring to the games?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="faq_11a" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_11a">
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+                                    <li>White &amp; Dark Shirt. Unless you are notified otherwise. (Try to avoid grey)</li>
+                                    <li>Water and/or nutrition</li>
+                                    <li>Hard, spirited, competitive play</li>
+                                    <li>Fun attitude</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
