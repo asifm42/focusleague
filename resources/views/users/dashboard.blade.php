@@ -18,9 +18,9 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <h6>Name</h6>
-                                <p>{{ $user->name }}</p>
+                                <p>{{ ucwords($user->name) }}</p>
                                 <h6>Nickname</h6>
-                                <p>{{ $user->nickname }}</p>
+                                <p>{{ ucwords($user->getNicknameOrFirstName()) }}</p>
                                 <h6>Email</h6>
                                 <p>{{ $user->email }}</p>
                                 <h6>Gender</h6>

@@ -2,7 +2,7 @@
 
 @section('content')
     <p>
-        Well, we hope this is {{ ucfirst($name) }} aka {{ ucfirst($nickname) }}. Someone tried to register an account at focusleague.com using the name, {{ ucfirst($name) }} and email, {{ $email }}.
+        Well, we hope this is {{ ucwords($name) }} aka {{ ucwords($nickname) }}. Someone tried to register an account at focusleague.com using the name, {{ ucwords($name) }} and email, {{ $email }}.
     </p>
     <p>If this was you, please confirm your email address by clicking the link below. We will be communicating most league information via email and it is important that we have an accurate email address.</p>
 

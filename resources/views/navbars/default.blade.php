@@ -38,7 +38,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a id="account-menu" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i>&nbsp; {{ auth()->user()->getNicknameOrFirstName() }} <span class="caret"></span>
+                        <i class="fa fa-user"></i>&nbsp; {{ ucwords(auth()->user()->getNicknameOrFirstName()) }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="account-menu">
                         <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>

@@ -22,7 +22,7 @@
 </div>
 
 <div class="content" style="color: #000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-    <p>Hi {{ ucfirst($nickname) }},</p>
+    <p>Hi {{ ucwords($nickname) }},</p>
 
 @yield('content')
 
