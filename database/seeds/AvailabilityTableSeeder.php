@@ -19,5 +19,12 @@ class AvailabilityTableSeeder extends Seeder
                 $week->signups()->save($player,['attending' => rand(0,1)]);
             }
         }
+        $cycle = Cycle::find(2);
+
+        foreach ($cycle->signups as $player){
+            foreach($cycle->weeks as $week) {
+                $week->signups()->save($player,['attending' => rand(0,1)]);
+            }
+        }
     }
 }

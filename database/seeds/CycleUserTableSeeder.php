@@ -25,5 +25,17 @@ class CycleUserTableSeeder extends Seeder
                 'will_captain' => false,
             ]);
         }
+        $cycle = Cycle::find(2);
+
+        for($i=1;$i<20;$i++){
+            $user = User::find($i);
+
+            $cycle->signups()->save($user, [
+                'div_pref_first' => $user->division_preference_first,
+                'div_pref_second' => $user->division_preference_second,
+                'note' => 'I love this game',
+                'will_captain' => false,
+            ]);
+        }
     }
 }
