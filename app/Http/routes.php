@@ -56,8 +56,6 @@ Route::group(['middleware' => ['web']], function() {
     /*
      * Session Routes
      */
-    Route::get(     'signin',               ['as' => 'sessions.create', 'uses' => 'SessionsController@create']);
-    Route::post(    'signin',               ['as' => 'sessions.signin', 'uses' => 'SessionsController@signIn']);
     Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
 
     // Password reset link request routes...
@@ -68,10 +66,6 @@ Route::group(['middleware' => ['web']], function() {
     Route::get(     'password/reset/{token}',           ['as' => 'password.resetForm', 'uses' => 'Auth\PasswordController@getReset']);
     Route::post(    'password/reset',                   ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
 
-    // User registration routes
-    Route::get(     'signup',                           ['as' => 'users.create', 'uses' => 'UsersController@create']);
-    Route::post(    'signup',                           ['as' => 'users.store', 'uses' => 'UsersController@store']);
-
     // User verification routes
     Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
     Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
@@ -81,7 +75,21 @@ Route::group(['middleware' => ['web']], function() {
         throw new TokenMismatchException();
         return view('site.welcome');
     });
+});
 
+/*
+ * User non-auth Routes that can only be seen by guests.
+ */
+Route::group(['middleware' => ['web', 'guest']], function() {
+    /*
+     * Session Routes
+     */
+    Route::get(     'signin',               ['as' => 'sessions.create', 'uses' => 'SessionsController@create']);
+    Route::post(    'signin',               ['as' => 'sessions.signin', 'uses' => 'SessionsController@signIn']);
+
+    // User registration routes
+    Route::get(     'signup',                           ['as' => 'users.create', 'uses' => 'UsersController@create']);
+    Route::post(    'signup',                           ['as' => 'users.store', 'uses' => 'UsersController@store']);
 });
 
 // Ultimate history outside of historyprovided middleware or you'll be stuck in a loop
