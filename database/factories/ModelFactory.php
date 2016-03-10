@@ -79,6 +79,21 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Models\UltimateHistory::class, function (Faker\Generator $faker) {
+    return [
+        'club_affiliation' => 'not sure',
+        'years_played' => '11-15',
+        'summary' => 'I have been playing Ultimate since 2000. I have competed at nationals and club worlds twice. I have played for Black Angus, Flash Flood, Doublewide, SCU Ignite.',
+        'fav_defensive_position' => 'zone wing',
+        'fav_offensive_position' => 'handler / mid-cutter',
+        'def_or_off' => 'offensive',
+        'best_skill' => 'throwing with accuracy and touch',
+        'skill_to_improve' => 'defensive coverage on a handler',
+        'best_throw' => 'short - mid range flick',
+        'throw_to_improve' => 'scoober',
+    ];
+});
+
 $factory->define(App\Models\Cycle::class, function (Faker\Generator $faker) {
     return [
         'created_by' => 1,
