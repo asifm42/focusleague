@@ -19,6 +19,7 @@
                 <li class={{ Active::pattern(['/'], 'active') }}><a href="{{ route('site.home') }}"><i class="fa fa-fw fa-home"></i>&nbsp; Home</a></li>
                 <li class={{ Active::pattern(['news'], 'active') }}><a href="{{ route('site.news') }}"><i class="fa fa-fw fa-newspaper-o"></i>&nbsp; News</a></li>
                 <li class={{ Active::pattern(['faq'], 'active') }}><a href="{{ route('site.faq') }}"><i class="fa fa-fw fa-question"></i>&nbsp; FAQ</a></li>
+                <li class={{ Active::pattern(['contact'], 'active') }}><a href="{{ route('contact.create') }}"><i class="fa fa-fw fa-envelope"></i>&nbsp; Contact</a></li>
         @if(! auth()->check())
                 <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signin'], ' active') }}"><a href="{{ route('sessions.create') }}"><i class="fa fa-sign-in fa-fw"></i>&nbsp; Sign In</a></li>
                 <li class="visible-xs-block visible-sm-block{{ Active::pattern(['signup'], ' active') }}"><a href="{!! route('users.create') !!}"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Sign Up</a></li>
@@ -37,7 +38,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a id="account-menu" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i>&nbsp; {{ auth()->user()->name }} <span class="caret"></span>
+                        <i class="fa fa-user"></i>&nbsp; {{ auth()->user()->getNicknameOrFirstName() }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="account-menu">
                         <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>

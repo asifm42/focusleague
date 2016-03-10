@@ -48,6 +48,12 @@ Route::group(['middleware' => ['web']], function() {
     Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PostsController@index']);
 
     /*
+     * Contact us routes
+     */
+    Route::get(     'contact',      ['as' => 'contact.create', 'uses' => 'ContactsController@create']);
+    Route::post(    'contact',      ['as' => 'contact.send', 'uses' => 'ContactsController@send']);
+
+    /*
      * Session Routes
      */
     Route::get(     'signin',               ['as' => 'sessions.create', 'uses' => 'SessionsController@create']);
