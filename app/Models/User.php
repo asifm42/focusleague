@@ -148,8 +148,10 @@ class User extends Authenticatable
     {
         if(!empty($this->nickname)){
             return $this->nickname;
-        } else {
+        } elseif (strstr($this->name, ' ', true)) {
             return strstr($this->name, ' ', true);
+        } else {
+            return $this->name;
         }
     }
 
