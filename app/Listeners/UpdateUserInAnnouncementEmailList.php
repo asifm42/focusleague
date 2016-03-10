@@ -27,14 +27,21 @@ class UpdateUserInAnnouncementEmailList
      */
     public function handle(UserUpdated $event)
     {
-        if ( app()->environment('local','production') ) {
+        // if ( app()->environment('local','production') ) {
             if ( array_key_exists('name', $event->changed) ) {
                 $user = $event->user;
 
                 // Instantiate the client.
                 $mgClient = new Mailgun(env('MAILGUN_SECRET'));
-                $listAddress = 'announce@mg.focusleague.com';
-                $memberAddress = $user->email;
+
+                if (app()->environment('local','dev')) {
+                    $listAddress = 'announce-test@mg.focusleague.com';
+                }
+                if (app()->environment('production')) {
+                    $listAddress = 'announce@mg.focusleague.com';
+                }
+
+
                 $memberName = ucwords($user->name);
 
                 // check if the email is already on the mailing list
@@ -56,6 +63,6 @@ class UpdateUserInAnnouncementEmailList
                     ));
                 }
             }
-        }
+        // }
     }
 }

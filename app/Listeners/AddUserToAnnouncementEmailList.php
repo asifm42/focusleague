@@ -27,12 +27,19 @@ class AddUserToAnnouncementEmailList
      */
     public function handle(UserVerified $event)
     {
-        if ( app()->environment('local','production') ) {
+        // if ( app()->environment('local','production') ) {
             $user = $event->user;
 
             // Instantiate the client.
             $mgClient = new Mailgun(env('MAILGUN_SECRET'));
-            $listAddress = 'announce@mg.focusleague.com';
+
+            if (app()->environment('local','dev')) {
+                $listAddress = 'announce-test@mg.focusleague.com';
+            }
+            if (app()->environment('production')) {
+                $listAddress = 'announce@mg.focusleague.com';
+            }
+
             $memberAddress = $user->email;
             $memberName = ucwords($user->name);
 
@@ -54,8 +61,6 @@ class AddUserToAnnouncementEmailList
                     'name'       => $memberName
                 ));
             }
-
-
-        }
+        // }
     }
 }
