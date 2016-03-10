@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\UserVerified;
+use App\Events\UserSignedUpAsASub;
 use App\Mailers\UserMailer as Mailer;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendWelcomeEmail
+class SendSubSignupConfirmation
 {
     /**
      * Create the event listener.
@@ -22,11 +22,11 @@ class SendWelcomeEmail
     /**
      * Handle the event.
      *
-     * @param  UserVerified  $event
+     * @param  UserSignedUpAsASub  $event
      * @return void
      */
-    public function handle(UserVerified $event)
+    public function handle(UserSignedUpAsASub $event)
     {
-        $this->mailer->welcome($event->user);
+        $this->mailer->sendSubSignupEmail($event->user, $event->week, $event->cycle);
     }
 }

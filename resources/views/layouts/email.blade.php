@@ -24,7 +24,12 @@
 <div class="content" style="color: #000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
     <p>
         @if (isset($user))
-            <?php $name = $user->name ?>
+            @if(is_array($user))
+
+            <?php $name = $user['nickname'] ?>
+            @else
+                <?php $name = $user->nickname ?>
+            @endif
         @endif
         @if (isset($name))
             @if ((strpos($name, ' ')))

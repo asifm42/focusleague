@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\TrimScalarValues;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use TrimScalarValues;
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -19,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'nickname', 'gender', 'birthday', 'cell_number', 'dominant_hand', 'height', 'division_preference_first', 'division_preference_second', 'image', 'admin', 'season_pass_ends_on', 'ip_address', 'last_login',
+        'name', 'nickname', 'gender', 'birthday', 'cell_number', 'mobile_carrier', 'dominant_hand', 'height', 'division_preference_first', 'division_preference_second', 'image', 'admin', 'season_pass_ends_on', 'ip_address', 'last_login',
     ];
 
     /**
@@ -198,6 +201,15 @@ class User extends Authenticatable
                     ->withPivot('attending')
                     ->orderBy('pivot_week_id')
                     ->withTimestamps();
+    }
+
+
+    /**
+     * Get the user's ultimate history
+     */
+    public function ultimateHistory()
+    {
+        return $this->hasOne('App\Models\UltimateHistory');
     }
 
     /**

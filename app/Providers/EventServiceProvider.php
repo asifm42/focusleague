@@ -19,7 +19,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserVerified' => [
             'App\Listeners\SendWelcomeEmail',
-            // 'App\Listeners\AddUserToAnnouncementEmailList',
+            'App\Listeners\AddUserToAnnouncementEmailList',
             // 'App\Listeners\SignInUser',
         ],
         'App\Events\VerificationCodeReset' => [
@@ -27,6 +27,14 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserUpdated' => [
             // 'App\Listeners\UpdateUserInAnnouncementEmailList',
+        ],
+        'App\Events\UserSignedUpForCycle' => [
+            'App\Listeners\SendCycleSignupConfirmation',
+            'App\Listeners\SendCycleSignupAlert',
+        ],
+        'App\Events\UserSignedUpAsASub' => [
+            'App\Listeners\SendSubSignupConfirmation',
+            'App\Listeners\SendSubSignupAlert',
         ],
     ];
 

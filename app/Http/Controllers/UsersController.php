@@ -65,18 +65,33 @@ class UsersController extends Controller
     public function dashboard(Request $request)
     {
         $user = auth()->user();
-        // dd($user->current_cycle_signup()->pivot->team_id);
+        $user->load('ultimateHistory');
+        // dd($user->availability()->where('cycle_id',2)->get());
         $data['user'] = $user;
         $data['current_cycle'] = Cycle::current_cycle();
         $data['next_cycle'] = Cycle::next_cycle();
+        $data['current_cycle_sub_weeks'] = [];
+        $data['next_cycle_sub_weeks'] = [];
         if ($data['current_cycle']) {
             $data['current_cycle_signup'] = $user->current_cycle_signup();
-            // dd($data['current_cycle_signup']);
+
+            foreach($data['current_cycle']->weeks as $week){
+                $sub_deets = $week->subs->find($user->id);
+                if ($sub_deets){
+                    $data['current_cycle_sub_weeks'][] = ['week'=>$week,'deets'=>$sub_deets];
+                }
+            }
         } else {
             $data['current_cycle_signup'] = [];
         }
         if ($data['next_cycle']) {
             $data['next_cycle_signup'] = $user->cycles()->where('cycle_id', $data['next_cycle']->id)->first();
+            foreach($data['next_cycle']->weeks as $week){
+                $sub_deets = $week->subs->find($user->id);
+                if ($sub_deets){
+                    $data['next_cycle_sub_weeks'][] = ['week'=>$week,'deets'=>$sub_deets];
+                }
+            }
         } else {
             $data['next_cycle_signup'] = [];
         }

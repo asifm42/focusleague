@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Events\UserSignedUpForCycle;
 use App\Exceptions\UnauthorizedAccessException;
 use App\Http\Requests;
 use App\Http\Requests\StoreCycleSignupRequest;
@@ -63,7 +64,11 @@ class CycleSignupsController extends Controller
             ]);
         }
 
-        // fire off event
+        $signup_id = $cycle->signups()->find($user->id)->pivot->id;
+
+        $signup = CycleSignup::findOrFail($signup_id);
+
+        event(new UserSignedUpForCycle($user, $cycle, $signup));
 
         return redirect()->route('cycles.view', $cycle->id);
     }

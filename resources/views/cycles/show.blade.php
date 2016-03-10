@@ -41,21 +41,30 @@
                                 @if ($cycle->status() === 'SIGNUP_OPEN')
                                     <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
                                     <a class="btn btn-default btn-block" href="{{ route('cycle.signup.edit', $cycle->id) }}">Edit sign up</a>
+                                @elseif ($cycle->status() === 'IN_PROGRESS')
+                                    <dd>In progess</dd>
                                 @elseif ($cycle->status() === 'SIGNUP_CLOSED')
                                     <dd>Sign up is currently closed.</dd>
                                 @endif
+                            @elseif($sub_weeks)
+                                <dd>You are signed up as a sub for the following weeks</dd>
+                                @foreach($sub_weeks as $sub_week)
+                                    <dd><a href="{{ route('sub.edit', $sub_week['deets']->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
+                                @endforeach
+                                <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                             @else
                                 @if ($cycle->status() === 'SIGNUP_OPENS_LATER')
                                     <dd>Sign up opens at {{ $cycle->signup_opens_at->toDayDateTimeString() }}</dd>
                                 @elseif ($cycle->status() === 'SIGNUP_OPEN')
                                     <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-                                    <button class="btn btn-primary block-">Sign up</button>
+                                    <a class="btn btn-default btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
+                                    <a class="btn btn-primary btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                                 @elseif ($cycle->status() === 'SIGNUP_CLOSED')
                                     <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
-                                    <button class="btn btn-primary">Sign up as sub</button>
+                                    <a class="btn btn-primary btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                                 @elseif ($cycle->status() === 'IN_PROGRESS')
                                     <dd>In progess</dd>
-                                    <button class="btn btn-primary">Sign up as sub</button>
+                                    <a class="btn btn-primary btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                                 @elseif ($cycle->status() === 'COMPLETED')
                                     <dd>Completed</dd>
                                 @endif
@@ -83,7 +92,7 @@
                     </div>
                     <div class="panel-body">
                         <table class="table table-condensed table-striped table-responsive">
-                            <tr>
+                            <tr class="text-center">
                                 <th>Name</th>
                                 <th>Div1</th>
                                 <th>Div2</th>
@@ -95,8 +104,22 @@
                             @foreach( $cycle->signups()->male()->get() as $signup )
                                 <tr>
                                     <td>{{ $signup->nickname }}</td>
-                                    <td>{{ $signup->pivot->div_pref_first }}</td>
-                                    <td>{{ $signup->pivot->div_pref_second }}</td>
+                                    {{-- <td class="">{{ strtolower($signup->pivot->div_pref_first) }}</td> --}}
+                                    {{-- <td class="">{{ strtolower($signup->pivot->div_pref_second) }}</td> --}}
+                                    <td class="text-center">
+                                        @if(strtolower($signup->pivot->div_pref_first) === 'mens')
+                                            <i class="fa fa-male fa-fw text-primary"></i>
+                                        @elseif(strtolower($signup->pivot->div_pref_first) === 'mixed')
+                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if(strtolower($signup->pivot->div_pref_second) === 'mens')
+                                            <i class="fa fa-male fa-fw text-primary"></i>
+                                        @elseif(strtolower($signup->pivot->div_pref_second) === 'mixed')
+                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                        @endif
+                                    </td>
                                     @foreach($signup->availability()->where('cycle_id',$cycle->id)->orderBy('pivot_week_id')->get() as $week)
                                         @if($week->pivot->attending)
                                             <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
@@ -121,7 +144,7 @@
                         <h4 class="panel-title">Female Signups <span class="badge pull-right">{{ $cycle->signups()->female()->count() }}</span></h4>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-condensed table-striped">
+                        <table class="table table-condensed table-striped table-responsive">
                             <tr>
                                 <th>Name</th>
                                 <th>Div1</th>
@@ -134,8 +157,22 @@
                             @foreach( $cycle->signups()->female()->get() as $signup )
                                 <tr>
                                     <td>{{ $signup->nickname }}</td>
-                                    <td>{{ $signup->pivot->div_pref_first }}</td>
-                                    <td>{{ $signup->pivot->div_pref_second }}</td>
+                                    {{-- <td>{{  strtolower($signup->pivot->div_pref_first) }}</td> --}}
+                                    {{-- <td>{{  strtolower($signup->pivot->div_pref_second) }}</td> --}}
+                                    <td class="text-center">
+                                        @if(strtolower($signup->pivot->div_pref_first) === 'womens')
+                                            <i class="fa fa-female fa-fw text-danger"></i>
+                                        @elseif(strtolower($signup->pivot->div_pref_first) === 'mixed')
+                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if(strtolower($signup->pivot->div_pref_second) === 'womens')
+                                            <i class="fa fa-male fa-fw text-primary"></i>
+                                        @elseif(strtolower($signup->pivot->div_pref_second) === 'mixed')
+                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                        @endif
+                                    </td>
                                     @foreach($signup->availability()->where('cycle_id',$cycle->id)->orderBy('pivot_week_id')->get() as $week)
                                         @if($week->pivot->attending)
                                             <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>

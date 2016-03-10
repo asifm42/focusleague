@@ -65,7 +65,7 @@
         $checkbox_options = [];
         if ($edit === false) {
             foreach ($cycle->weeks as $week) {
-                $checkbox_options[$week->starts_at->toFormattedDateString()] = [
+                $checkbox_options['&nbsp; ' . $week->starts_at->toFormattedDateString()] = [
                     'name' => 'weeks['.$week->id.']',
                     'value' => 1,
                     'data-week_id' => $week->id,
@@ -73,7 +73,7 @@
             }
         } else {
             foreach ($cycle->weeks as $week) {
-                $checkbox_options[$week->starts_at->toFormattedDateString()] = [
+                $checkbox_options['&nbsp; ' . $week->starts_at->toFormattedDateString()] = [
                     'name' => 'weeks['.$week->id.']',
                     'value' => 1,
                     'data-week_id' => $week->id,

@@ -36,7 +36,14 @@ class Week extends Model
      */
     public function week_index()
     {
-        // return $this->belongsTo('App\Models\Cycle', 'cycle_id');
+        $cycle_weeks = $this->cycle->weeks;
+        $num=0;
+        foreach ($cycle_weeks as $week) {
+            $num++;
+            if ($week->id === $this->id) {
+                return $num;
+            }
+        }
     }
 
     /**
@@ -52,7 +59,7 @@ class Week extends Model
      */
     public function signups()
     {
-        return $this->belongsToMany('App\Models\User', 'availability')->withPivot('attending')->withTimestamps();
+        return $this->belongsToMany('App\Models\User', 'availability')->withPivot('id', 'attending')->withTimestamps();
     }
 
     /**
@@ -61,7 +68,7 @@ class Week extends Model
     public function subs()
     {
         return $this->belongsToMany('App\Models\User', 'subs')
-                    ->withPivot('note', 'team_id')
+                    ->withPivot('id', 'note', 'team_id')
                     ->whereNull('subs.deleted_at') // for soft deletes
                     ->withTimestamps();
     }

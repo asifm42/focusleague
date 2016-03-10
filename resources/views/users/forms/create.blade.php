@@ -44,6 +44,19 @@
             ->help('for last-minute text communications')
             ->required()
         !!}
+        {!! Former::select('mobile_carrier')
+            ->addClass('form-control')
+            ->options([
+                'att' => 'AT&T',
+                'tmobile' => 'T-Mobile',
+                'verizon' => 'Verizon',
+                'sprint' => 'Sprint',
+                'other' => 'Other',
+                ])
+            ->placeholder('Required mobile carrier')
+            ->required()
+            ->help('for last-minute text communications')
+        !!}
         {!! Former::select('gender')
             ->addClass('form-control gender-js')
             ->options(['male' => 'Male', 'female' => 'Female'])

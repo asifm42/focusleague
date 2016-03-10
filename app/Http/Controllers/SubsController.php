@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Cycle;
+use App\Models\Week;
+use App\Events\UserSignedUpAsASub;
 
-class CyclesController extends Controller
+class SubsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,9 +26,20 @@ class CyclesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        //
+        $user = auth()->user();
+        $cycle = Cycle::findOrFail($id);
+        $cycle->load('weeks', 'signups', 'weeks.subs');
+
+        if ( !empty( $cycle->signups()->find($user->id) ) ){
+            flash()->warning('You can not sign up as a sub because you are already signed up for this cycle.');
+            return redirect()->route('cycles.view', $cycle->id);
+        }
+
+        return view('subs.create')
+            ->withCycle($cycle)
+            ->withUser($user);
     }
 
     /**
@@ -35,9 +48,21 @@ class CyclesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        // return $request->all();
+        $cycle = Cycle::findOrFail($id);
+        $cycle->load('weeks');
+
+        $week = $cycle->weeks->find($request->input('week'));
+
+        $week->subs()->attach(auth()->user()->id, ['note'=>$request->input('note')]);
+
+        event(new UserSignedUpAsASub(auth()->user(), $week, $cycle));
+
+        flash()->success('You are signed up to sub!');
+
+        return redirect()->route('users.dashboard');
     }
 
     /**
@@ -48,22 +73,7 @@ class CyclesController extends Controller
      */
     public function show($id)
     {
-        $cycle = Cycle::findOrFail($id);
-        $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability');
-
-        $data['cycle'] = $cycle;
-        $data['user'] = $user = auth()->user();
-        $data['current_cycle_signup'] = $user->current_cycle_signup();
-        $data['sub_weeks'] = [];
-        foreach($cycle->weeks as $week){
-            $sub_deets = $week->subs->find($user->id);
-            if ($sub_deets){
-                $data['sub_weeks'][] = ['week'=>$week,'deets'=>$sub_deets];
-            }
-        }
-        $sub_deets = $week->subs->find($user->id);
-
-        return view('cycles.show', $data);
+        //
     }
 
     /**

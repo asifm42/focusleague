@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title','FOCUS League – Cycle {{ $cycle->name }} Sign-up')
+@section('title','FOCUS League – Cycle Sign-up')
 
 @section('content')
     <div class="page-header">

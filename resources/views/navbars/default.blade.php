@@ -32,6 +32,7 @@
             </ul>
         @else
                 <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>
+                <li class="{{ Active::pattern('Cycle', 'active') }}"><a href="{{ route('cycles.view', 1) }}"><i class="fa fa-refresh"></i>&nbsp; Cycle</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
