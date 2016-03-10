@@ -33,13 +33,29 @@ class AddUserToAnnouncementEmailList
             // Instantiate the client.
             $mgClient = new Mailgun(env('MAILGUN_SECRET'));
             $listAddress = 'announce@mg.focusleague.com';
+            $memberAddress = $user->email;
+            $memberName = ucwords($user->name);
 
-            // Issue the call to the client.
-            $result = $mgClient->post("lists/$listAddress/members", array(
-                'address'     => $user->email,
-                'name'        => $user->name,
-                'subscribed'  => true
-            ));
+            // check if the email is already on the mailing list
+            $existResult = $mgClient->get("lists/$listAddress/members", array(
+                'address' => $memberAddress,
+                ));
+
+            if (empty($existResult->http_response_body->items)) {
+                // Email doesn't exist. Add it.
+                $result = $mgClient->post("lists/$listAddress/members", array(
+                    'address'     => $memberAddress,
+                    'name'        => $memberName,
+                    'subscribed'  => true
+                ));
+            } else {
+                // Email exists. Update the info.
+                $result = $mgClient->put("lists/$listAddress/members/$memberAddress", array(
+                    'name'       => $memberName
+                ));
+            }
+
+
         }
     }
 }

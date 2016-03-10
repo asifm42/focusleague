@@ -26,7 +26,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SendVerificationEmail',
         ],
         'App\Events\UserUpdated' => [
-            // 'App\Listeners\UpdateUserInAnnouncementEmailList',
+            'App\Listeners\UpdateUserInAnnouncementEmailList',
         ],
         'App\Events\UserSignedUpForCycle' => [
             'App\Listeners\SendCycleSignupConfirmation',
