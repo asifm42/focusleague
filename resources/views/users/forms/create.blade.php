@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h3 class="panel-title">Sign up for a new account</h3>
+        <h3 class="panel-title">Sign up for a player account</h3>
     </div>
 
     <div class="panel-body">
@@ -25,7 +25,7 @@
         {!! Former::text('nickname')
             ->addClass('form-control')
             ->placeholder('Optional nickname')
-            ->('We will mostly address you by this name through out the system. Leave it blank to use your first name.')
+            ->help('We will mostly address you by this name through out the system. Leave it blank to use your first name.')
         !!}
         @if($edit === true)
             {!! Former::text('email')
