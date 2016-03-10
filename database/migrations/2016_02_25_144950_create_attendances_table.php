@@ -13,7 +13,8 @@ class CreateAttendancesTable extends Migration
     public function up()
     {
         Schema::create('attendences', function (Blueprint $table) {
-            $table->increments('id');            $table->integer('game_id')->unsigned();
+            $table->increments('id');
+            $table->integer('week_id')->unsigned(); // should this be week_id???
             $table->integer('user_id')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->timestamp('checkin');
@@ -21,9 +22,9 @@ class CreateAttendancesTable extends Migration
             $table->softDeletes();
 
             // Foreign keys
-            $table->foreign('game_id')
+            $table->foreign('week_id')
                 ->references('id')
-                ->on('games');
+                ->on('weeks');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');

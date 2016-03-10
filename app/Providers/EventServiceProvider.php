@@ -13,8 +13,28 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        'App\Events\UserRegistered' => [
+            'App\Listeners\SendVerificationEmail',
+            'App\Listeners\SendNewUserRegisteredNotification',
+        ],
+        'App\Events\UserVerified' => [
+            'App\Listeners\SendWelcomeEmail',
+            'App\Listeners\AddUserToAnnouncementEmailList',
+            // 'App\Listeners\SignInUser',
+        ],
+        'App\Events\VerificationCodeReset' => [
+            'App\Listeners\SendVerificationEmail',
+        ],
+        'App\Events\UserUpdated' => [
+            'App\Listeners\UpdateUserInAnnouncementEmailList',
+        ],
+        'App\Events\UserSignedUpForCycle' => [
+            'App\Listeners\SendCycleSignupConfirmation',
+            'App\Listeners\SendCycleSignupAlert',
+        ],
+        'App\Events\UserSignedUpAsASub' => [
+            'App\Listeners\SendSubSignupConfirmation',
+            'App\Listeners\SendSubSignupAlert',
         ],
     ];
 

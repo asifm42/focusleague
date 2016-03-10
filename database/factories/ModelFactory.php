@@ -59,31 +59,50 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name($gender),
-        'nickname' => $faker->name($gender),
+        'nickname' => $faker->unique()->firstName($gender),
         'email' => $faker->email,
         'confirmed' => 1,
         'confirmation_code' => null,
         'gender' => $gender,
-        'birthday' => $faker->dateTimeBetween($startDate = '-40 years', $endDate = '-18 years'),
+        'birthday' => $faker->date($format = 'Y-m-d', $min = '-18 years'),
         'cell_number' => $faker->phoneNumber(),
+        'mobile_carrier' => 'tmobile',
         'dominant_hand' => $dominateHand,
         'height' => $faker->numberBetween($min = 46, $max = 84),
         'division_preference_first' => $divPref1,
         'division_preference_second' => $divPref2,
         'image' => $faker->imageUrl($width = 640, $height = 480),
-        'admin' => false,
+        'admin' => 0,
         'season_pass_ends_on' => $seasonPasser,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });
 
+$factory->define(App\Models\UltimateHistory::class, function (Faker\Generator $faker) {
+    return [
+        'club_affiliation' => 'not sure',
+        'years_played' => '11-15',
+        'summary' => 'I have been playing Ultimate since 2000. I have competed at nationals and club worlds twice. I have played for Black Angus, Flash Flood, Doublewide, SCU Ignite.',
+        'fav_defensive_position' => 'zone wing',
+        'fav_offensive_position' => 'handler / mid-cutter',
+        'def_or_off' => 'offensive',
+        'best_skill' => 'throwing with accuracy and touch',
+        'skill_to_improve' => 'defensive coverage on a handler',
+        'best_throw' => 'short - mid range flick',
+        'throw_to_improve' => 'scoober',
+    ];
+});
+
 $factory->define(App\Models\Cycle::class, function (Faker\Generator $faker) {
     return [
         'created_by' => 1,
+        'signup_opens_at' => '2016-03-09 00:00:00',
+        'signup_closes_at' => '2016-03-14 20:00:00',
         'starts_at' => '2016-03-15 20:00:00',
         'ends_at' => '2016-04-05 22:00:00',
         'name' => '2016-01',
+        'format' => 'TBD',
     ];
 });
 
@@ -96,7 +115,6 @@ $factory->define(App\Models\Week::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(App\Models\Game::class, function (Faker\Generator $faker) {
     return [
         'week_id' => 1,
@@ -106,5 +124,16 @@ $factory->define(App\Models\Game::class, function (Faker\Generator $faker) {
         'division'=> 'mens',
         'format'=> '7v7',
         'created_by' => 1,
+    ];
+});
+
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    return [
+        'type' => 'news',
+        'title' => $faker->realText($maxNbChars = 20, $indexSize = 2),
+        'content' => $faker->realText($maxNbChars = 200, $indexSize = 2),
+        'posted_by' => 1,
+        'created_at' => $created = $faker->dateTimeBetween($startDate = '2016-03-05', $endDate = '1 week'),
+        'updated_at'=> $created,
     ];
 });

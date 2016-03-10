@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'noreply@focusleague.com', 'name' => 'FOCUS League Support'],
 
     /*
     |--------------------------------------------------------------------------

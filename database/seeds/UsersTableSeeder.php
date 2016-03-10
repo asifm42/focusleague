@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        factory(App\Models\User::class, 30)->create();
+        factory(App\Models\User::class, 50)->create();
         //->each(function($u) {
         //    $u->posts()->save(factory(App\Post::class)->make());
         //});

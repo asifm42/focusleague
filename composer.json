@@ -7,15 +7,14 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "watson/validating": "~1.0",
         "laracasts/flash": "~1.3",
         "anahkiasen/former": "4.0.x-dev",
         "vinkla/hashids":"1.x",
         "laravelcollective/html": "~5.0",
         "mailgun/mailgun-php": "~1.7.2",
         "hieu-le/active": "~2.0",
-        "twbs/bootstrap": "^3.3"
-
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "propaganistas/laravel-phone": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -47,17 +46,13 @@
         ],
         "post-install-cmd": [
             "php artisan clear-compiled",
-            "php artisan optimize",
-            "mkdir -p public/assets/bootstrap",
-            "cp -R vendor/twbs/bootstrap/dist public/assets/bootstrap"
+            "php artisan optimize"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
         ],
         "post-update-cmd": [
-            "php artisan optimize",
-            "mkdir -p public/assets/bootstrap",
-            "cp -R vendor/twbs/bootstrap/dist public/assets/bootstrap"
+            "php artisan optimize"
         ]
     },
     "config": {

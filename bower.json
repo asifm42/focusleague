@@ -1,0 +1,12 @@
+{
+  "name": "focusleague",
+  "version": "1.0",
+  "private": true,
+  "dependencies": {
+    "bootswatch-dist": "3.3.6-paper",
+    "fontawesome": "4.5.0",
+    "jquery": "2.2.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.37",
+    "moment": "^2.11.2"
+  }
+}
