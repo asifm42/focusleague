@@ -1,10 +1,10 @@
 A new sub signup for FOCUS League at {{ $signup['created_at'] }}
 
-Nickname:
-    {{ $user['nickname'] }}
-
 Name:
     {{ $user['name'] }}
+
+Nickname:
+    {{ $user['nickname'] }}
 
 Cycle:
     {{ $cycle['name'] }}

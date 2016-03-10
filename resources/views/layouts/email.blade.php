@@ -22,25 +22,7 @@
 </div>
 
 <div class="content" style="color: #000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-    <p>
-        @if (isset($user))
-            @if(is_array($user))
-
-            <?php $name = $user['nickname'] ?>
-            @else
-                <?php $name = $user->nickname ?>
-            @endif
-        @endif
-        @if (isset($name))
-            @if ((strpos($name, ' ')))
-                Hi {{ strstr($name, ' ', true) }},
-            @else
-                Hi {{ $name }},
-            @endif
-        @else
-            Hi,
-        @endif
-    </p>
+    <p>Hi {{ $nickname }},</p>
 
 @yield('content')
 

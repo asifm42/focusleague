@@ -13,6 +13,8 @@ abstract class Mailer
      */
     public function sendTo($user, $subject, $view, $data = [], $headers = [])
     {
+        $data['nickname'] = $user->getNicknameOrFirstName();
+
         // change to "Mail::queue" when ready to use queues
         Mail::queue($view, $data, function($message) use($user, $subject, $headers)
         {

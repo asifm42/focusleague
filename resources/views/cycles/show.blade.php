@@ -103,7 +103,7 @@
                             </tr>
                             @foreach( $cycle->signups()->male()->get() as $signup )
                                 <tr>
-                                    <td>{{ $signup->nickname }}</td>
+                                    <td>{{ $signup->getNicknameOrFirstName() }}</td>
                                     {{-- <td class="">{{ strtolower($signup->pivot->div_pref_first) }}</td> --}}
                                     {{-- <td class="">{{ strtolower($signup->pivot->div_pref_second) }}</td> --}}
                                     <td class="text-center">
@@ -156,7 +156,7 @@
                             </tr>
                             @foreach( $cycle->signups()->female()->get() as $signup )
                                 <tr>
-                                    <td>{{ $signup->nickname }}</td>
+                                    <td>{{ $signup->getNicknameOrFirstName() }}</td>
                                     {{-- <td>{{  strtolower($signup->pivot->div_pref_first) }}</td> --}}
                                     {{-- <td>{{  strtolower($signup->pivot->div_pref_second) }}</td> --}}
                                     <td class="text-center">
@@ -205,7 +205,7 @@
                         <ul class="list-unstyled">
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->male()->get() as $sub)
-                                <li>{{$sub->name}}</li>
+                                <li>{{$sub->getNicknameOrFirstName()}}</li>
                             @endforeach
                         </ul>
                         @endfor
@@ -220,7 +220,7 @@
                         <ul class="list-unstyled">
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->female()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->female()->get() as $sub)
-                                <li>{{$sub->name}}</li>
+                                <li>{{$sub->getNicknameOrFirstName()}}</li>
                             @endforeach
                         </ul>
                         @endfor

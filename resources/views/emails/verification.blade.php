@@ -2,13 +2,7 @@
 
 @section('content')
     <p>
-        Well, we hope this is
-        @if ((strpos($name, ' ')))
-            {{ strstr($name, ' ', true) }}.
-        @else
-            {{ $name }}.
-        @endif
-            Someone tried to register an account at focusleague.com using the name, {{ $name }} and email, {{ $email }}.
+        Well, we hope this is {{ $name }} aka {{ $nickname }}. Someone tried to register an account at focusleague.com using the name, {{ $name }} and email, {{ $email }}.
     </p>
     <p>If this was you, please confirm your email address by clicking the link below. We will be communicating most league information via email and it is important that we have an accurate email address.</p>
 

@@ -31,7 +31,7 @@ class UserStoreRequest extends Request
         return [
             'name'                          => 'required|max:255',
             'email'                         => 'required|max:255|email|unique:users,email',
-            'nickname'                      => 'unique:users,nickname|min:3',
+            'nickname'                      => 'unique:users,nickname|min:3|max:15',
             'gender'                        => 'required|in:male,female',
             'birthday'                      => 'required|date',
             'cell_number'                   => 'required|phone:LENIENT,US',

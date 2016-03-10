@@ -25,6 +25,7 @@
         {!! Former::text('nickname')
             ->addClass('form-control')
             ->placeholder('Optional nickname')
+            ->('We will mostly address you by this name through out the system. Leave it blank to use your first name.')
         !!}
         @if($edit === true)
             {!! Former::text('email')

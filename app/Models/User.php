@@ -139,6 +139,32 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's nickname. If not provided, give the first name.
+     *
+     * @param  null
+     * @return string
+     */
+    public function getNicknameOrFirstName()
+    {
+        if(!empty($this->nickname)){
+            return $this->nickname;
+        } else {
+            return strstr($this->name, ' ', true);
+        }
+    }
+
+    /**
+     * Get the user's first name.
+     *
+     * @param  null
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return strstr($this->name, ' ', true);
+    }
+
+    /**
      * Get the height as a formatted string.
      *
      * @return string
