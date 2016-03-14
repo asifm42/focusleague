@@ -94,12 +94,12 @@
                         <table class="table table-condensed table-striped table-responsive">
                             <tr class="text-center">
                                 <th>Name</th>
-                                <th>Div1</th>
-                                <th>Div2</th>
-                                <th>Wk1</th>
-                                <th>Wk2</th>
-                                <th>Wk3</th>
-                                <th>Wk4</th>
+                                <th class="text-center">Div1</th>
+                                <th class="text-center">Div2</th>
+                                <th class="text-center">Wk1</th>
+                                <th class="text-center">Wk2</th>
+                                <th class="text-center">Wk3</th>
+                                <th class="text-center">Wk4</th>
                             </tr>
                             @foreach( $cycle->signups()->male()->get() as $signup )
                                 <tr>
@@ -110,14 +110,14 @@
                                         @if(strtolower($signup->pivot->div_pref_first) === 'mens')
                                             <i class="fa fa-male fa-fw text-primary"></i>
                                         @elseif(strtolower($signup->pivot->div_pref_first) === 'mixed')
-                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
                                         @endif
                                     </td>
                                     <td class="text-center">
                                         @if(strtolower($signup->pivot->div_pref_second) === 'mens')
                                             <i class="fa fa-male fa-fw text-primary"></i>
                                         @elseif(strtolower($signup->pivot->div_pref_second) === 'mixed')
-                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
                                         @endif
                                     </td>
                                     @foreach($signup->availability()->where('cycle_id',$cycle->id)->orderBy('pivot_week_id')->get() as $week)
@@ -147,12 +147,12 @@
                         <table class="table table-condensed table-striped table-responsive">
                             <tr>
                                 <th>Name</th>
-                                <th>Div1</th>
-                                <th>Div2</th>
-                                <th>Wk1</th>
-                                <th>Wk2</th>
-                                <th>Wk3</th>
-                                <th>Wk4</th>
+                                <th class="text-center">Div1</th>
+                                <th class="text-center">Div2</th>
+                                <th class="text-center">Wk1</th>
+                                <th class="text-center">Wk2</th>
+                                <th class="text-center">Wk3</th>
+                                <th class="text-center">Wk4</th>
                             </tr>
                             @foreach( $cycle->signups()->female()->get() as $signup )
                                 <tr>
@@ -161,16 +161,16 @@
                                     {{-- <td>{{  strtolower($signup->pivot->div_pref_second) }}</td> --}}
                                     <td class="text-center">
                                         @if(strtolower($signup->pivot->div_pref_first) === 'womens')
-                                            <i class="fa fa-female fa-fw text-danger"></i>
+                                            <i class="fa fa-female fa-fw text-info"></i>
                                         @elseif(strtolower($signup->pivot->div_pref_first) === 'mixed')
-                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
                                         @endif
                                     </td>
                                     <td class="text-center">
                                         @if(strtolower($signup->pivot->div_pref_second) === 'womens')
-                                            <i class="fa fa-male fa-fw text-primary"></i>
+                                            <i class="fa fa-female fa-fw text-info"></i>
                                         @elseif(strtolower($signup->pivot->div_pref_second) === 'mixed')
-                                            <i class="fa fa-male fa-fw text-primary"></i><i class="fa fa-female fa-fw text-danger"></i>
+                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
                                         @endif
                                     </td>
                                     @foreach($signup->availability()->where('cycle_id',$cycle->id)->orderBy('pivot_week_id')->get() as $week)

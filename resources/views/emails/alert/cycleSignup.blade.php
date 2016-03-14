@@ -1,4 +1,4 @@
-A new sub signup for FOCUS League at {{ $signup['created_at'] }}
+A new cycle signup for FOCUS League at {{ $signup['created_at'] }}
 
 Name:
     {{ $user['name'] }}
