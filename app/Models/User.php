@@ -289,4 +289,8 @@ class User extends Authenticatable
     {
         return $this->admin == true;
     }
+
+    public function isAvailable($weekId) {
+        return (bool) $this->availability->find($weekId)->pivot->attending;
+    }
 }
