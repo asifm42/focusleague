@@ -83,7 +83,7 @@ $factory->define(App\Models\UltimateHistory::class, function (Faker\Generator $f
     return [
         'club_affiliation' => 'not sure',
         'years_played' => '11-15',
-        'summary' => 'I have been playing Ultimate since 2000. I have competed at nationals and club worlds twice. I have played for Black Angus, Flash Flood, Doublewide, SCU Ignite.',
+        'summary' => $faker->sentences($nb=4, $asText=true),
         'fav_defensive_position' => 'zone wing',
         'fav_offensive_position' => 'handler / mid-cutter',
         'def_or_off' => 'offensive',
