@@ -15,7 +15,7 @@
                             </tr>
                             @foreach( $signups as $signup )
                                 <tr>
-                                    <td>{{ $signup->getNicknameOrFirstName() }}</td>
+                                    <td><a title="{{ $signup->name }}" href="{{ route('users.show', $signup->id) }}">{{ $signup->getNicknameOrFirstName() }}</a></td>
                                     @if(isset($showDivisions) && $showDivisions === true)
                                         <td class="text-center">
                                             @if(strtolower($signup->pivot->div_pref_first) === 'mens')
@@ -45,9 +45,13 @@
                                     @endforeach
                                     @if(auth()->user()->isAdmin())
                                         @if ($signup->pivot->will_captain)
-                                            <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
+                                            <td class="text-center">
+                                                <i class="fa fa-thumbs-up fa-fw text-primary"></i>
+                                            </td>
                                         @else
-                                            <td class="text-center"><i class="fa fa-times fa-fw text-danger"></i></td>
+                                            <td class="text-center">
+                                                <i class="fa fa-thumbs-down text-danger"></i>
+                                            </td>
                                         @endif
                                     @endif
                                 </tr>
