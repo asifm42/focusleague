@@ -57,4 +57,42 @@ class CycleSignup extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function isRigid(String $division = NULL) {
+        if (is_null($division)) {
+            if (empty($this->div_pref_second) || ($this->div_pref_first === $this->div_pref_second)) {
+                return $this->div_pref_first;
+            } else {
+                return false;
+            }
+        } else {
+            if ((empty($this->div_pref_second)
+                && (strtolower($this->div_pref_first) === strtolower($division)))) {
+                return true;
+            } elseif ((strtolower($this->div_pref_second) === strtolower($division))
+                && (strtolower($this->div_pref_first) === strtolower($division))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function isFlexible(String $division = NULL) {
+        if (is_null($division)) {
+            if ((!empty($this->div_pref_second)) && ($this->div_pref_first !== $this->div_pref_second)) {
+                return $this->div_pref_first;
+            } else {
+                return false;
+            }
+        } else {
+            if ((!empty($this->div_pref_second)
+                && (strtolower($this->div_pref_first) !== strtolower($this->div_pref_second))
+                && (strtolower($this->div_pref_first) === strtolower($division)))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }

@@ -45,17 +45,35 @@
 --}}
                                 <table class="table table-condensed table-striped">
                                     <tr>
-                                        <th>Div1</th>
-                                        <th>Div2</th>
-                                        <th>Wk1</th>
-                                        <th>Wk2</th>
-                                        <th>Wk3</th>
-                                        <th>Wk4</th>
-                                        <th>Willing to captain?</th>
+                                        <th class="text-center">Div1</th>
+                                        <th class="text-center">Div2</th>
+                                        <th class="text-center">Wk1</th>
+                                        <th class="text-center">Wk2</th>
+                                        <th class="text-center">Wk3</th>
+                                        <th class="text-center">Wk4</th>
+                                        <th class="text-center">Will captain?</th>
                                     </tr>
                                     <tr>
-                                        <td>{{ $current_cycle_signup->pivot->div_pref_first }}</td>
-                                        <td>{{ $current_cycle_signup->pivot->div_pref_second }}</td>
+
+                                    <td class="text-center">
+                                        @if(strtolower($current_cycle_signup->pivot->div_pref_first) === 'mens')
+                                            <i class="fa fa-male fa-fw text-primary"></i>
+                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_first) === 'mixed')
+                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
+                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_first) === 'womens')
+                                            <i class="fa fa-female fa-fw text-info"></i>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if(strtolower($current_cycle_signup->pivot->div_pref_second) === 'mens')
+                                            <i class="fa fa-male fa-fw text-primary"></i>
+                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_second) === 'mixed')
+                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
+                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_second) === 'womens')
+                                            <i class="fa fa-female fa-fw text-info"></i>
+                                        @endif
+                                    </td>
+
                                         @foreach($user->availability()->where('cycle_id', $current_cycle->id)->get() as $week)
                                             @if($week->pivot->attending)
                                                 <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
@@ -63,11 +81,11 @@
                                                 <td class="text-center"><i class="fa fa-times fa-fw text-danger"></i></td>
                                             @endif
                                         @endforeach
-                                        <td>
+                                        <td class="text-center">
                                             @if ($current_cycle_signup->pivot->will_captain)
-                                                Yes
+                                            <i class="fa fa-check fa-fw text-success"></i>
                                             @else
-                                                No
+                                            <i class="fa fa-times fa-fw text-danger"></i>
                                             @endif
                                         </td>
                                     </tr>
