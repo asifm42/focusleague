@@ -94,12 +94,12 @@
                         <table class="table table-condensed table-striped table-responsive">
                             <tr class="text-center">
                                 <th>Name</th>
-                                <th>Div1</th>
-                                <th>Div2</th>
-                                <th>Wk1</th>
-                                <th>Wk2</th>
-                                <th>Wk3</th>
-                                <th>Wk4</th>
+                                <th class="text-center">Div1</th>
+                                <th class="text-center">Div2</th>
+                                <th class="text-center">Wk1</th>
+                                <th class="text-center">Wk2</th>
+                                <th class="text-center">Wk3</th>
+                                <th class="text-center">Wk4</th>
                             </tr>
                             @foreach( $cycle->signups()->male()->get() as $signup )
                                 <tr>
@@ -147,12 +147,12 @@
                         <table class="table table-condensed table-striped table-responsive">
                             <tr>
                                 <th>Name</th>
-                                <th>Div1</th>
-                                <th>Div2</th>
-                                <th>Wk1</th>
-                                <th>Wk2</th>
-                                <th>Wk3</th>
-                                <th>Wk4</th>
+                                <th class="text-center">Div1</th>
+                                <th class="text-center">Div2</th>
+                                <th class="text-center">Wk1</th>
+                                <th class="text-center">Wk2</th>
+                                <th class="text-center">Wk3</th>
+                                <th class="text-center">Wk4</th>
                             </tr>
                             @foreach( $cycle->signups()->female()->get() as $signup )
                                 <tr>
