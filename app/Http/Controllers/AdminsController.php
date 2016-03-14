@@ -10,7 +10,7 @@ use App\Models\Cycle;
 
 class AdminsController extends Controller
 {
-    //
+    // oops, added this controller prematurely
     //
     public function dashboard() {
         $user = auth()->user();
