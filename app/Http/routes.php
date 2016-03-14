@@ -165,6 +165,8 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 
     Route::get(     'admin/dashboard',               ['as' => 'admin.dashboard', 'uses' => 'AdminsController@dashboard']);
 
+    Route::get(     'users/{id}',        ['as' => 'users.show', 'uses' => 'UsersController@show']);
+
     /*
      * Admin Ultimate History Routes
      */
