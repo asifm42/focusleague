@@ -33,7 +33,7 @@
             </ul>
         @else
                 <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>
-                <li class="{{ Active::pattern('Cycle', 'active') }}"><a href="{{ route('cycles.view', 1) }}"><i class="fa fa-refresh"></i>&nbsp; Cycle</a></li>
+                <li class="{{ Active::pattern('cycles/*', 'active') }}"><a href="{{ route('cycles.view', 1) }}"><i class="fa fa-refresh"></i>&nbsp; Cycle</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -42,6 +42,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="account-menu">
                         <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>
+                        @if (auth()->user()->isAdmin())
+                        <li class="{{ Active::pattern('admin/dashboard', 'active') }}"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Admin Dashboard</a></li>
+                        @endif
                         <li class="{{ Active::pattern('signout', 'active') }}"><a href="{{ route('sessions.signout') }}"><i class="fa fa-sign-out"></i>&nbsp; Sign out</a></li>
                     </ul>
                 </li>

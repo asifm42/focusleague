@@ -153,10 +153,21 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     // Route::put(     'weeks/{id}/subs/signup',       ['as' => 'sub.put', 'uses' => 'SubsController@update']);
     // Route::delete(  'weeks/{id}/subs/signup',       ['as' => 'sub.destroy', 'uses' => 'SubsController@destroy']);
 
+
+
+
+});
+
+Route::group(['middleware' => ['web','auth','admin']], function() {
+    // Route::get(     'users',            ['as' => 'users.list', 'uses' => 'UsersController@index']);
+
+
+
+    Route::get(     'admin/dashboard',               ['as' => 'admin.dashboard', 'uses' => 'AdminsController@dashboard']);
+
     /*
      * Admin Ultimate History Routes
      */
-
     // Route::get(     'ultimatehistory',               ['as' => 'ultimate_history.create', 'uses' => 'UltimateHistoryController@create']);
     // Route::post(    'ultimatehistory',               ['as' => 'ultimate_history.store', 'uses' => 'UltimateHistoryController@store']);
     // Route::get(     'ultimatehistory/{id}',          ['as' => 'ultimate_history.view', 'uses' => 'UltimateHistoryController@show']);
@@ -176,8 +187,4 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     // Route::delete(  'cyclesignups/{id}',         ['as' => 'cyclesignups.destroy', 'uses' => 'CycleSignupsController@destroy']);
 
 
-});
-
-Route::group(['middleware' => ['web','auth','admin']], function() {
-    // Route::get(     'users',            ['as' => 'users.list', 'uses' => 'UsersController@index']);
 });

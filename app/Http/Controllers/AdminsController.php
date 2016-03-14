@@ -10,65 +10,69 @@ use App\Models\Cycle;
 
 class AdminsController extends Controller
 {
-    // oops, added this controller prematurely
+
     //
     public function dashboard() {
         $user = auth()->user();
-        $user->load('ultimateHistory');
-        // dd($user->availability()->where('cycle_id',2)->get());
         $data['user'] = $user;
         $data['current_cycle'] = Cycle::current_cycle();
-        $data['next_cycle'] = Cycle::next_cycle();
-        $data['current_cycle_sub_weeks'] = [];
-        $data['next_cycle_sub_weeks'] = [];
-        if ($data['current_cycle']) {
-            $data['current_cycle_signup'] = $user->current_cycle_signup();
+        $data['current_cycle_signups'] = $data['current_cycle'] ->signups()->get()->load('availability');
 
-            foreach($data['current_cycle']->weeks as $week){
-                $sub_deets = $week->subs->find($user->id);
-                if ($sub_deets){
-                    $data['current_cycle_sub_weeks'][] = ['week'=>$week,'deets'=>$sub_deets];
-                }
-            }
-        } else {
-            $data['current_cycle_signup'] = [];
-        }
-        if ($data['next_cycle']) {
-            $data['next_cycle_signup'] = $user->cycles()->where('cycle_id', $data['next_cycle']->id)->first();
-            foreach($data['next_cycle']->weeks as $week){
-                $sub_deets = $week->subs->find($user->id);
-                if ($sub_deets){
-                    $data['next_cycle_sub_weeks'][] = ['week'=>$week,'deets'=>$sub_deets];
-                }
-            }
-        } else {
-            $data['next_cycle_signup'] = [];
-        }
+        $data['maleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
+            return strtolower($value->gender) == "male";
+        });
 
+        $data['femaleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
+            return strtolower($value->gender) == "female";
+        });
 
+        $data['mensFirst'] = $data['maleSignups']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_first) == 'mens';
+        });
 
+        $data['mensOnly'] = $data['mensFirst']->filter(function ($value, $key) {
+            return (strtolower($value->pivot->div_pref_second) == 'mens' || empty($value->pivot->div_pref_second));
+        });
 
+        $data['mensFlexible'] = $data['mensFirst']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_second) == 'mixed';
+        });
 
+        $data['womensFirst'] = $data['femaleSignups']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_first) == 'womens';
+        });
 
+        $data['womensOnly'] = $data['womensFirst']->filter(function ($value, $key) {
+            return (strtolower($value->pivot->div_pref_second) == 'womens' || empty($value->pivot->div_pref_second));
+        });
 
+        $data['womensFlexible'] = $data['womensFirst']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_second) == 'mixed';
+        });
 
+        $data['mixedFirstMale'] = $data['maleSignups']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_first) == 'mixed';
+        });
 
-        // $data['invoices'] = $user->invoices();
-        // $data['upcomingInvoice'] = $user->upcomingInvoice();
+        $data['mixedOnlyMale'] = $data['mixedFirstMale']->filter(function ($value, $key) {
+            return (strtolower($value->pivot->div_pref_second) == 'mixed' || empty($value->pivot->div_pref_second));
+        });
 
-        // set up the navigation options
-        // $data['navigation_select'] = [
-        //     '#profile'          => 'Profile',
-        //     '#storage'          => 'Storage'
-        // ];
+        $data['mixedFlexibleMale'] = $data['mixedFirstMale']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_second) == 'mens';
+        });
 
-        // add tags if needed
-        // if ($user->onFreeTrial()
-        //     || $user->onPaidPlan()
-        //     || $user->isAdmin()
-        //     || $user->isDev()) {
-        //     $data['navigation_select']['#tags'] = 'Tags';
-        // }
+        $data['mixedFirstFemale'] = $data['femaleSignups']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_first) == 'mixed';
+        });
+
+        $data['mixedOnlyFemale'] = $data['mixedFirstFemale']->filter(function ($value, $key) {
+            return (strtolower($value->pivot->div_pref_second) == 'mixed' || empty($value->pivot->div_pref_second));
+        });
+
+        $data['mixedFlexibleFemale'] = $data['mixedFirstFemale']->filter(function ($value, $key) {
+            return strtolower($value->pivot->div_pref_second) == 'womens';
+        });
 
         return view('admin.dashboard', $data );
     }
