@@ -52,8 +52,9 @@ class ContactsController extends Controller
 
         Mail::queue(['text' => 'emails.alert.contact'], $data, function($message)
         {
-            $message->to('asifm42@gmail.com', 'Asif Mohammed')
-                    ->subject('Contact us page');
+            $message->from($data['email'], $data['name'])
+                    ->to('asifm42@gmail.com', 'Asif Mohammed')
+                    ->subject('FOCUS League Contact us page');
         });
 
         flash()->success('Your contact has been recieved. We will be in touch soon. Thanks.');
