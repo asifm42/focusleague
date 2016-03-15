@@ -7,5 +7,6 @@
                         $showDivisions = (isset($showDivisions) && $showDivisions) ? true : false;
                     ?>
                         @include('teams.table', $data = ['players'=>$players, 'cycle'=>$cycle, 'team'=>$team])
+                        <p><i class="fa fa-space-shuttle text-warning"></i> = captain</p>
                     </div>
                 </div>
