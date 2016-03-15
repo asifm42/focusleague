@@ -31,7 +31,7 @@
                                 @if (is_null($current_cycle_signup->pivot->team_id))
                                     <dd>You are signed up but not placed on a team yet.</dd>
                                 @else
-                                    <dd>You are on team: <em>TEAM NAME</em></dd>
+                                    <dd>You are on team: <em>{{ucwords($cycle->teams->find($current_cycle_signup->pivot->team_id)->name)}}</em></dd>
                                 @endif
                                 @if ($current_cycle_signup->pivot->will_captain == true)
                                     <dd>You are willing to captain.</dd>
@@ -86,8 +86,14 @@
                 </div>
             </div>
             <div class="col-xs-12 col-md-5">
-                @include('signups.panel', $data = ['signups'=>$currentMaleSignups, 'cycle'=>$cycle, 'title' => 'Male signups', 'showDivisions'=>true])
-                @include('signups.panel', $data = ['signups'=>$currentFemaleSignups, 'cycle'=>$cycle, 'title' => 'Female signups', 'showDivisions'=>true])
+                @if($cycle->areTeamsPublished())
+                    @foreach($cycle->teams as $team)
+                        @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'cycle'=>$cycle, 'title' => 'Team '.ucwords($team->name), 'team'=>$team])
+                    @endforeach
+                @else
+                    @include('signups.panel', $data = ['signups'=>$currentMaleSignups, 'cycle'=>$cycle, 'title' => 'Male signups', 'showDivisions'=>true])
+                    @include('signups.panel', $data = ['signups'=>$currentFemaleSignups, 'cycle'=>$cycle, 'title' => 'Female signups', 'showDivisions'=>true])
+                @endif
             </div>
             <div class="col-xs-12 col-md-3">
                 <div class="panel panel-default">
@@ -99,7 +105,11 @@
                         <ul class="list-unstyled">
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->male()->get() as $sub)
-                                <li>{{$sub->getNicknameOrFirstName()}}</li>
+                                @if(auth()->user()->isAdmin())
+                                    <li><a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrFirstName() }}</a></li>
+                                @else
+                                    <li><span title="{{ $sub->name }}"=>{{$sub->getNicknameOrFirstName()}}</span></li>
+                                @endif
                             @endforeach
                         </ul>
                         @endfor
@@ -114,7 +124,11 @@
                         <ul class="list-unstyled">
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->female()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->female()->get() as $sub)
-                                <li>{{$sub->getNicknameOrFirstName()}}</li>
+                                @if(auth()->user()->isAdmin())
+                                    <li><a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrFirstName() }}</a></li>
+                                @else
+                                    <li><span title="{{ $sub->name }}"=>{{$sub->getNicknameOrFirstName()}}</span></li>
+                                @endif
                             @endforeach
                         </ul>
                         @endfor

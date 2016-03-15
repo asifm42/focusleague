@@ -49,7 +49,14 @@ class Cycle extends Model
                     ->withPivot('id', 'div_pref_first', 'div_pref_second', 'note', 'team_id', 'captain', 'will_captain')
                     ->whereNull('cycle_user.deleted_at') // for soft deletes
                     ->withTimestamps();
+    }
 
+    /**
+     * Get the cycle teams
+     */
+    public function teams()
+    {
+        return $this->hasMany('App\Models\Team', 'cycle_id');
     }
 
     public function status()
@@ -105,6 +112,16 @@ class Cycle extends Model
         $now = Carbon::now();
         return Cycle::where('signup_opens_at', '>', $now)
                     ->orderBy('signup_opens_at', 'asc')->first();
+    }
+
+    /**
+     * Checks if the teams are published
+     *
+     * @return bool
+     */
+    public function areTeamsPublished()
+    {
+        return $this->teams_published;
     }
 
 }

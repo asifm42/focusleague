@@ -34,7 +34,7 @@
                                 @if (is_null($current_cycle_signup->pivot->team_id))
                                     <dd>You are signed up but not placed on a team yet.</dd>
                                 @else
-                                    <dd>You are on team: <em>TEAM NAME</em></dd>
+                                    <dd>You are on team: <em>{{ucwords($current_cycle->teams->find($current_cycle_signup->pivot->team_id)->name)}}</em></dd>
                                 @endif
 {{--
                                 @if ($current_cycle_signup->pivot->will_captain == true)
