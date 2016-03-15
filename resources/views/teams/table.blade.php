@@ -17,13 +17,13 @@
                                 <tr>
                                     @if(auth()->user()->isAdmin())
                                         @if ($player->captain)
-                                        <td><a title="{{ $player->name }}" href="{{ route('users.show', $player->id) }}">{{ $player->user->getNicknameOrFirstName() }}</a>&nbsp;&nbsp;<i class="fa fa-space-shuttle text-warning"></i></td>
+                                        <td><a title="{{ $player->name }}" href="{{ route('users.show', $player->id) }}">{{ $player->user->getNicknameOrFirstName() }}</a>&nbsp;&nbsp;<i class="fa fa-star text-warning"></i></td>
                                         @else
                                         <td><a title="{{ $player->name }}" href="{{ route('users.show', $player->id) }}">{{ $player->user->getNicknameOrFirstName() }}</a></td>
                                         @endif
                                     @else
                                         @if ($player->captain)
-                                        <td><span title="{{ $player->name }}">{{ $player->user->getNicknameOrFirstName() }}</span>&nbsp;&nbsp;<i class="fa fa-space-shuttle fa-fw text-warning"></i></td>
+                                        <td><span title="{{ $player->name }}">{{ $player->user->getNicknameOrFirstName() }}</span>&nbsp;&nbsp;<i class="fa fa-star fa-fw text-warning"></i></td>
                                         @else
                                         <td><span title="{{ $player->name }}">{{ $player->user->getNicknameOrFirstName() }}</span></td>
                                         @endif

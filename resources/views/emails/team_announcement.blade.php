@@ -3,7 +3,7 @@
 @section('content')
     <p>Cycle {{ $cycle['name'] }} teams have been set!</p>
 
-    <p>The format for the cyle is {{ $cycle['format'] }}.<p>
+    <p>The format for the cycle is {{ $cycle['format'] }}.<p>
 
     <p>You are on team <em>{{ ucwords($team['name']) }}</em> in the {{ ucfirst($team['division']) }} division.</p>
 
@@ -11,20 +11,20 @@
         <p>Your captains are:</p>
         <ul>
             @foreach($captains as $captain)
-                <li>{{ $captain['nickname'] }} - {{ $captain['email'] }}</li>
+                <li>{{ $captain['name'] }} - {{ $captain['email'] }}</li>
             @endforeach
         </ul>
     @elseif (count($captains) == 1)
-        <p>Your captain is {{ $captains[0]['nickname'] }} and can be reached at {{ $captains[0]['email'] }}.</p>
+        <p>Your captain is {{ $captains[0]['name'] }} and can be reached at {{ $captains[0]['email'] }}.</p>
     @else
         <p>We are working on selecting a captain since no one volunteered. Please let us know if you have changed your mind and are willing to captain this cycle.</p>
     @endif
 
-    <p>Your fees for this cycle is ${{ $cost }}.00. Please use one of the following methods of payment (listed in order of preferance). Please put "Cycle {{ $cycle['name'] }} fees" in the note if possible.</p>
+    <p>Your fees for this cycle is ${{ $cost }}.00. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $cycle['name'] }} fees" in the note if possible.</p>
     <ul>
         <li>Paypal to asifm42@gmail.com</li>
         <li>Chase Quickpay to asifm42@gmail.com</li>
-        <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a></li>
+        <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a></li> (pay with your debit card, no account needed)
         <li>Check to "Asif Mohammed"</li>
         <li>Cash to Asif at the fields</li>
     </ul>
