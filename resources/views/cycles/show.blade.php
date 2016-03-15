@@ -106,9 +106,9 @@
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->male()->get() as $sub)
                                 @if(auth()->user()->isAdmin())
-                                <li><a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrFirstName() }}</a></li>
+                                    <li><a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrFirstName() }}</a></li>
                                 @else
-                                <li><span title="{{ $sub->name }}"=>{{$sub->getNicknameOrFirstName()}}</span></li>
+                                    <li><span title="{{ $sub->name }}"=>{{$sub->getNicknameOrFirstName()}}</span></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -124,7 +124,11 @@
                         <ul class="list-unstyled">
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->female()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->female()->get() as $sub)
-                                <li>{{$sub->getNicknameOrFirstName()}}</li>
+                                @if(auth()->user()->isAdmin())
+                                    <li><a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrFirstName() }}</a></li>
+                                @else
+                                    <li><span title="{{ $sub->name }}"=>{{$sub->getNicknameOrFirstName()}}</span></li>
+                                @endif
                             @endforeach
                         </ul>
                         @endfor
