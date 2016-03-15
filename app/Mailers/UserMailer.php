@@ -5,6 +5,7 @@ use App\Models\Cycle;
 use App\Models\User;
 use App\Models\CycleSignup;
 use App\Models\Week;
+use App\Models\Team;
 
 class UserMailer extends Mailer {
 
@@ -115,6 +116,48 @@ class UserMailer extends Mailer {
         $data=[];
         $data['user'] = $user->toArray();
         $data['cycle'] = $cycle->toArray();
+
+        // // add mailgun tag header
+        // $headers = ['x-mailgun-tag' => 'status_reminder'];
+
+        return $this->sendTo($user, $subject, $view, $data);
+
+        // return $this->sendTo($user, $subject, $view, $data, $headers);
+    }
+
+    /**
+     * Sends an email to the user announcing their team.
+     *
+     * @return void
+     */
+    public function sendTeamAnnouncementEmail(User $user, Cycle $cycle, Team $team)
+    {
+        $view = 'emails.team_announcement';
+        $subject = 'Teams are set!';
+        $data=[];
+        $data['user'] = $user->toArray();
+        $data['cycle'] = $cycle->toArray();
+        $data['team'] = $team->toArray();
+        $data['captains'] = [];
+        $data['cost'] = 0;
+
+        foreach($team->captains as $captain) {
+            $data['captains'][] = ['nickname'=>$captain->user->nickname, 'email'=>$captain->user->email];
+        }
+
+        $weeks_attending = count($user->availability->where('cycle_id', 1)->where('pivot.attending', 1));
+
+        switch ($weeks_attending) {
+            case 2:
+                $data['cost'] = config('focus_cost.cycle.two_weeks');
+                break;
+            case 3:
+                $data['cost'] = config('focus_cost.cycle.three_weeks');
+                break;
+            case 4:
+                $data['cost'] = config('focus_cost.cycle.four_weeks');
+                break;
+        }
 
         // // add mailgun tag header
         // $headers = ['x-mailgun-tag' => 'status_reminder'];

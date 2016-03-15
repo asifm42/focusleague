@@ -6,21 +6,21 @@ use Illuminate\Console\Command;
 use App\Models\Cycle;
 use App\Mailers\UserMailer;
 
-class SendSignupClosedEmail extends Command
+class SendTeamAnnouncementEmail extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'emails:sendSignupClosedEmail';
+    protected $signature = 'emails:sendTeamAnnouncementEmail';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Sends the signup closed email to all the cycle signups';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -40,10 +40,20 @@ class SendSignupClosedEmail extends Command
     public function handle()
     {
         $cycle = Cycle::current_cycle();
+        $teams = $cycle->teams;
+        $teams->load('players', 'players.user');
         $mailer = new UserMailer;
 
-        $cycle->signups()->each(function($item, $key) use ($mailer, $cycle) {
-            $mailer->sendSignupClosedEmail($item, $cycle);
-        });
+        if ($cycle->areTeamsPublished()) {
+            foreach ($teams as $team){
+                foreach ($team->players as $player){
+                    $mailer->sendTeamAnnouncementEmail($player->user, $cycle, $team);
+                }
+            }
+
+            $this->info('Team announcement emails queued up!');
+        } else {
+            $this->error('Teams are not published yet.');
+        }
     }
 }
