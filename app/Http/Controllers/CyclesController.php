@@ -49,7 +49,7 @@ class CyclesController extends Controller
     public function show($id)
     {
         $cycle = Cycle::findOrFail($id);
-        $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability');
+        $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
 
         $data['cycle'] = $cycle;
         $data['user'] = $user = auth()->user();
@@ -61,16 +61,20 @@ class CyclesController extends Controller
                 $data['sub_weeks'][] = ['week'=>$week,'deets'=>$sub_deets];
             }
         }
+        if ($cycle->areTeamsPublished()) {
+            // $data['team1signups'] = $cycle->teams->find(1)->players;
+            // dd($data['team1signups']->load('user'));
+        } else {
+            $data['current_cycle_signups'] = $cycle->signups()->get()->load('availability');
 
-        $data['current_cycle_signups'] = $cycle->signups()->get()->load('availability');
+            $data['currentMaleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
+                return strtolower($value->gender) == "male";
+            });
 
-        $data['currentMaleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
-            return strtolower($value->gender) == "male";
-        });
-
-        $data['currentFemaleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
-            return strtolower($value->gender) == "female";
-        });
+            $data['currentFemaleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
+                return strtolower($value->gender) == "female";
+            });
+        }
 
         return view('cycles.show', $data);
     }
