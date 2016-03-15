@@ -102,4 +102,25 @@ class UserMailer extends Mailer {
 
         // return $this->sendTo($user, $subject, $view, $data, $headers);
     }
+
+    /**
+     * Sends an email to the user announcing sign up closure.
+     *
+     * @return void
+     */
+    public function sendSignUpClosedEmail(User $user, Cycle $cycle)
+    {
+        $view = 'emails.signup_closed';
+        $subject = 'Sign-ups closed. Teams announcing tomorrow.';
+        $data=[];
+        $data['user'] = $user->toArray();
+        $data['cycle'] = $cycle->toArray();
+
+        // // add mailgun tag header
+        // $headers = ['x-mailgun-tag' => 'status_reminder'];
+
+        return $this->sendTo($user, $subject, $view, $data);
+
+        // return $this->sendTo($user, $subject, $view, $data, $headers);
+    }
 }

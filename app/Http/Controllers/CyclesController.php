@@ -61,7 +61,16 @@ class CyclesController extends Controller
                 $data['sub_weeks'][] = ['week'=>$week,'deets'=>$sub_deets];
             }
         }
-        $sub_deets = $week->subs->find($user->id);
+
+        $data['current_cycle_signups'] = $cycle->signups()->get()->load('availability');
+
+        $data['currentMaleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
+            return strtolower($value->gender) == "male";
+        });
+
+        $data['currentFemaleSignups'] = $data['current_cycle_signups']->filter(function ($value, $key) {
+            return strtolower($value->gender) == "female";
+        });
 
         return view('cycles.show', $data);
     }
