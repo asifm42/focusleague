@@ -212,13 +212,21 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the cycles the user has signed up for
+     * Get the user's current signup details
      */
     public function current_cycle_signup()
     {
-        return $this->cycles()->current()->first();
+        return $this->cycles()->current()->first()->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
     }
 
+    /**
+     * Get all the teams the user has been placed on
+     */
+    public function teams()
+    {
+        // The following is returning all teams for the cycle. NOT the team the user is on.
+        // return $this->hasManyThrough('App\Models\Team', 'App\Models\CycleSignup', 'team_id', 'id');
+    }
 
     /**
      * Get the weeks the user has signed up for

@@ -58,6 +58,14 @@ class CycleSignup extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    /**
+     * Get the team the signup belongs to
+     */
+    public function team()
+    {
+        return $this->belongsTo('App\Models\Team');
+    }
+
     public function isRigid(String $division = NULL) {
         if (is_null($division)) {
             if (empty($this->div_pref_second) || ($this->div_pref_first === $this->div_pref_second)) {
