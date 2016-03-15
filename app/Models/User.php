@@ -216,7 +216,10 @@ class User extends Authenticatable
      */
     public function current_cycle_signup()
     {
-        return $this->cycles()->current()->first()->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
+        // doesn't look like we can load here
+        // return $this->cycles()->current()->first()->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
+
+        return $this->cycles()->current()->first();
     }
 
     /**
