@@ -16,9 +16,9 @@
                             @foreach( $signups as $signup )
                                 <tr>
                                     @if(auth()->user()->isAdmin())
-                                        <td><a title="{{ $signup->name }}" href="{{ route('users.show', $signup->id) }}">{{ $signup->getNicknameOrFirstName() }}</a></td>
+                                        <td><a title="{{ $signup->name }}" href="{{ route('users.show', $signup->id) }}">{{ $signup->getNicknameOrShortName() }}</a></td>
                                     @else
-                                        <td><span title="{{ $signup->name }}">{{ $signup->getNicknameOrFirstName() }}</span></td>
+                                        <td><span title="{{ $signup->name }}">{{ $signup->getNicknameOrShortName() }}</span></td>
                                     @endif
                                     @if(isset($showDivisions) && $showDivisions === true)
                                         <td class="text-center">
