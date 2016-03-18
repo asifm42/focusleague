@@ -17,15 +17,15 @@
                                 <tr>
                                     @if(auth()->user()->isAdmin())
                                         @if ($player->captain)
-                                        <td><a title="{{ $player->name }}" href="{{ route('users.show', $player->id) }}">{{ $player->user->getNicknameOrShortName() }}</a>&nbsp;&nbsp;<i class="fa fa-star text-warning"></i></td>
+                                        <td><a title="{{ $player->user->name }}" href="{{ route('users.show', $player->user->id) }}">{{ $player->user->getNicknameOrShortName() }}</a>&nbsp;&nbsp;<i class="fa fa-star text-warning"></i></td>
                                         @else
-                                        <td><a title="{{ $player->name }}" href="{{ route('users.show', $player->id) }}">{{ $player->user->getNicknameOrShortName() }}</a></td>
+                                        <td><a title="{{ $player->user->name }}" href="{{ route('users.show', $player->user->id) }}">{{ $player->user->getNicknameOrShortName() }}</a></td>
                                         @endif
                                     @else
                                         @if ($player->captain)
-                                        <td><span title="{{ $player->name }}">{{ $player->user->getNicknameOrShortName() }}</span>&nbsp;&nbsp;<i class="fa fa-star fa-fw text-warning"></i></td>
+                                        <td><span title="{{ $player->user->name }}">{{ $player->user->getNicknameOrShortName() }}</span>&nbsp;&nbsp;<i class="fa fa-star fa-fw text-warning"></i></td>
                                         @else
-                                        <td><span title="{{ $player->name }}">{{ $player->user->getNicknameOrShortName() }}</span></td>
+                                        <td><span title="{{ $player->user->name }}">{{ $player->user->getNicknameOrShortName() }}</span></td>
                                         @endif
                                     @endif
                                     @if(isset($showDivisions) && $showDivisions === true)
