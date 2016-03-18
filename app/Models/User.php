@@ -156,6 +156,25 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's nickname. If not provided, give the first name + the last 3 letters of the last name.
+     *
+     * @param  null
+     * @return string
+     */
+    public function getNicknameOrShortName()
+    {
+        if(!empty($this->nickname)){
+            return $this->nickname;
+        } elseif (strstr($this->name, ' ', true)) {
+            $pieces = explode(' ', $this->name);
+            $letters = str_split($pieces[1], 3);
+            return ucfirst($pieces[0]) . (ucfirst($letters[0]));
+        } else {
+            return $this->name;
+        }
+    }
+
+    /**
      * Get the user's first name.
      *
      * @param  null

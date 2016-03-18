@@ -142,7 +142,12 @@ class UserMailer extends Mailer {
         $data['cost'] = 0;
 
         foreach($team->captains as $captain) {
-            $data['captains'][] = ['nickname'=>$captain->user->nickname, 'email'=>$captain->user->email];
+            if ($captain->user->nickname) {
+                $name = ucwords($captain->user->name) . ' aka ' . ucwords($captain->user->nickname);
+            } else {
+                $name = ucwords($captain->user->name);
+            }
+            $data['captains'][] = ['name'=>$name, 'email'=>$captain->user->email];
         }
 
         $weeks_attending = count($user->availability->where('cycle_id', 1)->where('pivot.attending', 1));

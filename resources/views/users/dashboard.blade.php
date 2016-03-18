@@ -220,7 +220,7 @@
                                 <h6>Name</h6>
                                 <p>{{ ucwords($user->name) }}</p>
                                 <h6>Nickname</h6>
-                                <p>{{ ucwords($user->getNicknameOrFirstName()) }}</p>
+                                <p>{{ ucwords($user->getNicknameOrShortName()) }}</p>
                                 <h6>Email</h6>
                                 <p>{{ $user->email }}</p>
                                 <h6>Gender</h6>
