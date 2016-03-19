@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
             Mail::send(['text' => 'emails.alert.queueFailing'], $data, function ($msg) {
                 $msg->to('asifm42@gmail.com', 'Asif Mohammed')
+                    ->from('system@focusleague.com', 'FOCUS League System')
                     ->subject('A queued job has failed');
             });
         });
