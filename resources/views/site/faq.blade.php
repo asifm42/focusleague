@@ -104,7 +104,7 @@
                             <div class="panel-body">
                                 <p>The FOCUS League is open to spirited, competitive male and female players who want to improve their skills through playing high level Ultimate in the framework of a team by practicing the same skills for 4 weeks with the same group of similarly minded players. We may cap the number of signups on a given cycle depending on availability.</p>
 
-                                <p>The FOCUS League takes the “Spirit of the Game” (http://www.usaultimate.org/spirit/) very seioursly. The league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
+                                <p>The FOCUS League takes the “Spirit of the Game” (http://www.usaultimate.org/spirit/) very seriously. The league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
 
                                 <p>Note: Anyone not accounting for themselves in accordance with the spirit of the league may be asked by the League Organizers to excuse themselves from the league indefinitely.</p>
                             </div>
