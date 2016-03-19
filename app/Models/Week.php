@@ -33,6 +33,8 @@ class Week extends Model
 
     /**
      * Get the index of the week within the cycle.
+     *
+     * @return integer
      */
     public function week_index()
     {
@@ -48,6 +50,8 @@ class Week extends Model
 
     /**
      * Get the cycle the week belongs to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function cycle()
     {
@@ -55,7 +59,9 @@ class Week extends Model
     }
 
     /**
-     * Get the users who have signed up for the cycle.
+     * Get the users who have signed up for the week.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function signups()
     {
@@ -64,6 +70,8 @@ class Week extends Model
 
     /**
      * Get the users who have signed up as a sub for the week.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function subs()
     {
