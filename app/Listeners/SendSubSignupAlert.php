@@ -39,7 +39,8 @@ class SendSubSignupAlert
         Mail::queue(['text' => 'emails.alert.subSignup'], $data, function($message)
         {
             $message->to('asifm42@gmail.com', 'Asif Mohammed')
-                    ->subject('New sub sign-up');
+                    ->from('system@focusleague.com', 'FOCUS League System')
+                    ->subject('New sub sign-up alert');
         });
     }
 }

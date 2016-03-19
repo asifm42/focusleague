@@ -33,7 +33,8 @@ class SendNewUserRegisteredNotification
         Mail::queue(['text' => 'emails.alert.registration'], $data, function($message)
         {
             $message->to('asifm42@gmail.com', 'Asif Mohammed')
-                    ->subject('New user registration');
+                    ->from('system@focusleague.com', 'FOCUS League System')
+                    ->subject('New user registration alert');
         });
     }
 }
