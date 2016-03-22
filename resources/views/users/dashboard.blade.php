@@ -12,6 +12,29 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-push-6">
+                <div class="panel panel-default hidden">
+                    <div class="panel-heading">Balance</div>
+                    <div class="panel-body">
+                        @if ($balance > 0)
+                            <h6>You currently owe ${{ $balance }}.</h6>
+                            <h6>You can pay via the following methods:</h6>
+                            <ul>
+                                <li>Paypal to asifm42@gmail.com</li>
+                                <li>Chase Quickpay to asifm42@gmail.com</li>
+                                <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
+                                <li>Check to "Asif Mohammed"</li>
+                                <li>Cash to Asif at the fields</li>
+                            </ul>
+                        @elseif ($balance === 0)
+                            <h6>Your balance is $0.</h6>
+                            <h6>Thank you for being current!</h6>
+                        @elseif ($balance < 0)
+                            <h6>You currently have a credit of ${{ $balance }}.</h6>
+                            <h6>It will be applied towards your next charge.</h6>
+                        @endif
+                        <a href="{{ route('balance.details', $user->id) }}" class="btn btn-default btn-block">See balance details</a>
+                    </div>
+                </div>
             @if(!empty($current_cycle))
                 <div class="panel panel-default">
                     <div class="panel-heading">Current Cycle</div>
@@ -276,12 +299,6 @@
                                 <p>{{ $user->ultimateHistory->throw_to_improve }}</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="panel panel-default hidden">
-                    <div class="panel-heading">Balance</div>
-                    <div class="panel-body">
-                        Account Balance
                     </div>
                 </div>
             </div>
