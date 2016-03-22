@@ -47,7 +47,8 @@ module.exports = function (grunt) {
                         'bower_components/jquery/dist/jquery.js',
                         'bower_components/moment/moment.js',
                         'bower_components/bootswatch-dist/js/bootstrap.js',
-                        'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js'
+                        'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+                        'bower_components/typeahead.js/dist/typeahead.bundle.js'
                         // 'bower_components/jquery-popupwindow/jquery.popupwindow.js',
                         // 'bower_components/underscore/underscore.js',
                         // 'bower_components/underscore.string/dist/underscore.string.js',
