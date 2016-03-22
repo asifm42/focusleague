@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->enum('type', ['charge', 'credit', 'payment']);
             $table->string('payment_type')->nullable();
             $table->string('description');
-            $table->integer('amount');
+            $table->decimal('amount', 10, 2);
             $table->integer('created_by')->unsigned();
             $table->timestamps();
 
