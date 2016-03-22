@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Traits\TrimScalarValues;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use TrimScalarValues;
+    use TrimScalarValues, SoftDeletes;
 
     /**
      * The attributes that should be mutated to dates.
@@ -261,6 +262,87 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
+
+    /**
+     * Get the weeks the user has signed up for as sub
+     */
+    public function subs()
+    {
+        return $this->hasMany('App\Models\Sub')
+                    ->orderBy('week_id')
+                    ->withTimestamps();
+    }
+    /**
+     * Get the user's transactions
+     */
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\Transaction')
+                    ->orderBy('date')->orderBy('created_at');
+    }
+
+    /**
+     * Get the user's charges
+     */
+    public function charges()
+    {
+        return $this->transactions()->ofType('charge');
+    }
+
+    /**
+     * Get the user's payments
+     */
+    public function payments()
+    {
+        return $this->transactions()->ofType('payment');
+    }
+
+    /**
+     * Get the user's credits
+     */
+    public function credits()
+    {
+        return $this->transactions()->ofType('credit');
+    }
+
+    /**
+     * Get the user's balance
+     */
+    public function getBalance()
+    {
+        $balance = 0;
+
+        foreach ($this->transactions as $transaction){
+            switch($transaction->type){
+                case 'charge':
+                    $balance += $transaction->amount;
+                    break;
+                case 'payment':
+                case 'fee':
+                    $balance -= $transaction->amount;
+                    break;
+
+            }
+        }
+
+        return $balance;
+    }
+
+    /**
+     * Get the user's balance as a string with dollar sign
+     */
+    public function getBalanceString()
+    {
+        $balance = $this->getBalance();
+
+        if ( $balance < 0 ) {
+            $balanceStr = '-$' . abs($balance);
+        } else {
+            $balanceStr = '$' . $balance;
+        }
+
+        return $balanceStr;
+    }
 
     /**
      * Get the user's ultimate history
