@@ -6,7 +6,20 @@
                     <?php
                         $showDivisions = (isset($showDivisions) && $showDivisions) ? true : false;
                     ?>
-                        @include('teams.table', $data = ['players'=>$players, 'cycle'=>$cycle, 'team'=>$team])
+                        @if(strtolower($team->division) === 'mixed')
+                            <?php
+                                $malePlayers = $players->filter(function ($value, $key) {
+                                    return strtolower($value->user->gender) == "male";
+                                });
+                                $femalePlayers = $players->filter(function ($value, $key) {
+                                    return strtolower($value->user->gender) == "female";
+                                });
+                            ?>
+                            @include('teams.table', $data = ['players'=>$malePlayers, 'cycle'=>$cycle, 'team'=>$team])
+                            @include('teams.table', $data = ['players'=>$femalePlayers, 'cycle'=>$cycle, 'team'=>$team])
+                        @else
+                            @include('teams.table', $data = ['players'=>$players, 'cycle'=>$cycle, 'team'=>$team])
+                        @endif
                         <p><i class="fa fa-star text-warning"></i> = captain</p>
                     </div>
                 </div>
