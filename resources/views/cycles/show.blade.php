@@ -148,9 +148,23 @@
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->female()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->female()->get() as $sub)
                                 @if(auth()->user()->isAdmin())
-                                    <li><a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrShortName() }}</a></li>
+                                    <li>
+                                        <a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrShortName() }}</a>
+                                        @if ($sub->pivot->team_id)
+                                            <span class="pull-right"><a href="">Team {{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</a></span>
+                                        @else
+                                            <span class="pull-right"><em><a href="{{ route('subs.teamPlacementForm', $sub->id) }}">Place sub</a></em></span>
+                                        @endif
+                                    </li>
                                 @else
-                                    <li><span title="{{ $sub->name }}"=>{{$sub->getNicknameOrShortName()}}</span></li>
+                                    <li>
+                                        <span title="{{ $sub->name }}"=>{{$sub->getNicknameOrShortName()}}</span>
+                                        @if ($sub->pivot->team_id)
+                                            <span class="pull-right">Team {{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</span>
+                                        @else
+                                            <span class="pull-right"><em>Team TBD</em></span>
+                                        @endif
+                                    </li>
                                 @endif
                             @endforeach
                         </ul>
