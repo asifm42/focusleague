@@ -10,7 +10,7 @@
                                     <th class="text-center">Wk3</th>
                                     <th class="text-center">Wk4</th>
                                 @if(auth()->user()->isAdmin())
-                                    <th class="text-center"><i class="fa fa-trophy"></i></th>
+                                    <th class="text-center"><i class="fa fa-star"></i></th>
                                 @endif
                             </tr>
                             @foreach( $signups as $signup )
@@ -54,7 +54,7 @@
                                             </td>
                                         @else
                                             <td class="text-center">
-                                                <i class="fa fa-thumbs-down text-danger"></i>
+                                                <i class="fa fa-thumbs-down text-default"></i>
                                             </td>
                                         @endif
                                     @endif
