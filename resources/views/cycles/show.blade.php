@@ -28,10 +28,14 @@
                             <dd>{{ $cycle->format }}</dd>
                             <dt>Current Status</dt>
                             @if ($current_cycle_signup)
-                                @if (is_null($current_cycle_signup->pivot->team_id))
-                                    <dd>You are signed up but not placed on a team yet.</dd>
+                                @if($cycle->areTeamsPublished())
+                                    @if (is_null($current_cycle_signup->pivot->team_id))
+                                        <dd>You are signed up but not placed on a team yet.</dd>
+                                    @else
+                                        <dd>You are on team: <em>{{ucwords($cycle->teams->find($current_cycle_signup->pivot->team_id)->name)}}</em></dd>
+                                    @endif
                                 @else
-                                    <dd>You are on team: <em>{{ucwords($cycle->teams->find($current_cycle_signup->pivot->team_id)->name)}}</em></dd>
+                                    <dd>You are signed up but not placed on a team yet.</dd>
                                 @endif
                                 @if ($current_cycle_signup->pivot->will_captain == true)
                                     <dd>You are willing to captain.</dd>
@@ -79,7 +83,12 @@
                     <div class="panel-body">
                         <ul class='list-unstyled'>
                         @for( $i=0, $len = $cycle->weeks()->count(); $i < $len; $i++)
+
                             <li>{{'Week ' . ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</li>
+{{--
+                            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong></li>
+
+--}}
                         @endfor
                         </ul>
                     </div>
@@ -88,7 +97,7 @@
             <div class="col-xs-12 col-md-5">
                 @if($cycle->areTeamsPublished())
                     @foreach($cycle->teams as $team)
-                        @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'cycle'=>$cycle, 'title' => 'Team '.ucwords($team->name), 'team'=>$team])
+                        @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                     @endforeach
                 @else
                     @include('signups.panel', $data = ['signups'=>$currentMaleSignups, 'cycle'=>$cycle, 'title' => 'Male signups', 'showDivisions'=>true])

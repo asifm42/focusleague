@@ -57,4 +57,12 @@ class Team extends Model
     {
         return $this->hasMany('App\Models\CycleSignup')->where('captain', true);
     }
+
+    /**
+     * Get the team's name with division in parenthesis
+     */
+    public function nameAndDivision()
+    {
+        return ucwords($this->name) . ' (' . ucwords($this->division) . ')';
+    }
 }
