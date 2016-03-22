@@ -58,13 +58,13 @@
                                 @elseif ($cycle->status() === 'SIGNUP_OPEN')
                                     <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
                                     <a class="btn btn-default btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
-                                    <a class="btn btn-primary btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
+                                    <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                                 @elseif ($cycle->status() === 'SIGNUP_CLOSED')
                                     <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
-                                    <a class="btn btn-primary btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
+                                    <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                                 @elseif ($cycle->status() === 'IN_PROGRESS')
-                                    <dd>In progess</dd>
-                                    <a class="btn btn-primary btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
+                                    <dd>In progess. Sign-ups are closed but you can sign up as a sub.</dd>
+                                    <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                                 @elseif ($cycle->status() === 'COMPLETED')
                                     <dd>Completed</dd>
                                 @endif
@@ -106,9 +106,23 @@
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->male()->get() as $sub)
                                 @if(auth()->user()->isAdmin())
-                                    <li><a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrShortName() }}</a></li>
+                                    <li>
+                                        <a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrShortName() }}</a>
+                                        @if ($sub->pivot->team_id)
+                                            <span class="pull-right"><a href="">Team {{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</a></span>
+                                        @else
+                                            <span class="pull-right"><em><a href="{{ route('subs.teamPlacementForm', $sub->id) }}">Place sub</a></em></span>
+                                        @endif
+                                    </li>
                                 @else
-                                    <li><span title="{{ $sub->name }}"=>{{$sub->getNicknameOrShortName()}}</span></li>
+                                    <li>
+                                        <span title="{{ $sub->name }}"=>{{$sub->getNicknameOrShortName()}}</span>
+                                        @if ($sub->pivot->team_id)
+                                            <span class="pull-right">Team {{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</span>
+                                        @else
+                                            <span class="pull-right"><em>Team TBD</em></span>
+                                        @endif
+                                    </li>
                                 @endif
                             @endforeach
                         </ul>
