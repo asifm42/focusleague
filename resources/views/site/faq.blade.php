@@ -25,7 +25,7 @@
                         </div>
                         <div id="faq_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_1">
                             <div class="panel-body">
-                                <p>The FOCUS League is a competitive Ultimate league in Houston intended for players with intermediate to advanced skills in the sport of Ultimate. The purpose of this league is to structure would-be pick-up games into a series of 4 week cycles and increase the availability of competitive Ultimate in Houston. Registered players will be divided into X number of teams and remain together for a 4 week cycle. Each team will have a team captain(s) who will lead the team in developing the team offense and defense (i.e., teams will call offensive plays, call defenses with a marking direction, work on zones, crumbles, and any other strategic points of interest of the team).</p>
+                                <p>The FOCUS League is a competitive Ultimate league in Houston intended for players with intermediate to advanced skills in the sport of Ultimate. The mission of this league is to structure would-be pick-up games into a series of 4 week cycles and increase the availability of competitive Ultimate in Houston. Registered players will be divided into X number of teams and remain together for a 4 week cycle. Each team will have a team captain(s) who will lead the team in developing the team offense and defense (i.e., teams will call offensive plays, call defenses with a marking direction, work on zones, crumbles, and any other strategic points of interest of the team).</p>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                             <div class="panel-body">
                                 <p>The FOCUS League is open to spirited, competitive male and female players who want to improve their skills through playing high level Ultimate in the framework of a team by practicing the same skills for 4 weeks with the same group of similarly minded players. We may cap the number of signups on a given cycle depending on availability.</p>
 
-                                <p>The FOCUS League takes the “Spirit of the Game” (http://www.usaultimate.org/spirit/) very seioursly. The league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
+                                <p>The FOCUS League takes the “Spirit of the Game” (http://www.usaultimate.org/spirit/) very seriously. The league stresses the highest level of sportsmanship and fun, hard, fair, competitive play. Players are expected to be competitive while respecting their teammates AND their opponents and avoiding dangerous, "win at all costs" plays.</p>
 
                                 <p>Note: Anyone not accounting for themselves in accordance with the spirit of the league may be asked by the League Organizers to excuse themselves from the league indefinitely.</p>
                             </div>

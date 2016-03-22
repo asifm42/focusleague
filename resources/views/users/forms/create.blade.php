@@ -25,7 +25,7 @@
         {!! Former::text('nickname')
             ->addClass('form-control')
             ->placeholder('Optional nickname')
-            ->help('We will mostly address you by this name through out the system. Leave it blank to use your first name.')
+            ->help('We will mostly address you by this name through out the system. Leave it blank to use your first name + the first 3 letters of your last name.')
         !!}
         @if($edit === true)
             {!! Former::text('email')
@@ -140,6 +140,7 @@
                 ->addClass('form-control')
                 ->placeholder('Required password')
                 ->required()
+                ->help('Minimum 8 characters. Case-sensitive.')
             !!}
             {!! Former::password('password_confirmation')
                 ->addClass('form-control')

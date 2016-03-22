@@ -43,7 +43,8 @@ class SendCycleSignupAlert
         Mail::queue(['text' => 'emails.alert.cycleSignup'], $data, function($message)
         {
             $message->to('asifm42@gmail.com', 'Asif Mohammed')
-                    ->subject('New cycle sign-up');
+                    ->from('system@focusleague.com', 'FOCUS League System')
+                    ->subject('New cycle sign-up alert');
         });
     }
 }

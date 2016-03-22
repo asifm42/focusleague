@@ -50,7 +50,7 @@ class ContactsController extends Controller
         $data['msg'] = $request->input('message');
         $data['timestamp'] = Carbon::now()->toDayDateTimeString();
 
-        Mail::queue(['text' => 'emails.alert.contact'], $data, function($message)
+        Mail::queue(['text' => 'emails.alert.contact'], $data, function($message) use ($data)
         {
             $message->from($data['email'], $data['name'])
                     ->to('asifm42@gmail.com', 'Asif Mohammed')
