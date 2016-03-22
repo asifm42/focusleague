@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\SubTeamPlacementRequest;
 use App\Models\Cycle;
+use App\Models\Sub;
 use App\Models\Week;
 use App\Events\UserSignedUpAsASub;
 
@@ -108,5 +110,25 @@ class SubsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function placeOnATeam(SubTeamPlacementRequest $request, $id)
+    {
+        $sub = Sub::findOrFail($id);
+        $sub->load('user');
+        $sub->team_id = $request->input('team_id');
+        $sub->save();
+        $sub->load('team');
+        // fire off event
+
+
+        flash()->success($sub->user->getNicknameOrShortName . ' placed on Team ' . ucwords($sub->team->name) . ' as a sub.');
+        return redirect()->back();
     }
 }
