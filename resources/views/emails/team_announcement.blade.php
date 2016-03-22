@@ -24,7 +24,7 @@
     <ul>
         <li>Paypal to asifm42@gmail.com</li>
         <li>Chase Quickpay to asifm42@gmail.com</li>
-        <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a></li> (pay with your debit card, no account needed)
+        <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
         <li>Check to "Asif Mohammed"</li>
         <li>Cash to Asif at the fields</li>
     </ul>
