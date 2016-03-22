@@ -82,16 +82,15 @@
                 ->addClass('btn btn-primary')
                 ->value('Save')
             !!}
-    {!! Former::close() !!}
+            {!! Former::close() !!}
 
             {!! Form::delete(route( 'transactions.destroy', $transaction->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) !!}
         @else
-    {!! Former::close() !!}
-
             {!! Former::submit()
                 ->addClass('btn btn-primary')
                 ->value('Create')
             !!}
+            {!! Former::close() !!}
         @endif
     </div>
 </div>
