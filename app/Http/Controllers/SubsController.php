@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\EditSubSignupFormRequest;
 use App\Http\Requests\SubTeamPlacementRequest;
 use App\Models\Cycle;
 use App\Models\Sub;
@@ -84,9 +85,24 @@ class SubsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(EditSubSignupFormRequest $request, $id)
     {
-        //
+        $sub = Sub::findOrFail($id);
+        $sub->load('user', 'week');
+        $user = $sub->user;
+
+        $cycle = $sub->week->cycle;
+        $cycle->load('weeks', 'signups', 'weeks.subs');
+
+        if ( !empty( $cycle->signups()->find($user->id) ) ){
+            flash()->warning('You can not sign up as a sub because you are already signed up for this cycle.');
+            return redirect()->route('cycles.view', $cycle->id);
+        }
+
+        return view('subs.edit')
+            ->withCycle($cycle)
+            ->withUser($user)
+            ->withSub($sub);
     }
 
     /**
@@ -109,7 +125,13 @@ class SubsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sub = Sub::findOrFail($id);
+
+        $sub->delete();
+
+        flash()->success('Sub sign-up deleted');
+
+        return redirect()->route('users.dashboard');
     }
 
     /**

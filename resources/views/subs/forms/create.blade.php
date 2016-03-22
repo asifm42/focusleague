@@ -31,7 +31,7 @@
         {!! Former::text('nickname')
             ->label('Player')
             ->addClass('form-control')
-            ->placeholder(auth()->user()->nickname)
+            ->placeholder($user->getNicknameOrShortname())
             ->disabled()
         !!}
         @if(count($week_already_subbing) > 0)
@@ -64,14 +64,17 @@
                 ->addClass('btn btn-primary')
                 ->value('Save')
             !!}
+            {!! Former::close() !!}
+
+            {!! Form::delete(route( 'sub.destroy', $sub->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) !!}
         @else
             {!! Former::submit()
                 ->addClass('btn btn-primary')
                 ->value('Sign up')
             !!}
+            {!! Former::close() !!}
         @endif
     </div>
-    {!! Former::close() !!}
 </div>
 
 @section('scripts')
