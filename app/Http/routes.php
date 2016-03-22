@@ -111,7 +111,8 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     /*
      * User Routes
      */
-    Route::get(     'users/{id}',       ['as' => 'users.view', 'uses' => 'UsersController@show']);
+    // following route is also in admin group. remove from there once page is updated with permissions
+    // Route::get(     'users/{id}',       ['as' => 'users.show', 'uses' => 'UsersController@show']);
     Route::get(     'dashboard',        ['as' => 'users.dashboard', 'uses' => 'UsersController@dashboard']);
     Route::get(     'users/{id}/edit',  ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
     Route::patch(   'users/{id}',       ['as' => 'users.update', 'uses' => 'UsersController@update']);
@@ -144,6 +145,12 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     Route::delete(  'subs/{id}',                    ['as' => 'sub.destroy', 'uses' => 'SubsController@destroy']);
 
     /*
+     * Transaction routes
+     *
+     */
+    Route::get(     'user/{id}/balance',      ['as' => 'balance.details', 'uses' => 'TransactionsController@index']);
+
+    /*
      * Sub Signup Routes
      */
     // Route::get(     'weeks/{id}/subs/signup',       ['as' => 'sub.create', 'uses' => 'SubsController@create']);
@@ -159,13 +166,52 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
-    // Route::get(     'users',            ['as' => 'users.list', 'uses' => 'UsersController@index']);
+    Route::get(     'users',            ['as' => 'users.list', 'uses' => 'UsersController@index']);
+    Route::get(     'users/{id}',        ['as' => 'users.show', 'uses' => 'UsersController@show']);
+
+    /*
+     * Posts routes
+     *
+     */
+    Route::get(     'posts/create',          ['as' => 'posts.create', 'uses' => 'PostsController@create']);
+    Route::post(    'posts',                 ['as' => 'posts.store', 'uses' => 'PostsController@store']);
+    Route::get(     'posts/{id}/edit',       ['as' => 'posts.edit', 'uses' => 'PostsController@edit']);
+    Route::patch(   'posts/{id}',            ['as' => 'posts.update', 'uses' => 'PostsController@update']);
+    Route::put(     'posts/{id}',            ['as' => 'posts.put', 'uses' => 'PostsController@update']);
+    Route::delete(  'posts/{id}',            ['as' => 'posts.destroy', 'uses' => 'PostsController@destroy']);
 
 
 
     Route::get(     'admin/dashboard',               ['as' => 'admin.dashboard', 'uses' => 'AdminsController@dashboard']);
+    Route::get(     'admin/cycles/{id}',            ['as' => 'admin.cycle.details', 'uses' => 'AdminsController@cycleDetails']);
 
-    Route::get(     'users/{id}',        ['as' => 'users.show', 'uses' => 'UsersController@show']);
+    /*
+     * Cycle routes
+     *
+     */
+    Route::get(     'cycle/{id}/teams',             ['as' =>'cycle.teams.show', 'uses' => 'CycleTeamsController@show']);
+    Route::get(     'cycle/{id}/teams/create',      ['as' =>'cycle.teams.create', 'uses' => 'CycleTeamsController@create']);
+    Route::post(    'cycle/{id}/teams/publish',     ['as' =>'cycle.teams.publish', 'uses' => 'CycleTeamsController@publish']);
+    Route::post(    'cycle/{id}/teams/unpublish',   ['as' =>'cycle.teams.unpublish', 'uses' => 'CycleTeamsController@unpublish']);
+
+    /*
+     * Transactions routes
+     *
+     */
+    Route::get(     'transactions/create',          ['as' => 'transactions.create', 'uses' => 'TransactionsController@create']);
+    Route::post(    'transactions',                 ['as' => 'transactions.store', 'uses' => 'TransactionsController@store']);
+    Route::get(     'transactions/{id}/edit',       ['as' => 'transactions.edit', 'uses' => 'TransactionsController@edit']);
+    Route::patch(   'transactions/{id}',            ['as' => 'transactions.update', 'uses' => 'TransactionsController@update']);
+    Route::put(     'transactions/{id}',            ['as' => 'transactions.put', 'uses' => 'TransactionsController@update']);
+    Route::delete(  'transactions/{id}',            ['as' => 'transactions.destroy', 'uses' => 'TransactionsController@destroy']);
+
+    /*
+     * Sub placement routes
+     *
+     */
+    Route::get(     'subs/{id}/team',               ['as' => 'subs.teamPlacementForm', 'uses' => 'SubsController@teamPlacementForm']);
+    Route::post(    'subs/{id}/team',               ['as' => 'subs.placeOnATeam', 'uses' => 'SubsController@placeOnATeam']);
+
 
     /*
      * Admin Ultimate History Routes
