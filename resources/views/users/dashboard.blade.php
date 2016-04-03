@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-push-6">
-                <div class="panel panel-default hidden">
+                <div class="panel panel-default">
                     <div class="panel-heading">Balance</div>
                     <div class="panel-body">
                         @if ($balance > 0)

@@ -13,6 +13,11 @@
         <div class="row">
             <div class="col-xs-12 col-md-8">
             <table class="table table-striped table-responsive table-condensed table-bordered">
+                @if (auth()->user()->isAdmin())
+                    <tr>
+                        <th colspan=8>Balance Details for {{ $user->name }} ( {{$user->getNicknameOrShortname() }})</th>
+                    </tr>
+                @endif
                 <tr>
                     <th>Date</th>
                     <th>Cycle</th>
@@ -34,9 +39,9 @@
                         <td>{{ ucwords($transaction->type) }}</td>
                         <td>{{ $transaction->payment_type ? ucwords($transaction->payment_type) : 'N/A' }}</td>
                         @if ($transaction->type === 'payment' || $transaction->type === 'credit')
-                            <td class="text-right">-${{ $transaction->amount }}</td>
+                            <td class="text-right">-${{ number_format($transaction->amount, 2, '.', '') }}</td>
                         @else
-                            <td class="text-right text-danger">${{ $transaction->amount }}</td>
+                            <td class="text-right text-danger">${{ number_format($transaction->amount, 2, '.', '') }}</td>
                         @endif
                         @if (auth()->user()->isAdmin())
                             <td class="text-center">
@@ -49,16 +54,18 @@
                     <tr>
                         @if ($balance < 0 )
                             <td colspan="6" class="text-right">Credit</td>
-                            <td class="text-right text-primary">${{ $balance }}
+                            <td class="text-right text-primary">${{ number_format($balance, 2, '.', '') }}
                         @elseif ($balance === 0 )
                             <td colspan="6" class="text-right">Balance</td>
-                            <td class="text-right">${{ $balance }}
+                            <td class="text-right">${{ number_format($balance, 2, '.', '') }}
                         @else
                             <td colspan="6" class="text-right">Amount owed</td>
-                            <td class="text-right text-danger">${{ $balance }}
+                            <td class="text-right text-danger">${{ number_format($balance, 2, '.', '') }}
                         @endif
                         @if (auth()->user()->isAdmin())
-                            <td></td>
+                            <td class="text-center">
+                                <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default btn-xs">Add</a>
+                            </td>
                         @endif
                     </tr>
                 </tr>

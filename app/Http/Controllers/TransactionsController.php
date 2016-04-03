@@ -42,8 +42,12 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->has('user_id')) {
+            $user = User::findOrFail($request->input('user_id'));
+            $data['typeahead_name'] = $user->name . " (" . $user->getNicknameOrShortName() . ")";
+        }
         $users = User::all();
         $names = '';
         foreach($users as $user){

@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         // Commands\Inspire::class,
         \App\Console\Commands\SendSignupClosedEmail::class,
         \App\Console\Commands\SendTeamAnnouncementEmail::class,
+        \App\Console\Commands\ChargeCyclePlayerFee::class,
     ];
 
     /**

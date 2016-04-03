@@ -19,7 +19,6 @@
                 ->action(route('transactions.store'))
             !!}
         @endif
-
         {!! Former::text('date')
             ->name('date')
             ->label('Transaction Date')
@@ -53,6 +52,7 @@
             ->fromQuery($weeks, 'starts_at', 'id')
         !!}
         {!! Former::select('type')
+            ->label('Transaction Type')
             ->addClass('form-control')
             ->options(['charge' => 'Charge', 'payment' => 'Payment', 'credit' => 'Credit',])
             ->placeholder('Required type')

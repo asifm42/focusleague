@@ -310,7 +310,7 @@ class User extends Authenticatable
      */
     public function getBalance()
     {
-        $balance = 0;
+        $balance = 0.00;
 
         foreach ($this->transactions as $transaction){
             switch($transaction->type){
@@ -321,7 +321,6 @@ class User extends Authenticatable
                 case 'fee':
                     $balance -= $transaction->amount;
                     break;
-
             }
         }
 
