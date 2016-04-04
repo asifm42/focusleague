@@ -14,14 +14,23 @@
 
 Route::get('/welcomeemail', function () {
     $data = [
-    'name' =>'asif',
-    'email' => 'asif@test.com',
-    'confirmation_code' => '11111',
+        'name' =>'asif',
+        'email' => 'asif@test.com',
+        'confirmation_code' => '11111',
     ];
     return view('emails.verification', $data);
 });
 
 
+Route::get('/smstest', function () {
+    $user = App\Models\User::find(1);
+    Mail::send('emails.reminder',[], function ($m) use ($user) {
+        $m->from('hello@focusleague.com', 'Focusleague.com');
+
+        $m->to('8326406042@tmomail.net', $user->name);
+    });
+    return 'success';
+});
 
 /*
 |--------------------------------------------------------------------------
