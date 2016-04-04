@@ -139,7 +139,7 @@
             });
 
             @if(isset($typeahead_name))
-                $('.users-typeahead-js').typeahead('val', '{!! $typeahead_name !!}');
+                $('.users-typeahead-js').typeahead('val', "{!! $typeahead_name !!}");
             @endif
         })
     </script>
