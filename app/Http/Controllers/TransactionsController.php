@@ -32,7 +32,7 @@ class TransactionsController extends Controller
     {
         $data['user'] = $user = User::findOrFail($id);
         $data['transactions'] = $user->transactions;
-        $data['balance'] = $user->getBalance();
+        $data['balance'] = number_format($user->getBalance(), 2, '.', ',');
 
         return view('transactions.index', $data);
     }

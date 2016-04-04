@@ -54,13 +54,13 @@
                     <tr>
                         @if ($balance < 0 )
                             <td colspan="6" class="text-right">Credit</td>
-                            <td class="text-right text-primary">${{ number_format($balance, 2, '.', '') }}
+                            <td class="text-right text-primary">${{ $balance }}
                         @elseif ($balance === 0 )
                             <td colspan="6" class="text-right">Balance</td>
-                            <td class="text-right">${{ number_format($balance, 2, '.', '') }}
+                            <td class="text-right">${{ $balance }}
                         @else
                             <td colspan="6" class="text-right">Amount owed</td>
-                            <td class="text-right text-danger">${{ number_format($balance, 2, '.', '') }}
+                            <td class="text-right text-danger">${{ $balance }}
                         @endif
                         @if (auth()->user()->isAdmin())
                             <td class="text-center">

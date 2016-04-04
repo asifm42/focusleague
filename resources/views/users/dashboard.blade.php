@@ -25,11 +25,11 @@
                                 <li>Check to "Asif Mohammed"</li>
                                 <li>Cash to Asif at the fields</li>
                             </ul>
-                        @elseif ($balance === 0)
-                            <h6>Your balance is $0.</h6>
+                        @elseif ($balance == 0)
+                            <h6>Your balance is $0.00.</h6>
                             <h6>Thank you for being current!</h6>
                         @elseif ($balance < 0)
-                            <h6>You currently have a credit of ${{ $balance }}.</h6>
+                            <h6>You currently have a credit of ${{ number_format(abs($balance), 2, '.',',') }}.</h6>
                             <h6>It will be applied towards your next charge.</h6>
                         @endif
                         <a href="{{ route('balance.details', $user->id) }}" class="btn btn-default btn-block">See balance details</a>

@@ -310,7 +310,7 @@ class User extends Authenticatable
      */
     public function getBalance()
     {
-        $balance = 0.00;
+        $balance = 0;
 
         foreach ($this->transactions as $transaction){
             switch($transaction->type){
@@ -333,11 +333,10 @@ class User extends Authenticatable
     public function getBalanceString()
     {
         $balance = $this->getBalance();
+        $balanceStr = '$' . number_format(abs($balance), 2, '.', ',');
 
         if ( $balance < 0 ) {
-            $balanceStr = '-$' . abs($balance);
-        } else {
-            $balanceStr = '$' . $balance;
+            $balanceStr = '-' . $balanceStr;
         }
 
         return $balanceStr;
