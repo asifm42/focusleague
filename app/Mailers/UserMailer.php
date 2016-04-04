@@ -171,4 +171,25 @@ class UserMailer extends Mailer {
 
         // return $this->sendTo($user, $subject, $view, $data, $headers);
     }
+
+    /**
+     * Sends an email to the user with their balance info and reminding them to pay.
+     *
+     * @return void
+     */
+    public function sendBalanceReminderEmail(User $user)
+    {
+        $view = 'emails.balance_reminder';
+        $subject = 'Please clear your balance';
+        $data=[];
+        $data['user'] = $user->toArray();
+        $data['balance'] = $user->getBalanceString();
+
+        // // add mailgun tag header
+        // $headers = ['x-mailgun-tag' => 'status_reminder'];
+
+        return $this->sendTo($user, $subject, $view, $data);
+
+        // return $this->sendTo($user, $subject, $view, $data, $headers);
+    }
 }

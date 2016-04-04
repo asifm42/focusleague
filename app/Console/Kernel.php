@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendSignupClosedEmail::class,
         \App\Console\Commands\SendTeamAnnouncementEmail::class,
         \App\Console\Commands\ChargeCyclePlayerFee::class,
+        \App\Console\Commands\SendBalanceReminderEmail::class,
     ];
 
     /**
@@ -29,5 +30,14 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('emails:sendBalanceReminderEmail')
+                 ->weekly()->mondays()->at('10:40')
+                 ->sendOutputTo(storage_path().'/balanceReminderEmailLog_' . date('Y_m_d') . '.log')
+                 ->emailOutputTo('asifm42@gmail.com');
+
+        $schedule->command('emails:sendBalanceReminderEmail')
+                 ->weekly()->wednesdays()->at('10:00')
+                 ->sendOutputTo(storage_path().'/balanceReminderEmailLog_' . date('Y_m_d') . '.log')
+                 ->emailOutputTo('asifm42@gmail.com');
     }
 }
