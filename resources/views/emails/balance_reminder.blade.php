@@ -1,7 +1,7 @@
 @extends('layouts.email')
 
 @section('content')
-    <p>Looks like you have a balance of {{ $balance }} on your account. We would greatly appreciate it if you can take care of the payment asap using one of the following methods of payment (listed in order of preference).</p>
+    <p>Looks like you have an outstanding balance of {{ $balance }} on your account. We would greatly appreciate it if you can take care of the payment asap using one of the following methods of payment (listed in order of preference).</p>
 
     <ul>
         <li>Paypal to {{ 'asifm42@gmail.com (please try to avoid fees)' }}</li>
