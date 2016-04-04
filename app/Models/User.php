@@ -318,7 +318,7 @@ class User extends Authenticatable
                     $balance += $transaction->amount;
                     break;
                 case 'payment':
-                case 'fee':
+                case 'credit':
                     $balance -= $transaction->amount;
                     break;
             }
