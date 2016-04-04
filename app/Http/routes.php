@@ -21,6 +21,15 @@ Route::get('/welcomeemail', function () {
     return view('emails.verification', $data);
 });
 
+Route::get('/baldeet', function () {
+    $data = [
+        'name' =>'asif',
+        'balance' => '8.52',
+        'user' => \App\Models\user::find(1),
+    ];
+    return view('emails.balance_reminder', $data);
+});
+
 
 Route::get('/smstest', function () {
     $user = App\Models\User::find(1);
@@ -175,8 +184,9 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
-    Route::get(     'users',            ['as' => 'users.list', 'uses' => 'UsersController@index']);
-    Route::get(     'users/{id}',        ['as' => 'users.show', 'uses' => 'UsersController@show']);
+    Route::get(     'users',                ['as' => 'users.list', 'uses' => 'UsersController@index']);
+    Route::get(     'users/{id}',           ['as' => 'users.show', 'uses' => 'UsersController@show']);
+    Route::get(     'delinquents',          ['as' => 'users.delinquent', 'uses' => 'UsersController@showDelinquentUsers']);
 
     /*
      * Posts routes

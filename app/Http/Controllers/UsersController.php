@@ -39,6 +39,22 @@ class UsersController extends Controller
     }
 
     /**
+     * Display a listing of the users who have a positive balance.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showDelinquentUsers()
+    {
+        $users = User::all();
+
+        $data['users'] = $users->filter(function ($item) {
+            return $item->getBalance() > 0;
+        });
+
+        return view('users.index', $data);
+    }
+
+    /**
      * Show the create form
      *
      * @return View
