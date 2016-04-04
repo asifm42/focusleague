@@ -46,7 +46,7 @@ class ChargeCyclePlayerFee extends Command
                 'cycle_id' => $cycle->id,
                 'type' => 'charge',
                 'created_by' => 1,
-                'date' => '2016-03-15'
+                'date' => $cycle->starts_at->format('Y-m-d')
             ];
 
         foreach ($cycle->signups as $signup) {
