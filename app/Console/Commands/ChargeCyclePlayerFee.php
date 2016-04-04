@@ -39,7 +39,9 @@ class ChargeCyclePlayerFee extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::find(1);
+        $cycle_id = $this->ask('What is the id of the cycle?');
+
+        $cycle = Cycle::find($cycle_id);
         $data = [
                 'cycle_id' => $cycle->id,
                 'type' => 'charge',
@@ -53,6 +55,10 @@ class ChargeCyclePlayerFee extends Command
             $weeks = $signup->availability()->where('cycle_id',$cycle->id)->get();
 
             if (is_null($signup->pivot->team_id)) {
+                continue;
+            }
+
+            if ($signup->transactions()->where('type','charge')->where('cycle_id',$cycle->id)->count() >= 1) {
                 continue;
             }
 
@@ -76,7 +82,7 @@ class ChargeCyclePlayerFee extends Command
             $transaction = new Transaction($data);
             $signup->transactions()->save($transaction);
 
-            $this->info('Player fee charged for '. $signup->id);
+            $this->info('Player fee charged for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());
         }
     }
 }
