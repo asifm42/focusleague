@@ -77,7 +77,7 @@ class TransactionsController extends Controller
 
         flash()->success('Transaction posted');
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('balance.details', $transaction->user_id);
     }
 
     /**
@@ -132,7 +132,7 @@ class TransactionsController extends Controller
 
         flash()->success('Transaction updated');
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('balance.details', $transaction->user_id);
     }
 
     /**
