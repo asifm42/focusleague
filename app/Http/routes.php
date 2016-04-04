@@ -12,34 +12,34 @@
 */
 
 
-Route::get('/welcomeemail', function () {
-    $data = [
-        'name' =>'asif',
-        'email' => 'asif@test.com',
-        'confirmation_code' => '11111',
-    ];
-    return view('emails.verification', $data);
-});
+// Route::get('/welcomeemail', function () {
+//     $data = [
+//         'name' =>'asif',
+//         'email' => 'asif@test.com',
+//         'confirmation_code' => '11111',
+//     ];
+//     return view('emails.verification', $data);
+// });
 
-Route::get('/baldeet', function () {
-    $data = [
-        'name' =>'asif',
-        'balance' => '8.52',
-        'user' => \App\Models\user::find(1),
-    ];
-    return view('emails.balance_reminder', $data);
-});
+// Route::get('/baldeet', function () {
+//     $data = [
+//         'name' =>'asif',
+//         'balance' => '8.52',
+//         'user' => \App\Models\user::find(1),
+//     ];
+//     return view('emails.balance_reminder', $data);
+// });
 
 
-Route::get('/smstest', function () {
-    $user = App\Models\User::find(1);
-    Mail::send('emails.reminder',[], function ($m) use ($user) {
-        $m->from('hello@focusleague.com', 'Focusleague.com');
+// Route::get('/smstest', function () {
+//     $user = App\Models\User::find(1);
+//     Mail::send('emails.reminder',[], function ($m) use ($user) {
+//         $m->from('hello@focusleague.com', 'Focusleague.com');
 
-        $m->to('8326406042@tmomail.net', $user->name);
-    });
-    return 'success';
-});
+//         $m->to('8326406042@tmomail.net', $user->name);
+//     });
+//     return 'success';
+// });
 
 /*
 |--------------------------------------------------------------------------
