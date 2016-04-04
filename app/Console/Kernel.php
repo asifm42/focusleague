@@ -31,12 +31,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('emails:sendBalanceReminderEmail')
-                 ->weekly()->mondays()->at('11:15')
-                 ->sendOutputTo(storage_path().'/logs/balanceReminderEmailLog_' . date('Y_m_d') . '.log')
-                 ->emailOutputTo('asifm42@gmail.com');
-
-        $schedule->command('emails:sendBalanceReminderEmail')
-                 ->weekly()->wednesdays()->at('10:00')
+                 ->weekly()->thursdays()->at('10:00')
                  ->sendOutputTo(storage_path().'/logs/balanceReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
     }
