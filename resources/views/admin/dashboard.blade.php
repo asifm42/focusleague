@@ -42,9 +42,10 @@
             <div class="col-xs-12 col-md-6">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Admin Tasks</div>
+                    <div class="panel-heading">Admin Links</div>
                     <div class="panel-body">
                         <a href="{{ route('users.list') }}" class="btn btn-default btn-lg btn-block">See all users</a>
+                        <a href="{{ route('users.delinquent') }}" class="btn btn-default btn-lg btn-block">See delinquents</a>
                         <a href="{{ route('posts.create') }}" class="btn btn-default btn-lg btn-block">Create a post</a>
                         <a href="{{ route('transactions.create') }}" class="btn btn-default btn-lg btn-block">Post a transaction</a>
                     </div>
