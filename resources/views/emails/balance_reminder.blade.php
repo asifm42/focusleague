@@ -4,7 +4,7 @@
     <p>Looks like you have a balance of {{ $balance }} on your account. We would greatly appreciate it if you can take care of the payment asap using one of the following methods of payment (listed in order of preference).</p>
 
     <ul>
-        <li>Paypal to asifm42@gmail.com</li>
+        <li>Paypal to {{ 'asifm42@gmail.com (please try to avoid fees)' }}</li>
         <li>Chase Quickpay to asifm42@gmail.com</li>
         <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
         <li>Check to "Asif Mohammed"</li>
