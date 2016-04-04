@@ -104,13 +104,12 @@ class Cycle extends Model
     }
 
     /**
-     * Scope a query to the current cycle.
+     * Get the next cycle.
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function next_cycle()
     {
-
         $now = Carbon::now();
         return Cycle::where('signup_opens_at', '>', $now)
                     ->orderBy('signup_opens_at', 'asc')->first();
