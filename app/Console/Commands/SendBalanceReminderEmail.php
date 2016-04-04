@@ -46,7 +46,7 @@ class SendBalanceReminderEmail extends Command
             if ($user->getBalance() > 0) {
                 $mailer->sendBalanceReminderEmail($user);
 
-                $this->info('Balance reminder for id:'. $user->id . ' - name: ' . $user->getNicknameOrShortname() . ' - balance: ' . $user->getBalance());
+                $this->info('Balance reminder email queued for id:'. $user->id . ' - name: ' . $user->getNicknameOrShortname() . ' - balance: ' . $user->getBalance());
             }
         }
     }
