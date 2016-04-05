@@ -48,7 +48,12 @@ class CyclesController extends Controller
      */
     public function show($id)
     {
-        $cycle = Cycle::findOrFail($id);
+        if ($id === 'current') {
+            $cycle = Cycle::current_cycle();
+        } else {
+            $cycle = Cycle::findOrFail($id);
+        }
+
         $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
 
         $data['cycle'] = $cycle;
