@@ -140,6 +140,7 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     /*
      * Cycle Routes
      */
+    Route::get(     'cycles',               ['as' => 'cycles.index', 'uses' => 'CyclesController@index']);
     Route::get(     'cycles/{id}',          ['as' => 'cycles.view', 'uses' => 'CyclesController@show']);
     Route::get(     'cycles/current',       ['as' => 'cycles.current', 'uses' => 'CyclesController@show']);
 

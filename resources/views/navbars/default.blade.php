@@ -33,7 +33,18 @@
             </ul>
         @else
                 <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>
-                <li class="{{ Active::pattern('cycles/*', 'active') }}"><a href="{{ route('cycles.current') }}"><i class="fa fa-refresh"></i>&nbsp; Cycle</a></li>
+                {{--<li class="{{ Active::pattern('cycles/*', 'active') }}"><a href="{{ route('cycles.current') }}"><i class="fa fa-refresh"></i>&nbsp; Cycle</a></li>--}}
+                <li class="dropdown {{ Active::routePattern('cycles.*', 'active') }}">
+                    <a id="cycle-menu" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-refresh"></i>&nbsp; Cycles&nbsp;<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="cycle-menu">
+                        <li class="{{ Active::pattern('cycles/*', 'active') }}"><a href="{{ route('cycles.current') }}"><i class="fa fa-refresh"></i>&nbsp; Current Cycle</a></li>
+                        <li class="{{ Active::pattern('cycles', 'active') }}"><a href="{{ route('cycles.index') }}"><i class="fa fa-history"></i>&nbsp; All Cycles</a></li>
+                    </ul>
+                </li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

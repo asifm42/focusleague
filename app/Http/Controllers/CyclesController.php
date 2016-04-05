@@ -16,7 +16,11 @@ class CyclesController extends Controller
      */
     public function index()
     {
-        //
+        $data['cycles'] = Cycle::all()->reverse();
+
+        $data['current_cycle'] = Cycle::current_cycle();
+
+        return view('cycles.index', $data);
     }
 
     /**
