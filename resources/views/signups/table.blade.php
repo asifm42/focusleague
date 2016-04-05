@@ -15,7 +15,11 @@
             @endif
         </tr>
         @foreach( $signups as $signup )
+            @if ($signup->id === auth()->user()->id)
+            <tr class="success">
+            @else
             <tr>
+            @endif
                 @if(auth()->user()->isAdmin())
                     <td><a title="{{ $signup->name }}" href="{{ route('users.show', $signup->id) }}">{{ $signup->getNicknameOrShortName() }}</a></td>
                 @else

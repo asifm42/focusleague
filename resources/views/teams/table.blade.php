@@ -15,7 +15,11 @@
             @endif
         </tr>
         @foreach( $players as $player )
+            @if ($player->id === auth()->user()->id)
+            <tr class="success">
+            @else
             <tr>
+            @endif
                 @if(auth()->user()->isAdmin())
                     @if ($player->captain)
                     <td><a title="{{ $player->user->name }}" href="{{ route('users.show', $player->user->id) }}">{{ $player->user->getNicknameOrShortName() }}</a>&nbsp;&nbsp;<i class="fa fa-star text-warning"></i></td>
