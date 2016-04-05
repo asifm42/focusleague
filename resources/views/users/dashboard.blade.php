@@ -273,6 +273,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Ultimate History - <a href="{{ route('users.ultimate_history.edit', $user->id) }}">Edit</a></div>
                     <div class="panel-body">
+                        @if ($user->ultimateHistory)
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <h6>Club affiliation</h6>
@@ -299,6 +300,13 @@
                                 <p>{{ $user->ultimateHistory->throw_to_improve }}</p>
                             </div>
                         </div>
+                        @else
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    No history found.
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

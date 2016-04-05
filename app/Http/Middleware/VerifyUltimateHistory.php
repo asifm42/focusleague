@@ -15,7 +15,7 @@ class VerifyUltimateHistory
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->ultimateHistory) {
+        if (auth()->user()->ultimateHistory || auth()->user()->isAdmin()) {
             return $next($request);
         } else {
             flash()->warning('Please fill out your ultimate history first.');
