@@ -150,7 +150,7 @@
                     <div class="panel-body">
                         @for($i=0, $len=$cycle->weeks()->count(); $i < $len; $i++ )
                         <ul class="list-unstyled">
-                            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->female()->count() }}</span></li>
+                            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}<strong>Week {{ ($i+1) }} - {{ $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong><span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->female()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->female()->get() as $sub)
                                 @if(auth()->user()->isAdmin())
                                     <li>
