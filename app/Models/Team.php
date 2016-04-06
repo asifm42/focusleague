@@ -36,6 +36,8 @@ class Team extends Model
 
     /**
      * Get the team's cycle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function cycle()
     {
@@ -52,6 +54,8 @@ class Team extends Model
 
     /**
      * Get the team's captains
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function captains()
     {
@@ -64,5 +68,15 @@ class Team extends Model
     public function nameAndDivision()
     {
         return ucwords($this->name) . ' (' . ucwords($this->division) . ')';
+    }
+
+    /**
+     * Get the games the team is playing in
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function games()
+    {
+        return $this->belongsToMany('App\Models\Game');
     }
 }

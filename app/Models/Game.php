@@ -26,4 +26,22 @@ class Game extends Model
     protected $hidden = [
 
     ];
+
+    /**
+     * Get the week that the game will be on.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function week() {
+        return $this->belongsTo('App\Models\Week');
+    }
+
+    /**
+     * Get the the teams that are playing in the game.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function teams() {
+        return $this->belongsToMany('App\Models\Team');
+    }
 }

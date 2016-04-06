@@ -181,8 +181,6 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     // Route::delete(  'weeks/{id}/subs/signup',       ['as' => 'sub.destroy', 'uses' => 'SubsController@destroy']);
 
 
-
-
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {

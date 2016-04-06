@@ -84,4 +84,8 @@ class Week extends Model
                     ->whereNull('subs.deleted_at') // for soft deletes
                     ->withTimestamps();
     }
+
+    public function games() {
+        return $this->hasMany('App\Models\Game');
+    }
 }

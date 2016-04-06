@@ -63,7 +63,7 @@ class CyclesController extends Controller
             $cycle = Cycle::findOrFail($id);
         }
 
-        $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
+        $cycle->load('signups', 'weeks', 'weeks.subs', 'weeks.games', 'signups.availability', 'teams');
 
         $data['cycle'] = $cycle;
         $data['user'] = $user = auth()->user();
