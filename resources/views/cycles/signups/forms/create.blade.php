@@ -99,7 +99,7 @@
                 ->label('Are you willing to captain this cycle?')
                 ->text('&nbsp;&nbsp;'.'Yes')
                 ->class('form control will_captain-js')
-                ->help('You must be available 3 out of the 4 weeks to be a captain')
+                ->help('You must be available all 3 weeks to be a captain')
             !!}
         </div>
         {!! Former::textarea('note')
