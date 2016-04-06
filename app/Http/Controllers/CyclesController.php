@@ -62,7 +62,7 @@ class CyclesController extends Controller
 
         $data['cycle'] = $cycle;
         $data['user'] = $user = auth()->user();
-        $data['current_cycle_signup'] = $user->current_cycle_signup();
+        $data['current_cycle_signup'] = $user->cycles->find($cycle->id);
         $data['sub_weeks'] = [];
         foreach($cycle->weeks as $week){
             $sub_deets = $week->subs->find($user->id);
