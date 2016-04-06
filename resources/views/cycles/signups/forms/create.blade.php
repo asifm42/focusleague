@@ -89,7 +89,7 @@
         {!! Former::checkboxes('weeks[]')
             ->label('Availability')
             ->addClass('availability-js')
-            ->help('You must be available 2 out of the 4 weeks to sign up')
+            ->help('You must be available 2 out of the 3 weeks to sign up')
             ->checkboxes($checkbox_options)
         !!}
 
