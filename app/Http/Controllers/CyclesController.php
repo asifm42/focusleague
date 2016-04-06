@@ -54,6 +54,11 @@ class CyclesController extends Controller
     {
         if ($id === 'current') {
             $cycle = Cycle::current_cycle();
+            if (!$cycle) {
+                flash()->info('Sorry, there is no current cycle at the moment.');
+
+                return redirect()->route('cycles.index');
+            }
         } else {
             $cycle = Cycle::findOrFail($id);
         }

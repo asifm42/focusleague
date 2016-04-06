@@ -59,21 +59,13 @@
                                 @else
                                     <dd>You are on team: <em>{{ucwords($current_cycle->teams->find($current_cycle_signup->pivot->team_id)->name)}}</em></dd>
                                 @endif
-{{--
-                                @if ($current_cycle_signup->pivot->will_captain == true)
-                                    <dd>You are willing to captain.</dd>
-                                @else
-                                    <dd>You are NOT willing to captain.</dd>
-                                @endif
---}}
                                 <table class="table table-condensed table-striped">
                                     <tr>
                                         <th class="text-center">Div1</th>
                                         <th class="text-center">Div2</th>
-                                        <th class="text-center">Wk1</th>
-                                        <th class="text-center">Wk2</th>
-                                        <th class="text-center">Wk3</th>
-                                        <th class="text-center">Wk4</th>
+                                        @foreach($current_cycle->weeks as $key=>$week)
+                                            <th class="text-center">Wk{{ $key+1 }}</th>
+                                        @endforeach
                                         <th class="text-center">Will captain?</th>
                                     </tr>
                                     <tr>

@@ -18,7 +18,7 @@
             <div class="col-xs-12 col-md-3">
                 <ul class="list-unstyled">
                     @foreach($cycles as $cycle)
-                        @if($cycle->id === $current_cycle->id)
+                        @if($current_cycle && $cycle->id === $current_cycle->id)
                             <li><a href={{ route('cycles.view', $cycle->id) }}>{{ $cycle->name }} (current)</a></li>
                         @else
                             <li><a href={{ route('cycles.view', $cycle->id) }}>{{ $cycle->name }}</a></li>

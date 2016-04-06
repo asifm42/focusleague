@@ -6,10 +6,9 @@
                 <th class="text-center">Div1</th>
                 <th class="text-center">Div2</th>
             @endif
-                <th class="text-center">Wk1</th>
-                <th class="text-center">Wk2</th>
-                <th class="text-center">Wk3</th>
-                <th class="text-center">Wk4</th>
+                @foreach($cycle->weeks as $key=>$week)
+                    <th class="text-center">Wk{{ $key+1 }}</th>
+                @endforeach
             @if(auth()->user()->isAdmin())
                 <th class="text-center"><i class="fa fa-star"></i></th>
             @endif
@@ -80,23 +79,16 @@
                 <th class="text-center" colspan=1>Total</th>
             @endif
             <?php
-                $week1Count = $players->filter(function ($value, $key) use ($cycle){
-                            return $value->user->isAvailable($cycle->weeks[0]->id);
-                        })->count();
-                $week2Count = $players->filter(function ($value, $key) use ($cycle){
-                            return $value->user->isAvailable($cycle->weeks[1]->id);
-                        })->count();
-                $week3Count = $players->filter(function ($value, $key) use ($cycle){
-                            return $value->user->isAvailable($cycle->weeks[2]->id);
-                        })->count();
-                $week4Count = $players->filter(function ($value, $key) use ($cycle){
-                            return $value->user->isAvailable($cycle->weeks[3]->id);
-                        })->count();
+                $weekCount = [];
+                foreach($cycle->weeks as $key=>$week) {
+                    $weekCount[] = $players->filter(function ($value, $key) use ($week){
+                                return $value->user->isAvailable($week->id);
+                            })->count();
+                }
             ?>
-            <th class="text-center">{{ $week1Count }}</th>
-            <th class="text-center">{{ $week2Count }}</th>
-            <th class="text-center">{{ $week3Count }}</th>
-            <th class="text-center">{{ $week4Count }}</th>
+            @foreach($weekCount as $count)
+                <th class="text-center">{{ $count }}</th>
+            @endforeach
             @if(auth()->user()->isAdmin())
                 <th class="text-center"></th>
             @endif

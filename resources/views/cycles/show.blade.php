@@ -83,12 +83,17 @@
                     <div class="panel-body">
                         <ul class='list-unstyled'>
                         @for( $i=0, $len = $cycle->weeks()->count(); $i < $len; $i++)
-
-                            <li>{{'Week ' . ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</li>
 {{--
+                            <li>{{'Week ' . ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</li>
+--}}
                             <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong></li>
 
---}}
+                            <ul class='list-unstyled'>
+                                @foreach($cycle->weeks[$i]->games as $game)
+                                    <li>{{ ucwords($game->teams[0]->name) }} v {{ ucwords($game->teams[1]->name) }} | 8p-10p</li>
+                                @endforeach
+                            </ul>
+
                         @endfor
                         </ul>
                     </div>
@@ -112,7 +117,7 @@
                     <div class="panel-body">
                         @for($i=0, $len=$cycle->weeks()->count(); $i < $len; $i++ )
                         <ul class="list-unstyled">
-                            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }}</strong>&nbsp;<span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
+                            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }} - {{ $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong><span class="badge pull-right">{{ $cycle->weeks[$i]->subs()->male()->count() }}</span></li>
                             @foreach($cycle->weeks[$i]->subs()->male()->get() as $sub)
                                 @if(auth()->user()->isAdmin())
                                     <li>
@@ -175,4 +180,4 @@
 
         </div>
     </div>
-@endsection
+@stop
