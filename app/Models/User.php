@@ -259,6 +259,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Week', 'availability')
                     ->withPivot('attending')
                     ->orderBy('pivot_week_id')
+                    ->where('availability.deleted_at', null)
                     ->withTimestamps();
     }
 
