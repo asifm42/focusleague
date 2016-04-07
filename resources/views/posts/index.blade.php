@@ -19,7 +19,7 @@
                         <p><small>{{ $post->created_at->toFormattedDateString() }} by {{ $post->author->nickname }}</small></p>
                     </div>
                     <div class="panel-body">
-                            <p>{!! $post->content !!}</p>
+                            <p>{!! html_entity_decode($post->content) !!}</p>
                     </div>
                 </div>
                 @endforeach
