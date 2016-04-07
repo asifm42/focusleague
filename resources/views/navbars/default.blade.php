@@ -53,8 +53,11 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="account-menu">
                         <li class="{{ Active::pattern('dashboard', 'active') }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>
+                        <li class="{{ Active::pattern('balance', 'active') }}"><a href="{{ route('balance.details', auth()->user()->id) }}"><i class="fa fa-money"></i>&nbsp; Balance ({{ auth()->user()->getBalanceString() }})</a></li>
                         @if (auth()->user()->isAdmin())
-                        <li class="{{ Active::pattern('admin/dashboard', 'active') }}"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Admin Dashboard</a></li>
+                            <li class="{{ Active::pattern('admin/dashboard', 'active') }}"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Admin Dashboard</a></li>
+                            <li class="{{ Active::pattern('users', 'active') }}"><a href="{{ route('users.list') }}"><i class="fa fa-users"></i>&nbsp; All Users</a></li>
+                            <li class="{{ Active::pattern('delinquents', 'active') }}"><a href="{{ route('users.delinquent') }}"><i class="fa fa-money"></i>&nbsp; Delinquents</a></li>
                         @endif
                         <li class="{{ Active::pattern('signout', 'active') }}"><a href="{{ route('sessions.signout') }}"><i class="fa fa-sign-out"></i>&nbsp; Sign out</a></li>
                     </ul>
