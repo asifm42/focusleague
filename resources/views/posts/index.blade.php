@@ -15,11 +15,12 @@
                 @foreach($posts as $post)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>{{ $post->title }}</h4>
+                        <h5 class="hidden-md hidden-lg">{{ $post->title }}</h4>
+                        <h4 class="hidden-xs hidden-sm">{{ $post->title }}</h4>
                         <p><small>{{ $post->created_at->toFormattedDateString() }} by {{ $post->author->nickname }}</small></p>
                     </div>
                     <div class="panel-body">
-                            <p>{!! html_entity_decode($post->content) !!}</p>
+                        <p>{!! html_entity_decode($post->content) !!}</p>
                     </div>
                 </div>
                 @endforeach
