@@ -32,7 +32,16 @@ class CycleSignupsController extends Controller
      */
     public function create(Request $request, $id)
     {
-        $cycle = Cycle::findOrFail($id);
+        if ($id === 'current') {
+            $cycle = Cycle::current_cycle();
+            if (!$cycle) {
+                flash()->info('Sorry, there is no current cycle at the moment.');
+
+                return redirect()->route('cycles.index');
+            }
+        } else {
+            $cycle = Cycle::findOrFail($id);
+        }
         $user = auth()->user();
 
         // If user already has a signup redirect to edit form
