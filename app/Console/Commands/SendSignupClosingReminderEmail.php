@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\Cycle;
 use App\Models\User;
 use App\Mailers\UserMailer;
+use Carbon;
 
 class SendSignupClosingReminderEmail extends Command
 {
