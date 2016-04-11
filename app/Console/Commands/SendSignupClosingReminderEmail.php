@@ -14,7 +14,7 @@ class SendSignupClosingReminderEmail extends Command
      *
      * @var string
      */
-    protected $signature = 'emails:SendSignupClosingReminderEmail';
+    protected $signature = 'emails:sendSignupClosingReminderEmail';
 
     /**
      * The console command description.
