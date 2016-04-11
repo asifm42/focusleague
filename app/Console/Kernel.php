@@ -18,6 +18,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendTeamAnnouncementEmail::class,
         \App\Console\Commands\ChargeCyclePlayerFee::class,
         \App\Console\Commands\SendBalanceReminderEmail::class,
+        \App\Console\Commands\SendNonReturnerReminderEmail::class,
+        \App\Console\Commands\SendSignupClosingReminderEmail::class,
     ];
 
     /**
@@ -34,5 +36,16 @@ class Kernel extends ConsoleKernel
                  ->weekly()->thursdays()->at('10:00')
                  ->sendOutputTo(storage_path().'/logs/balanceReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
+
+        $schedule->command('emails:sendSignupClosingReminderEmail')
+                 ->weekly()->mondays()->at('13:15')
+                 ->sendOutputTo(storage_path().'/logs/signupClosingReminderEmailLog_' . date('Y_m_d') . '.log')
+                 ->emailOutputTo('asifm42@gmail.com');
+
+        $schedule->command('emails:sendNonReturnerReminderEmail')
+                 ->weekly()->tuesdays()->at('13:20')
+                 ->sendOutputTo(storage_path().'/logs/nonReturnerReminderEmailLog_' . date('Y_m_d') . '.log')
+                 ->emailOutputTo('asifm42@gmail.com');
+
     }
 }
