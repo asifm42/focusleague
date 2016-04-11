@@ -205,7 +205,8 @@ class UserMailer extends Mailer {
         $subject = 'Cycle ' . $cycle->name . ' sign-up closing soon. Don\'t be left out!';
         $data=[];
         $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle->toArray();
+        $data['cycle'] = $cycle;
+        $data['cycleArr'] = $cycle->toArray();
 
         // // add mailgun tag header
         // $headers = ['x-mailgun-tag' => 'status_reminder'];
@@ -227,7 +228,8 @@ class UserMailer extends Mailer {
         $subject = 'Did you have fun last cycle?';
         $data=[];
         $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle->toArray();
+        $data['cycle'] = $cycle;
+        $data['cycleArr'] = $cycle->toArray();
 
         // // add mailgun tag header
         // $headers = ['x-mailgun-tag' => 'status_reminder'];
