@@ -38,12 +38,12 @@ class Kernel extends ConsoleKernel
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendSignupClosingReminderEmail')
-                 ->weekly()->mondays()->at('14:35')
+                 ->weekly()->mondays()->at('15:00')
                  ->sendOutputTo(storage_path().'/logs/signupClosingReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendNonReturnerReminderEmail')
-                 ->weekly()->mondays()->at('14:36')
+                 ->weekly()->tuesdays()->at('07:00')
                  ->sendOutputTo(storage_path().'/logs/nonReturnerReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
