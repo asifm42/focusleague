@@ -150,7 +150,7 @@ class UserMailer extends Mailer {
             $data['captains'][] = ['name'=>$name, 'email'=>$captain->user->email];
         }
 
-        $weeks_attending = count($user->availability->where('cycle_id', 1)->where('pivot.attending', 1));
+        $weeks_attending = count($user->availability->where('cycle_id', $cycle->id)->where('pivot.attending', 1));
 
         switch ($weeks_attending) {
             case 2:
