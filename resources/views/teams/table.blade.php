@@ -14,7 +14,7 @@
             @endif
         </tr>
         @foreach( $players as $player )
-            @if ($player->id === auth()->user()->id)
+            @if ($player->user->id === auth()->user()->id)
             <tr class="success">
             @else
             <tr>
