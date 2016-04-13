@@ -82,7 +82,7 @@ class ChargeCyclePlayerFee extends Command
             $transaction = new Transaction($data);
             $signup->transactions()->save($transaction);
 
-            $this->info('Player fee charged for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());
+            $this->info('$' . $data['amount'] . ' Player fee charged for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());
         }
     }
 }
