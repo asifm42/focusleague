@@ -31,8 +31,17 @@ class SubsController extends Controller
      */
     public function create(Request $request, $id)
     {
+        if ($id === 'current') {
+            $cycle = Cycle::current_cycle();
+            if (!$cycle) {
+                flash()->info('Sorry, there is no current cycle at the moment.');
+
+                return redirect()->route('cycles.index');
+            }
+        } else {
+            $cycle = Cycle::findOrFail($id);
+        }
         $user = auth()->user();
-        $cycle = Cycle::findOrFail($id);
         $cycle->load('weeks', 'signups', 'weeks.subs');
 
         if ( !empty( $cycle->signups()->find($user->id) ) ){
