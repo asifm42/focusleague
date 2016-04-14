@@ -125,4 +125,14 @@ class Cycle extends Model
         return $this->teams_published;
     }
 
+
+    /**
+     * Checks if cycle sign-up is open
+     *
+     * @return bool
+     */
+    public function isSignupOpen()
+    {
+        return $this->signup_closes_at->gt(Carbon::now());
+    }
 }
