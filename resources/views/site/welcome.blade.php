@@ -18,7 +18,8 @@
                     </div>
                     <h6>Tuesdays, 8p-10p, at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3959319,15z/data=!4m2!3m1!1s0x0:0xfb9729c16219059c">Houston Sports Park</a></h6>
 
-                    <h4><a href="{{ route('cycles.view', 'current') }}">Sign up for Cycle 2016-02 is now open!</a></h4>
+                    <h4><a href="{{ route('sub.create', 2) }}">Sign up as sub for Cycle 2016-02!</a></h4>
+                    <h4 class="text-info">Sign up for Cycle 2016-03 opens on Apr 27!</h4>
 
                     @if(auth()->check())
                         <a href="{{ route('users.dashboard') }}" class ="btn btn-primary btn-lg" style="margin-bottom:15px;"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a>
@@ -40,12 +41,22 @@
                     </div>
                     <h5>Tuesdays, 8p-10p, at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3959319,15z/data=!4m2!3m1!1s0x0:0xfb9729c16219059c">Houston Sports Park</a></h5>
 
-                    <h4><a href="{{ route('cycles.view', 'current') }}">Sign up for Cycle 2016-02 is now open!</a></h4>
-
                     @if(auth()->check())
-                        <a href="{{ route('users.dashboard') }}" class ="btn btn-primary btn-lg" style="margin-bottom:15px;"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a>
+                        <p><a href="{{ route('users.dashboard') }}" class ="btn btn-primary btn-lg" ><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></p>
+                        @if($current_cycle)
+                            @if(!auth()->user()->current_cycle_signup())
+                                @if($current_cycle->isSignupOpen())
+                                    <a href="{{ route('cycle.signup.create', 'current') }}" class ="btn btn-info btn-lg" style="margin-bottom:15px;">Sign up for Cycle 2016-02</a>
+                                @else
+                                    <a href="{{ route('sub.create', 'current') }}" class ="btn btn-info btn-lg">Sign up as a sub for Cycle 2016-02</a>
+                                @endif
+                            @endif
+                        @endif
                     @else
-                        <a href="{{ route('users.create') }}" class ="btn btn-primary btn-lg" style="margin-bottom:15px;">Get your player account here</a>
+                        <p><a href="{{ route('sessions.create', 2) }}" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a></p>
+                    @endif
+                    @if($next_cycle)
+                        <h4 class="text-info">Sign up for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!</h4>
                     @endif
 
                     <div class="jumbotron">
