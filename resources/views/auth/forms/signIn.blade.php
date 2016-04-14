@@ -43,5 +43,5 @@
 
     {!! Former::close() !!}
 </div>
-<a href="{{ route('users.create')}}" class="btn btn-info btn-block">Need a player account? Get one here.</a>
+<p><a href="{{ route('users.create')}}" class="btn btn-info btn-block">Need a player account? Get one here.</a></p>
 
