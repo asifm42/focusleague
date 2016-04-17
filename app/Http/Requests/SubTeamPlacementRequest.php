@@ -13,6 +13,10 @@ class SubTeamPlacementRequest extends Request
      */
     public function authorize()
     {
+        if (auth()->user()->isAdmin()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -24,7 +28,7 @@ class SubTeamPlacementRequest extends Request
     public function rules()
     {
         return [
-            //
+            'team_id'   => 'required',
         ];
     }
 }

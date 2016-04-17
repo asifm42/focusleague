@@ -230,6 +230,7 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
      */
     Route::get(     'subs/{id}/team',               ['as' => 'subs.teamPlacementForm', 'uses' => 'SubsController@teamPlacementForm']);
     Route::post(    'subs/{id}/team',               ['as' => 'subs.placeOnATeam', 'uses' => 'SubsController@placeOnATeam']);
+    Route::patch(    'subs/{id}/team',               ['as' => 'subs.updateTeamPlacement', 'uses' => 'SubsController@placeOnATeam']);
 
 
     /*

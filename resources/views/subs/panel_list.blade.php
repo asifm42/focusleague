@@ -11,9 +11,9 @@
                     <li>
                         <a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrShortName() }}</a>
                         @if ($sub->pivot->team_id)
-                            <span class="pull-right"><a href="">Team {{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</a></span>
+                            <span class="pull-right"><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">Team {{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</a></span>
                         @else
-                            <span class="pull-right"><em><a href="{{ route('subs.teamPlacementForm', $sub->id) }}">Place sub</a></em></span>
+                            <span class="pull-right"><em><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">Place sub</a></em></span>
                         @endif
                     </li>
                 @else

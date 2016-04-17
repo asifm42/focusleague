@@ -9,6 +9,8 @@ use App\Http\Requests\EditSubSignupFormRequest;
 use App\Http\Requests\SubTeamPlacementRequest;
 use App\Models\Cycle;
 use App\Models\Sub;
+use App\Models\Team;
+use App\Models\Transaction;
 use App\Models\Week;
 use App\Events\UserSignedUpAsASub;
 
@@ -144,7 +146,29 @@ class SubsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show the team placement form for a sub
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function teamPlacementForm(Request $request, $id)
+    {
+        $sub = Sub::findOrFail($id);
+        $sub->load('user', 'week');
+        $data['sub']=$sub;
+        $data['cycle']=$sub->week->cycle;
+        $data['user']=$sub->user;
+        $data['edit']=false;
+        if ($request->isMethod('patch')) {
+            $data['edit']=true;
+        }
+        $data['cycle_teams']=$data['cycle']->teams;
+
+        return view('subs.teamPlacementForm', $data);
+    }
+
+    /**
+     * Place a sub on a team
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -153,13 +177,31 @@ class SubsController extends Controller
     {
         $sub = Sub::findOrFail($id);
         $sub->load('user');
-        $sub->team_id = $request->input('team_id');
+        $team = Team::findOrFail($request->input('team_id'));
+        $sub->team()->associate($team);
         $sub->save();
         $sub->load('team');
         // fire off event
 
+        $transaction = Transaction::where('cycle_id', $sub->week->cycle->id)
+                    ->where('week_id', $sub->week_id)
+                    ->where('user_id', $sub->user_id)
+                    ->where('type', 'charge')->first();
 
-        flash()->success($sub->user->getNicknameOrShortName . ' placed on Team ' . ucwords($sub->team->name) . ' as a sub.');
+        if(empty($transaction)) {
+            Transaction::create([
+                'cycle_id' => $sub->week->cycle->id,
+                'week_id' => $sub->week_id,
+                'user_id' => $sub->user_id,
+                'type' => 'charge',
+                'description' => 'Sub fee',
+                'created_by' => auth()->user()->id,
+                'date' => $sub->week->starts_at->format('Y-m-d'),
+                'amount' => config('focus_cost.cycle.sub')
+            ]);
+        }
+        flash()->success($sub->user->getNicknameOrShortName() . ' placed on Team ' . ucwords($sub->team->name) . ' as a sub.');
         return redirect()->back();
     }
+
 }
