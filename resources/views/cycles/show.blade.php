@@ -102,7 +102,7 @@
             <div class="col-xs-12 col-md-5">
                 @if($cycle->areTeamsPublished())
                     @foreach($cycle->teams as $team)
-                        @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
+                        @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                     @endforeach
                 @else
                     @include('signups.panel', $data = ['signups'=>$currentMaleSignups, 'cycle'=>$cycle, 'title' => 'Male signups', 'showDivisions'=>true])

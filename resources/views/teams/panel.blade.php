@@ -14,11 +14,17 @@
                                 $femalePlayers = $players->filter(function ($value, $key) {
                                     return strtolower($value->user->gender) == "female";
                                 });
+                                $maleSubs = $subs->filter(function ($value, $key) {
+                                    return strtolower($value->user->gender) == "male";
+                                });
+                                $femaleSubs = $subs->filter(function ($value, $key) {
+                                    return strtolower($value->user->gender) == "female";
+                                });
                             ?>
-                            @include('teams.table', $data = ['players'=>$malePlayers, 'cycle'=>$cycle, 'team'=>$team])
-                            @include('teams.table', $data = ['players'=>$femalePlayers, 'cycle'=>$cycle, 'team'=>$team])
+                            @include('teams.table', $data = ['players'=>$malePlayers->load('user'), 'subs'=>$maleSubs, 'cycle'=>$cycle, 'team'=>$team])
+                            @include('teams.table', $data = ['players'=>$femalePlayers->load('user'), 'subs'=>$femaleSubs, 'cycle'=>$cycle, 'team'=>$team])
                         @else
-                            @include('teams.table', $data = ['players'=>$players, 'cycle'=>$cycle, 'team'=>$team])
+                            @include('teams.table', $data = ['players'=>$players, 'subs'=>$subs, 'cycle'=>$cycle, 'team'=>$team])
                         @endif
                         <p><i class="fa fa-star text-warning"></i> = captain</p>
                     </div>

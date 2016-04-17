@@ -1,14 +1,43 @@
 <div class="table-responsive">
     <table class="table table-condensed table-striped">
+{{--     @if(strtolower($team->division) === 'mixed')
+        <tr class="default"><th>
+        @if(strtolower($players->first()->gender) === 'male')
+            Men
+        @else
+            Women
+        @endif
+        </th>
+        @if(isset($showDivisions) && $showDivisions === true)
+            <th class="text-center"></th>
+            <th class="text-center"></th>
+        @endif
+        @foreach($cycle->weeks as $key=>$week)
+            <th class="text-center"></th>
+        @endforeach
+        @if(auth()->user()->isAdmin())
+            <th class="text-center"></th>
+        @endif
+        </tr>
+    @endif --}}
         <tr class="text-center">
+
+        @if(strtolower($team->division) === 'mixed')
+           @if(strtolower($players->get(0)['user']['gender']) === 'male')
+                <th><i class="fa fa-male text-primary"></i>&nbsp;Name</th>
+            @else
+                <th><i class="fa fa-female text-info"></i>&nbsp;Name</th>
+            @endif
+        @else
             <th>Name</th>
+        @endif
             @if(isset($showDivisions) && $showDivisions === true)
                 <th class="text-center">Div1</th>
                 <th class="text-center">Div2</th>
             @endif
-                @foreach($cycle->weeks as $key=>$week)
-                    <th class="text-center">Wk{{ $key+1 }}</th>
-                @endforeach
+            @foreach($cycle->weeks as $key=>$week)
+                <th class="text-center">Wk{{ $key+1 }}</th>
+            @endforeach
             @if(auth()->user()->isAdmin())
                 <th class="text-center"><i class="fa fa-star"></i></th>
             @endif
@@ -72,6 +101,41 @@
                 @endif
             </tr>
         @endforeach
+        @if($subs->count() > 0)
+            <tr>
+                <th colspan=6 class="warning">Subs</th>
+            </tr>
+        @endif
+        @foreach( $subs as $sub )
+            @if ($sub->user->id === auth()->user()->id)
+            <tr class="success">
+            @else
+            <tr>
+            @endif
+                @if(auth()->user()->isAdmin())
+                    <td><a title="{{ $sub->user->name }}" href="{{ route('users.show', $sub->user->id) }}">{{ $sub->user->getNicknameOrShortName() }}</a></td>
+                @else
+                    <td><span title="{{ $sub->user->name }}">{{ $sub->user->getNicknameOrShortName() }}</span></td>
+                @endif
+
+                @if(isset($showDivisions) && $showDivisions === true)
+                    <td colsspan=2>
+                    </td>
+                @endif
+
+                @foreach($cycle->weeks as $week )
+
+                    @if($week->id === $sub->week_id)
+                        <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
+                    @else
+                        <td class="text-center"><!-- <i class="fa fa-times fa-fw text-danger"></i>--></td>
+                    @endif
+                @endforeach
+                @if(auth()->user()->isAdmin())
+                    <td></td>
+                @endif
+            </tr>
+        @endforeach
         <tr class="info">
             @if(isset($showDivisions) && $showDivisions === true)
                 <th class="text-center" colspan=3>Total</th>
@@ -81,9 +145,13 @@
             <?php
                 $weekCount = [];
                 foreach($cycle->weeks as $key=>$week) {
-                    $weekCount[] = $players->filter(function ($value, $key) use ($week){
+                    $playerCount = $players->filter(function ($value, $key) use ($week){
                                 return $value->user->isAvailable($week->id);
                             })->count();
+                    $subCount = $subs->filter(function ($value, $key) use ($week){
+                                return $value->week_id === $week->id;
+                            })->count();
+                    $weekCount[] = $playerCount + $subCount;
                 }
             ?>
             @foreach($weekCount as $count)

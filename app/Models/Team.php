@@ -79,4 +79,14 @@ class Team extends Model
     {
         return $this->belongsToMany('App\Models\Game');
     }
+
+    /**
+     * Get the subs that have been placed on this team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function subs()
+    {
+        return $this->hasMany('App\Models\Sub');
+    }
 }
