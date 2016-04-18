@@ -103,39 +103,50 @@
         @endforeach
         @if($subs->count() > 0)
             <tr>
-                <th colspan=6 class="warning">Subs</th>
-            </tr>
-        @endif
-        @foreach( $subs as $sub )
-            @if ($sub->user->id === auth()->user()->id)
-            <tr class="success">
-            @else
-            <tr>
-            @endif
-                @if(auth()->user()->isAdmin())
-                    <td><a title="{{ $sub->user->name }}" href="{{ route('users.show', $sub->user->id) }}">{{ $sub->user->getNicknameOrShortName() }}</a></td>
-                @else
-                    <td><span title="{{ $sub->user->name }}">{{ $sub->user->getNicknameOrShortName() }}</span></td>
-                @endif
-
-                @if(isset($showDivisions) && $showDivisions === true)
-                    <td colsspan=2>
-                    </td>
-                @endif
-
-                @foreach($cycle->weeks as $week )
-
-                    @if($week->id === $sub->week_id)
-                        <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
+                <th colspan=6 class="warning">
+                @if(strtolower($team->division) === 'mixed')
+                   @if(strtolower($players->get(0)['user']['gender']) === 'male')
+                        <i class="fa fa-male text-primary"></i>
                     @else
-                        <td class="text-center"><!-- <i class="fa fa-times fa-fw text-danger"></i>--></td>
+                        <i class="fa fa-female text-info"></i>
                     @endif
-                @endforeach
-                @if(auth()->user()->isAdmin())
-                    <td></td>
+                    &nbsp;Subs
+                @else
+                    Subs
                 @endif
+                </th>
             </tr>
-        @endforeach
+            @foreach( $subs as $sub )
+                @if ($sub->user->id === auth()->user()->id)
+                <tr class="success">
+                @else
+                <tr>
+                @endif
+                    @if(auth()->user()->isAdmin())
+                        <td><a title="{{ $sub->user->name }}" href="{{ route('users.show', $sub->user->id) }}">{{ $sub->user->getNicknameOrShortName() }}</a></td>
+                    @else
+                        <td><span title="{{ $sub->user->name }}">{{ $sub->user->getNicknameOrShortName() }}</span></td>
+                    @endif
+
+                    @if(isset($showDivisions) && $showDivisions === true)
+                        <td colsspan=2>
+                        </td>
+                    @endif
+
+                    @foreach($cycle->weeks as $week )
+
+                        @if($week->id === $sub->week_id)
+                            <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
+                        @else
+                            <td class="text-center"><!-- <i class="fa fa-times fa-fw text-danger"></i>--></td>
+                        @endif
+                    @endforeach
+                    @if(auth()->user()->isAdmin())
+                        <td></td>
+                    @endif
+                </tr>
+            @endforeach
+        @endif
         <tr class="info">
             @if(isset($showDivisions) && $showDivisions === true)
                 <th class="text-center" colspan=3>Total</th>
