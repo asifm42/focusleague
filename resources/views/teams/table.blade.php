@@ -106,11 +106,10 @@
                 <th colspan=6 class="warning">
                 @if(strtolower($team->division) === 'mixed')
                    @if(strtolower($players->get(0)['user']['gender']) === 'male')
-                        <i class="fa fa-male text-primary"></i>
+                        <i class="fa fa-male text-primary"></i>&nbsp;Subs
                     @else
-                        <i class="fa fa-female text-info"></i>
+                        <i class="fa fa-female text-info"></i>&nbsp;Subs
                     @endif
-                    &nbsp;Subs
                 @else
                     Subs
                 @endif
