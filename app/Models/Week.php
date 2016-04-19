@@ -88,4 +88,8 @@ class Week extends Model
     public function games() {
         return $this->hasMany('App\Models\Game');
     }
+
+    public function isRainedOut() {
+        return $this->rained_out;
+    }
 }

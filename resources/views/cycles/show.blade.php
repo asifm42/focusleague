@@ -160,9 +160,17 @@
                                 <tr class="warning">
                                     <td colspan="5"><strong>Week {{ ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong></td>
                                 </tr>
-
-                                @foreach($cycle->weeks[$i]->games as $game)
+                                @if($cycle->weeks[$i]->isRainedOut())
                                     <tr>
+                                        <th colspan=5 class="text-center">RAINED OUT</th>
+                                    </tr>
+                                @endif
+                                @foreach($cycle->weeks[$i]->games as $game)
+                                    @if($cycle->weeks[$i]->isRainedOut())
+                                        <tr class="rainedOut" style="text-decoration: line-through;">
+                                    @else
+                                        <tr>
+                                    @endif
                                         @if(strtolower($game->teams[0]->division) === 'mens')
                                             <td class="text-center"><i class="fa fa-fw fa-male text-primary"></i></td>
                                         @elseif (strtolower($game->teams[0]->division) === 'womens')
@@ -170,10 +178,10 @@
                                         @else
                                             <td class="text-center"><i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i></td>
                                         @endif
-                                        <td class="text-right">{{ ucwords($game->teams[0]->name) }} {{ $game->teams[0]->pivot->points_scored }}</td>
+                                        <td class="text-right">{{ ucwords($game->teams[0]->name) }}&nbsp;{{ $game->teams[0]->pivot->points_scored }}</td>
                                         <td class="text-center">vs</td>
-                                        <td class="text-left">{{ $game->teams[1]->pivot->points_scored }} {{ ucwords($game->teams[1]->name) }}</td>
-                                        <td class="text-center">8p-10p</td>
+                                        <td class="text-left">{{ $game->teams[1]->pivot->points_scored }}&nbsp;{{ ucwords($game->teams[1]->name) }}</td>
+                                        <td class="text-center">{{ $game->starts_at->format('g:ia') }}-{{ $game->ends_at->format('g:ia') }}</td>
                                     </tr>
                                 @endforeach
 

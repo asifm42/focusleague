@@ -10,6 +10,13 @@ class Game extends Model
     use SoftDeletes;
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['starts_at', 'ends_at', 'created_at', 'updated_at', 'deleted_at'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
