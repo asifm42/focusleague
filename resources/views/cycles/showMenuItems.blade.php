@@ -5,7 +5,7 @@
             <!-- <li> -->
             <!-- <ul class="nav navmenu-nav"> -->
             @foreach($cycle->teams as $team)
-                <li><a href="{{ '#' . $team->name }}">
+                <li><a href="{{ '#' . snake_case($team->name) }}">
                 @if(strtolower($team->division) === 'mens')
                 <i class="fa fa-fw fa-male"></i>&nbsp;Team {{ ucwords($team->name) }}
                 @elseif(strtolower($team->division) === 'womens')

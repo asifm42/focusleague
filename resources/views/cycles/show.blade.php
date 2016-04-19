@@ -218,7 +218,7 @@
                     @if($cycle->areTeamsPublished())
                         <div id="mensTeams" class="row">
                         @foreach($cycle->teams->where('division', 'mens') as $team)
-                            <div id="{{ $team->name }}" class="col-xs-12 col-sm-6">
+                            <div id="{{ snake_case($team->name) }}" class="col-xs-12 col-sm-6">
                             @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                             </div>
                         @endforeach
