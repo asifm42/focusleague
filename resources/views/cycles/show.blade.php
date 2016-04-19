@@ -225,14 +225,14 @@
                         </div>
                         <div id="mixedTeams" class="row">
                         @foreach($cycle->teams->where('division', 'mixed') as $team)
-                            <div class="col-xs-12 col-sm-6">
+                            <div id="{{ snake_case($team->name) }}" class="col-xs-12 col-sm-6">
                             @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                             </div>
                         @endforeach
                         </div>
                         <div id="womensTeams" class="row">
                         @foreach($cycle->teams->where('division', 'womens') as $team)
-                            <div class="col-xs-12 col-sm-6">
+                            <div id="{{ snake_case($team->name) }}" class="col-xs-12 col-sm-6">
                             @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                             </div>
                         @endforeach
