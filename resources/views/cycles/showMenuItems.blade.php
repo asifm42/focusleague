@@ -6,9 +6,9 @@
             <!-- <ul class="nav navmenu-nav"> -->
             @foreach($cycle->teams as $team)
                 <li><a href="{{ '#' . $team->name }}">
-                @if($team->division === 'mens')
+                @if(strtolower($team->division) === 'mens')
                 <i class="fa fa-fw fa-male"></i>&nbsp;Team {{ ucwords($team->name) }}
-                @elseif($team->division === 'womens')
+                @elseif(strtolower($team->division) === 'womens')
                 <i class="fa fa-fw fa-female text-info"></i>&nbsp;Team {{ ucwords($team->name) }}
                 @else
                 <i class="fa fa-male"></i><i class="fa fa-female text-info"></i>&nbsp;Team {{ ucwords($team->name) }}

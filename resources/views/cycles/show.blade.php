@@ -163,9 +163,9 @@
 
                                 @foreach($cycle->weeks[$i]->games as $game)
                                     <tr>
-                                        @if($game->teams[0]->division === 'mens')
+                                        @if(strtolower($game->teams[0]->division) === 'mens')
                                             <td class="text-center"><i class="fa fa-fw fa-male text-primary"></i></td>
-                                        @elseif ($game->teams[0]->division === 'womens')
+                                        @elseif (strtolower($game->teams[0]->division) === 'womens')
                                             <td class="text-center"><i class="fa fa-fw fa-female text-info"></i></td>
                                         @else
                                             <td class="text-center"><i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i></td>
