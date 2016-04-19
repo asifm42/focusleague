@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -88,5 +89,15 @@ class Team extends Model
     public function subs()
     {
         return $this->hasMany('App\Models\Sub');
+    }
+
+    /**
+     * Get the subs that have been placed on this team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function hasPlayer(User $user)
+    {
+        return $this->players->where('user_id', $user->id)->first();
     }
 }

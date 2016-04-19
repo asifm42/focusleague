@@ -42,6 +42,7 @@ class Game extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function teams() {
-        return $this->belongsToMany('App\Models\Team');
+        return $this->belongsToMany('App\Models\Team')
+        ->withPivot('id','points_scored');
     }
 }

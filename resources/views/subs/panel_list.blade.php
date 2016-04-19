@@ -9,14 +9,14 @@
         ?>
         <ul class="list-unstyled">
             @if ($subCount > 0)
-            <li><strong>Week {{ ($i+1) }} - {{ $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong><span class="badge pull-right">{{ $subCount }}</span></li>
-                <li style="border-bottom:solid 1px #ccc;"><strong>Name</strong><span class="pull-right"><strong>Team</strong></span></li>
+                <li class="hidden"><strong>Name</strong><span class="pull-right"><strong>Team</strong></span></li>
+            <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) }} - {{ $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong><span class="badge pull-right">{{ $subCount }}</span></li>
                 @foreach($cycle->weeks[$i]->subs()->$gender()->get() as $sub)
                     @if(auth()->user()->isAdmin())
                         <li>
                             <a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrShortName() }}</a>
                             @if ($sub->pivot->team_id)
-                                <span class="pull-right"><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">{{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</a></span>
+                                <span class="pull-right"><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">{{ ucwords($cycle->teams->find($sub->pivot->team_id)->nameAndDivision()) }}</a></span>
                             @else
                                 <span class="pull-right"><em><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">Select</a></em></span>
                             @endif
