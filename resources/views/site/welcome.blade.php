@@ -38,7 +38,7 @@
                         <p><a href="{{ route('sessions.create', 2) }}" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a></p>
                     @endif
                     @if($next_cycle)
-                        <h5 class="text-info">Sign up for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!</h5>
+                        <h5 class="text-info">Registration for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!</h5>
                     @endif
                 </div>
                 <div class="text-center hidden-xs hidden-sm">
@@ -70,7 +70,7 @@
                         <p><a href="{{ route('sessions.create', 2) }}" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a></p>
                     @endif
                     @if($next_cycle)
-                        <h4 class="text-info">Sign up for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!</h4>
+                        <h4 class="text-info">Registration for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!</h4>
                     @endif
                 </div>
 
