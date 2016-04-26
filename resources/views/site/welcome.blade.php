@@ -14,8 +14,8 @@
                     <!-- <h5><span class = "emphasize">F</span>ostering <span class = "emphasize">O</span>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</h5> -->
                     <div class="jumbotron" style="background-color: #ffff99;" >
                         <h4>Game Status for Tuesday, Apr 26</h4>
-                        <p class="hidden">Games are canceled due to weather. See you next week!</p>
-                        <p>As of 10 am, Games are on. However, if HSP is closed due to excessive rain in the last week, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>.</p>
+                        <p>As of 1 pm, games are canceled due to excessive rain in the last week. See you next week!</p>
+                        <p class="hidden">As of 10 am, Games are on. However, if HSP is closed due to excessive rain in the last week, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>.</p>
                     </div>
                     <h6>Tuesdays, 8p-10p, at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3959319,15z/data=!4m2!3m1!1s0x0:0xfb9729c16219059c">Houston Sports Park</a></h6>
 
@@ -46,8 +46,8 @@
                     <h3>Fostering Organized Competitive Ultimate Series</h3>
                     <div class="jumbotron" style="background-color: #ffff99;">
                         <h3>Game Status for Tuesday, Apr 26</h3>
-                        <p class="hidden">Games are canceled due to weather. See you next week!</p>
-                        <p>As of 10 am, Games are on. However, if HSP is closed due to excessive rain in the last week, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>.</p>
+                        <p>As of 1 pm, games are canceled due to excessive rain in the last week. See you next week!</p>
+                        <p class="hidden">As of 10 am, Games are on. However, if HSP is closed due to excessive rain in the last week, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>.</p>
                     </div>
                     <h5>Tuesdays, 8p-10p, at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3959319,15z/data=!4m2!3m1!1s0x0:0xfb9729c16219059c">Houston Sports Park</a></h5>
 
