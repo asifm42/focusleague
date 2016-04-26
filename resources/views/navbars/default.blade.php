@@ -5,11 +5,12 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
+<!--                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> -->
+                <span style="font-size:1em"><strong>NAV</strong></span>
             </button>
-            <a class="navbar-brand" href="{{ URL::route('site.home') }}"><img src="{{ asset('assets/img/logo.png') }}" class="logo-navbar"></a>
+            <a class="navbar-brand" href="{{ URL::route('site.home') }}"><img src="{{ asset('assets/img/logo.png') }}" alt="FOCUS League" title="FOCUS League" class="logo-navbar"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
