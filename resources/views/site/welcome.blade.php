@@ -23,11 +23,11 @@
                         <p><a href="{{ route('users.dashboard') }}" class ="btn btn-primary btn-lg" ><i class="fa fa-tachometer"></i>&nbsp; Your Dashboard</a></p>
                         @if($current_cycle && !auth()->user()->current_cycle_signup())
                             @if($current_cycle->isSignupOpen())
-                                <p><a href="{{ route('cycle.signup.create', 'current') }}" class ="btn btn-primary btn-lg">Sign up for Cycle 2016-02</a></p>
+                                <p><a href="{{ route('cycle.signup.create', 'current') }}" class ="btn btn-primary btn-lg">Sign up for Cycle {{ $current_cycle->name }}</a></p>
                             @else
                                 <h5 class="text-info">Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.</h5>
                             @endif
-                            <p><a href="{{ route('sub.create', 'current') }}" class ="btn btn-info btn-lg">Sign up as a sub for Cycle 2016-02</a></p>
+                            <p><a href="{{ route('sub.create', 'current') }}" class ="btn btn-info btn-lg">Sign up as a sub for Cycle {{ $current_cycle->name }}</a></p>
                         @endif
                     @else
                         @if($current_cycle && $current_cycle->isSignupOpen())
@@ -55,11 +55,11 @@
                         <p><a href="{{ route('users.dashboard') }}" class ="btn btn-primary btn-lg" ><i class="fa fa-tachometer"></i>&nbsp; Your Dashboard</a></p>
                         @if($current_cycle && !auth()->user()->current_cycle_signup())
                             @if($current_cycle->isSignupOpen())
-                                <p><a href="{{ route('cycle.signup.create', 'current') }}" class ="btn btn-primary btn-lg">Sign up for Cycle 2016-02</a></p>
+                                <p><a href="{{ route('cycle.signup.create', 'current') }}" class ="btn btn-primary btn-lg">Sign up for Cycle {{ $current_cycle->name }}</a></p>
                             @else
                                 <h4 class="text-info">Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.</h4>
                             @endif
-                            <p><a href="{{ route('sub.create', 'current') }}" class ="btn btn-info btn-lg">Sign up as a sub for Cycle 2016-02</a></p>
+                            <p><a href="{{ route('sub.create', 'current') }}" class ="btn btn-info btn-lg">Sign up as a sub for Cycle {{ $current_cycle->name }}</a></p>
                         @endif
                     @else
                         @if($current_cycle && $current_cycle->isSignupOpen())
