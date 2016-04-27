@@ -20,6 +20,9 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendBalanceReminderEmail::class,
         \App\Console\Commands\SendNonReturnerReminderEmail::class,
         \App\Console\Commands\SendSignupClosingReminderEmail::class,
+        \App\Console\Commands\ApplyRainOutCredit::class,
+        // \App\Console\Commands\ChangeEmails::class,
+        // \App\Console\Commands\RevenueToDate::class,
     ];
 
     /**

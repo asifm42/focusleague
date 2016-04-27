@@ -19,4 +19,6 @@ return [
         'four_weeks' => 24,
     ],
 
+    'rainout_credit' => 5,
+
 ];
