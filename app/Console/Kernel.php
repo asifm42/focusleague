@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendBalanceReminderEmail::class,
         \App\Console\Commands\SendNonReturnerReminderEmail::class,
         \App\Console\Commands\SendSignupClosingReminderEmail::class,
+        \App\Console\Commands\SendSignupOpenReminderEmail::class,
         \App\Console\Commands\ApplyRainOutCredit::class,
         // \App\Console\Commands\ChangeEmails::class,
         // \App\Console\Commands\RevenueToDate::class,
@@ -40,15 +41,25 @@ class Kernel extends ConsoleKernel
                  ->sendOutputTo(storage_path().'/logs/balanceReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
+        $schedule->command('emails:sendSignupOpenReminder')
+                 ->weekly()->fridays()->at('10:00')
+                 ->sendOutputTo(storage_path().'/logs/signupOpenReminderEmailLog_' . date('Y_m_d') . '.log')
+                 ->emailOutputTo('asifm42@gmail.com');
+
+        $schedule->command('emails:sendSignupOpenReminder')
+                 ->weekly()->mondays()->at('10:00')
+                 ->sendOutputTo(storage_path().'/logs/signupOpenReminderEmailLog_' . date('Y_m_d') . '.log')
+                 ->emailOutputTo('asifm42@gmail.com');
+
         $schedule->command('emails:sendSignupClosingReminderEmail')
-                 ->weekly()->mondays()->at('15:00')
+                 ->weekly()->tuesdays()->at('10:00')
                  ->sendOutputTo(storage_path().'/logs/signupClosingReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
-        $schedule->command('emails:sendNonReturnerReminderEmail')
-                 ->weekly()->tuesdays()->at('07:00')
-                 ->sendOutputTo(storage_path().'/logs/nonReturnerReminderEmailLog_' . date('Y_m_d') . '.log')
-                 ->emailOutputTo('asifm42@gmail.com');
+        // $schedule->command('emails:sendNonReturnerReminderEmail')
+        //          ->weekly()->tuesdays()->at('07:00')
+        //          ->sendOutputTo(storage_path().'/logs/nonReturnerReminderEmailLog_' . date('Y_m_d') . '.log')
+        //          ->emailOutputTo('asifm42@gmail.com');
 
     }
 }
