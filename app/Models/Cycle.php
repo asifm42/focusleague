@@ -67,11 +67,14 @@ class Cycle extends Model
 
         if ($now->lt($this->signup_opens_at)){
             return 'SIGNUP_OPENS_LATER';
-        } elseif ($now->gt($this->signup_opens_at) && $now->lt($this->signup_closes_at)) {
+        // } elseif ($now->gt($this->signup_opens_at) && $now->lt($this->signup_closes_at)) {
+        } elseif ($now->between($this->signup_opens_at, $this->signup_closes_at)) {
             return 'SIGNUP_OPEN';
-        } elseif ($now->gt($this->signup_closes_at) && $now->lt($this->starts_at)) {
+        // } elseif ($now->gt($this->signup_closes_at) && $now->lt($this->starts_at)) {
+        } elseif ($now->between($this->signup_closes_at, $this->starts_at)) {
             return 'SIGNUP_CLOSED';
-        } elseif ($now->gt($this->starts_at) && $now->lt($this->ends_at)) {
+        // } elseif ($now->gt($this->starts_at) && $now->lt($this->ends_at)) {
+        } elseif ($now->between($this->starts_at, $this->ends_at)) {
             return 'IN_PROGRESS';
         } elseif ($now->gt($this->ends_at)) {
             return 'COMPLETED';
@@ -125,7 +128,6 @@ class Cycle extends Model
         return $this->teams_published;
     }
 
-
     /**
      * Checks if cycle sign-up is open
      *
@@ -133,6 +135,7 @@ class Cycle extends Model
      */
     public function isSignupOpen()
     {
-        return $this->signup_closes_at->gt(Carbon::now());
+        $now = Carbon::now();
+        return $now->between($this->signup_opens_at, $this->signup_closes_at);
     }
 }
