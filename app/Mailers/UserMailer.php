@@ -208,12 +208,34 @@ class UserMailer extends Mailer {
         $data['cycle'] = $cycle;
         $data['cycleArr'] = $cycle->toArray();
 
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
+        // add mailgun tag header
+        $headers = ['x-mailgun-tag' => 'cycle_'.$cycle->name.'_signup_reminder'];
 
-        return $this->sendTo($user, $subject, $view, $data);
+        // return $this->sendTo($user, $subject, $view, $data);
 
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
+        return $this->sendTo($user, $subject, $view, $data, $headers);
+    }
+
+    /**
+     * Sends an email to the user reminding them that sign-up is still open.
+     *
+     * @return void
+     */
+    public function sendSignupOpenReminderEmail(User $user, Cycle $cycle)
+    {
+        $view = 'emails.signup_closing_reminder';
+        $subject = 'Reminder: Cycle ' . $cycle->name . ' sign-up is open!';
+        $data=[];
+        $data['user'] = $user->toArray();
+        $data['cycle'] = $cycle;
+        $data['cycleArr'] = $cycle->toArray();
+
+        // add mailgun tag header
+        $headers = ['x-mailgun-tag' => 'cycle_'.$cycle->name.'_signup_reminder'];
+
+        // return $this->sendTo($user, $subject, $view, $data);
+
+        return $this->sendTo($user, $subject, $view, $data, $headers);
     }
 
 
