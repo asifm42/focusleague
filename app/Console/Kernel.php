@@ -47,7 +47,7 @@ class Kernel extends ConsoleKernel
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendSignupOpenReminder')
-                 ->weekly()->mondays()->at('10:00')
+                 ->weekly()->mondays()->at('12:00')
                  ->sendOutputTo(storage_path().'/logs/signupOpenReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
