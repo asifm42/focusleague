@@ -38,7 +38,7 @@
 
 <div class="footer" style="border-top: 1px solid #ddd; color: #888; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
     <p>Sent from &ndash; <a href="{!! url('') !!}">FOCUS League</a>.</p>
-{{-- @yield('unsubscribe') --}}
+@yield('unsubscribe')
 </div>
 
 </body>
