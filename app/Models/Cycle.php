@@ -138,4 +138,37 @@ class Cycle extends Model
         $now = Carbon::now();
         return $now->between($this->signup_opens_at, $this->signup_closes_at);
     }
+
+    /**
+     * Get the current week
+     *
+     * @return App\Models\Week
+     */
+    public function currentWeek()
+    {
+        $now = Carbon::now();
+
+        // if today is tuesday, then look for a week with today's date
+        // if not, then get the next tuesday
+        if($now->dayOfWeek == Carbon::MONDAY) {
+            $searchDate = $now->format("Y-m-d").'%';
+        } else {
+            $searchDate = $now->next(Carbon::TUESDAY)->format("Y-m-d").'%';
+        }
+
+        return $this->weeks()->where('starts_at', 'like', $searchDate)->first();
+    }
+
+    /**
+     * Checks if there is a game today.
+     *
+     * @return mixed|App\Models\Week|null
+     */
+    public function gameToday()
+    {
+        $searchDate = Carbon::today()->format("Y-m-d").'%';
+
+        return $this->weeks()->where('starts_at', 'like', $searchDate)->first();
+    }
+
 }
