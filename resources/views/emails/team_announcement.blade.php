@@ -20,7 +20,7 @@
         <p>We are working on selecting a captain since no one volunteered. Please let us know if you have changed your mind and are willing to captain this cycle.</p>
     @endif
 
-    <p>Your fees for this cycle is ${{ $cost }}.00. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $cycle['name'] }} fees" in the note if possible.</p>
+    <p>Your fees for this cycle is ${{ $cost }}.00. Your current balance is {{ $balance }}. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $cycle['name'] }} fees" in the note if possible.</p>
     <ul>
         <li>Paypal to asifm42@gmail.com</li>
         <li>Chase Quickpay to asifm42@gmail.com</li>

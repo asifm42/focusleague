@@ -140,6 +140,7 @@ class UserMailer extends Mailer {
         $data['team'] = $team->toArray();
         $data['captains'] = [];
         $data['cost'] = 0;
+        $data['balance'] = $user->getBalanceString();
 
         foreach($team->captains as $captain) {
             if ($captain->user->nickname) {
