@@ -23,7 +23,7 @@
         <tr class="text-center">
 
         @if(strtolower($team->division) === 'mixed')
-           @if(strtolower($players->get(0)['user']['gender']) === 'male')
+           @if(strtolower($players->first()['user']['gender']) == 'male')
                 <th><i class="fa fa-male text-primary"></i>&nbsp;Name</th>
             @else
                 <th><i class="fa fa-female text-info"></i>&nbsp;Name</th>
@@ -105,7 +105,7 @@
             <tr>
                 <th colspan=6 class="warning">
                 @if(strtolower($team->division) === 'mixed')
-                   @if(strtolower($players->get(0)['user']['gender']) === 'male')
+                   @if(strtolower($subs->first()['user']['gender']) === 'male')
                         <i class="fa fa-male text-primary"></i>&nbsp;Subs
                     @else
                         <i class="fa fa-female text-info"></i>&nbsp;Subs
