@@ -13,6 +13,7 @@ use App\Models\Team;
 use App\Models\Transaction;
 use App\Models\Week;
 use App\Events\UserSignedUpAsASub;
+use Former;
 
 class SubsController extends Controller
 {
@@ -110,6 +111,7 @@ class SubsController extends Controller
             return redirect()->route('cycles.view', $cycle->id);
         }
 
+        Former::populate($sub);
         return view('subs.edit')
             ->withCycle($cycle)
             ->withUser($user)

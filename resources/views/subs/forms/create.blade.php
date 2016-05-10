@@ -9,11 +9,22 @@
     $week_already_subbing = [];
     foreach($cycle->weeks as $week) {
         $sub_deets = $week->subs->find($user->id);
-        if ($sub_deets) {
-            $week_already_subbing[] = ['week' => $week, 'sub_deets' => $sub_deets];
-        } else {
-            $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+        if ($edit === true)
+            if ($sub->week_id === $week->id) {
+                $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+            } elseif ($sub_deets) {
+                $week_already_subbing[] = ['week' => $week, 'sub_deets' => $sub_deets];
+            } else {
+                $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+            }
+        else {
+            if ($sub_deets) {
+                $week_already_subbing[] = ['week' => $week, 'sub_deets' => $sub_deets];
+            } else {
+                $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+            }
         }
+
     }
 ?>
     <div class="panel-body">
