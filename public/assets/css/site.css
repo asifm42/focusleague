@@ -10016,3 +10016,21 @@ input[type="checkbox"]:disabled:checked:after,
 #faq_list .panel {
     margin-bottom: 15px;
 }
+
+.tt-open {
+    background-color: #fff;
+    border:1px #2196f3 dashed;
+    border-top:0;
+    width:100%;
+    padding:5px;
+}
+
+
+.tt-hint {
+    color:#a6a6a6;
+}
+
+.twitter-typeahead {
+    display:block; !important
+
+}
