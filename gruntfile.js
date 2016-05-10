@@ -13,7 +13,7 @@ module.exports = function (grunt) {
                         src: ['fonts/**'],
                         dest: 'public/assets/',
                         expand: true
-                    },
+                    }
                 ]
             },
             fontawesome: {
@@ -24,7 +24,7 @@ module.exports = function (grunt) {
                         src: ['fonts/**'],
                         dest: 'public/assets/',
                         expand: true
-                    },
+                    }
                 ]
             }// ,
             // jquery: {
@@ -94,8 +94,8 @@ module.exports = function (grunt) {
             site: {
                 src: 'public/assets/js/site.js',
                 dest: 'public/assets/js/site.min.js'
-            },
-        },
+            }
+        }
     });
 
     // Load plugins.
