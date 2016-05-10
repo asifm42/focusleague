@@ -49,17 +49,37 @@
             <tr>
             @endif
                 @if(auth()->user()->isAdmin())
-                    @if ($player->captain)
-                    <td><a title="{{ $player->user->name }}" href="{{ route('users.show', $player->user->id) }}">{{ $player->user->getNicknameOrShortName() }}</a>&nbsp;&nbsp;<i class="fa fa-star text-warning"></i></td>
-                    @else
-                    <td><a title="{{ $player->user->name }}" href="{{ route('users.show', $player->user->id) }}">{{ $player->user->getNicknameOrShortName() }}</a></td>
-                    @endif
+                    <td>
+                        <a title="{{ $player->user->name }}" href="{{ route('users.show', $player->user->id) }}">{{ $player->user->getNicknameOrShortName() }}</a>
+                        @if ($player->captain)
+                            &nbsp;&nbsp;<i class="fa fa-star text-warning"></i>
+                        @endif
+                        @if (!empty($player->note))
+                            &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    data-container="body"
+                                    data-trigger="focus click hover"
+                                    data-html="true"
+                                    data-title="{{ $player->note }}"></i>
+                        @endif
+                    </td>
                 @else
-                    @if ($player->captain)
-                    <td><span title="{{ $player->user->name }}">{{ $player->user->getNicknameOrShortName() }}</span>&nbsp;&nbsp;<i class="fa fa-star fa-fw text-warning"></i></td>
-                    @else
-                    <td><span title="{{ $player->user->name }}">{{ $player->user->getNicknameOrShortName() }}</span></td>
-                    @endif
+                    <td>
+                        <span title="{{ $player->user->name }}">{{ $player->user->getNicknameOrShortName() }}</span>
+                        @if ($player->captain)
+                            &nbsp;&nbsp;<i class="fa fa-star fa-fw text-warning"></i>
+                        @endif
+                        @if (!empty($player->note) && ($player->user->id === auth()->user()->id) )
+                            &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    data-container="body"
+                                    data-trigger="focus click hover"
+                                    data-html="true"
+                                    data-title="{{ $player->note }}"></i>
+                        @endif
+                    </td>
                 @endif
                 @if(isset($showDivisions) && $showDivisions === true)
                     <td class="text-center">
@@ -122,9 +142,32 @@
                 <tr>
                 @endif
                     @if(auth()->user()->isAdmin())
-                        <td><a title="{{ $sub->user->name }}" href="{{ route('users.show', $sub->user->id) }}">{{ $sub->user->getNicknameOrShortName() }}</a></td>
+                        <td>
+                            <a title="{{ $sub->user->name }}" href="{{ route('users.show', $sub->user->id) }}">{{ $sub->user->getNicknameOrShortName() }}</a>
+
+                        @if (!empty($sub->note))
+                            &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    data-container="body"
+                                    data-trigger="focus click hover"
+                                    data-html="true"
+                                    data-title="{{ $sub->note }}"></i>
+                        @endif
+                        </td>
                     @else
-                        <td><span title="{{ $sub->user->name }}">{{ $sub->user->getNicknameOrShortName() }}</span></td>
+                        <td>
+                            <span title="{{ $sub->user->name }}">{{ $sub->user->getNicknameOrShortName() }}</span>
+                            @if (!empty($sub->note) && ($sub->user->id === auth()->user()->id) )
+                                &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        data-container="body"
+                                        data-trigger="focus click hover"
+                                        data-html="true"
+                                        data-title="{{ $sub->note }}"></i>
+                            @endif
+                        </td>
                     @endif
 
                     @if(isset($showDivisions) && $showDivisions === true)

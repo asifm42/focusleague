@@ -20,9 +20,33 @@
             <tr>
             @endif
                 @if(auth()->user()->isAdmin())
-                    <td><a title="{{ $signup->name }}" href="{{ route('users.show', $signup->id) }}">{{ $signup->getNicknameOrShortName() }}</a></td>
+                    <td>
+                        <a title="{{ $signup->name }}" href="{{ route('users.show', $signup->id) }}">{{ $signup->getNicknameOrShortName() }}</a>
+
+                        @if (!empty($signup->pivot->note))
+                            &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    data-container="body"
+                                    data-trigger="focus click hover"
+                                    data-html="true"
+                                    data-title="{{ $signup->pivot->note }}"></i>
+                        @endif
+
+                    </td>
                 @else
-                    <td><span title="{{ $signup->name }}">{{ $signup->getNicknameOrShortName() }}</span></td>
+                    <td>
+                        <span title="{{ $signup->name }}">{{ $signup->getNicknameOrShortName() }}</span>
+                        @if (!empty($signup->pivot->note) && ($signup->id === auth()->user()->id) )
+                            &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    data-container="body"
+                                    data-trigger="focus click hover"
+                                    data-html="true"
+                                    data-title="{{ $signup->pivot->note }}"></i>
+                        @endif
+                    </td>
                 @endif
                 @if(isset($showDivisions) && $showDivisions === true)
                     <td class="text-center">

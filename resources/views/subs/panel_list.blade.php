@@ -15,6 +15,16 @@
                     @if(auth()->user()->isAdmin())
                         <li>
                             <a title="{{ $sub->name }}" href="{{ route('users.show', $sub->id) }}">{{ $sub->getNicknameOrShortName() }}</a>
+
+                            @if (!empty($sub->pivot->note))
+                                &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        data-container="body"
+                                        data-trigger="focus click hover"
+                                        data-html="true"
+                                        data-title="{{ $sub->pivot->note }}"></i>
+                            @endif
                             @if ($sub->pivot->team_id)
                                 <span class="pull-right"><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">{{ ucwords($cycle->teams->find($sub->pivot->team_id)->nameAndDivision()) }}</a></span>
                             @else
@@ -24,6 +34,16 @@
                     @else
                         <li>
                             <span title="{{ $sub->name }}"=>{{$sub->getNicknameOrShortName()}}</span>
+
+                            @if (!empty($sub->pivot->note) && ($sub->id === auth()->user()->id) )
+                                &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        data-container="body"
+                                        data-trigger="focus click hover"
+                                        data-html="true"
+                                        data-title="{{ $sub->pivot->note }}"></i>
+                            @endif
                             @if ($sub->pivot->team_id)
                                 <span class="pull-right">{{ ucwords($cycle->teams->find($sub->pivot->team_id)->name) }}</span>
                             @else

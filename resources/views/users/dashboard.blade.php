@@ -41,7 +41,7 @@
                     <div class="panel-body">
 
                         <dl class="horizontal">
-                            <dt>Name:</dt>
+                            <dt>Name</dt>
                             <dd>{{ $current_cycle->name }}</dd>
                             <dt>Format</dt>
                             <dd>{{ $current_cycle->format }}</dd>
@@ -66,7 +66,7 @@
                                         @foreach($current_cycle->weeks as $key=>$week)
                                             <th class="text-center">Wk{{ $key+1 }}</th>
                                         @endforeach
-                                        <th class="text-center">Will captain?</th>
+                                        <th class="text-center">Will capt?</th>
                                     </tr>
                                     <tr>
 
@@ -104,6 +104,13 @@
                                             @endif
                                         </td>
                                     </tr>
+                                    @if (!empty($current_cycle_signup->pivot->note))
+                                        <tr>
+                                            <td colspan="6">
+                                                <i class="fa fa-sticky-note text-warning"></i>&nbsp;&nbsp;{{ $current_cycle_signup->pivot->note }}
+                                            </td>
+                                        </tr>
+                                    @endif
                                 </table>
                                 @if ($current_cycle->status() === 'SIGNUP_OPEN')
                                     <a class="btn btn-default btn-block" href="{{ route('cycle.signup.edit', $current_cycle->id) }}">Edit sign up</a>
