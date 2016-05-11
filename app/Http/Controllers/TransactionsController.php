@@ -28,9 +28,15 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($id = null)
     {
-        $data['user'] = $user = User::findOrFail($id);
+        if (is_null($id)){
+            $user = auth()->user();
+        } else {
+            $user = User::findOrFail($id);
+        }
+
+        $data['user'] = $user;
         $data['transactions'] = $user->transactions;
         $data['balance'] = number_format($user->getBalance(), 2, '.', ',');
 
@@ -77,7 +83,7 @@ class TransactionsController extends Controller
 
         flash()->success('Transaction posted');
 
-        return redirect()->route('balance.details', $transaction->user_id);
+        return redirect()->route('users.balance', $transaction->user_id);
     }
 
     /**
@@ -132,7 +138,7 @@ class TransactionsController extends Controller
 
         flash()->success('Transaction updated');
 
-        return redirect()->route('balance.details', $transaction->user_id);
+        return redirect()->route('users.balance', $transaction->user_id);
     }
 
     /**

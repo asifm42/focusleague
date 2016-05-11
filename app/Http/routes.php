@@ -168,7 +168,7 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
      * Transaction routes
      *
      */
-    Route::get(     'user/{id}/balance',      ['as' => 'balance.details', 'uses' => 'TransactionsController@index']);
+    Route::get(     'balance',      ['as' => 'balance.details', 'uses' => 'TransactionsController@index']);
 
     /*
      * Sub Signup Routes
@@ -187,6 +187,7 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     Route::get(     'users',                ['as' => 'users.list', 'uses' => 'UsersController@index']);
     Route::get(     'users/{id}',           ['as' => 'users.show', 'uses' => 'UsersController@show']);
     Route::get(     'delinquents',          ['as' => 'users.delinquent', 'uses' => 'UsersController@showDelinquentUsers']);
+    Route::get(     'user/{id}/balance',    ['as' => 'users.balance', 'uses' => 'TransactionsController@index']);
 
     /*
      * Posts routes

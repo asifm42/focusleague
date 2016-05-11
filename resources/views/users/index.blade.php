@@ -33,7 +33,7 @@
                                 <td>{{ $user->cell_number }}</td>
                                 <td>{{ $user->gender }}</td>
                                 <td>{{ $user->birthday }}</td>
-                                <td class="text-right"><a href="{{ route('balance.details', $user->id) }}">{{ $user->getBalanceString() }}</a></td>
+                                <td class="text-right"><a href="{{ route('users.balance', $user->id) }}">{{ $user->getBalanceString() }}</a></td>
                             </tr>
                         @endforeach
                     </table>

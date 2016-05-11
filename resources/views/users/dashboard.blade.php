@@ -32,7 +32,7 @@
                             <h6>You currently have a credit of ${{ number_format(abs($balance), 2, '.',',') }}.</h6>
                             <h6>It will be applied towards your next charge.</h6>
                         @endif
-                        <a href="{{ route('balance.details', $user->id) }}" class="btn btn-default btn-block">See balance details</a>
+                        <a href="{{ route('balance.details') }}" class="btn btn-default btn-block">See balance details</a>
                     </div>
                 </div>
             @if(!empty($current_cycle))
