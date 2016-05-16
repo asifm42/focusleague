@@ -32,11 +32,11 @@
 
 
 Route::get('/smstest', function () {
-    $user = App\Models\User::find(1);
-    Mail::send(['text' => 'emails.sms'],[], function ($m) use ($user) {
-        $m->from('hello@focusleague.com', 'focusleague.com');
-
-        $m->to('8326406042@tmomail.net', $user->name);
+    $user = App\Models\User::find(2);
+    Mail::send(['text' => 'emails.sms'],[], function ($msg) use ($user) {
+        $msg->from('noreply@focusleague.com', 'focusleague.com')
+            ->subject('Test Msg')
+            ->to('8323537617@tmomail.net', 'Nicky');
     });
     return 'success';
 });
