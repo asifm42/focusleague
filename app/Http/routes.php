@@ -31,15 +31,15 @@
 // });
 
 
-// Route::get('/smstest', function () {
-//     $user = App\Models\User::find(1);
-//     Mail::send('emails.reminder',[], function ($m) use ($user) {
-//         $m->from('hello@focusleague.com', 'Focusleague.com');
+Route::get('/smstest', function () {
+    $user = App\Models\User::find(1);
+    Mail::send(['text' => 'emails.sms'],[], function ($m) use ($user) {
+        $m->from('hello@focusleague.com', 'focusleague.com');
 
-//         $m->to('8326406042@tmomail.net', $user->name);
-//     });
-//     return 'success';
-// });
+        $m->to('8326406042@tmomail.net', $user->name);
+    });
+    return 'success';
+});
 
 /*
 |--------------------------------------------------------------------------
