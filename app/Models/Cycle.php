@@ -150,7 +150,7 @@ class Cycle extends Model
 
         // if today is tuesday, then look for a week with today's date
         // if not, then get the next tuesday
-        if($now->dayOfWeek == Carbon::MONDAY) {
+        if($now->dayOfWeek == Carbon::TUESDAY) {
             $searchDate = $now->format("Y-m-d").'%';
         } else {
             $searchDate = $now->next(Carbon::TUESDAY)->format("Y-m-d").'%';
