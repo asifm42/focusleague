@@ -13,14 +13,18 @@
                     <h5>Fostering Organized Competitive Ultimate Series</h5>
                     <!-- <h5><span class = "emphasize">F</span>ostering <span class = "emphasize">O</span>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</h5> -->
                     @if($current_cycle && $current_cycle->gameToday())
-                    <div class="jumbotron" style="background-color: #ffff99;" >
-                        <h4>Game Status for {{ Carbon::today()->format("l, F jS") }}</h4>
-                        @if($current_cycle->currentWeek()->isRainedOut())
-                        <p>Games are canceled due to weather.</p>
-                        @else
-                        <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
-                        @endif
-                    </div>
+                        <div class="jumbotron" style="background-color: #ffff99;" >
+                            <h4>Game Status for {{ Carbon::today()->format("l, F jS") }}</h4>
+                            @if($current_cycle->currentWeek()->isRainedOut())
+                                <p>Games are canceled due to weather.</p>
+                            @else
+                                <p><strong>Games are ON!</strong> We are on the turf field, so the game will be ON even if the grass fields are closed. We have a very low probability of cancelling due to lightning.</p>
+                                <p>HSP will communicate lightning closure/delay via their <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Please check that or here before leaving for the fields.</p>
+                            {{--
+                                <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
+                            --}}
+                            @endif
+                        </div>
                     @endif
                     <h6>Tuesdays, 8p-10p, at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3959319,15z/data=!4m2!3m1!1s0x0:0xfb9729c16219059c">Houston Sports Park</a></h6>
 
@@ -55,7 +59,11 @@
                         @if($current_cycle->currentWeek()->isRainedOut())
                         <p>Games are canceled due to weather.</p>
                         @else
-                        <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
+                                <p><strong>Games are ON!</strong> We are on the turf field, so the game will be ON even if the grass fields are closed. We have a very low probability of cancelling due to lightning.</p>
+                                <p>HSP will communicate lightning closure/delay via their <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Please check that or here before leaving for the fields.</p>
+                            {{--
+                                <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
+                            --}}
                         @endif
                     </div>
                     @endif
