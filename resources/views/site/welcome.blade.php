@@ -41,7 +41,7 @@
                     @else
                         @if($current_cycle && $current_cycle->isSignupOpen())
                             <h5 class="text-primary">Sign up for Cycle {{ $current_cycle->name }} is now open!</h5>
-                        @else
+                        @elseif ($current_cycle)
                             <h5 class="text-info">Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.</h5>
                         @endif
                         <p><a href="{{ route('sessions.create', 2) }}" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a></p>
@@ -82,7 +82,7 @@
                     @else
                         @if($current_cycle && $current_cycle->isSignupOpen())
                             <h4 class="text-primary">Sign up for Cycle {{ $current_cycle->name }} is now open!</h4>
-                        @else
+                        @elseif ($current_cycle)
                             <h4 class="text-info">Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.</h4>
                         @endif
                         <p><a href="{{ route('sessions.create', 2) }}" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a></p>
