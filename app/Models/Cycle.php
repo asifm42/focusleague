@@ -146,17 +146,11 @@ class Cycle extends Model
      */
     public function currentWeek()
     {
-        $now = Carbon::now();
+        $thisTuesday = new Carbon('this tuesday');
+        $searchDate = $thisTuesday->format("Y-m-d").'%';
+        $currentWeek = $this->weeks()->where('starts_at', 'like', $searchDate)->first();
 
-        // if today is tuesday, then look for a week with today's date
-        // if not, then get the next tuesday
-        if($now->dayOfWeek == Carbon::TUESDAY) {
-            $searchDate = $now->format("Y-m-d").'%';
-        } else {
-            $searchDate = $now->next(Carbon::TUESDAY)->format("Y-m-d").'%';
-        }
-
-        return $this->weeks()->where('starts_at', 'like', $searchDate)->first();
+        return $currentWeek;
     }
 
     /**
