@@ -20,7 +20,7 @@ class SendTeamAnnouncementEmail extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Sends an email to everyone who was placed on a team informing them which team they are on and who their captain is.';
 
     /**
      * Create a new command instance.
