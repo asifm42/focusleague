@@ -99,13 +99,13 @@
                         </p>
                     @endif
 
-                    @include('site.schedule')
-
                     @if($next_cycle)
                         <h5 class="text-info">
                             Registration for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!
                         </h5>
                     @endif
+
+                    @include('site.schedule')
                 </div>
                 <div class="text-center hidden-xs hidden-sm">
                     <div>
