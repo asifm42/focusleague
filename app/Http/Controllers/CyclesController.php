@@ -20,6 +20,8 @@ class CyclesController extends Controller
 
         $data['current_cycle'] = Cycle::current_cycle();
 
+        $data['next_cycle'] = Cycle::next_cycle();
+
         return view('cycles.index', $data);
     }
 
@@ -126,4 +128,5 @@ class CyclesController extends Controller
     {
         //
     }
+
 }
