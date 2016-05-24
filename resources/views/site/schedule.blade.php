@@ -48,6 +48,12 @@
             <li class="list-group-item">
                 Tuesday, August 23rd - Cycle 2016-05 Wk4
             </li>
+            <li class="list-group-item">
+                Tuesday, August 30th - TBD
+            </li>
+            <li class="list-group-item">
+                Sept - TBD
+            </li>
         </ul>
     </div>
 </div>
