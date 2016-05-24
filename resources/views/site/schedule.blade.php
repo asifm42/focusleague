@@ -10,13 +10,13 @@
                 </h6>
             </li>
             <li class="list-group-item">
-                Tuesday, May 24th - NO game
+                <span class="text-danger">Tuesday, May 24th - No game</span>
             </li>
             <li class="list-group-item list-group-item-info">
                 Wednesday, May 25th - Cycle 2016-04 Registration Opens
             </li>
             <li class="list-group-item">
-                Tuesday, May 31st - NO game
+                <span class="text-danger">Tuesday, May 31st - No game</span>
             </li>
             <li class="list-group-item">
                 Tuesday, June 7th - Cycle 2016-04 Wk1
