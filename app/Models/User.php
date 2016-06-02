@@ -197,6 +197,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the sms address
+     *
+     * @return string
+     */
+    public function getSmsAddress() {
+        $numbers_only = preg_replace("/[^\d]/", "", $this->cell_number);
+        $email_gateway = config('sms.mobile_carriers.' . $this->mobile_carrier . '.email_gateway');
+        return $numbers_only . '@' . $email_gateway;
+    }
+
+
+    /**
      * Set the user's email as confirmed
      *
      * @return bool

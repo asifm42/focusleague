@@ -1,1 +1,1 @@
-This is a test text message from FOCUS.
+{{ $msg }} (do not reply)

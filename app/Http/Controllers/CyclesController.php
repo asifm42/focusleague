@@ -129,4 +129,29 @@ class CyclesController extends Controller
         //
     }
 
+    /**
+     * Sends an SMS to all users who are playing in the current cycle
+     * that have provided a valid mobile wireless carrier.
+     *
+     * @param  string  $subject
+     * @param  string  $message
+     * @return \Illuminate\Http\Response
+     */
+    public function sendSmsToPlayers(Request $request)
+    {
+        // create list of players
+        $cycle = Cycle::current()->get();
+        // filter out the others
+        // go through each and send sms
+
+        // $data['msg'] = $request->input('message');
+        // $subject = $request->input('subject');
+        // $user = \App\Models\User::find(1);
+        // \Mail::queue(['text' => 'emails.sms'], $data, function ($sms) use ($user, $subject) {
+        //     $sms->from('support@focusleague.com', 'FOCUS League')
+        //         ->subject($subject)
+        //         ->to($user->getSmsAddress(), $user->getNicknameOrShortName());
+        // });
+        // return 'success';
+    }
 }
