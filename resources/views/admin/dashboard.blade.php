@@ -27,13 +27,9 @@
                             <dd>{{ $current_cycle->status() }}</dd>
                         </dl>
                         <a href="{{ route('admin.cycle.details', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Admin overview</a>
-                        @if (!$current_cycle->teams_publised)
-                            <a href="{{ route('cycle.teams.create', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Team Builder</a>
+                            <a href="{{ route('cycle.teams.builder', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Team Builder</a>
+                        @if (! $current_cycle->teams_publised)
                             <a href="{{-- {{ route('games.create', $current_cycle->id) }} --}}" class="btn btn-default btn-lg btn-block">Schedule Builder</a>
-                            <a href="{{ route('cycle.teams.publish', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Publish teams</a>
-                        @else
-                            <a href="{{ route('cycle.teams.unpublish', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Place a sub</a>
-                            <a href="{{ route('cycle.teams.unpublish', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Unpublish teams</a>
                         @endif
                     </div>
                 </div>

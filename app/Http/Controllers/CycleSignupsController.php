@@ -183,6 +183,32 @@ class CycleSignupsController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function apiUpdate(Request $request, $id)
+    {
+        $cycleSignup = CycleSignup::findOrFail($id);
+
+        if ($request->has('team_id')) {
+            $cycleSignup->team_id = $request->input('team_id');
+        }
+
+        if ($request->has('captain')) {
+            $cycleSignup->captain = $request->input('captain');
+        }
+
+        $cycleSignup->save();
+
+        \Debugbar::info($request->all());
+
+       return response()->json($cycleSignup);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

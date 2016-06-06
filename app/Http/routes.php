@@ -41,6 +41,9 @@ Route::get('/smstest', function () {
     return 'success';
 });
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -93,6 +96,7 @@ Route::group(['middleware' => ['web']], function() {
         throw new TokenMismatchException();
         return view('site.welcome');
     });
+
 });
 
 /*
@@ -179,8 +183,6 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     // Route::patch(   'weeks/{id}/subs/signup',       ['as' => 'sub.update', 'uses' => 'SubsController@update']);
     // Route::put(     'weeks/{id}/subs/signup',       ['as' => 'sub.put', 'uses' => 'SubsController@update']);
     // Route::delete(  'weeks/{id}/subs/signup',       ['as' => 'sub.destroy', 'uses' => 'SubsController@destroy']);
-
-
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function() {
@@ -206,13 +208,23 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     Route::get(     'admin/cycles/{id}',            ['as' => 'admin.cycle.details', 'uses' => 'AdminsController@cycleDetails']);
 
     /*
-     * Cycle routes
+     * Cycle Team routes
      *
      */
-    Route::get(     'cycle/{id}/teams',             ['as' =>'cycle.teams.show', 'uses' => 'CycleTeamsController@show']);
-    Route::get(     'cycle/{id}/teams/create',      ['as' =>'cycle.teams.create', 'uses' => 'CycleTeamsController@create']);
-    Route::post(    'cycle/{id}/teams/publish',     ['as' =>'cycle.teams.publish', 'uses' => 'CycleTeamsController@publish']);
-    Route::post(    'cycle/{id}/teams/unpublish',   ['as' =>'cycle.teams.unpublish', 'uses' => 'CycleTeamsController@unpublish']);
+    Route::get(     'cycles/{id}/teams',        ['as' => 'cycle.teams.builder', 'uses' => 'CycleTeamsController@index']);
+    Route::get(     'cycles/{id}/teams/announce',     ['as' => 'cycle.teams.announce', 'uses' => 'CycleTeamsController@announce']);
+    Route::get(     'teams',                    ['as' => 'teams.list', 'uses' => 'TeamsController@index']);
+    Route::get(     'teams/create',             ['as' => 'teams.create', 'uses' => 'TeamsController@create']);
+    Route::post(    'teams',                    ['as' => 'teams.store', 'uses' => 'TeamsController@store']);
+    Route::get(     'teams/{id}/edit',          ['as' => 'teams.edit', 'uses' => 'TeamsController@edit']);
+    Route::patch(   'teams/{id}',               ['as' => 'teams.update', 'uses' => 'TeamsController@update']);
+    Route::put(     'teams/{id}',               ['as' => 'teams.put', 'uses' => 'TeamsController@update']);
+    Route::delete(  'teams/{id}',               ['as' => 'teams.destroy', 'uses' => 'TeamsController@destroy']);
+
+    // Route::get(     'api/teams/{id}',           ['as' =>'teams.show', 'uses' => 'TeamsController@show']);
+
+    Route::get(    'cycles/{id}/teams/publish',                 ['as' =>'cycle.teams.publish', 'uses' => 'CycleTeamsController@publish']);
+    Route::get(    'cycles/{id}/teams/unpublish',               ['as' =>'cycle.teams.unpublish', 'uses' => 'CycleTeamsController@unpublish']);
 
     /*
      * Transactions routes
@@ -232,7 +244,6 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     Route::get(     'subs/{id}/team',               ['as' => 'subs.teamPlacementForm', 'uses' => 'SubsController@teamPlacementForm']);
     Route::post(    'subs/{id}/team',               ['as' => 'subs.placeOnATeam', 'uses' => 'SubsController@placeOnATeam']);
     Route::patch(    'subs/{id}/team',               ['as' => 'subs.updateTeamPlacement', 'uses' => 'SubsController@placeOnATeam']);
-
 
     /*
      * Admin Ultimate History Routes
@@ -254,6 +265,9 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     Route::patch(   'cyclesignups/{id}',         ['as' => 'cyclesignups.update', 'uses' => 'CycleSignupsController@update']);
     Route::put(     'cyclesignups/{id}',         ['as' => 'cyclesignups.put', 'uses' => 'CycleSignupsController@update']);
     // Route::delete(  'cyclesignups/{id}',         ['as' => 'cyclesignups.destroy', 'uses' => 'CycleSignupsController@destroy']);
+});
 
 
+Route::group(['middleware' => ['api']], function() {
+    Route::put(     'api/cyclesignups/{id}',         ['as' => 'api.cyclesignups.put', 'uses' => 'CycleSignupsController@apiUpdate']);
 });
