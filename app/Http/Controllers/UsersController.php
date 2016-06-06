@@ -27,6 +27,34 @@ class UsersController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $data['users'] = $users = User::all();
+
+        return view('users.index', $data);
+    }
+
+    /**
+     * Display a listing of the users who have a positive balance.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showDelinquentUsers()
+    {
+        $users = User::all();
+
+        $data['users'] = $users->filter(function ($item) {
+            return $item->getBalance() > 0;
+        });
+
+        return view('users.index', $data);
+    }
+
+    /**
      * Show the create form
      *
      * @return View
@@ -71,6 +99,7 @@ class UsersController extends Controller
         $data['next_cycle'] = Cycle::next_cycle();
         $data['current_cycle_sub_weeks'] = [];
         $data['next_cycle_sub_weeks'] = [];
+        $data['balance'] = number_format($user->getBalance(), 2, '.', ',');
         if ($data['current_cycle']) {
             $data['current_cycle_signup'] = $user->current_cycle_signup();
 
@@ -113,6 +142,7 @@ class UsersController extends Controller
         $data['next_cycle'] = Cycle::next_cycle();
         $data['current_cycle_sub_weeks'] = [];
         $data['next_cycle_sub_weeks'] = [];
+        $data['balance'] = $user->getBalance();
         if ($data['current_cycle']) {
             $data['current_cycle_signup'] = $user->current_cycle_signup();
 

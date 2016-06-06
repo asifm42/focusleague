@@ -220,7 +220,15 @@
                         </div>
                         <div id="faq_10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_10">
                             <div class="panel-body">
-                                <p>We will be accepting Paypal, Chase Quickpay, Square Cash, Check or cash. More details to follow soon.</p>
+     <p>We accept the following methods of payment (listed in order of preference). Please put "Cycle *name* fees" in the note if possible.</p>
+    <ul>
+        <li>Paypal to asifm42&commat;gmail&period;com</li>
+        <li>Chase Quickpay to asifm42&commat;gmail&period;com</li>
+        <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
+        <li>Check to "Asif Mohammed"</li>
+        <li><strong>Exact cash</strong> to Asif Mohammed, Nick Carranza or your team captain at the fields. Please <a href="{{ route('contact.create') }}">contact us</a> with the amount and who you paid so we can credit your balance properly.</li>
+    </ul> {{--
+                                <p>We will be accepting Paypal, Chase Quickpay, Square Cash, Check or cash. More details to follow soon.</p>--}}
                             </div>
                         </div>
                     </div>

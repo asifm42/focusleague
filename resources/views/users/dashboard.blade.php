@@ -12,13 +12,36 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-push-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Balance</div>
+                    <div class="panel-body">
+                        @if ($balance > 0)
+                            <h6>You currently owe ${{ $balance }}.</h6>
+                            <h6>You can pay via the following methods:</h6>
+                            <ul>
+                                <li>Paypal to asifm42@gmail.com</li>
+                                <li>Chase Quickpay to asifm42@gmail.com</li>
+                                <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
+                                <li>Check to "Asif Mohammed"</li>
+                                <li>Cash to Asif at the fields</li>
+                            </ul>
+                        @elseif ($balance == 0)
+                            <h6>Your balance is $0.00.</h6>
+                            <h6>Thank you for being current!</h6>
+                        @elseif ($balance < 0)
+                            <h6>You currently have a credit of ${{ number_format(abs($balance), 2, '.',',') }}.</h6>
+                            <h6>It will be applied towards your next charge.</h6>
+                        @endif
+                        <a href="{{ route('balance.details') }}" class="btn btn-default btn-block">See balance details</a>
+                    </div>
+                </div>
             @if(!empty($current_cycle))
                 <div class="panel panel-default">
                     <div class="panel-heading">Current Cycle</div>
                     <div class="panel-body">
 
                         <dl class="horizontal">
-                            <dt>Name:</dt>
+                            <dt>Name</dt>
                             <dd>{{ $current_cycle->name }}</dd>
                             <dt>Format</dt>
                             <dd>{{ $current_cycle->format }}</dd>
@@ -36,22 +59,14 @@
                                 @else
                                     <dd>You are on team: <em>{{ucwords($current_cycle->teams->find($current_cycle_signup->pivot->team_id)->name)}}</em></dd>
                                 @endif
-{{--
-                                @if ($current_cycle_signup->pivot->will_captain == true)
-                                    <dd>You are willing to captain.</dd>
-                                @else
-                                    <dd>You are NOT willing to captain.</dd>
-                                @endif
---}}
                                 <table class="table table-condensed table-striped">
                                     <tr>
                                         <th class="text-center">Div1</th>
                                         <th class="text-center">Div2</th>
-                                        <th class="text-center">Wk1</th>
-                                        <th class="text-center">Wk2</th>
-                                        <th class="text-center">Wk3</th>
-                                        <th class="text-center">Wk4</th>
-                                        <th class="text-center">Will captain?</th>
+                                        @foreach($current_cycle->weeks as $key=>$week)
+                                            <th class="text-center">Wk{{ $key+1 }}</th>
+                                        @endforeach
+                                        <th class="text-center">Will capt?</th>
                                     </tr>
                                     <tr>
 
@@ -89,6 +104,13 @@
                                             @endif
                                         </td>
                                     </tr>
+                                    @if (!empty($current_cycle_signup->pivot->note))
+                                        <tr>
+                                            <td colspan="6">
+                                                <i class="fa fa-sticky-note text-warning"></i>&nbsp;&nbsp;{{ $current_cycle_signup->pivot->note }}
+                                            </td>
+                                        </tr>
+                                    @endif
                                 </table>
                                 @if ($current_cycle->status() === 'SIGNUP_OPEN')
                                     <a class="btn btn-default btn-block" href="{{ route('cycle.signup.edit', $current_cycle->id) }}">Edit sign up</a>
@@ -97,7 +119,7 @@
                             @elseif($current_cycle_sub_weeks)
                                 <dd>You are signed up as a sub for the following weeks</dd>
                                 @foreach($current_cycle_sub_weeks as $sub_week)
-                                    <dd><a href="{{ route('sub.edit', $sub_week['deets']->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
+                                    <dd><a href="{{ route('sub.edit', $sub_week['deets']->pivot->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
                                 @endforeach
                                 <a class="btn btn-default btn-block" href="{{ route('sub.create', $current_cycle->id) }}">Sign up as sub</a>
                                 <a class="btn btn-info btn-block" href="{{ route('cycles.view', $current_cycle->id) }}">Cycle Details</a>
@@ -250,6 +272,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Ultimate History - <a href="{{ route('users.ultimate_history.edit', $user->id) }}">Edit</a></div>
                     <div class="panel-body">
+                        @if ($user->ultimateHistory)
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <h6>Club affiliation</h6>
@@ -276,12 +299,13 @@
                                 <p>{{ $user->ultimateHistory->throw_to_improve }}</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="panel panel-default hidden">
-                    <div class="panel-heading">Balance</div>
-                    <div class="panel-body">
-                        Account Balance
+                        @else
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    No history found.
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

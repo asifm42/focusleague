@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon;
 
 class Cycle extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that should be mutated to dates.
      *
@@ -65,11 +67,14 @@ class Cycle extends Model
 
         if ($now->lt($this->signup_opens_at)){
             return 'SIGNUP_OPENS_LATER';
-        } elseif ($now->gt($this->signup_opens_at) && $now->lt($this->signup_closes_at)) {
+        // } elseif ($now->gt($this->signup_opens_at) && $now->lt($this->signup_closes_at)) {
+        } elseif ($now->between($this->signup_opens_at, $this->signup_closes_at)) {
             return 'SIGNUP_OPEN';
-        } elseif ($now->gt($this->signup_closes_at) && $now->lt($this->starts_at)) {
+        // } elseif ($now->gt($this->signup_closes_at) && $now->lt($this->starts_at)) {
+        } elseif ($now->between($this->signup_closes_at, $this->starts_at)) {
             return 'SIGNUP_CLOSED';
-        } elseif ($now->gt($this->starts_at) && $now->lt($this->ends_at)) {
+        // } elseif ($now->gt($this->starts_at) && $now->lt($this->ends_at)) {
+        } elseif ($now->between($this->starts_at, $this->ends_at)) {
             return 'IN_PROGRESS';
         } elseif ($now->gt($this->ends_at)) {
             return 'COMPLETED';
@@ -102,13 +107,12 @@ class Cycle extends Model
     }
 
     /**
-     * Scope a query to the current cycle.
+     * Get the next cycle.
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function next_cycle()
     {
-
         $now = Carbon::now();
         return Cycle::where('signup_opens_at', '>', $now)
                     ->orderBy('signup_opens_at', 'asc')->first();
@@ -122,6 +126,43 @@ class Cycle extends Model
     public function areTeamsPublished()
     {
         return $this->teams_published;
+    }
+
+    /**
+     * Checks if cycle sign-up is open
+     *
+     * @return bool
+     */
+    public function isSignupOpen()
+    {
+        $now = Carbon::now();
+        return $now->between($this->signup_opens_at, $this->signup_closes_at);
+    }
+
+    /**
+     * Get the current week
+     *
+     * @return App\Models\Week
+     */
+    public function currentWeek()
+    {
+        $thisTuesday = new Carbon('this tuesday');
+        $searchDate = $thisTuesday->format("Y-m-d").'%';
+        $currentWeek = $this->weeks()->where('starts_at', 'like', $searchDate)->first();
+
+        return $currentWeek;
+    }
+
+    /**
+     * Checks if there is a game today.
+     *
+     * @return mixed|App\Models\Week|null
+     */
+    public function gameToday()
+    {
+        $searchDate = Carbon::today()->format("Y-m-d").'%';
+
+        return $this->weeks()->where('starts_at', 'like', $searchDate)->first();
     }
 
 }

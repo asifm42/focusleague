@@ -9,11 +9,22 @@
     $week_already_subbing = [];
     foreach($cycle->weeks as $week) {
         $sub_deets = $week->subs->find($user->id);
-        if ($sub_deets) {
-            $week_already_subbing[] = ['week' => $week, 'sub_deets' => $sub_deets];
-        } else {
-            $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+        if ($edit === true)
+            if ($sub->week_id === $week->id) {
+                $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+            } elseif ($sub_deets) {
+                $week_already_subbing[] = ['week' => $week, 'sub_deets' => $sub_deets];
+            } else {
+                $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+            }
+        else {
+            if ($sub_deets) {
+                $week_already_subbing[] = ['week' => $week, 'sub_deets' => $sub_deets];
+            } else {
+                $week_options[$week->id] = $week->starts_at->toFormattedDateString();
+            }
         }
+
     }
 ?>
     <div class="panel-body">
@@ -31,7 +42,7 @@
         {!! Former::text('nickname')
             ->label('Player')
             ->addClass('form-control')
-            ->placeholder(auth()->user()->nickname)
+            ->placeholder($user->getNicknameOrShortname())
             ->disabled()
         !!}
         @if(count($week_already_subbing) > 0)
@@ -64,14 +75,17 @@
                 ->addClass('btn btn-primary')
                 ->value('Save')
             !!}
+            {!! Former::close() !!}
+
+            {!! Form::delete(route( 'sub.destroy', $sub->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) !!}
         @else
             {!! Former::submit()
                 ->addClass('btn btn-primary')
                 ->value('Sign up')
             !!}
+            {!! Former::close() !!}
         @endif
     </div>
-    {!! Former::close() !!}
 </div>
 
 @section('scripts')

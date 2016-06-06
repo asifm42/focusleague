@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\EditSubSignupFormRequest;
+use App\Http\Requests\SubTeamPlacementRequest;
 use App\Models\Cycle;
+use App\Models\Sub;
+use App\Models\Team;
+use App\Models\Transaction;
 use App\Models\Week;
 use App\Events\UserSignedUpAsASub;
+use Former;
 
 class SubsController extends Controller
 {
@@ -28,8 +34,17 @@ class SubsController extends Controller
      */
     public function create(Request $request, $id)
     {
+        if ($id === 'current') {
+            $cycle = Cycle::current_cycle();
+            if (!$cycle) {
+                flash()->info('Sorry, there is no current cycle at the moment.');
+
+                return redirect()->route('cycles.index');
+            }
+        } else {
+            $cycle = Cycle::findOrFail($id);
+        }
         $user = auth()->user();
-        $cycle = Cycle::findOrFail($id);
         $cycle->load('weeks', 'signups', 'weeks.subs');
 
         if ( !empty( $cycle->signups()->find($user->id) ) ){
@@ -82,9 +97,25 @@ class SubsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(EditSubSignupFormRequest $request, $id)
     {
-        //
+        $sub = Sub::findOrFail($id);
+        $sub->load('user', 'week');
+        $user = $sub->user;
+
+        $cycle = $sub->week->cycle;
+        $cycle->load('weeks', 'signups', 'weeks.subs');
+
+        if ( !empty( $cycle->signups()->find($user->id) ) ){
+            flash()->warning('You can not sign up as a sub because you are already signed up for this cycle.');
+            return redirect()->route('cycles.view', $cycle->id);
+        }
+
+        Former::populate($sub);
+        return view('subs.edit')
+            ->withCycle($cycle)
+            ->withUser($user)
+            ->withSub($sub);
     }
 
     /**
@@ -107,6 +138,72 @@ class SubsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sub = Sub::findOrFail($id);
+
+        $sub->delete();
+
+        flash()->success('Sub sign-up deleted');
+
+        return redirect()->route('users.dashboard');
     }
+
+    /**
+     * Show the team placement form for a sub
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function teamPlacementForm(Request $request, $id)
+    {
+        $sub = Sub::findOrFail($id);
+        $sub->load('user', 'week');
+        $data['sub']=$sub;
+        $data['cycle']=$sub->week->cycle;
+        $data['user']=$sub->user;
+        $data['edit']=false;
+        if ($request->isMethod('patch')) {
+            $data['edit']=true;
+        }
+        $data['cycle_teams']=$data['cycle']->teams;
+
+        return view('subs.teamPlacementForm', $data);
+    }
+
+    /**
+     * Place a sub on a team
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function placeOnATeam(SubTeamPlacementRequest $request, $id)
+    {
+        $sub = Sub::findOrFail($id);
+        $sub->load('user');
+        $team = Team::findOrFail($request->input('team_id'));
+        $sub->team()->associate($team);
+        $sub->save();
+        $sub->load('team');
+        // fire off event
+
+        $transaction = Transaction::where('cycle_id', $sub->week->cycle->id)
+                    ->where('week_id', $sub->week_id)
+                    ->where('user_id', $sub->user_id)
+                    ->where('type', 'charge')->first();
+
+        if(empty($transaction)) {
+            Transaction::create([
+                'cycle_id' => $sub->week->cycle->id,
+                'week_id' => $sub->week_id,
+                'user_id' => $sub->user_id,
+                'type' => 'charge',
+                'description' => 'Sub fee',
+                'created_by' => auth()->user()->id,
+                'date' => $sub->week->starts_at->format('Y-m-d'),
+                'amount' => config('focus_cost.cycle.sub')
+            ]);
+        }
+        flash()->success($sub->user->getNicknameOrShortName() . ' placed on Team ' . ucwords($sub->team->name) . ' as a sub.');
+        return redirect()->back();
+    }
+
 }

@@ -32,12 +32,27 @@ class CycleSignupsController extends Controller
      */
     public function create(Request $request, $id)
     {
-        $cycle = Cycle::findOrFail($id);
+        if ($id === 'current') {
+            $cycle = Cycle::current_cycle();
+            if (!$cycle) {
+                flash()->info('Sorry, there is no current cycle at the moment.');
+
+                return redirect()->route('cycles.index');
+            }
+        } else {
+            $cycle = Cycle::findOrFail($id);
+        }
         $user = auth()->user();
 
         // If user already has a signup redirect to edit form
         if ($user->cycles()->find($cycle->id)) {
             return redirect()->route('cycle.signup.edit', $cycle->id);
+        }
+
+        // if sign up is not open and user is not an admin, redirect to edit page
+        if ($cycle->status() !== "SIGNUP_OPEN" && ! $user->isAdmin()){
+            flash()->error('Sorry, sign-up is closed for this cycle. You can sign up as a sub.');
+            return redirect()->route('sub.create', $cycle->id);
         }
 
         return view('cycles.signups.create')
@@ -55,6 +70,11 @@ class CycleSignupsController extends Controller
     {
         $cycle = Cycle::findOrFail($id);
         $user = auth()->user();
+
+        // If user already has a signup redirect to edit form
+        if ($user->cycles()->find($cycle->id)) {
+            return redirect()->route('cycle.signup.edit', $cycle->id);
+        }
 
         $cycle->signups()->attach($user->id, [
             'div_pref_first'    => $request->input('div_pref_first'),
@@ -108,9 +128,17 @@ class CycleSignupsController extends Controller
             $cycle = $signup->cycle;
         }
 
+        // if sign up is not open and user is not an admin, redirect back
+        if ($cycle->status() !== "SIGNUP_OPEN" && ! $user->isAdmin()){
+            flash()->error('Sorry, editing your sign-up is not possible. Please use the contact us page to share your schedule change.');
+            return redirect()->back();
+        }
+
         if ( auth()->user()->cannot('update', $signup) ) {
             throw new UnauthorizedAccessException;
         }
+
+        // fire off event
 
         Former::populate($signup);
         return view('cycles.signups.edit')
@@ -152,6 +180,32 @@ class CycleSignupsController extends Controller
         }
 
         return redirect()->route('cycles.view', $cycle->id);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function apiUpdate(Request $request, $id)
+    {
+        $cycleSignup = CycleSignup::findOrFail($id);
+
+        if ($request->has('team_id')) {
+            $cycleSignup->team_id = $request->input('team_id');
+        }
+
+        if ($request->has('captain')) {
+            $cycleSignup->captain = $request->input('captain');
+        }
+
+        $cycleSignup->save();
+
+        \Debugbar::info($request->all());
+
+       return response()->json($cycleSignup);
     }
 
     /**

@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Week extends Model
 {
+    use TrimScalarValues, SoftDeletes;
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -79,5 +83,13 @@ class Week extends Model
                     ->withPivot('id', 'note', 'team_id')
                     ->whereNull('subs.deleted_at') // for soft deletes
                     ->withTimestamps();
+    }
+
+    public function games() {
+        return $this->hasMany('App\Models\Game');
+    }
+
+    public function isRainedOut() {
+        return $this->rained_out;
     }
 }

@@ -60,7 +60,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name($gender),
         'nickname' => $faker->unique()->firstName($gender),
-        'email' => $faker->email,
+        'email' => $faker->safeEmail,
         'confirmed' => 1,
         'confirmation_code' => null,
         'gender' => $gender,

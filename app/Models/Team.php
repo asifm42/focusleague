@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Team extends Model
 {
+    use TrimScalarValues, SoftDeletes;
     /**
      * The attributes that should be mutated to dates.
      *
@@ -33,6 +37,8 @@ class Team extends Model
 
     /**
      * Get the team's cycle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function cycle()
     {
@@ -49,9 +55,49 @@ class Team extends Model
 
     /**
      * Get the team's captains
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function captains()
     {
         return $this->hasMany('App\Models\CycleSignup')->where('captain', true);
+    }
+
+    /**
+     * Get the team's name with division in parenthesis
+     */
+    public function nameAndDivision()
+    {
+        return ucwords($this->name) . ' (' . ucwords($this->division) . ')';
+    }
+
+    /**
+     * Get the games the team is playing in
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function games()
+    {
+        return $this->belongsToMany('App\Models\Game');
+    }
+
+    /**
+     * Get the subs that have been placed on this team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function subs()
+    {
+        return $this->hasMany('App\Models\Sub');
+    }
+
+    /**
+     * Get the subs that have been placed on this team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function hasPlayer(User $user)
+    {
+        return $this->players->where('user_id', $user->id)->first();
     }
 }

@@ -18,4 +18,16 @@ class UserPolicy
     {
         //
     }
+
+    /**
+     * Determine if user listing can be viewed by the user
+     *
+     * @param  \App\Models\User            $user
+     * @param  \App\Models\UltimateHistory     $history
+     * @return bool
+     */
+    public function index()
+    {
+        return auth()->user()->admin();
+    }
 }

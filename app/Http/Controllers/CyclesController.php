@@ -16,7 +16,13 @@ class CyclesController extends Controller
      */
     public function index()
     {
-        //
+        $data['cycles'] = Cycle::all()->reverse();
+
+        $data['current_cycle'] = Cycle::current_cycle();
+
+        $data['next_cycle'] = Cycle::next_cycle();
+
+        return view('cycles.index', $data);
     }
 
     /**
@@ -48,12 +54,22 @@ class CyclesController extends Controller
      */
     public function show($id)
     {
-        $cycle = Cycle::findOrFail($id);
-        $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
+        if ($id === 'current') {
+            $cycle = Cycle::current_cycle();
+            if (!$cycle) {
+                flash()->info('Sorry, there is no current cycle at the moment.');
+
+                return redirect()->route('cycles.index');
+            }
+        } else {
+            $cycle = Cycle::findOrFail($id);
+        }
+
+        $cycle->load('signups', 'weeks', 'weeks.subs', 'weeks.games', 'signups.availability', 'teams');
 
         $data['cycle'] = $cycle;
         $data['user'] = $user = auth()->user();
-        $data['current_cycle_signup'] = $user->current_cycle_signup();
+        $data['current_cycle_signup'] = $user->cycles->find($cycle->id);
         $data['sub_weeks'] = [];
         foreach($cycle->weeks as $week){
             $sub_deets = $week->subs->find($user->id);
@@ -112,4 +128,5 @@ class CyclesController extends Controller
     {
         //
     }
+
 }

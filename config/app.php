@@ -155,6 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\FormServiceProvider::class,
 
 
         /*
@@ -166,7 +167,7 @@ return [
         // 'Chumper\Zipper\ZipperServiceProvider',
         'Vinkla\Hashids\HashidsServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
-        'Collective\Html\HtmlServiceProvider',
+        //'Collective\Html\HtmlServiceProvider',
         'Former\FormerServiceProvider',
         // 'Intervention\Image\ImageServiceProvider',
         'HieuLe\Active\ActiveServiceProvider',

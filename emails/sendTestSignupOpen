@@ -1,0 +1,11 @@
+#!/bin/bash
+curl -s --user 'api:key-0fcbdb08fd52c5216420312b59c679a4' \
+    https://api.mailgun.net/v3/mg.focusleague.com/messages \
+    -F from='FOCUS League <support@focusleague.com>' \
+    -F to='announce-test@mg.focusleague.com' \
+    -F subject='Sign-up for FOCUS League Cycle 2016-03 is now open! [test message]' \
+    -F html='<Cycle2016-03SignupOpenAnnouncement.html' \
+    -F o:tag='test' \
+    -F o:tracking=true \
+    -F o:tracking-clicks=true \
+    -F o:tracking-opens=true

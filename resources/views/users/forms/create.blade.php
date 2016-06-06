@@ -17,10 +17,12 @@
         @endif
 
         {!! Former::text('name')
+            ->label('Name')
             ->addClass('form-control')
-            ->placeholder('Required name')
+            ->placeholder('Required first & last name')
             ->autofocus('autofocus')
             ->required()
+            ->help('Please provide first and last name.')
         !!}
         {!! Former::text('nickname')
             ->addClass('form-control')
@@ -42,7 +44,7 @@
         {!! Former::text('cell_number')
             ->addClass('form-control cell_number-js')
             ->placeholder('Required cell number')
-            ->help('for last-minute text communications')
+            ->help('For last-minute text communications.')
             ->required()
         !!}
         {!! Former::select('mobile_carrier')
@@ -56,7 +58,7 @@
                 ])
             ->placeholder('Required mobile carrier')
             ->required()
-            ->help('for last-minute text communications')
+            ->help('For last-minute text communications.')
         !!}
         {!! Former::select('gender')
             ->addClass('form-control gender-js')

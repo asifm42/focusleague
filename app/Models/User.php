@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Traits\TrimScalarValues;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use TrimScalarValues;
+    use TrimScalarValues, SoftDeletes;
 
     /**
      * The attributes that should be mutated to dates.
@@ -235,10 +236,12 @@ class User extends Authenticatable
      */
     public function current_cycle_signup()
     {
-        // doesn't look like we can load here
-        // return $this->cycles()->current()->first()->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
+        $cycle = $this->cycles()->current()->first();
+        if ($cycle) {
+            $cycle->load('signups', 'weeks', 'weeks.subs','signups.availability', 'teams');
+        }
 
-        return $this->cycles()->current()->first();
+        return $cycle;
     }
 
     /**
@@ -258,9 +261,89 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Week', 'availability')
                     ->withPivot('attending')
                     ->orderBy('pivot_week_id')
+                    ->where('availability.deleted_at', null)
                     ->withTimestamps();
     }
 
+
+    /**
+     * Get the weeks the user has signed up for as sub
+     */
+    public function subs()
+    {
+        return $this->hasMany('App\Models\Sub')
+                    ->orderBy('week_id')
+                    ->withTimestamps();
+    }
+    /**
+     * Get the user's transactions
+     */
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\Transaction')
+                    ->orderBy('date')->orderBy('created_at');
+    }
+
+    /**
+     * Get the user's charges
+     */
+    public function charges()
+    {
+        return $this->transactions()->ofType('charge');
+    }
+
+    /**
+     * Get the user's payments
+     */
+    public function payments()
+    {
+        return $this->transactions()->ofType('payment');
+    }
+
+    /**
+     * Get the user's credits
+     */
+    public function credits()
+    {
+        return $this->transactions()->ofType('credit');
+    }
+
+    /**
+     * Get the user's balance
+     */
+    public function getBalance()
+    {
+        $balance = 0;
+
+        foreach ($this->transactions as $transaction){
+            switch($transaction->type){
+                case 'charge':
+                    $balance += $transaction->amount;
+                    break;
+                case 'payment':
+                case 'credit':
+                    $balance -= $transaction->amount;
+                    break;
+            }
+        }
+
+        return $balance;
+    }
+
+    /**
+     * Get the user's balance as a string with dollar sign
+     */
+    public function getBalanceString()
+    {
+        $balance = $this->getBalance();
+        $balanceStr = '$' . number_format(abs($balance), 2, '.', ',');
+
+        if ( $balance < 0 ) {
+            $balanceStr = '-' . $balanceStr;
+        }
+
+        return $balanceStr;
+    }
 
     /**
      * Get the user's ultimate history

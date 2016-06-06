@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Models\Cycle;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -16,7 +17,10 @@ class PagesController extends Controller
      */
     public function welcome()
     {
-        return view('site.welcome');
+        $data['current_cycle'] = Cycle::current_cycle();
+        $data['next_cycle'] = Cycle::next_cycle();
+
+        return view('site.welcome', $data);
     }
 
     /**
