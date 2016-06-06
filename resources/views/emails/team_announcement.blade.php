@@ -26,7 +26,7 @@
         <li>Chase Quickpay to asifm42@gmail.com</li>
         <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
         <li>Check to "Asif Mohammed"</li>
-        <li>Exact cash to Asif Mohammed, Nick Carranza or your team captain at the fields. Please shoot us an email with the amount and who you paid so we can credit your balance properly.</li>
+        <li>Exact cash to Asif Mohammed, Nick Carranza or your team captain at the fields. Please <a href="{{ route('contact.create') }}">contact us</a> with the amount and who you paid so we can credit your balance properly.</li>
     </ul>
 
     <p>More details such as your team's schedule and other teams can be found on the <a href="{{ route('cycles.view', $cycle['id']) }}">cycle details</a> page.</p>
