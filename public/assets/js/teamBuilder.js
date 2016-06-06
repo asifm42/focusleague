@@ -109,11 +109,17 @@ Vue.component('signup', {
                 var data = {};
                 data.text = team.name;
                 data.value = team.id;
-
-                content.push(data);
+                if (this.signup.gender.toLowerCase() == 'male' &&
+                    (team.division.toLowerCase() == 'mixed' || team.division.toLowerCase() == 'mens')) {
+                    content.push(data);
+                }
+                if (this.signup.gender.toLowerCase() === 'female' &&
+                    (team.division.toLowerCase() == 'mixed' || team.division.toLowerCase() == 'womens')) {
+                    content.push(data);
+                }
                 // content.push({ text: team.name, value: team.id});
                 // content+= '<option value='+team.id+'>' + team.name + '</option>';
-            });
+            }, this);
             return content;
         }
     },
