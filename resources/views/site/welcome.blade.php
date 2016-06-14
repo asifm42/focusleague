@@ -23,7 +23,7 @@
                                 The Mission
                             </h4>
                             <p>
-                                To structure would-be pickup games into a league and increase the availability of competitive Ultimate in Houston.
+                                To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
                             </p>
                             <p>
                                 <a  href="{{ route('site.faq') }}"
@@ -53,6 +53,9 @@
                                 <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
                             --}}
                             @endif
+                            <div>
+                                <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=29.6297&lon=-95.4378&name=Houston Sports Park (77045)"> </iframe>
+                            </div>
                         </div>
                     @endif
 
@@ -121,7 +124,7 @@
                                 The Mission
                             </h4>
                             <p>
-                                To structure would-be pickup games into a league and increase the availability of competitive Ultimate in Houston.
+                                To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
                             </p>
                             <p>
                                 <a  href="{{ route('site.faq') }}"
@@ -151,6 +154,9 @@
                                 <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
                             --}}
                         @endif
+                        <div>
+                            <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=29.6297&lon=-95.4378&name=Houston Sports Park (77045)"> </iframe>
+                        </div>
                     </div>
                     @endif
 
