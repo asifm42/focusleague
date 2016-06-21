@@ -94,6 +94,10 @@ module.exports = function (grunt) {
             site: {
                 src: 'public/assets/js/site.js',
                 dest: 'public/assets/js/site.min.js'
+            },
+            teamBuilder: {
+                src: 'public/assets/js/teamBuilder.js',
+                dest: 'public/assets/js/teamBuilder.min.js'
             }
         }
     });
@@ -108,4 +112,5 @@ module.exports = function (grunt) {
     // Register tasks.
     // @see http://gruntjs.com/getting-started#loading-grunt-plugins-and-tasks
     grunt.registerTask('default', ['copy','concat', 'cssmin', 'uglify']);
+    grunt.registerTask('teamBuilder', ['uglify']);
 };
