@@ -36,6 +36,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SendSubSignupConfirmation',
             'App\Listeners\SendSubSignupAlert',
         ],
+        'App\Events\UserUpdatedSubSignup' => [
+            'App\Listeners\SendSubSignupUpdateAlert',
+        ],
     ];
 
     /**

@@ -31,7 +31,7 @@
         @if($edit === true)
             {!! Former::vertical_open()
                 ->method('PATCH')
-                ->action(route('sub.update', $cycle->id))
+                ->action(route('sub.update', $sub->id))
             !!}
         @else
             {!! Former::vertical_open()

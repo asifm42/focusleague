@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\EditSubSignupFormRequest;
+use App\Http\Requests\UpdateSubSignupRequest;
 use App\Http\Requests\SubTeamPlacementRequest;
 use App\Models\Cycle;
 use App\Models\Sub;
@@ -13,6 +14,7 @@ use App\Models\Team;
 use App\Models\Transaction;
 use App\Models\Week;
 use App\Events\UserSignedUpAsASub;
+use App\Events\UserUpdatedSubSignup;
 use Former;
 
 class SubsController extends Controller
@@ -125,9 +127,34 @@ class SubsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSubSignupRequest $request, $id)
     {
-        //
+        $sub = Sub::findOrFail($id);
+        $sub->load('user', 'week');
+        $user = $sub->user;
+
+        $cycle = $sub->week->cycle;
+        $cycle->load('weeks', 'signups', 'weeks.subs');
+
+        $week = $cycle->weeks->find($request->input('week'));
+
+        $sub->week()->associate($week);
+        $sub->note = $request->input('note');
+
+        $sub->save();
+        // $week->subs()->attach(auth()->user()->id, ['note'=>$request->input('note')]);
+
+        event(new UserUpdatedSubSignup(auth()->user(), $week, $sub));
+
+        if (auth()->user()->isAdmin()) {
+            flash()->success('<a href="'.route('sub.edit', $sub->id).'"">Sub signup for ' . $user->name . '</a> has been updated.');
+
+            return redirect()->route('users.show', $user->id);
+        }
+
+        flash()->success('Your sub signup has been updated.');
+
+        return redirect()->route('users.dashboard');
     }
 
     /**
