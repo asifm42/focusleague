@@ -1,6 +1,6 @@
-                <div class="panel panel-default">
+                <div class="panel panel-default signup-list">
                     <div class="panel-heading">
-                        <h4 class="panel-title">{{ $title }} <span class="badge pull-right">{{ $signups->count() }}</span></h4>
+                        <h4 class="panel-title">{{ $title }} <span class="badge pull-right hidden">{{ $signups->count() }}</span></h4>
                     </div>
                     <div class="panel-body">
                     <?php
