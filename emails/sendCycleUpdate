@@ -1,0 +1,11 @@
+#!/bin/bash
+curl -s --user 'api:key-0fcbdb08fd52c5216420312b59c679a4' \
+    https://api.mailgun.net/v3/mg.focusleague.com/messages \
+    -F from='FOCUS League <support@focusleague.com>' \
+    -F to='announce@mg.focusleague.com' \
+    -F subject='Who picked up cones? & Still have spots open for Cycle 2016-04!' \
+    -F html='<ConesCycle2016-04Update.html' \
+    -F o:tag='' \
+    -F o:tracking=true \
+    -F o:tracking-clicks=true \
+    -F o:tracking-opens=true
