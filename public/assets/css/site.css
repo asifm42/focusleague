@@ -10025,6 +10025,39 @@ input[type="checkbox"]:disabled:checked:after,
     padding:5px;
 }
 
+#schedule > .panel-body,
+.signup-list .panel-body,
+.team-list .panel-body {
+    padding:0;
+}
+
+// may not need this anymore since it was only for captain star
+.signup-list .panel-body p > i.legend,
+.team-list .panel-body p > i.legend {
+    margin-top:10px;
+    margin-left:5px;
+}
+
+#schedule table,
+.signup-list table,
+.team-list table {
+    margin-bottom: 0;
+}
+
+
+#schedule ul.list-unstyled {
+    margin:15px;
+    margin-bottom:26.5px
+}
+
+@media screen and (max-width: 767px) {
+    #schedule .table-responsive,
+    .signup-list .table-responsive,
+    .team-list .table-responsive {
+        margin-bottom:0;
+        border:none;
+    }
+}
 
 .tt-hint {
     color:#a6a6a6;
@@ -10032,5 +10065,4 @@ input[type="checkbox"]:disabled:checked:after,
 
 .twitter-typeahead {
     display:block; !important
-
 }

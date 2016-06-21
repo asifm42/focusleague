@@ -52,7 +52,13 @@
                     <td>
                         <a title="{{ $player->user->name }}" href="{{ route('users.show', $player->user->id) }}">{{ $player->user->getNicknameOrShortName() }}</a>
                         @if ($player->captain)
-                            &nbsp;&nbsp;<i class="fa fa-star text-warning"></i>
+                            &nbsp;&nbsp;<i class="fa fa-star text-warning"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    data-container="body"
+                                    data-trigger="focus click hover"
+                                    data-html="true"
+                                    data-title="Team Captain"></i>
                         @endif
                         @if (!empty($player->note))
                             &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"

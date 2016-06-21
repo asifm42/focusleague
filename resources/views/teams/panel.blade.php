@@ -1,6 +1,16 @@
-                <div class="panel panel-default">
+                <div class="panel panel-default team-list">
                     <div class="panel-heading">
-                        <h4 class="panel-title">{{ $title }} <span class="badge pull-right">{{ $players->count() }}</span></h4>
+                        <h4 class="panel-title">
+                            {{ 'Team ' . ucwords($team->name) }}
+                            @if(strtolower($team->division) === 'mens')
+                                <i class="fa fa-male text-primary"></i>
+                            @elseif(strtolower($team->division) === 'womens')
+                                <i class="fa fa-female text-info"></i>
+                            @elseif(strtolower($team->division) === 'mixed')
+                                <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
+                            @endif
+                            <span class="badge pull-right hidden">{{ $players->count() }}</span>
+                        </h4>
                     </div>
                     <div class="panel-body">
                     <?php
@@ -71,6 +81,6 @@
                         @else
                             @include('teams.table', $data = ['players'=>$players, 'subs'=>$subs, 'cycle'=>$cycle, 'team'=>$team])
                         @endif
-                        <p><i class="fa fa-star text-warning"></i> = captain</p>
+                        <p class="hidden"><i class="fa fa-star text-warning legend"></i> = captain</p>
                     </div>
                 </div>

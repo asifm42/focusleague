@@ -191,8 +191,6 @@
                             @else
 
 
-
-
                             <ul class='list-unstyled'>
                             @for( $i=0, $len = $cycle->weeks()->count(); $i < $len; $i++)
                                 <li style="border-bottom:solid 1px #ccc;"><strong>Week {{ ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong></li>
@@ -202,7 +200,6 @@
                                         <li>{{ ucwords($game->teams[0]->name) }} v {{ ucwords($game->teams[1]->name) }} | 8p-10p</li>
                                     @endforeach
                                 </ul>
-
                             @endfor
                             </ul>
                             @endif
