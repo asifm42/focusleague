@@ -261,4 +261,24 @@ class UserMailer extends Mailer {
 
         // return $this->sendTo($user, $subject, $view, $data, $headers);
     }
+
+    /**
+     * Sends an email to the user asking if they are still available for tonight's game.
+     *
+     * @return void
+     */
+    public function sendAvailabilityEmail(User $user)
+    {
+        $view = 'emails.availability';
+        $subject = 'Are you still coming tonight?';
+        $data=[];
+        $data['user'] = $user->toArray();
+
+        // // add mailgun tag header
+        // $headers = ['x-mailgun-tag' => 'status_reminder'];
+
+        return $this->sendTo($user, $subject, $view, $data);
+
+        // return $this->sendTo($user, $subject, $view, $data, $headers);
+    }
 }
