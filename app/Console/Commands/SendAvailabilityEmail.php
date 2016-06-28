@@ -78,9 +78,9 @@ class SendAvailabilityEmail extends Command
             $mailer->sendAvailabilityEmail($signup);
         }
 
-        foreach ($week->subs as $sub) {
-            $mailer->sendAvailabilityEmail($sub);
-        }
+        // foreach ($week->subs as $sub) {
+        //     $mailer->sendAvailabilityEmail($sub);
+        // }
 
         $this->info('Availability emails queued up');
     }
