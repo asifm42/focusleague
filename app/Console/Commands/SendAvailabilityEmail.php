@@ -51,9 +51,17 @@ class SendAvailabilityEmail extends Command
 
         $cycle->load('signups');
 
+        $headers = ['week id', 'date', 'rainedOut'];
+
+        $weeks = $cycle->weeks()->get(['id', 'starts_at', 'rained_out'])->toArray();
+
+        $this->table($headers, $weeks);
+
         $week_id = $this->ask('What is the id of the week?');
 
         $week = Week::find($week_id);
+
+        $week->load('subs');
 
         $mailer = new UserMailer;
 
@@ -73,5 +81,7 @@ class SendAvailabilityEmail extends Command
         foreach ($week->subs as $sub) {
             $mailer->sendAvailabilityEmail($sub);
         }
+
+        $this->info('Availability emails queued up');
     }
 }
