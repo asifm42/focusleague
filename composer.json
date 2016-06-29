@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "asifm42/focusleague",
+    "description": "FOCUS League web app",
+    "keywords": [],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -14,7 +14,8 @@
         "mailgun/mailgun-php": "~1.7.2",
         "hieu-le/active": "~2.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "propaganistas/laravel-phone": "~2.0"
+        "propaganistas/laravel-phone": "~2.0",
+        "rap2hpoutre/laravel-log-viewer": "^0.7.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

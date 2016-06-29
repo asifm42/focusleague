@@ -161,17 +161,18 @@ return [
         /*
          * Third-party Service Providers
          */
-        // 'Aws\Laravel\AwsServiceProvider',
-        // 'Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider',
-        'Laracasts\Flash\FlashServiceProvider',
-        // 'Chumper\Zipper\ZipperServiceProvider',
-        'Vinkla\Hashids\HashidsServiceProvider',
-        'Barryvdh\Debugbar\ServiceProvider',
-        //'Collective\Html\HtmlServiceProvider',
-        'Former\FormerServiceProvider',
-        // 'Intervention\Image\ImageServiceProvider',
-        'HieuLe\Active\ActiveServiceProvider',
-        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class
+        // Aws\Laravel\AwsServiceProvider::class,
+        // Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        // Chumper\Zipper\ZipperServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        // Collective\Html\HtmlServiceProvider::class,
+        Former\FormerServiceProvider::class,
+        // Intervention\Image\ImageServiceProvider::class,
+        HieuLe\Active\ActiveServiceProvider::class,
+        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class
     ],
 
     /*
@@ -221,17 +222,17 @@ return [
         /*
          * Third-party Aliases
          */
-        // 'AWS'       => 'Aws\Laravel\AwsFacade',
-        'Flash'     => 'Laracasts\Flash\Flash',
-        // 'Zipper'    => 'Chumper\Zipper\Zipper',
-        'Hashids'   => 'Vinkla\Hashids\Facades\Hashids',
-        'Debugbar'  => 'Barryvdh\Debugbar\Facade',
-        'Form'      => 'Collective\Html\FormFacade',
-        'Html'      => 'Collective\Html\HtmlFacade',
-        'Former'    =>  'Former\Facades\Former',
-        // 'Image'     => 'Intervention\Image\Facades\Image',
-        'Active' => 'HieuLe\Active\Facades\Active',
-        'Carbon' => Carbon\Carbon::class
+        // 'AWS'       => Aws\Laravel\AwsFacade::class,
+        'Flash'     => Laracasts\Flash\Flash::class,
+        // 'Zipper'    => Chumper\Zipper\Zipper::class,
+        'Hashids'   => Vinkla\Hashids\Facades\Hashids::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Former'    => Former\Facades\Former::class,
+        // 'Image'     => Intervention\Image\Facades\Image::class,
+        'Active'    => HieuLe\Active\Facades\Active::class,
+        'Carbon'    => Carbon\Carbon::class
     ],
 
 ];
