@@ -27,42 +27,27 @@ class UpdateUserInAnnouncementEmailList
      */
     public function handle(UserUpdated $event)
     {
-        // if ( app()->environment('local','production') ) {
-            if ( array_key_exists('name', $event->changed) ) {
-                $user = $event->user;
+        if ( array_key_exists('name', $event->changed) ) {
+            $user = $event->user;
 
-                // Instantiate the client.
-                $mgClient = new Mailgun(env('MAILGUN_SECRET'));
+            // Instantiate the client.
+            $mgClient = new Mailgun(env('MAILGUN_SECRET'));
 
-                if (app()->environment('local','dev')) {
-                    $listAddress = 'announce-test@mg.focusleague.com';
-                }
-                if (app()->environment('production')) {
-                    $listAddress = 'announce@mg.focusleague.com';
-                }
-
-
-                $memberName = ucwords($user->name);
-
-                // check if the email is already on the mailing list
-                $existResult = $mgClient->get("lists/$listAddress/members", array(
-                    'address' => $memberAddress,
-                    ));
-
-                if (empty($existResult->http_response_body->items)) {
-                    // Email doesn't exist. Add it.
-                    $result = $mgClient->post("lists/$listAddress/members", array(
-                        'address'     => $memberAddress,
-                        'name'        => $memberName,
-                        'subscribed'  => true
-                    ));
-                } else {
-                    // Email exists. Update the info.
-                    $result = $mgClient->put("lists/$listAddress/members/$memberAddress", array(
-                        'name'       => $memberName
-                    ));
-                }
+            if (app()->environment('local','dev')) {
+                $listAddress = 'announce-test@mg.focusleague.com';
             }
-        // }
+            if (app()->environment('production')) {
+                $listAddress = 'announce@mg.focusleague.com';
+            }
+
+            $memberName = ucwords($user->name);
+
+            $mgClient->post("lists/$listAddress/members", [
+                    'address'       => $user->email,
+                    'name'          => $memberName,
+                    'upsert'        => 'yes'
+                ]
+            );
+        }
     }
 }
