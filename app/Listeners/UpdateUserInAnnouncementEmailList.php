@@ -40,14 +40,22 @@ class UpdateUserInAnnouncementEmailList
                 $listAddress = 'announce@mg.focusleague.com';
             }
 
+            $memberEmail = $user->email;
             $memberName = ucwords($user->name);
 
-            $mgClient->post("lists/$listAddress/members", [
-                    'address'       => $user->email,
-                    'name'          => $memberName,
-                    'upsert'        => 'yes'
-                ]
-            );
+            try {
+                $mgClient->put("lists/$listAddress/members/$memberEmail", [
+                        'name'          => $memberName
+                    ]
+                );
+            } catch (\Mailgun\Connection\Exceptions\MissingEndpoint $e) {
+                $mgClient->post("lists/$listAddress/members", [
+                        'address'       => $memberEmail,
+                        'name'          => $memberName,
+                        'upsert'        => 'yes'
+                    ]
+                );
+            }
         }
     }
 }
