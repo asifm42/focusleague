@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "asifm/focusleague",
+    "description": "FOCUS League web app",
+    "keywords": [],
     "license": "MIT",
     "type": "project",
     "require": {
