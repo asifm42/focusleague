@@ -255,5 +255,6 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     Route::put(     'cyclesignups/{id}',         ['as' => 'cyclesignups.put', 'uses' => 'CycleSignupsController@update']);
     // Route::delete(  'cyclesignups/{id}',         ['as' => 'cyclesignups.destroy', 'uses' => 'CycleSignupsController@destroy']);
 
-
+// Log routes
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });

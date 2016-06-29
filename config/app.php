@@ -171,7 +171,8 @@ return [
         'Former\FormerServiceProvider',
         // 'Intervention\Image\ImageServiceProvider',
         'HieuLe\Active\ActiveServiceProvider',
-        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class
+        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class
     ],
 
     /*
