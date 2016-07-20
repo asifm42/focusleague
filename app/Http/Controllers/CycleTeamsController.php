@@ -142,11 +142,15 @@ class CycleTeamsController extends Controller
     /**
      * Email team announcement
      *
-     * @param  int  $id
+     * @param  int  $cycleId
      * @return \Illuminate\Http\Response
      */
-    public function announce($id)
+    public function announce($cycleId)
     {
+
+        $exitCode = Artisan::call('charge:cyclePlayerFee', [
+            'cycle' => $cycleId
+        ]);
         // only sends the email for the current cycle
 
         Artisan::queue('emails:sendTeamAnnouncementEmail');
