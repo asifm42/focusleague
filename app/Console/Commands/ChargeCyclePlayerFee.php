@@ -20,7 +20,7 @@ class ChargeCyclePlayerFee extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Creates a transaction for every player assigned to a team for the cycle';
 
     /**
      * Create a new command instance.
