@@ -40,18 +40,16 @@
                             <h4>
                                 Game Status for {{ Carbon::today()->format("l, F jS") }}
                             </h4>
-                            @if($current_cycle->currentWeek()->isRainedOut())
-                                <p>Games are canceled due to weather.</p>
+                            @if($current_cycle->currentWeek()->hasStatus())
+                                {!! $current_cycle->currentWeek()->status() !!}
+                            @elseif($current_cycle->currentWeek()->isRainedOut())
+                                <p>
+                                    Games are canceled due to weather.
+                                </p>
                             @else
                                 <p>
-                                    <strong>Games are ON!</strong> We are on the turf field, so the game will be ON even if the grass fields are closed. We have a very low probability of cancelling due to lightning.
+                                    Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.
                                 </p>
-                                <p>
-                                    HSP will communicate lightning closure/delay via their <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Please check that or here before leaving for the fields.
-                                </p>
-                            {{--
-                                <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
-                            --}}
                             @endif
                             <div>
                                 <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe>
@@ -97,7 +95,7 @@
                             </h5>
                         @endif
                         <p>
-                            <a  href="{{ route('sessions.create', 2) }}"
+                            <a  href="{{ route('sessions.create') }}"
                                 class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a>
                         </p>
                     @endif
@@ -139,21 +137,17 @@
                             <h3>
                                 Game Status for {{ Carbon::today()->format("l, F jS") }}
                             </h3>
-                        @if($current_cycle->currentWeek()->isRainedOut())
-                            <p>
-                                Games are canceled due to weather.
-                            </p>
-                        @else
+                            @if($current_cycle->currentWeek()->hasStatus())
+                                {!! $current_cycle->currentWeek()->status() !!}
+                            @elseif($current_cycle->currentWeek()->isRainedOut())
                                 <p>
-                                    <strong>Games are ON!</strong> We are on the turf field, so the game will be ON even if the grass fields are closed. We have a very low probability of cancelling due to lightning.
+                                    Games are canceled due to weather.
                                 </p>
+                            @else
                                 <p>
-                                    HSP will communicate lightning closure/delay via their <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Please check that or here before leaving for the fields.
+                                    Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.
                                 </p>
-                            {{--
-                                <p>Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.</p>
-                            --}}
-                        @endif
+                            @endif
                         <div>
                             <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe>
                         </div>

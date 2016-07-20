@@ -92,4 +92,12 @@ class Week extends Model
     public function isRainedOut() {
         return $this->rained_out;
     }
+
+    public function hasStatus() {
+        return ! is_null($this->status);
+    }
+
+    public function status() {
+        return $this->status;
+    }
 }
