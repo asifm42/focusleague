@@ -13,7 +13,7 @@ class ChargeCyclePlayerFee extends Command
      *
      * @var string
      */
-    protected $signature = 'charge:cyclePlayerFee';
+    protected $signature = 'charge:cyclePlayerFee {cycle_id?}';
 
     /**
      * The console command description.
@@ -39,7 +39,8 @@ class ChargeCyclePlayerFee extends Command
      */
     public function handle()
     {
-        $cycle_id = $this->ask('What is the id of the cycle?');
+
+        $cycle_id = $this->argument('cycle_id') ? $this->argument('cycle_id') : $this->ask('What is the id of the cycle?');
 
         $cycle = Cycle::find($cycle_id);
         $data = [
