@@ -30,6 +30,14 @@
 //     return view('emails.balance_reminder', $data);
 // });
 
+// quick route to send a signup confirmation. have to update with ids
+Route::get('/signupconfirmation', function () {
+    $user = Black\Models\User::find();
+    $cycle = Black\Models\Cycle::find();
+    $signup = Black\Models\CycleSignup::find();
+
+    event(new Black\Events\UserSignedUpForCycle($user, $cycle, $signup));
+})
 
 Route::get('/smstest', function () {
     $user = App\Models\User::find(2);
