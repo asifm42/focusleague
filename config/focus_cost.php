@@ -21,4 +21,6 @@ return [
 
     'rainout_credit' => 5,
 
+    'hourly_field_cost' => 95,
+
 ];
