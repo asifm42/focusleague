@@ -37,7 +37,7 @@ Route::get('/signupconfirmation', function () {
     $signup = Black\Models\CycleSignup::find();
 
     event(new Black\Events\UserSignedUpForCycle($user, $cycle, $signup));
-})
+});
 
 Route::get('/smstest', function () {
     $user = App\Models\User::find(2);
