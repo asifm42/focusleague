@@ -15,8 +15,8 @@ return [
     'cycle' => [
         'sub' => 10,
         'two_weeks' => 18,
-        'three_weeks' => 21,
-        'four_weeks' => 24,
+        'three_weeks' => 25,
+        'four_weeks' => 30,
     ],
 
     'rainout_credit' => 5,
