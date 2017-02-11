@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Models\Cycle;
+use App\Models\Team;
+use Former;
 
 class TeamsController extends Controller
 {
@@ -25,7 +28,9 @@ class TeamsController extends Controller
      */
     public function create()
     {
-        //
+        $cycle = Cycle::current_cycle();
+
+        return view('teams.create')->withCycle($cycle);
     }
 
     /**
@@ -36,7 +41,9 @@ class TeamsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $team = Team::create($request->all());
+
+        return redirect()->route('cycle.teams.builder', ['id' => $team->cycle_id]);
     }
 
     /**
@@ -47,7 +54,9 @@ class TeamsController extends Controller
      */
     public function show($id)
     {
-        //
+        $team = Team::findOrFail($id);
+        $team->load('players', 'players.user');
+        return $team->toJson();
     }
 
     /**
@@ -58,7 +67,13 @@ class TeamsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $team = Team::findOrFail($id);
+        $cycle = Cycle::findOrFail($team->cycle_id);
+
+        Former::populate($team);
+
+        return view('teams.create')->withCycle($cycle)
+                ->withTeam($team);
     }
 
     /**
@@ -70,7 +85,10 @@ class TeamsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $team = Team::findOrFail($id);
+        $team->fill($request->all());
+
+        return redirect()->route('cycle.teams.builder', ['id' => $team->cycle_id]);
     }
 
     /**

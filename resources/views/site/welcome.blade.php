@@ -95,7 +95,7 @@
                             </h5>
                         @endif
                         <p>
-                            <a  href="{{ route('sessions.create', 2) }}"
+                            <a  href="{{ route('sessions.create') }}"
                                 class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a>
                         </p>
                     @endif
