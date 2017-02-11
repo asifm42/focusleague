@@ -10,19 +10,37 @@
                 </h6>
             </li>
             <li class="list-group-item list-group-item-info">
-                Wednesday, July 20th - Cycle 2016-05 Registration Opens
+                Wednesday, March 1st - Cycle 2017-01 Registration Opens
             </li>
             <li class="list-group-item">
-                Tuesday, August 2nd - Cycle 2016-05 Wk1
+                Tuesday, March 7th - Cycle 2017-01 Wk1
             </li>
             <li class="list-group-item">
-                Tuesday, August 9th - Cycle 2016-05 Wk2
+                Tuesday, March 14th - Cycle 2017-01 Wk2
             </li>
             <li class="list-group-item">
-                Tuesday, August 16th - Cycle 2016-05 Wk3
+                Tuesday, March 21st - Cycle 2017-01 Wk3
+            </li>
+            <li class="list-group-item">
+                Tuesday, March 28th - Cycle 2017-01 Wk4
+            </li>
+            <li class="list-group-item list-group-item-info">
+                Wednesday, March 29th - Cycle 2017-02 Registration Opens
+            </li>
+            <li class="list-group-item">
+                Tuesday, April 4th - Cycle 2017-02 Wk1
+            </li>
+            <li class="list-group-item">
+                Tuesday, April 11th - Cycle 2017-02 Wk2
+            </li>
+            <li class="list-group-item">
+                Tuesday, April 18th - Cycle 2017-02 Wk3
+            </li>
+            <li class="list-group-item">
+                Tuesday, April 25th - Cycle 2017-02 Wk4
             </li>
             <li class="list-group-item list-group-item-info text-center">
-                <h5>FOCUS League will return in 2017</h5>
+                <h5>May - Sept 2017 - TBA</h5>
             </li>
         </ul>
     </div>
