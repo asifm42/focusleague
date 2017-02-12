@@ -10,34 +10,94 @@
                 </h6>
             </li>
             <li class="list-group-item list-group-item-info">
-                Wednesday, March 1st - Cycle 2017-01 Registration Opens
+                <time datetime="2017-03-01" class="icon">
+                  <em>Wednesday</em>
+                  <strong>March</strong>
+                  <span>1</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle&nbsp;2017-01 Registration&nbsp;Opens</span>
+                <span class="event hidden-xs hidden-sm">Cycle&nbsp;2017-01 Registration&nbsp;Opens</span>
             </li>
             <li class="list-group-item">
-                Tuesday, March 7th - Cycle 2017-01 Wk1
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>March</strong>
+                  <span>7</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-01 Wk1</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-01 Wk1</span>
             </li>
             <li class="list-group-item">
-                Tuesday, March 14th - Cycle 2017-01 Wk2
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>March</strong>
+                  <span>14</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-01 Wk2</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-01 Wk2</span>
             </li>
             <li class="list-group-item">
-                Tuesday, March 21st - Cycle 2017-01 Wk3
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>March</strong>
+                  <span>21</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-01 Wk3</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-01 Wk3</span>
             </li>
             <li class="list-group-item">
-                Tuesday, March 28th - Cycle 2017-01 Wk4
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>March</strong>
+                  <span>28</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-01 Wk4</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-01 Wk4</span>
             </li>
             <li class="list-group-item list-group-item-info">
-                Wednesday, March 29th - Cycle 2017-02 Registration Opens
+                <time datetime="2017-03-07" class="icon">
+                  <em>Wednesday</em>
+                  <strong>March</strong>
+                  <span>29</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle&nbsp;2017-02 Registration&nbsp;Opens</span>
+                <span class="event hidden-xs hidden-sm">Cycle&nbsp;2017-02 Registration&nbsp;Opens</span>
             </li>
             <li class="list-group-item">
-                Tuesday, April 4th - Cycle 2017-02 Wk1
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>April</strong>
+                  <span>4</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-02 Wk1</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-02 Wk1</span>
             </li>
             <li class="list-group-item">
-                Tuesday, April 11th - Cycle 2017-02 Wk2
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>April</strong>
+                  <span>11</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-02 Wk2</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-02 Wk2</span>
             </li>
             <li class="list-group-item">
-                Tuesday, April 18th - Cycle 2017-02 Wk3
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>April</strong>
+                  <span>18</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-02 Wk3</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-02 Wk3</span>
             </li>
             <li class="list-group-item">
-                Tuesday, April 25th - Cycle 2017-02 Wk4
+                <time datetime="2017-03-07" class="icon">
+                  <em>Tuesday</em>
+                  <strong>April</strong>
+                  <span>25</span>
+                </time>
+                <span class="event-xs hidden-md hidden-lg">Cycle 2017-02 Wk4</span>
+                <span class="event hidden-xs hidden-sm">Cycle 2017-02 Wk4</span>
             </li>
             <li class="list-group-item list-group-item-info text-center">
                 <h5>May - Sept 2017 - TBA</h5>
