@@ -346,10 +346,14 @@ Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
                                     How It Works
                                 </h4>
                                 <ol class="text-left" style="font-size: 20px;">
-                                <li>Register for a cycle</li>
-                                <li>Compete 3-4 weeks</li>
-                                <li>Rinse &amp; Repeat</li>
+                                    <li>Register for a cycle</li>
+                                    <li>Compete 3-4 weeks</li>
+                                    <li>Rinse &amp; Repeat</li>
                                 </ol>
+                                <a  href="{{ route('site.faq') }}"
+                                    class="btn btn-default btn-lg">
+                                        FAQ
+                                </a>
                             </div>
                         </div>
                     </div>
