@@ -8,8 +8,8 @@ time.icon
   font-size: 0.8em; /* change icon size */
   display: inline-block;
   position: relative;
-  width: 6.5em;
-  height: 7.5em;
+  width: 6em;
+  height: 6.5em;
   background-color: #fff;
   border-radius: 0.6em;
   border: 1px solid #2196f3;
@@ -32,7 +32,7 @@ time.icon strong
 {
   position: absolute;
   top: 0;
-  padding: 0.4em 0;
+  padding: 0.2em 0;
   color: #fff;
   background-color: #2196f3;
   /*border-bottom: 1px dashed #f37302;*/
@@ -44,30 +44,60 @@ time.icon em
   position: absolute;
   bottom: 0.2em;
   color: #2196f3;
+  font-size: 0.8em;
 }
 
 time.icon span
 {
   font-size: 2.25em;
   letter-spacing: -0.05em;
-  padding-top: 1em;
+  padding-top: .8em;
   color: #2f2f2f;
 }
 
 span.event,
 span.event-xs  {
     display: inline-block;
-    line-height: 4em;
+    line-height: 5em;
     vertical-align: top;
     padding-left: 20px;
-    font-size: 1.5em;
-}
-span.event-xs {
-    line-height: 6em;
     font-size: 1em;
 }
 
-span.
+.schedule > li,
+.schedule-list > li {
+    padding:10px 15px 3px 10px;
+}
+
+.schedule-list > .list-group-item:first-child {
+    border-radius: 0;
+}
+.schedule-list > .list-group-item:last-child {
+    border-radius: 0;
+    border-bottom: 0;
+}
+
+.schedule {
+    max-height:433px;
+/*    overflow-x: hidden;
+    overflow-y: scroll;*/
+/*    border-top:solid #ddd 1px;
+    border-bottom:solid #ddd 1px;
+    border: #ddd 1px;
+    border-radius:3px;*/
+}
+
+
+.schedule-list {
+    max-height:368px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+/*    border-top:solid #ddd 1px;*/
+    border-bottom:solid #ddd 1px;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+}
+
 </style>
 @stop
 
@@ -84,23 +114,7 @@ span.
                     </h5>
                     <!-- <h5><span class = "emphasize">F</span>ostering <span class = "emphasize">O</span>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</h5> -->
 
-                    <div class="text-center">
-                        <div class="jumbotron">
-                            <h4>
-                                The Mission
-                            </h4>
-                            <p>
-                                To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
-                            </p>
-                            <p>
-                                <a  href="{{ route('site.faq') }}"
-                                    class="btn btn-default btn-lg">
-                                        Learn more
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-
+<div class="row">
                     @if($current_cycle && $current_cycle->gameToday())
                         <div    class="jumbotron"
                                 style="background-color: #ffff99;" >
@@ -161,10 +175,23 @@ span.
                                 Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.
                             </h5>
                         @endif
-                        <p>
+<div class="row" style="margin-bottom:1em;">
+
+                    <div class="text-center">
+                        <div class="alert alert-success">
+                            <h3 style="color: #fff;">
+                                FOCUS&nbsp;League&nbsp;returns March&nbsp;7th!
+                            </h3>
+                            <h5 style="color: #fff;">
+Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
+                            </h5>
+                        </div>
+                    </div>
+</div>
+<!--                         <p>
                             <a  href="{{ route('sessions.create') }}"
                                 class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a>
-                        </p>
+                        </p> -->
                     @endif
 
                     @if($next_cycle)
@@ -172,8 +199,42 @@ span.
                             Registration for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!
                         </h5>
                     @endif
-
-                    @include('site.schedule')
+</div>
+                    <div class = "row">
+                        <div class = "col-xs-12 col-md-4">
+                            <div class="jumbotron how-it-works">
+                                <h4>
+                                    How It Works
+                                </h4>
+                                <ol class="text-left" style="font-size: 20px;">
+                                <li>Register for a cycle</li>
+                                <li>Compete 3-4 weeks</li>
+                                <li>Rinse &amp; Repeat</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class = "col-xs-12 col-md-4">
+                            @include('site.schedule')
+                        </div>
+                        <div class = "col-xs-12 col-md-4">
+                            <div class="text-center">
+                                <div class="jumbotron">
+                                    <h4>
+                                        The Mission
+                                    </h4>
+                                    <p>
+                                        To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
+                                    </p>
+                                    <p>
+                                        <a  href="{{ route('site.faq') }}"
+                                            class="btn btn-default btn-lg">
+                                                Learn more
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="text-center hidden-xs hidden-sm">
                     <div>
@@ -183,44 +244,19 @@ span.
                         Fostering Organized Competitive Ultimate Series
                     </h3>
 
-                    <div class="text-center">
-                        <div class="jumbotron">
-                            <h4>
-                                The Mission
-                            </h4>
-                            <p>
-                                To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
-                            </p>
-                            <p>
-                                <a  href="{{ route('site.faq') }}"
-                                    class="btn btn-default btn-lg">
-                                        Learn more
-                                </a>
-                            </p>
+<!--                     <div class="text-center">
+                        <div class="alert alert-success">
+                            <h1 style="color: #fff;">
+                                FOCUS League returns March 7th!
+                            </h1>
                         </div>
-                    </div>
+                    </div> -->
                     @if($current_cycle && $current_cycle->gameToday())
-                    <div class="jumbotron" style="background-color: #ffff99;" >
-                            <h3>
-                                Game Status for {{ Carbon::today()->format("l, F jS") }}
-                            </h3>
-                            @if($current_cycle->currentWeek()->hasStatus())
-                                {!! $current_cycle->currentWeek()->status() !!}
-                            @elseif($current_cycle->currentWeek()->isRainedOut())
-                                <p>
-                                    Games are canceled due to weather.
-                                </p>
-                            @else
-                                <p>
-                                    Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.
-                                </p>
-                            @endif
-                        <div>
-                            <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe>
-                        </div>
-                    </div>
+
                     @endif
 
+                <div class = "row">
+                    <div class="col-xs-12">
                     @if(auth()->check())
                         <p>
                             <a  href="{{ route('users.dashboard') }}"
@@ -256,20 +292,67 @@ span.
                                 Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.
                             </h4>
                         @endif
-                        <p>
+<!--                         <p style="margin-top: 1em;">
                             <a  href="{{ route('sessions.create', 2) }}"
                                 class="btn btn-primary btn-lg">
                                     <i class="fa fa-sign-in"></i>&nbsp; Sign in
                             </a>
-                        </p>
+                        </p> -->
+
+                    <div class="text-center" style="margin:1em 0;">
+                        <div class="alert alert-success">
+                            <h1 style="color: #fff;">
+                                FOCUS&nbsp;League&nbsp;returns March&nbsp;7th!
+                            </h1>
+                            <h3 style="color: #fff;">
+Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
+                            </h3>
+                        </div>
+                    </div>
+
                     @endif
                     @if($next_cycle)
-                        <h4 class="text-info">
+                        <h1 class="text-info">
                             Registration for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!
-                        </h4>
+                        </h1>
                     @endif
-
-                    @include('site.schedule')
+                    </div>
+                </div>
+                    <div class = "row">
+                        <div class = "col-xs-12 col-md-4">
+                            <div class="text-center">
+                                <div class="jumbotron">
+                                    <h4>
+                                        The Mission
+                                    </h4>
+                                    <p>
+                                        To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
+                                    </p>
+                                    <p>
+                                        <a  href="{{ route('site.faq') }}"
+                                            class="btn btn-default btn-lg">
+                                                Learn more
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class = "col-xs-12 col-md-4">
+                            @include('site.schedule')
+                        </div>
+                        <div class = "col-xs-12 col-md-4">
+                            <div class="jumbotron how-it-works">
+                                <h4>
+                                    How It Works
+                                </h4>
+                                <ol class="text-left" style="font-size: 20px;">
+                                <li>Register for a cycle</li>
+                                <li>Compete 3-4 weeks</li>
+                                <li>Rinse &amp; Repeat</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
