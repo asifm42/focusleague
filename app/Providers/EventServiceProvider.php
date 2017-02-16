@@ -15,11 +15,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\UserRegistered' => [
             'App\Listeners\SendVerificationEmail',
-            // 'App\Listeners\SendNewUserRegisteredNotification',
+            'App\Listeners\SendNewUserRegisteredNotification',
         ],
         'App\Events\UserVerified' => [
             'App\Listeners\SendWelcomeEmail',
-            'App\Listeners\AddUserToAnnouncementEmailList',
+            // 'App\Listeners\AddUserToAnnouncementEmailList',
             // 'App\Listeners\SignInUser',
         ],
         'App\Events\VerificationCodeReset' => [

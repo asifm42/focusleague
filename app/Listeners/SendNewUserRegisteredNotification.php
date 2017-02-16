@@ -3,11 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
+use App\Mail\UserRegisteredAlert;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
-class SendNewUserRegisteredNotification
+class SendNewUserRegisteredNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -27,14 +28,7 @@ class SendNewUserRegisteredNotification
      */
     public function handle(UserRegistered $event)
     {
-        $data = $event->user->toArray();
-
-        // Alert email, if you want to be notified upon new registrations
-        Mail::queue(['text' => 'emails.alert.registration'], $data, function($message)
-        {
-            $message->to('asifm42@gmail.com', 'Asif Mohammed')
-                    ->from('system@focusleague.com', 'FOCUS League System')
-                    ->subject('New user registration alert');
-        });
+        Mail::to('asifm42@gmail.com', 'Asif Mohammed')
+                ->queue(new UserRegisteredAlert($event->user));
     }
 }
