@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Week extends Model
 {
-    use TrimScalarValues, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that should be mutated to dates.
