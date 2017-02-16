@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\CanResetPassword;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use CanResetPassword, Notifiable, SoftDeletes;
 
     /**
      * The attributes that should be mutated to dates.

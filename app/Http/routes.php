@@ -71,7 +71,7 @@ Route::group(['middleware' => ['web']], function() {
     /*
      * Site Pages Route
      */
-    Route::get(     '/',        ['as' => 'site.home',       'uses' => 'PagesController@welcome']);
+    // Route::get(     '/',        ['as' => 'site.home',       'uses' => 'PagesController@welcome']);
     Route::get(     'faq',      ['as' => 'site.faq',        'uses' => 'PagesController@faq']);
     Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesController@pricing']);
     Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PostsController@index']);
@@ -85,15 +85,15 @@ Route::group(['middleware' => ['web']], function() {
     /*
      * Session Routes
      */
-    Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
+    // Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
 
     // Password reset link request routes...
-    Route::get(     'password/email',       ['as' => 'password.emailForm', 'uses' => 'Auth\PasswordController@getEmail']);
-    Route::post(    'password/email',       ['as' => 'password.email', 'uses' => 'Auth\PasswordController@postEmail']);
+    // Route::get(     'password/email',       ['as' => 'password.emailForm', 'uses' => 'Auth\PasswordController@getEmail']);
+    // Route::post(    'password/email',       ['as' => 'password.email', 'uses' => 'Auth\PasswordController@postEmail']);
 
-    // Password reset routes...
-    Route::get(     'password/reset/{token}',           ['as' => 'password.resetForm', 'uses' => 'Auth\PasswordController@getReset']);
-    Route::post(    'password/reset',                   ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
+    // // Password reset routes...
+    // Route::get(     'password/reset/{token}',           ['as' => 'password.resetForm', 'uses' => 'Auth\PasswordController@getReset']);
+    // Route::post(    'password/reset',                   ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
 
     // User verification routes
     Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
@@ -114,8 +114,8 @@ Route::group(['middleware' => ['web', 'guest']], function() {
     /*
      * Session Routes
      */
-    Route::get(     'signin',               ['as' => 'sessions.create', 'uses' => 'SessionsController@create']);
-    Route::post(    'signin',               ['as' => 'sessions.signin', 'uses' => 'SessionsController@signIn']);
+    // Route::get(     'signin',               ['as' => 'sessions.create', 'uses' => 'Auth\LoginController@showLoginForm']);
+    // Route::post(    'signin',               ['as' => 'sessions.signin', 'uses' => 'Auth\LoginController@login']);
 
     // User registration routes
     Route::get(     'signup',                           ['as' => 'users.create', 'uses' => 'UsersController@create']);

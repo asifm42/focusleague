@@ -28,6 +28,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserUpdated' => [
             'App\Listeners\UpdateUserInAnnouncementEmailList',
         ],
+        'Illuminate\Auth\Events\Attempting' => [
+            'App\Listeners\CheckIfUserEmailIsConfirmed',
+        ],
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LogLoginDetails',
+        ],
         'App\Events\UserSignedUpForCycle' => [
             'App\Listeners\SendCycleSignupConfirmation',
             'App\Listeners\SendCycleSignupAlert',
