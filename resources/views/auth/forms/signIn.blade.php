@@ -27,7 +27,7 @@
             </div>
             <div class="col-xs-6">
                 <div class="checkbox pull-right">
-                    <a href="{!! route('password.emailForm') !!}">Forgot password?</a>
+                    <a href="{!! route('password.request') !!}">Forgot password?</a>
                 </div>
             </div>
         </div>
