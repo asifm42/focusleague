@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\UserRegistered' => [
             'App\Listeners\SendVerificationEmail',
-            'App\Listeners\SendNewUserRegisteredNotification',
+            // 'App\Listeners\SendNewUserRegisteredNotification',
         ],
         'App\Events\UserVerified' => [
             'App\Listeners\SendWelcomeEmail',
@@ -50,11 +50,12 @@ class EventServiceProvider extends ServiceProvider
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
      */
     public function boot()
     {
+        parent::boot();
 
+        //
     }
 }

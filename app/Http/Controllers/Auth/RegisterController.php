@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Traits\RegistersUsers;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 
 class RegisterController extends Controller
 {
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -48,9 +49,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'name'              => 'required|max:255',
+            'email'             => 'required|email|max:255|unique:users',
+            'nickname'          => 'unique:users,nickname|min:3|max:15',
+            'gender'            => 'required|in:male,female',
+            'birthday'          => 'required|date',
+            'cell_number'       => 'required|phone:LENIENT,US',
+            'dominant_hand'     => 'required|in:left,right',
+            'height'            => 'required|min:48|max:84|numeric',
+            'division_preference_first'     => 'required|in:mens,mixed,womens',
+            'password' => 'required|min:8|confirmed',
         ]);
     }
 
@@ -62,10 +70,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $user = new User($data);
+
+        // Manually add the non-fillable attributes
+        $user['email']                  = $data['email'];
+        $user['password']               = bcrypt($data['password']);
+        $user['confirmation_code']      = str_random(32);
+
+        if (! $user->save() ){
+            throw new SaveModelException($user);
+        }
+
+        return $user;
     }
 }

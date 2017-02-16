@@ -2,11 +2,9 @@
 
 namespace App\Listeners;
 
-use Black\Exceptions\UnverifiedAccountException;
-use Black\Models\User;
+use App\Exceptions\UnverifiedAccountException;
+use App\Models\User;
 use Illuminate\Auth\Events\Attempting as AttemptingLogin;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CheckIfUserEmailIsConfirmed
 {

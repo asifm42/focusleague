@@ -96,9 +96,9 @@ Route::group(['middleware' => ['web']], function() {
     // Route::post(    'password/reset',                   ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
 
     // User verification routes
-    Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
-    Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
-    Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
+    // Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
+    // Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
+    // Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
     //
     Route::get('/token', function () {
         throw new TokenMismatchException();
@@ -118,8 +118,8 @@ Route::group(['middleware' => ['web', 'guest']], function() {
     // Route::post(    'signin',               ['as' => 'sessions.signin', 'uses' => 'Auth\LoginController@login']);
 
     // User registration routes
-    Route::get(     'signup',                           ['as' => 'users.create', 'uses' => 'UsersController@create']);
-    Route::post(    'signup',                           ['as' => 'users.store', 'uses' => 'UsersController@store']);
+    // Route::get(     'signup',                           ['as' => 'users.create', 'uses' => 'UsersController@create']);
+    // Route::post(    'signup',                           ['as' => 'users.store', 'uses' => 'UsersController@store']);
 });
 
 // Ultimate history outside of historyprovided middleware or you'll be stuck in a loop

@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Obsidian Black – Log')
+@extends('layouts.default')
+@section('title', 'FOCUS League – Log')
 
 @section('styles')
 

@@ -7,11 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\UserEditFormRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Requests\VerificationCodeResetRequest;
-use App\Http\Requests\VerifyUserEmailRequest;
 use App\Http\Controllers\Controller;
-use App\Jobs\ResetVerificationCode;
-use App\Jobs\VerifyUser;
 use App\Models\Cycle;
 use App\Models\User;
 use App\Updaters\UserUpdater;
@@ -194,38 +190,5 @@ class UsersController extends Controller
         flash()->success('Update Saved');
 
         return redirect()->route('users.dashboard');
-    }
-
-    protected function verify(VerifyUserEmailRequest $request)
-    {
-        $this->dispatch(new VerifyUser($request->input('confirmation_code')));
-
-        flash()->success('You have successfully verified your account.');
-
-        return redirect('signin');
-    }
-
-    protected function resetVerificationCodeForm(Request $request)
-    {
-        if($request->input('error') == 'UnverifiedAccount') {
-            flash()->error('Your email address has not been verified. Please verify your account by clicking the verification link in the welcome email.');
-        }
-
-        if($request->has('email')) {
-            $data = [ 'email' => $request->input('email') ];
-        } else {
-            $data = [ 'email' => '' ];
-        }
-
-        return view('auth.user.verify', $data);
-    }
-
-    protected function resetVerificationCode(VerificationCodeResetRequest $request)
-    {
-        $this->dispatch(new ResetVerificationCode($request->input('email')));
-
-        flash()->success('Welcome email resent! Please verify your account by clicking the verification link in the welcome email.');
-
-        return redirect('signin');
     }
 }
