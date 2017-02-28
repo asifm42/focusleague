@@ -45,7 +45,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-Regards,<br>{{ config('app.name') }}
+–The FOCUS League team (Asif &amp; Nicky)
 @endif
 
 <!-- Subcopy -->
