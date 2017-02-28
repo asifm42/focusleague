@@ -16,10 +16,10 @@ class VerifyAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->isAdmin()) {
+        if (auth()->user()->isAdmin()
+            || auth()->user()->isGod()) {
             return $next($request);
-        } else {
-            throw new UnauthorizedAccessException();
         }
+        throw new UnauthorizedAccessException('You must be an admin to access this page.');
     }
 }
