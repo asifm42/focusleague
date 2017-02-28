@@ -41,7 +41,7 @@ class SendSignupClosingReminderEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::current_cycle();
+        $cycle = Cycle::currentCycle();
 
         // check if there is a current cycle
         if (!$cycle){

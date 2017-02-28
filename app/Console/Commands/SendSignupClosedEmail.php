@@ -39,7 +39,7 @@ class SendSignupClosedEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::current_cycle();
+        $cycle = Cycle::currentCycle();
         $mailer = new UserMailer;
 
         $cycle->signups()->each(function($item, $key) use ($mailer, $cycle) {

@@ -28,7 +28,7 @@ class TeamsController extends Controller
      */
     public function create()
     {
-        $cycle = Cycle::current_cycle();
+        $cycle = Cycle::currentCycle();
 
         return view('teams.create')->withCycle($cycle);
     }

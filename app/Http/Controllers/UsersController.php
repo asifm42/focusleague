@@ -134,8 +134,8 @@ class UsersController extends Controller
         $user->load('ultimateHistory');
         // dd($user->availability()->where('cycle_id',2)->get());
         $data['user'] = $user;
-        $data['current_cycle'] = Cycle::current_cycle();
-        $data['next_cycle'] = Cycle::next_cycle();
+        $data['current_cycle'] = Cycle::currentCycle();
+        $data['next_cycle'] = Cycle::nextCycle();
         $data['current_cycle_sub_weeks'] = [];
         $data['next_cycle_sub_weeks'] = [];
         $data['balance'] = $user->getBalance();

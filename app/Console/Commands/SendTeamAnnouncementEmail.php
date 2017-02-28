@@ -39,7 +39,7 @@ class SendTeamAnnouncementEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::current_cycle();
+        $cycle = Cycle::currentCycle();
         $teams = $cycle->teams;
         $teams->load('players', 'players.user');
         $mailer = new UserMailer;
