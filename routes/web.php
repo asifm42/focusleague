@@ -64,6 +64,12 @@ Route::get(     'users/verify/{confirmationCode}',  'Auth\EmailVerificationContr
 Route::get(     'users/verification',       'Auth\EmailVerificationController@resetVerificationCodeForm')->name('users.resetVerificationCodeForm');
 Route::post(    'users/verification',        'Auth\EmailVerificationController@resetVerificationCode')->name('users.resetVerificationCode');
 
+/*
+ * User Impersonation
+ * middleware on controller
+ */
+Route::get('users/impersonate/{id}', 'ImpersonationController@impersonate')->name('users.impersonate');
+Route::get('users/stop-impersonating', 'ImpersonationController@stopImpersonating')->name('users.impersonate.stop');
 
 
 Route::group(['middleware' => ['auth','historyprovided']], function() {

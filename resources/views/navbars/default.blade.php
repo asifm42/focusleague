@@ -50,15 +50,38 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a id="account-menu" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i>&nbsp; {{ ucwords(auth()->user()->getNicknameOrFirstName()) }} <span class="caret"></span>
+                        @if (session('impersonator'))
+                          <i class="fa fa-fw fa-user-secret text-danger" data-toggle="tooltip" data-placement="left" title="You are impersonating"></i>
+                        @else
+                            <i class="fa fa-fw fa-user"></i>
+                        @endif
+                        {{ ucwords(auth()->user()->getNicknameOrFirstName()) }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="account-menu">
+                        @if (session('impersonator'))
+                            <li class="dropdown-header">Impersonation</li>
+
+                            <!-- Stop Impersonating -->
+                            <li>
+                                <a href="{{ action('ImpersonationController@stopImpersonating') }}">
+                                    <i class="fa fa-fw fa-btn fa-user-secret"></i>
+                                    Back To My Account
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+                        @endif
                         <li class="{{ active_class(if_uri_pattern('dashboard', 'active')) }}"><a href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a></li>
                         <li class="{{ active_class(if_uri_pattern('balance', 'active')) }}"><a href="{{ route('balance.details') }}"><i class="fa fa-money"></i>&nbsp; Balance ({{ auth()->user()->getBalanceString() }})</a></li>
+
+                        <li class="divider"></li>
                         @if (auth()->user()->isAdmin())
+                            <li class="dropdown-header">Admin</li>
                             <li class="{{ active_class(if_uri_pattern('admin/dashboard', 'active')) }}"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Admin Dashboard</a></li>
                             <li class="{{ active_class(if_uri_pattern('users', 'active')) }}"><a href="{{ route('users.list') }}"><i class="fa fa-users"></i>&nbsp; All Users</a></li>
                             <li class="{{ active_class(if_uri_pattern('delinquents', 'active')) }}"><a href="{{ route('users.delinquent') }}"><i class="fa fa-money"></i>&nbsp; Delinquents</a></li>
+
+                            <li class="divider"></li>
                         @endif
                         <li class="{{ active_class(if_uri_pattern('signout', 'active')) }}"><a href="{{ route('sessions.signout') }}"><i class="fa fa-sign-out"></i>&nbsp; Sign out</a></li>
                     </ul>

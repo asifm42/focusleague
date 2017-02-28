@@ -19,6 +19,16 @@ class User extends Authenticatable
     protected $dates = ['season_pass_ends_on', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'admin' => 'boolean',
+        'god' => 'boolean',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -402,6 +412,16 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->admin == true;
+    }
+
+    /**
+     * Checks if the user is an admin.
+     *
+     * @return bool
+     */
+    public function isGod()
+    {
+        return $this->god == true;
     }
 
     public function isAvailable($weekId) {

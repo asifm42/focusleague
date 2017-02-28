@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Exceptions\UnauthorizedAccessException;
 
-class God
+class VerifyGod
 {
     /**
      * Handle an incoming request.
