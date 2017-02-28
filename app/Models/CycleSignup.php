@@ -103,4 +103,29 @@ class CycleSignup extends Model
             }
         }
     }
+
+    public function cost()
+    {
+        $weeks = $this->user->availability()->where('cycle_id',$this->cycle->id)->get();
+
+        $attendingDates = collect();
+
+        foreach($weeks as $week){
+            if ($week->pivot->attending) {
+                $attendingDates->push($week->starts_at->toFormattedDateString());
+            }
+        }
+
+        if ($attendingDates->count() === 4){
+            return config('focus_cost.cycle.four_weeks');
+        } elseif ($attendingDates->count() === 3){
+            return config('focus_cost.cycle.three_weeks');
+        } elseif ($attendingDates->count() === 2) {
+            return config('focus_cost.cycle.two_weeks');
+        } elseif ($attendingDates->count() === 1) {
+            return config('focus_cost.cycle.sub');
+        } else {
+            return config('focus_cost.cycle.two_weeks');
+        }
+    }
 }
