@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use Carbon;
+use Carbon\Carbon;
 use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
-use Mail;
-use Queue;
+use Laravel\Dusk\DuskServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         Queue::failing( function(JobFailed $event) {
 
             $data['jobName'] = $event->job->getName();
-            $data['jsonEncodedData'] = json_encode($event->data);
+            $data['jsonEncodedData'] = json_encode($event->job->payload());
             // $data['connection'] = $event->connectionName;
 
             // Add current timestring
@@ -42,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->register(DuskServiceProvider::class);
+        }
     }
 }
