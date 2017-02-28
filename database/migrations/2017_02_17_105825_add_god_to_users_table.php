@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDateToTransactionsTable extends Migration
+class AddGodToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +13,8 @@ class AddDateToTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->date('date')->after('amount')->default('CURRENT_TIMESTAMP');
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('god')->default(0);
         });
     }
 
@@ -24,8 +25,8 @@ class AddDateToTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('date');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('god');
         });
     }
 }

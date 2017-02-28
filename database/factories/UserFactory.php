@@ -2,14 +2,12 @@
 
 /*
 |--------------------------------------------------------------------------
-| Model Factories
+| User Model Factories
 |--------------------------------------------------------------------------
 |
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
 |
 */
+
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
@@ -76,52 +74,5 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'season_pass_ends_on' => $seasonPasser,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
-    ];
-});
-
-$factory->define(App\Models\UltimateHistory::class, function (Faker\Generator $faker) {
-    return [
-        'club_affiliation' => 'not sure',
-        'years_played' => '11-15',
-        'summary' => $faker->sentences($nb=4, $asText=true),
-        'fav_defensive_position' => 'zone wing',
-        'fav_offensive_position' => 'handler / mid-cutter',
-        'def_or_off' => 'offensive',
-        'best_skill' => 'throwing with accuracy and touch',
-        'skill_to_improve' => 'defensive coverage on a handler',
-        'best_throw' => 'short - mid range flick',
-        'throw_to_improve' => 'scoober',
-    ];
-});
-
-$factory->define(App\Models\Week::class, function (Faker\Generator $faker) {
-    return [
-        'cycle_id' => 1,
-        'starts_at' => '2016-03-15 20:00:00',
-        'ends_at' => '2016-03-15 22:00:00',
-        'rained_out' => false,
-    ];
-});
-
-$factory->define(App\Models\Game::class, function (Faker\Generator $faker) {
-    return [
-        'week_id' => 1,
-        'starts_at' => '2016-03-15 20:20:00',
-        'ends_at' => '2016-03-15 22:00:00',
-        'field' => 'field A',
-        'division'=> 'mens',
-        'format'=> '7v7',
-        'created_by' => 1,
-    ];
-});
-
-$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
-    return [
-        'type' => 'news',
-        'title' => $faker->realText($maxNbChars = 20, $indexSize = 2),
-        'content' => $faker->realText($maxNbChars = 200, $indexSize = 2),
-        'posted_by' => 1,
-        'created_at' => $created = $faker->dateTimeBetween($startDate = '2016-03-05', $endDate = '1 week'),
-        'updated_at'=> $created,
     ];
 });
