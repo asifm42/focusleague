@@ -19,7 +19,8 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserVerified' => [
             'App\Listeners\SendWelcomeEmail',
-            // 'App\Listeners\AddUserToAnnouncementEmailList',
+            'App\Listeners\SendUserEmailVerifiedAlert',
+            'App\Listeners\AddUserToAnnouncementEmailList',
             // 'App\Listeners\SignInUser',
         ],
         'App\Events\VerificationCodeReset' => [
