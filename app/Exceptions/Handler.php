@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
-            return response()->view('errors.custom', [], 500);
+            return response()->view('errors.generic', [], 500);
         }
 
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
@@ -74,6 +74,12 @@ class Handler extends ExceptionHandler
         if ($e instanceof \App\Exceptions\UnauthorizedAccessException
             || $e instanceof \Illuminate\Auth\Access\UnauthorizedException) {
             return response()->view('errors.unauthorizedAccessAttempt', ['msg'=>$e->getMessage()], 403);
+        }
+
+        if ($e instanceof \App\Exceptions\NoCurrentCycleException) {
+            flash()->info('Sorry, there is no current cycle at the moment.');
+
+            return redirect()->route('cycles.index');
         }
 
         if ($e instanceof \App\Exceptions\SaveModelException) {
