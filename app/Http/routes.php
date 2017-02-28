@@ -72,9 +72,9 @@ Route::group(['middleware' => ['web']], function() {
      * Site Pages Route
      */
     // Route::get(     '/',        ['as' => 'site.home',       'uses' => 'PagesController@welcome']);
-    Route::get(     'faq',      ['as' => 'site.faq',        'uses' => 'PagesController@faq']);
-    Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesController@pricing']);
-    Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PostsController@index']);
+    // MOVED // Route::get(     'faq',      ['as' => 'site.faq',        'uses' => 'PagesController@faq']);
+    // MOVED // Route::get(     'pricing',  ['as' => 'site.pricing',    'uses' => 'PagesController@pricing']);
+    // MOVED // Route::get(     'news',     ['as' => 'site.news',       'uses' => 'PostsController@index']);
 
     /*
      * Contact us routes
@@ -85,20 +85,20 @@ Route::group(['middleware' => ['web']], function() {
     /*
      * Session Routes
      */
-    // Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
+    // MOVED // Route::get(     'signout',              ['as' => 'sessions.signout', 'uses' => 'SessionsController@signOut']);
 
     // Password reset link request routes...
-    // Route::get(     'password/email',       ['as' => 'password.emailForm', 'uses' => 'Auth\PasswordController@getEmail']);
-    // Route::post(    'password/email',       ['as' => 'password.email', 'uses' => 'Auth\PasswordController@postEmail']);
+    // MOVED // Route::get(     'password/email',       ['as' => 'password.emailForm', 'uses' => 'Auth\PasswordController@getEmail']);
+    // MOVED // Route::post(    'password/email',       ['as' => 'password.email', 'uses' => 'Auth\PasswordController@postEmail']);
 
     // // Password reset routes...
-    // Route::get(     'password/reset/{token}',           ['as' => 'password.resetForm', 'uses' => 'Auth\PasswordController@getReset']);
-    // Route::post(    'password/reset',                   ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
+    // MOVED // Route::get(     'password/reset/{token}',           ['as' => 'password.resetForm', 'uses' => 'Auth\PasswordController@getReset']);
+    // MOVED // Route::post(    'password/reset',                   ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
 
     // User verification routes
-    // Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
-    // Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
-    // Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
+    // MOVED // Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
+    // MOVED // Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
+    // MOVED // Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
     //
     Route::get('/token', function () {
         throw new TokenMismatchException();
@@ -152,9 +152,9 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
     /*
      * Cycle Routes
      */
-    Route::get(     'cycles',               ['as' => 'cycles.index', 'uses' => 'CyclesController@index']);
-    Route::get(     'cycles/{id}',          ['as' => 'cycles.view', 'uses' => 'CyclesController@show']);
-    Route::get(     'cycles/current',       ['as' => 'cycles.current', 'uses' => 'CyclesController@show']);
+    // MOVED // Route::get(     'cycles',               ['as' => 'cycles.index', 'uses' => 'CyclesController@index']);
+    // MOVED // Route::get(     'cycles/{id}',          ['as' => 'cycles.view', 'uses' => 'CyclesController@show']);
+    // MOVED // Route::get(     'cycles/current',       ['as' => 'cycles.current', 'uses' => 'CyclesController@show']);
 
     /*
      * Cycle Signup Routes
@@ -277,7 +277,7 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     /*
         Log routes
      */
-    Route::get('logs',              ['as' => 'admin.logs', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
+    // MOVED // Route::get('logs',              ['as' => 'admin.logs', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
 });
 
 

@@ -11,11 +11,22 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+/*
+ * Non-Auth Routes
+ * TO-DO UNTESTED
+ *
+ */
+Route::get(     '/',        'PagesController@welcome')->name('site.home');
+Route::get(     'faq',      'PagesController@faq')->name('site.faq');
+Route::get(     'pricing',  'PagesController@pricing')->name('site.pricing');
+Route::get(     'news',     'PostsController@index')->name('site.news');
 
-Route::get(     '/',        ['as' => 'site.home',       'uses' => 'PagesController@welcome']);
+/*
+ * Contact us routes
+ * TO-DO UNTESTED
+ */
+// Route::get(     'contact',      ['as' => 'contact.create', 'uses' => 'ContactsController@create']);
+// Route::post(    'contact',      ['as' => 'contact.send', 'uses' => 'ContactsController@send']);
 
 /*
  * Auth Routes
@@ -49,14 +60,9 @@ Route::post(    'signup',  'Auth\RegisterController@register')->name('users.stor
  * Middleware applied on the controller
  *
  */
-// User verification routes
 Route::get(     'users/verify/{confirmationCode}',  'Auth\EmailVerificationController@verifyEmail')->name('users.verify');
 Route::get(     'users/verification',       'Auth\EmailVerificationController@resetVerificationCodeForm')->name('users.resetVerificationCodeForm');
 Route::post(    'users/verification',        'Auth\EmailVerificationController@resetVerificationCode')->name('users.resetVerificationCode');
-
-    // Route::get(     'users/verify',                     ['as' => 'users.verify', 'uses' => 'UsersController@verify']);
-    // Route::get(     'users/verification',               ['as' => 'users.resetVerificationCodeForm', 'uses' => 'UsersController@resetVerificationCodeForm']);
-    // Route::post(    'users/verification',               ['as' => 'users.resetVerificationCode', 'uses' => 'UsersController@resetVerificationCode']);
 
 
 
@@ -69,4 +75,79 @@ Route::group(['middleware' => ['auth','historyprovided']], function() {
     // Route::get(     'users/{id}',       ['as' => 'users.show', 'uses' => 'UsersController@show']);
     Route::get(     'dashboard',        ['as' => 'users.dashboard', 'uses' => 'UsersController@dashboard']);
 
+    /*
+     * Cycle Routes
+     */
+    Route::get(     'cycles',               ['as' => 'cycles.index', 'uses' => 'CyclesController@index']);
+    Route::get(     'cycles/{cycle}',          ['as' => 'cycles.view', 'uses' => 'CyclesController@show']);
+    Route::get(     'cycles/current',       ['as' => 'cycles.current', 'uses' => 'CyclesController@show']);
+
+
+
+
+
+
+
+
+    /*
+     * Cycle Signup Routes
+     * TO-DO UNTESTED
+     */
+    // Route::get(     'cycles/{id}/signup',       ['as' => 'cycle.signup.create', 'uses' => 'CycleSignupsController@create']);
+    // Route::post(    'cycles/{id}/signup',       ['as' => 'cycle.signup.store', 'uses' => 'CycleSignupsController@store']);
+    // Route::get(     'cycles/{id}/signup/edit',  ['as' => 'cycle.signup.edit', 'uses' => 'CycleSignupsController@edit']);
+    // Route::patch(   'cycles/{id}/signup',       ['as' => 'cycle.signup.update', 'uses' => 'CycleSignupsController@update']);
+    // Route::put(     'cycles/{id}/signup',       ['as' => 'cycle.signup.put', 'uses' => 'CycleSignupsController@update']);
+    // Route::delete(  'cycles/{id}/signup',       ['as' => 'cycle.signup.destroy', 'uses' => 'CycleSignupsController@destroy']);
+
+
+
+
+
+
+    /*
+     * Sub Signup Routes
+     * TO-DO UNTESTED
+     */
+    // Route::get(     'cycles/{id}/subs/signup',      ['as' => 'sub.create', 'uses' => 'SubsController@create']);
+    // Route::post(    'cycles/{id}/subs',             ['as' => 'sub.store', 'uses' => 'SubsController@store']);
+    // Route::get(     'subs/{id}/edit',               ['as' => 'sub.edit', 'uses' => 'SubsController@edit']);
+    // Route::patch(   'subs/{id}',                    ['as' => 'sub.update', 'uses' => 'SubsController@update']);
+    // Route::put(     'subs/{id}',                    ['as' => 'sub.put', 'uses' => 'SubsController@update']);
+    // Route::delete(  'subs/{id}',                    ['as' => 'sub.destroy', 'uses' => 'SubsController@destroy']);
+
+
+    /*
+     * Transaction routes
+     * TO-DO UNTESTED
+     *
+     */
+    // Route::get(     'balance',      ['as' => 'balance.details', 'uses' => 'TransactionsController@index']);
+
+
+
+
+});
+
+// Ultimate history outside of historyprovided middleware or you'll be stuck in a loop
+Route::group(['middleware' => ['auth']], function() {
+    /*
+     * Ultimate History Routes
+     */
+    // Route::get(     'ultimatehistory',                      ['as' => 'ultimate_history.create', 'uses' => 'UltimateHistoryController@create']);
+    // Route::get(     'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.show', 'uses' => 'UltimateHistoryController@show']);
+    // Route::post(    'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.store', 'uses' => 'UltimateHistoryController@store']);
+    // Route::get(     'users/{id}/ultimatehistory/edit',      ['as' => 'users.ultimate_history.edit', 'uses' => 'UltimateHistoryController@edit']);
+    // Route::patch(   'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.update', 'uses' => 'UltimateHistoryController@update']);
+    // Route::put(     'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.put', 'uses' => 'UltimateHistoryController@update']);
+    // Route::delete(  'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.destroy', 'uses' => 'UltimateHistoryController@destroy']);
+});
+
+
+Route::group(['middleware' => ['auth','admin']], function() {
+
+    /*
+        Log routes
+     */
+    Route::get('logs',              ['as' => 'admin.logs', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
 });
