@@ -18,9 +18,9 @@ class CyclesController extends Controller
     {
         $data['cycles'] = Cycle::all()->reverse();
 
-        $data['current_cycle'] = Cycle::current_cycle();
+        $data['current_cycle'] = Cycle::currentCycle();
 
-        $data['next_cycle'] = Cycle::next_cycle();
+        $data['next_cycle'] = Cycle::nextCycle();
 
         return view('cycles.index', $data);
     }
@@ -52,19 +52,8 @@ class CyclesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, Cycle $cycle)
     {
-        if ($id === 'current') {
-            $cycle = Cycle::current_cycle();
-            if (!$cycle) {
-                flash()->info('Sorry, there is no current cycle at the moment.');
-
-                return redirect()->route('cycles.index');
-            }
-        } else {
-            $cycle = Cycle::findOrFail($id);
-        }
-
         $cycle->load('signups', 'weeks', 'weeks.subs', 'weeks.games', 'signups.availability', 'teams');
 
         $data['cycle'] = $cycle;

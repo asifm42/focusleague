@@ -98,7 +98,7 @@ class Cycle extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function current_cycle()
+    public static function currentCycle()
     {
         $now = Carbon::now();
         return Cycle::where('signup_opens_at', '<', $now)
@@ -111,7 +111,7 @@ class Cycle extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function next_cycle()
+    public static function nextCycle()
     {
         $now = Carbon::now();
         return Cycle::where('signup_opens_at', '>', $now)

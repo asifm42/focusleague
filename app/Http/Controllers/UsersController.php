@@ -91,8 +91,8 @@ class UsersController extends Controller
         $user = auth()->user();
         $user->load('ultimateHistory');
         $data['user'] = $user;
-        $data['current_cycle'] = Cycle::current_cycle();
-        $data['next_cycle'] = Cycle::next_cycle();
+        $data['current_cycle'] = Cycle::currentCycle();
+        $data['next_cycle'] = Cycle::nextCycle();
         $data['current_cycle_sub_weeks'] = [];
         $data['next_cycle_sub_weeks'] = [];
         $data['balance'] = number_format($user->getBalance(), 2, '.', ',');
