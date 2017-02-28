@@ -3,9 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\UserSignedUpForCycle;
-use App\Mailers\UserMailer as Mailer;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Mail\CycleSignupConfirmation;
+// use App\Mailers\UserMailer as Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
 class SendCycleSignupConfirmation
 {
@@ -14,9 +16,9 @@ class SendCycleSignupConfirmation
      *
      * @return void
      */
-    public function __construct(Mailer $mailer)
+    public function __construct()
     {
-        $this->mailer = $mailer;
+
     }
 
     /**
@@ -27,6 +29,9 @@ class SendCycleSignupConfirmation
      */
     public function handle(UserSignedUpForCycle $event)
     {
-        $this->mailer->sendCycleSignupConfirmation($event->user, $event->cycle, $event->cycleSignup);
+
+        Mail::to($event->user->email, $event->user->name)
+            ->queue(new CycleSignupConfirmation($event->user, $event->cycle, $event->cycleSignup));
+        // $this->mailer->sendCycleSignupConfirmation($event->user, $event->cycle, $event->cycleSignup);
     }
 }
