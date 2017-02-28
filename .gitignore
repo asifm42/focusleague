@@ -8,3 +8,5 @@ composer.phar
 composer.lock
 focusleague.sublime-project
 focusleague.sublime-workspace
+storage/stubdb.sqlite
+storage/testdb.sqlite
