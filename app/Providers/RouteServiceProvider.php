@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
+use App;
+use App\Exceptions\NoCurrentCycleException;
+use App\Models\Cycle;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +29,20 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        // Route::model('cycle', App\Models\Cycle::class);
+
+        Route::bind('cycle', function ($value) {
+            if ($value === 'current') {
+                $cycle = Cycle::currentCycle();
+                if (!$cycle) {
+                    throw new NoCurrentCycleException();
+                }
+                return $cycle;
+            } else {
+                return Cycle::findOrFail($value);
+            }
+        });
     }
 
     /**
