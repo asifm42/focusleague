@@ -33,7 +33,7 @@ class CycleSignupsController extends Controller
     public function create(Request $request, $id)
     {
         if ($id === 'current') {
-            $cycle = Cycle::current_cycle();
+            $cycle = Cycle::currentCycle();
             if (!$cycle) {
                 flash()->info('Sorry, there is no current cycle at the moment.');
 
@@ -57,7 +57,8 @@ class CycleSignupsController extends Controller
 
         return view('cycles.signups.create')
                 ->withCycle($cycle)
-                ->withUser($user);
+                ->withUser($user)
+                ->withCost(config('focus_cost'));
     }
 
     /**
@@ -144,7 +145,8 @@ class CycleSignupsController extends Controller
         return view('cycles.signups.edit')
                 ->withCycle($cycle)
                 ->withUser($user)
-                ->withSignup($signup);
+                ->withSignup($signup)
+                ->withCost(config('focus_cost'));
     }
 
     /**
