@@ -1,10 +1,14 @@
-@extends('layouts.email')
+@component('emails.layouts.message')
+<p>Just a quick friendly reminder that sign-up for Cycle {{ $cycle->name }} is closing soon! We would hate to not see your beautiful face out there.</p>
 
-@section('content')
+@component('mail::button', ['url' => route('cycle.signup.create', $cycle->id), 'color' => 'blue'])
+SIGN UP FOR CYCLE {{ $cycle->name }}
+@endcomponent
 
-    <p>Just a quick friendly reminder that sign-up for Cycle {{ $cycleArr['name'] }} is closing soon!{{-- at {{ $cycle->signup_closes_at->toDayDateTimeString() }}.--}} We would hate to not see your beautiful face out there.</p>
+<p>Thanks for your support!</p>
 
-    <p><a href="{{ route('cycle.signup.create', $cycleArr['id']) }}">SIGN UP FOR CYCLE {{ $cycleArr['name'] }}</a></p>
+@slot('unsubscribe')
+<p><a href="%tag_unsubscribe_url%">Unsubscribe</a> from Cycle {{ $cycle->name }} sign-up reminders.</p>
+@endslot
 
-    <p>Thanks for your support!</p>
-@stop
+@endcomponent

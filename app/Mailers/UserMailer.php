@@ -204,19 +204,10 @@ class UserMailer extends Mailer {
      */
     public function sendSignupClosingReminderEmail(User $user, Cycle $cycle)
     {
-        $view = 'emails.signup_closing_reminder';
-        $subject = 'Cycle ' . $cycle->name . ' sign-up closing soon. Don\'t be left out!';
-        $data=[];
-        $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle;
-        $data['cycleArr'] = $cycle->toArray();
+        Mail::to($user->email, $user->name)
+            ->queue(new Mailable\SignupClosingReminderEmail($user, $cycle));
 
-        // add mailgun tag header
-        $headers = ['x-mailgun-tag' => 'cycle_'.$cycle->name.'_signup_reminder'];
-
-        // return $this->sendTo($user, $subject, $view, $data);
-
-        return $this->sendTo($user, $subject, $view, $data, $headers);
+        return;
     }
 
     /**

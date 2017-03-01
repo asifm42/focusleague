@@ -25,13 +25,22 @@ class SendSignupClosingReminderEmail extends Command
     protected $description = 'Sends an email to all players who have not signed up for the current cycle reminding them sign up is closing soon.';
 
     /**
+     * The user mailer instance
+     *
+     * @var UserMailer
+     */
+    protected $mailer;
+
+
+    /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserMailer $userMailer)
     {
         parent::__construct();
+        $this->mailer = $userMailer;
     }
 
     /**
@@ -45,32 +54,27 @@ class SendSignupClosingReminderEmail extends Command
 
         // check if there is a current cycle
         if (!$cycle){
+            $this->error('No current cycle');
             return;
         }
 
-        $cycle->load('signups');
-
-        // check to see if sign-up is open
+        // check to see if sign-up is closing within 48 hrs
         if (!$cycle->signup_closes_at->between(Carbon::now(), Carbon::now()->addHours(48))){
             $this->error('Sign-up not closing within 48 hrs. Cycle ' . $cycle->name . ' closing/closed at ' . $cycle->signup_closes_at->toDayDateTimeString());
             return;
         }
 
+        // send an email to each user that has not signed up for the cycle. Reject the rice players.
+        $cycle->usersNotSignedUp()
+            ->reject(function ($user) {
+                return in_array($user->id, config('groups.rice'));
+            })->each(function ($user) use ($cycle) {
+                $this->mailer->sendSignupClosingReminderEmail($user, $cycle);
 
-        $users = User::all();
-        $mailer = new UserMailer;
-
-        $usersNotSignedUp = $users->diff($cycle->signups);
-
-        // remove rice players
-        $usersNotSignedUp = $usersNotSignedUp->filter(function ($item) {
-                return !in_array($item->id, config('groups.rice'));
+                $this->info('Sign-up closing reminder email queued up for id:' . $user->id
+                    . ' - name: ' . $user->name
+                    . ' - nickname: ' . $user->getNicknameOrShortname()
+                );
             });
-
-
-        foreach($usersNotSignedUp as $user){
-            $mailer->sendSignupClosingReminderEmail($user, $cycle);
-            $this->info('Sign-up closing reminder email queued up for id:'. $user->id . ' - name: ' . $user->name . ' - nickname: ' . $user->getNicknameOrShortname());
-        }
     }
 }
