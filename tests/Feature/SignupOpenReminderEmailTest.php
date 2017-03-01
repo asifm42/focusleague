@@ -45,13 +45,8 @@ class SignupOpenReminderEmailTest extends TestCase
         ]);
 
         $user1 = User::find($cycle->created_by);
-        // $user1->ultimateHistory()->save(factory(UltimateHistory::class)->make());
         $user2 = factory(User::class)->create();
-        // $user2->ultimateHistory()->save(factory(UltimateHistory::class)->make());
         $user3 = factory(User::class)->create();
-        // $user3->ultimateHistory()->save(factory(UltimateHistory::class)->make());
-        // $user4 = factory(User::class)->create();
-        // $user3->ultimateHistory()->save(factory(UltimateHistory::class)->make());
 
         $cycle->signups()->attach($user1->id, [
             'div_pref_first'    => 'mens',
@@ -65,16 +60,11 @@ class SignupOpenReminderEmailTest extends TestCase
             ]);
         });
 
-        $users = User::all();
-
-        $usersNotSignedUp = $users->diff($cycle->signups);
+        $usersNotSignedUp = $cycle->usersNotSignedUp();
 
         $this->assertEquals(2, $usersNotSignedUp->count());
         $this->assertTrue($usersNotSignedUp->contains($user2));
         $this->assertTrue($usersNotSignedUp->contains($user3));
-
-
-        // dd($this->artisan('emails:sendSignupOpenReminder'));
 
         $usersNotSignedUp->each(function ($user) use ($cycle) {
             Mail::to($user->email, $user->name)
@@ -87,6 +77,10 @@ class SignupOpenReminderEmailTest extends TestCase
 
         Mail::assertSent(SignupOpenReminderEmail::class, function ($mail) use ($user3) {
             return $mail->hasTo($user3->email);
+        });
+
+        Mail::assertSent(SignupOpenReminderEmail::class, function ($mail) use ($user1) {
+            return !$mail->hasTo($user1->email);
         });
 
     }
