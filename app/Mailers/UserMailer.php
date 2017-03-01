@@ -10,7 +10,8 @@ use App\Models\User;
 use App\Models\Week;
 use Illuminate\Support\Facades\Mail;
 
-class UserMailer extends Mailer {
+class UserMailer extends Mailer
+{
 
     /**
      * Sends the verification email.
@@ -129,6 +130,7 @@ class UserMailer extends Mailer {
     {
         Mail::to($user->email, $user->name)
             ->queue(new TeamAnnouncementEmail($user, $cycle, $team));
+return;
 
         $view = 'emails.team_announcement';
         $subject = 'Teams are set!';
