@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Mail\SignupOpenAnnounceEmail;
+use App\Mailers\UserMailer;
 use App\Models\Cycle;
 use App\Models\User;
 use Illuminate\Console\Command;
@@ -25,6 +26,15 @@ class SendSignupOpenAnnouncementEmail extends Command
     protected $description = 'Sends an announcement email to all players who haven’t signed up for the cycle';
 
     /**
+     * The mailer instance.
+     *
+     * @var UserMailer
+     */
+    protected $userMailer;
+
+
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -32,6 +42,7 @@ class SendSignupOpenAnnouncementEmail extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->userMailer = new UserMailer;
     }
 
     /**
@@ -57,36 +68,12 @@ class SendSignupOpenAnnouncementEmail extends Command
             return;
         }
 
-        $users = User::all();
-
-        $usersNotSignedUp = $users->diff($cycle->signups);
-
-        // remove rice players
-        $usersNotSignedUp = $usersNotSignedUp->filter(function ($item) {
-                return !in_array($item->id, config('groups.rice'));
-            });
-
-        $usersNotSignedUp->each(function ($user) use ($cycle) {
-            Mail::to($user->email, $user->name)
-                ->queue(new SignupOpenAnnounceEmail($user, $cycle));
-
-            $this->info(
-                'Sign-up open announcement email queued up for id:'
-                . $user->id
-                . ' - name: '
-                . $user->name
-                . ' - nickname: '
-                . $user->getNicknameOrShortname()
-            );
-        });
-
         // send an email to each user that has not signed up for the cycle. Reject the rice players.
         $cycle->usersNotSignedUp()
             ->reject(function ($user) {
                 return in_array($user->id, config('groups.rice'));
             })->each(function ($user) use ($cycle) {
-                Mail::to($user->email, $user->name)
-                    ->queue(new SignupOpenAnnounceEmail($user, $cycle));
+                $this->userMailer->sendSignupOpenAnnouncementEmail($user, $cycle);
 
                 $this->info(
                     'Sign-up open reminder email queued up for id:' . $user->id

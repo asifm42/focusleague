@@ -1,11 +1,13 @@
 <?php
 namespace App\Mailers;
 
+use App\Mail as Mailable;
 use App\Models\Cycle;
-use App\Models\User;
 use App\Models\CycleSignup;
-use App\Models\Week;
 use App\Models\Team;
+use App\Models\User;
+use App\Models\Week;
+use Illuminate\Support\Facades\Mail;
 
 class UserMailer extends Mailer {
 
@@ -237,6 +239,19 @@ class UserMailer extends Mailer {
         // return $this->sendTo($user, $subject, $view, $data);
 
         return $this->sendTo($user, $subject, $view, $data, $headers);
+    }
+
+    /**
+     * Sends an email to the user announcing opening of cycle sign-up.
+     *
+     * @return void
+     */
+    public function sendSignupOpenAnnouncementEmail(User $user, Cycle $cycle)
+    {
+        Mail::to($user->email, $user->name)
+            ->queue(new Mailable\SignupOpenAnnounceEmail($user, $cycle));
+
+        return;
     }
 
 
