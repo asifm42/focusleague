@@ -167,31 +167,20 @@ span.event-xs  {
                         @endif
                     @else
                         @if($current_cycle && $current_cycle->isSignupOpen())
-                            <h5 class="text-primary">
-                                Sign up for Cycle {{ $current_cycle->name }} is now open!
-                            </h5>
+                        <div class="text-center" style="margin:1em;">
+                            <div class="alert alert-success">
+                                <a  href="{{ route('sessions.create') }}">
+                                    <h4 style="color: #fff; margin:0">
+                                        Sign up for Cycle {{ $current_cycle->name }} is now open!
+                                    </h4>
+                                </a>
+                            </div>
+                        </div>
                         @elseif ($current_cycle)
                             <h5 class="text-info">
                                 Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.
                             </h5>
                         @endif
-<div class="row" style="margin-bottom:1em;">
-
-                    <div class="text-center">
-                        <div class="alert alert-success">
-                            <h3 style="color: #fff;">
-                                FOCUS&nbsp;League&nbsp;returns March&nbsp;7th!
-                            </h3>
-                            <h5 style="color: #fff;">
-Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
-                            </h5>
-                        </div>
-                    </div>
-</div>
-<!--                         <p>
-                            <a  href="{{ route('sessions.create') }}"
-                                class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>&nbsp; Sign in</a>
-                        </p> -->
                     @endif
 
                     @if($next_cycle)
@@ -243,14 +232,6 @@ Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
                     <h3>
                         Fostering Organized Competitive Ultimate Series
                     </h3>
-
-<!--                     <div class="text-center">
-                        <div class="alert alert-success">
-                            <h1 style="color: #fff;">
-                                FOCUS League returns March 7th!
-                            </h1>
-                        </div>
-                    </div> -->
                     @if($current_cycle && $current_cycle->gameToday())
 
                     @endif
@@ -284,9 +265,15 @@ Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
                         @endif
                     @else
                         @if($current_cycle && $current_cycle->isSignupOpen())
-                            <h4 class="text-primary">
-                                Sign up for Cycle {{ $current_cycle->name }} is now open!
-                            </h4>
+                        <div class="text-center" style="margin:1em 0;">
+                            <div class="alert alert-success">
+                                <a  href="{{ route('sessions.create') }}">
+                                    <h3 style="color: #fff; margin:0">
+                                        Sign up for Cycle {{ $current_cycle->name }} is now open!
+                                    </h3>
+                                </a>
+                            </div>
+                        </div>
                         @elseif ($current_cycle)
                             <h4 class="text-info">
                                 Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.
@@ -299,7 +286,7 @@ Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
                             </a>
                         </p> -->
 
-                    <div class="text-center" style="margin:1em 0;">
+<!--                     <div class="text-center" style="margin:1em 0;">
                         <div class="alert alert-success">
                             <h1 style="color: #fff;">
                                 FOCUS&nbsp;League&nbsp;returns March&nbsp;7th!
@@ -308,7 +295,7 @@ Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
 Cycle 2017-01&nbsp;Registration&nbsp;Opens March&nbsp;1st.
                             </h3>
                         </div>
-                    </div>
+                    </div> -->
 
                     @endif
                     @if($next_cycle)
