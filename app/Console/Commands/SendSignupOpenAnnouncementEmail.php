@@ -79,5 +79,21 @@ class SendSignupOpenAnnouncementEmail extends Command
                 . $user->getNicknameOrShortname()
             );
         });
+
+        // send an email to each user that has not signed up for the cycle. Reject the rice players.
+        $cycle->usersNotSignedUp()
+            ->reject(function ($user) {
+                return in_array($user->id, config('groups.rice'));
+            })->each(function ($user) use ($cycle) {
+                Mail::to($user->email, $user->name)
+                    ->queue(new SignupOpenAnnounceEmail($user, $cycle));
+
+                $this->info(
+                    'Sign-up open reminder email queued up for id:' . $user->id
+                    . ' - name: ' . $user->name
+                    . ' - nickname: ' . $user->getNicknameOrShortname()
+                );
+            });
+
     }
 }

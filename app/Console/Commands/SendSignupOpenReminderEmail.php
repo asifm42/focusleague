@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Mail\SignupOpenReminderEmail;
 use App\Models\Cycle;
-use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -57,34 +56,19 @@ class SendSignupOpenReminderEmail extends Command
             return;
         }
 
-        $users = User::all();
+        // send an email to each user that has not signed up for the cycle. Filter out the rice players.
+        $cycle->usersNotSignedUp()
+            ->reject(function ($user) {
+                return in_array($user->id, config('groups.rice'));
+            })->each(function ($user) use ($cycle) {
+                Mail::to($user->email, $user->name)
+                    ->queue(new SignupOpenReminderEmail($user, $cycle));
 
-        $usersNotSignedUp = $users->diff($cycle->signups);
-
-        // remove rice players
-        $usersNotSignedUp = $usersNotSignedUp->filter(function ($item) {
-                return !in_array($item->id, config('groups.rice'));
+                $this->info(
+                    'Sign-up open reminder email queued up for id:' . $user->id
+                    . ' - name: ' . $user->name
+                    . ' - nickname: ' . $user->getNicknameOrShortname()
+                );
             });
-
-
-        $usersNotSignedUp->each(function ($user) use ($cycle) {
-            Mail::to($user->email, $user->name)
-                ->queue(new SignupOpenReminderEmail($user, $cycle));
-
-            $this->info(
-                'Sign-up open reminder email queued up for id:'
-                . $user->id
-                . ' - name: '
-                . $user->name
-                . ' - nickname: '
-                . $user->getNicknameOrShortname()
-            );
-        });
-
-        // foreach($usersNotSignedUp as $user){
-        //     // $mailer->sendSignupOpenReminderEmail($user, $cycle);
-        //         Mail::to($user->email, $user->name)
-        //             ->queue(new SignupOpenReminderEmail($user, $cycle));
-        // }
     }
 }
