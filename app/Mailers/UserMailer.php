@@ -2,6 +2,7 @@
 namespace App\Mailers;
 
 use App\Mail as Mailable;
+use App\Mail\TeamAnnouncementEmail;
 use App\Models\Cycle;
 use App\Models\CycleSignup;
 use App\Models\Team;
@@ -113,18 +114,10 @@ class UserMailer extends Mailer {
      */
     public function sendSignUpClosedEmail(User $user, Cycle $cycle)
     {
-        $view = 'emails.signup_closed';
-        $subject = 'Sign-ups closed. Teams announcing tomorrow.';
-        $data=[];
-        $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle->toArray();
+        Mail::to($user->email, $user->name)
+            ->queue(new Mailable\SignupClosedEmail($user, $cycle));
 
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
-
-        return $this->sendTo($user, $subject, $view, $data);
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
+        return;
     }
 
     /**
@@ -134,6 +127,9 @@ class UserMailer extends Mailer {
      */
     public function sendTeamAnnouncementEmail(User $user, Cycle $cycle, Team $team)
     {
+        Mail::to($user->email, $user->name)
+            ->queue(new TeamAnnouncementEmail($user, $cycle, $team));
+
         $view = 'emails.team_announcement';
         $subject = 'Teams are set!';
         $data=[];
@@ -207,19 +203,10 @@ class UserMailer extends Mailer {
      */
     public function sendSignupOpenReminderEmail(User $user, Cycle $cycle)
     {
-        $view = 'emails.signup_closing_reminder';
-        $subject = 'Reminder: Cycle ' . $cycle->name . ' sign-up is open!';
-        $data=[];
-        $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle;
-        $data['cycleArr'] = $cycle->toArray();
+        Mail::to($user->email, $user->name)
+            ->queue(new Mailable\SignupOpenReminderEmail($user, $cycle));
 
-        // add mailgun tag header
-        $headers = ['x-mailgun-tag' => 'cycle_'.$cycle->name.'_signup_reminder'];
-
-        // return $this->sendTo($user, $subject, $view, $data);
-
-        return $this->sendTo($user, $subject, $view, $data, $headers);
+        return;
     }
 
     /**
