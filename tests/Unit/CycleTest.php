@@ -53,19 +53,15 @@ class CycleTest extends TestCase
         $startTime = $cycle->starts_at;
         $cycle->weeks()->saveMany([
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime
             ]),
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime->addWeek(1)
             ]),
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime->addWeek(1)
             ]),
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime->addWeek(1)
             ]),
         ]);
@@ -76,29 +72,29 @@ class CycleTest extends TestCase
         $user4 = factory(User::class)->create();
         $user5 = factory(User::class)->create();
 
-        $cycle->signups()->attach($user1->id, [
-            'div_pref_first'    => 'mens',
-            'div_pref_second'   => 'mens',
-            'will_captain'      => false,
+        $cycle->signups()->attach([
+            $user1->id => [
+                'div_pref_first'    => 'mens',
+                'div_pref_second'   => 'mens',
+                'will_captain'      => false,
+            ],
+            $user2->id => [
+                'div_pref_first'    => 'mens',
+                'div_pref_second'   => 'mens',
+                'will_captain'      => false,
+            ],
+            $user3->id => [
+                'div_pref_first'    => 'mens',
+                'div_pref_second'   => 'mens',
+                'will_captain'      => false,
+            ],
         ]);
 
-
-        $cycle->signups()->attach($user2->id, [
-            'div_pref_first'    => 'mens',
-            'div_pref_second'   => 'mens',
-            'will_captain'      => false,
-        ]);
-        $cycle->signups()->attach($user3->id, [
-            'div_pref_first'    => 'mens',
-            'div_pref_second'   => 'mens',
-            'will_captain'      => false,
-        ]);
-
-        $cycle->weeks->each(function($week) use ($user1) {
-            $user1->availability()->attach($week->id, [
-                'attending' => true
-            ]);
-        });
+        // $cycle->weeks->each(function($week) use ($user1) {
+        //     $user1->availability()->attach($week->id, [
+        //         'attending' => true
+        //     ]);
+        // });
 
         // do we need add availability for the other signups
 
@@ -116,19 +112,15 @@ class CycleTest extends TestCase
         $startTime = $cycle->starts_at;
         $cycle->weeks()->saveMany([
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime
             ]),
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime->addWeek(1)
             ]),
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime->addWeek(1)
             ]),
             factory(Week::class)->make([
-                'cycle_id' => $cycle->id,
                 'starts_at' => $startTime->addWeek(1)
             ]),
         ]);
@@ -137,20 +129,30 @@ class CycleTest extends TestCase
         $user2 = factory(User::class)->create();
         $users = factory(User::class, 8)->create();
 
-        $cycle->signups()->attach($user1->id, [
-            'div_pref_first'    => 'mens',
-            'div_pref_second'   => 'mens',
-            'will_captain'      => false,
+        $cycle->signups()->attach([
+            $user1->id => [
+                'div_pref_first'    => 'mens',
+                'div_pref_second'   => 'mens',
+                'will_captain'      => false,
+            ],
+            $user2->id => [
+                'div_pref_first'    => 'mens',
+                'div_pref_second'   => 'mens',
+                'will_captain'      => false,
+            ],
         ]);
 
-        $cycle->weeks->each(function($week) use ($user1) {
+        $cycle->weeks->each(function($week) use ($user1, $user2) {
             $user1->availability()->attach($week->id, [
+                'attending' => true
+            ]);
+            $user2->availability()->attach($week->id, [
                 'attending' => true
             ]);
         });
 
-        $this->assertEquals(9, $cycle->usersNotSignedUp()->count());
-        $this->assertTrue($cycle->usersNotSignedUp()->contains($user2));
+        $this->assertEquals(8, $cycle->usersNotSignedUp()->count());
+        $this->assertFalse($cycle->usersNotSignedUp()->contains($user2));
         $this->assertTrue($cycle->usersNotSignedUp()->contains($users->get(4)));
     }
 }
