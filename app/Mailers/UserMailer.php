@@ -51,7 +51,7 @@ class UserMailer extends Mailer {
         $data['user'] = $user->toArray();
         $data['cycle'] = $cycle->toArray();
         $data['signup'] = $signup->toArray();
-        $data['cost'] = '$24';
+        $data['cost'] = '$30';
         $data['dates_attending'] = [];
         $data['dates_missing'] = [];
         $weeks = $user->availability()->where('cycle_id',$cycle->id)->get();
@@ -65,7 +65,7 @@ class UserMailer extends Mailer {
         }
 
         if (count($data['dates_attending']) === 3){
-            $data['cost'] = '$21';
+            $data['cost'] = '$25';
         } elseif (count($data['dates_attending']) === 2) {
             $data['cost'] = '$18';
         }
