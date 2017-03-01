@@ -2,12 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\SignupOpenAnnounceEmail;
 use App\Mailers\UserMailer;
 use App\Models\Cycle;
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
 
 class SendSignupOpenAnnouncementEmail extends Command
 {
@@ -39,10 +37,10 @@ class SendSignupOpenAnnouncementEmail extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserMailer $mailer)
     {
         parent::__construct();
-        $this->userMailer = new UserMailer;
+        $this->userMailer = $mailer;
     }
 
     /**
@@ -52,15 +50,13 @@ class SendSignupOpenAnnouncementEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::currentCycle();
+        $cycle = Cycle::currentCycle()->load('signups');
 
         // check if there is a current cycle
         if (!$cycle){
             $this->error('No current cycle.');
             return;
         }
-
-        $cycle->load('signups');
 
         // check to see if sign-up is open
         if (!$cycle->isSignupOpen()){
