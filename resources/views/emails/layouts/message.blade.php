@@ -1,4 +1,11 @@
 @component('mail::message')
+{{-- Greeting --}}
+@if (isset($user))
+Hi {{ title_case($user->getNicknameOrFirstName()) }},
+@else
+Hi FOCUS Leaguer,
+@endif
+
 {{ $slot }}
 
 <!-- Salutation -->
