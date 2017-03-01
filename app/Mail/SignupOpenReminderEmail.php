@@ -45,21 +45,6 @@ class SignupOpenReminderEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        // $view = 'emails.signup_closing_reminder';
-        // $subject = 'Reminder: Cycle ' . $cycle->name . ' sign-up is open!';
-        // $data=[];
-        // $data['user'] = $user->toArray();
-        // $data['cycle'] = $cycle;
-        // $data['cycleArr'] = $cycle->toArray();
-
-        // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'cycle_'.$cycle->name.'_signup_reminder'];
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
-
-
-        // $this;
-
         return $this->from('support@focusleague.com', 'FOCUS League')
                     ->subject('Reminder: Cycle ' . $this->cycle->name . ' sign-up is open!')
                     ->markdown('emails.signup_open_reminder')
