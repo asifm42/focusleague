@@ -15,7 +15,7 @@ class CycleMailer extends Mailer
     /**
      * Sends an email to unregistered users announcing opening of cycle sign-up.
      *
-     * @return void
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public static function sendSignupOpenAnnouncementEmail()
     {
@@ -32,7 +32,7 @@ class CycleMailer extends Mailer
     /**
      * Sends an email to unregistered users reminding them that sign-up is still open.
      *
-     * @return void
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public static function sendSignupOpenReminderEmail()
     {
@@ -49,7 +49,7 @@ class CycleMailer extends Mailer
     /**
      * Sends an email to unregistered users reminding them that sign-up is closing soon.
      *
-     * @return
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public static function sendSignupClosingReminderEmail()
     {
@@ -66,7 +66,7 @@ class CycleMailer extends Mailer
     /**
      * Sends an email to users that are signed up that sign up is closed
      *
-     * @return void
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public static function sendSignUpClosedEmail()
     {
@@ -78,57 +78,10 @@ class CycleMailer extends Mailer
         });
     }
 
-
-
-
-    /**
-     * Sends an email to the user encouraging feeback from the last cycle and reminding about upcoming cycle sign-up closing.
-     *
-     * @return void
-     */
-    public function sendNonReturnerReminderEmail(User $user, Cycle $cycle)
-    {
-        $view = 'emails.non_returner_reminder';
-        $subject = 'Did you have fun last cycle?';
-        $data=[];
-        $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle;
-        $data['cycleArr'] = $cycle->toArray();
-
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
-
-        return $this->sendTo($user, $subject, $view, $data);
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
-    }
-
-    /**
-     * Sends an email to the user asking if they are still available for tonight's game.
-     *
-     * @return void
-     */
-    public function sendAvailabilityEmail(User $user)
-    {
-        $view = 'emails.availability';
-        $subject = 'Are you still coming tonight?';
-        $data=[];
-        $data['user'] = $user->toArray();
-
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
-
-        return $this->sendTo($user, $subject, $view, $data);
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
-    }
-
-
-
     /**
      * Sends an email to the registered players placed on a team announcing their team.
      *
-     * @return void
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public static function sendTeamAnnouncementEmail()
     {
