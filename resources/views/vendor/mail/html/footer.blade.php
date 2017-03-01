@@ -4,6 +4,9 @@
             <tr>
                 <td class="content-cell" align="center">
                     {{ Illuminate\Mail\Markdown::parse($slot) }}
+                @if (isset($unsubscribe))
+                    {{ Illuminate\Mail\Markdown::parse($unsubscribe) }}
+                @endif
                 </td>
             </tr>
         </table>

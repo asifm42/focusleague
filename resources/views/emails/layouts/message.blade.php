@@ -1,10 +1,16 @@
 @component('mail::message')
-    {{ $slot }}
+{{ $slot }}
 
 <!-- Salutation -->
 @if (! empty($salutation))
 {{ $salutation }}
 @else
 –The FOCUS League team (Asif &amp; Nicky)
+@endif
+
+@if (isset($unsubscribe))
+    @slot('unsubscribe')
+        {{ $unsubscribe }}
+    @endslot
 @endif
 @endcomponent

@@ -23,5 +23,9 @@
         @component('mail::footer')
             © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
         @endcomponent
+        {{-- $unsubscribe --}}
+        @if (isset($unsubscribe))
+            {{ $unsubscribe }}
+        @endif
     @endslot
 @endcomponent
