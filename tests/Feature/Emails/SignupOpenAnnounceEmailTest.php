@@ -2,7 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Mail\SignupOpenReminderEmail;
+use App\Mail\SignupOpenAnnounceEmail;
+use App\Mailers\UserMailer;
 use App\Models\Cycle;
 use App\Models\UltimateHistory;
 use App\Models\User;
@@ -19,10 +20,13 @@ class SignupOpenReminderEmailTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    function users_not_signed_up_for_the_current_cycle_get_a_reminder()
+    function users_not_signed_up_for_the_current_cycle_get_an_announcement()
     {
         Mail::fake();
+
         Queue::fake();
+
+        $mailer = new UserMailer;
         $cycle = factory(Cycle::class)->create();
         $startTime = $cycle->starts_at;
         $cycle->weeks()->saveMany([
@@ -66,22 +70,20 @@ class SignupOpenReminderEmailTest extends TestCase
         $this->assertTrue($usersNotSignedUp->contains($user2));
         $this->assertTrue($usersNotSignedUp->contains($user3));
 
-        $usersNotSignedUp->each(function ($user) use ($cycle) {
-            Mail::to($user->email, $user->name)
-                ->queue(new SignupOpenReminderEmail($user, $cycle));
+        $usersNotSignedUp->each(function ($user) use ($cycle, $mailer) {
+            $mailer->sendSignupOpenAnnouncementEmail($user,$cycle);
         });
 
-        Mail::assertSent(SignupOpenReminderEmail::class, function ($mail) use ($user2) {
+        Mail::assertSent(SignupOpenAnnounceEmail::class, function ($mail) use ($user2) {
             return $mail->hasTo($user2->email);
         });
 
-        Mail::assertSent(SignupOpenReminderEmail::class, function ($mail) use ($user3) {
+        Mail::assertSent(SignupOpenAnnounceEmail::class, function ($mail) use ($user3) {
             return $mail->hasTo($user3->email);
         });
 
-        Mail::assertSent(SignupOpenReminderEmail::class, function ($mail) use ($user1) {
+        Mail::assertSent(SignupOpenAnnounceEmail::class, function ($mail) use ($user1) {
             return !$mail->hasTo($user1->email);
         });
-
     }
 }

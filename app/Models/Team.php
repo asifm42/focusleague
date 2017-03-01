@@ -91,12 +91,37 @@ class Team extends Model
     }
 
     /**
-     * Get the subs that have been placed on this team
+     * Sees if this has the player on its roster
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \App\Models\CycleSignup | null
      */
     public function hasPlayer(User $user)
     {
         return $this->players->where('user_id', $user->id)->first();
+    }
+
+    /**
+     * Adds a player to the roster
+     *
+     * @return self
+     */
+    public function addPlayer(User $user)
+    {
+        // find the user's current signup
+        // update the team id
+        // return this
+    }
+
+    /**
+     * Adds a player to the roster
+     *
+     * @return self
+     */
+    public function addPlayers($users)
+    {
+        // iterate over users
+        // find the user's current signup
+        // update the team id
+        // return this
     }
 }
