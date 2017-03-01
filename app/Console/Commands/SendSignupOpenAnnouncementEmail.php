@@ -28,7 +28,7 @@ class SendSignupOpenAnnouncementEmail extends Command
      *
      * @var UserMailer
      */
-    protected $userMailer;
+    protected $mailer;
 
 
 
@@ -40,7 +40,7 @@ class SendSignupOpenAnnouncementEmail extends Command
     public function __construct(UserMailer $mailer)
     {
         parent::__construct();
-        $this->userMailer = $mailer;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -69,7 +69,7 @@ class SendSignupOpenAnnouncementEmail extends Command
             ->reject(function ($user) {
                 return in_array($user->id, config('groups.rice'));
             })->each(function ($user) use ($cycle) {
-                $this->userMailer->sendSignupOpenAnnouncementEmail($user, $cycle);
+                $this->mailer->sendSignupOpenAnnouncementEmail($user, $cycle);
 
                 $this->info(
                     'Sign-up open reminder email queued up for id:' . $user->id
