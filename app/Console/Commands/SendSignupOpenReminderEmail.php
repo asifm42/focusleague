@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\SignupOpenReminderEmail;
 use App\Models\Cycle;
 use App\Models\User;
-use App\Mailers\UserMailer;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class SendSignupOpenReminderEmail extends Command
 {
@@ -57,7 +58,6 @@ class SendSignupOpenReminderEmail extends Command
         }
 
         $users = User::all();
-        $mailer = new UserMailer;
 
         $usersNotSignedUp = $users->diff($cycle->signups);
 
@@ -66,9 +66,25 @@ class SendSignupOpenReminderEmail extends Command
                 return !in_array($item->id, config('groups.rice'));
             });
 
-        foreach($usersNotSignedUp as $user){
-            $mailer->sendSignupOpenReminderEmail($user, $cycle);
-            $this->info('Sign-up open reminder email queued up for id:'. $user->id . ' - name: ' . $user->name . ' - nickname: ' . $user->getNicknameOrShortname());
-        }
+
+        $usersNotSignedUp->each(function ($user) use ($cycle) {
+            Mail::to($user->email, $user->name)
+                ->queue(new SignupOpenReminderEmail($user, $cycle));
+
+            $this->info(
+                'Sign-up open reminder email queued up for id:'
+                . $user->id
+                . ' - name: '
+                . $user->name
+                . ' - nickname: '
+                . $user->getNicknameOrShortname()
+            );
+        });
+
+        // foreach($usersNotSignedUp as $user){
+        //     // $mailer->sendSignupOpenReminderEmail($user, $cycle);
+        //         Mail::to($user->email, $user->name)
+        //             ->queue(new SignupOpenReminderEmail($user, $cycle));
+        // }
     }
 }
