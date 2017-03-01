@@ -170,5 +170,4 @@ class Cycle extends Model
     {
         return User::all()->diff($this->signups);
     }
-
 }
