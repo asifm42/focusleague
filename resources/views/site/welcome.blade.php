@@ -169,7 +169,7 @@ span.event-xs  {
                         @if($current_cycle && $current_cycle->isSignupOpen())
                         <div class="text-center" style="margin:1em;">
                             <div class="alert alert-success">
-                                <a  href="{{ route('sessions.create') }}">
+                                <a  href="{{ route('cycles.current', 'current') }}">
                                     <h4 style="color: #fff; margin:0">
                                         Sign up for Cycle {{ $current_cycle->name }} is now open!
                                     </h4>
@@ -238,6 +238,17 @@ span.event-xs  {
 
                 <div class = "row">
                     <div class="col-xs-12">
+                    @if($current_cycle->isSignupOpen())
+                        <div class="text-center" style="margin:1em 0;">
+                            <div class="alert alert-success">
+                                <a  href="{{ route('cycles.current') }}">
+                                    <h3 style="color: #fff; margin:0">
+                                        Sign up for Cycle {{ $current_cycle->name }} is now open!
+                                    </h3>
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                     @if(auth()->check())
                         <p>
                             <a  href="{{ route('users.dashboard') }}"
@@ -265,15 +276,7 @@ span.event-xs  {
                         @endif
                     @else
                         @if($current_cycle && $current_cycle->isSignupOpen())
-                        <div class="text-center" style="margin:1em 0;">
-                            <div class="alert alert-success">
-                                <a  href="{{ route('sessions.create') }}">
-                                    <h3 style="color: #fff; margin:0">
-                                        Sign up for Cycle {{ $current_cycle->name }} is now open!
-                                    </h3>
-                                </a>
-                            </div>
-                        </div>
+
                         @elseif ($current_cycle)
                             <h4 class="text-info">
                                 Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.
