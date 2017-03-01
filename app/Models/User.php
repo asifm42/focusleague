@@ -427,4 +427,9 @@ class User extends Authenticatable
     public function isAvailable($weekId) {
         return (bool) $this->availability->find($weekId)->pivot->attending;
     }
+
+    public static function notSignedUpForCycle(Cycle $cycle)
+    {
+        return Self::all()->diff($cycle->signups);
+    }
 }
