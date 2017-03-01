@@ -50,7 +50,7 @@ class SendSignupOpenAnnouncementEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::currentCycle()->load('signups');
+        $cycle = Cycle::currentCycle();
 
         // check if there is a current cycle
         if (!$cycle){
