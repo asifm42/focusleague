@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Carbon;
 
 class Cycle extends Model
 {
@@ -101,7 +102,7 @@ class Cycle extends Model
     public static function currentCycle()
     {
         $now = Carbon::now();
-        return Cycle::where('signup_opens_at', '<', $now)
+        return Self::where('signup_opens_at', '<', $now)
                     ->where('ends_at', '>', $now)
                     ->first();
     }
@@ -114,7 +115,7 @@ class Cycle extends Model
     public static function nextCycle()
     {
         $now = Carbon::now();
-        return Cycle::where('signup_opens_at', '>', $now)
+        return Self::where('signup_opens_at', '>', $now)
                     ->orderBy('signup_opens_at', 'asc')->first();
     }
 
@@ -163,6 +164,11 @@ class Cycle extends Model
         $searchDate = Carbon::today()->format("Y-m-d").'%';
 
         return $this->weeks()->where('starts_at', 'like', $searchDate)->first();
+    }
+
+    public function usersNotSignedUp()
+    {
+        return User::all()->diff($this->signups);
     }
 
 }
