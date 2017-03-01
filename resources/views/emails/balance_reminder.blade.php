@@ -1,4 +1,4 @@
-@component('emails.layouts.message')
+@component('emails.layouts.message', ['user' => $user])
 @component('site.payment_methods', ['balance' => $user->getBalance()])
 <p>Looks like you have an outstanding balance of {{ $user->getBalanceString() }} on your account. We would greatly appreciate it if you can take care of the payment asap using one of the following methods of payment (listed in order of preference).</p>
 @endcomponent

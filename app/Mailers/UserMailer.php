@@ -182,18 +182,8 @@ class UserMailer extends Mailer {
      */
     public function sendBalanceReminderEmail(User $user)
     {
-        $view = 'emails.balance_reminder';
-        $subject = 'Please clear your balance';
-        $data=[];
-        $data['user'] = $user->toArray();
-        $data['balance'] = $user->getBalanceString();
-
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
-
-        return $this->sendTo($user, $subject, $view, $data);
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
+        Mail::to($user->email, $user->name)
+            ->queue(new Mailable\BalanceReminderEmail($user));
     }
 
 

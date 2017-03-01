@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Mail\BalanceReminderEmail;
+use App\Mailers\UserMailer as Mailer;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
@@ -24,13 +25,21 @@ class SendBalanceReminderEmail extends Command
     protected $description = 'Sends the balance reminder email to all users who have a positive balance';
 
     /**
+     * The mailer instance.
+     *
+     * @var Mailer
+     */
+    protected $mailer;
+
+    /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Mailer $mailer)
     {
         parent::__construct();
+        $this->mailer = $mailer;
     }
 
     /**
@@ -40,16 +49,15 @@ class SendBalanceReminderEmail extends Command
      */
     public function handle()
     {
-        $users = User::all();
-
-        foreach($users as $user) {
+        User::all()->each(function ($user) {
             if ($user->getBalance() > 0) {
-
-                Mail::to($user->email, $user->name)
-                    ->queue(new BalanceReminderEmail($user));
-
-                $this->info('Balance reminder email queued for id:'. $user->id . ' - name: ' . $user->getNicknameOrShortname() . ' - balance: ' . $user->getBalance());
+                $this->mailer->sendBalanceReminderEmail($user);
+                $this->info(
+                    'Balance reminder email queued for id:'. $user->id
+                    . ' - name: ' . $user->getNicknameOrShortname()
+                    . ' - balance: ' . $user->getBalance()
+                );
             }
-        }
+        });
     }
 }
