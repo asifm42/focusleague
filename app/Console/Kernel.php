@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendNonReturnerReminderEmail::class,
         \App\Console\Commands\SendSignupClosingReminderEmail::class,
         \App\Console\Commands\SendSignupOpenReminderEmail::class,
+        \App\Console\Commands\SendSignupOpenAnnouncementEmail::class,
         \App\Console\Commands\ApplyRainOutCredit::class,
         // \App\Console\Commands\ChangeEmails::class,
         \App\Console\Commands\RevenueToDate::class,
