@@ -30,8 +30,6 @@ class SendSignupOpenAnnouncementEmail extends Command
      */
     protected $mailer;
 
-
-
     /**
      * Create a new command instance.
      *
