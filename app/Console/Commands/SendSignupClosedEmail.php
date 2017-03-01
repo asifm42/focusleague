@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Cycle;
-use App\Mailers\UserMailer;
+use App\Mailers\UserMailer as Mailer;
 
 class SendSignupClosedEmail extends Command
 {
@@ -23,13 +23,21 @@ class SendSignupClosedEmail extends Command
     protected $description = 'Sends the signup closed email to all the cycle signups';
 
     /**
+     * The mailer instance.
+     *
+     * @var Mailer
+     */
+    protected $mailer;
+
+    /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Mailer $mailer)
     {
         parent::__construct();
+        $this->mailer = $mailer;
     }
 
     /**
@@ -40,10 +48,9 @@ class SendSignupClosedEmail extends Command
     public function handle()
     {
         $cycle = Cycle::currentCycle();
-        $mailer = new UserMailer;
 
-        $cycle->signups()->each(function($item, $key) use ($mailer, $cycle) {
-            $mailer->sendSignupClosedEmail($item, $cycle);
+        $cycle->signups()->each(function($signup) use ($mailer, $cycle) {
+            $this->mailer->sendSignupClosedEmail($signup, $cycle);
         });
     }
 }
