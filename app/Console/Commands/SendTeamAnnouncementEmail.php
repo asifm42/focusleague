@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Cycle;
+use App\Mail\TeamAnnouncementEmail;
 use App\Mailers\UserMailer;
+use App\Models\Cycle;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class SendTeamAnnouncementEmail extends Command
 {
@@ -40,20 +42,22 @@ class SendTeamAnnouncementEmail extends Command
     public function handle()
     {
         $cycle = Cycle::currentCycle();
-        $teams = $cycle->teams;
-        $teams->load('players', 'players.user');
-        $mailer = new UserMailer;
+        $cycle->load('teams', 'teams.players', 'teams.players.user');
 
-        if ($cycle->areTeamsPublished()) {
-            foreach ($teams as $team){
-                foreach ($team->players as $player){
-                    $mailer->sendTeamAnnouncementEmail($player->user, $cycle, $team);
-                }
-            }
-
-            $this->info('Team announcement emails queued up!');
-        } else {
+        if (! $cycle->areTeamsPublished()) {
             $this->error('Teams are not published yet.');
+            return;
         }
+
+        $cycle->teams->each(function ($team) use ($cycle) {
+            $team->players->each(function ($player) use ($cycle, $team) {
+                if ($player->user) {
+                    Mail::to($player->user->email, $player->user->name)
+                        ->queue(new TeamAnnouncementEmail($player->user, $cycle, $team));
+                }
+            });
+        });
+
+        $this->info('Team announcement emails queued up!');
     }
 }
