@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use App\Mailers\CycleMailer;
 use App\Models\Cycle;
-use App\Mailers\UserMailer as Mailer;
+use Illuminate\Console\Command;
 
 class SendSignupClosedEmail extends Command
 {
@@ -22,22 +22,15 @@ class SendSignupClosedEmail extends Command
      */
     protected $description = 'Sends the signup closed email to all the cycle signups';
 
-    /**
-     * The mailer instance.
-     *
-     * @var Mailer
-     */
-    protected $mailer;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(Mailer $mailer)
+    public function __construct()
     {
         parent::__construct();
-        $this->mailer = $mailer;
     }
 
     /**
@@ -47,10 +40,24 @@ class SendSignupClosedEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::currentCycle();
+        if (! Cycle::currentCycle()) {
+            $this->error('No Current Cycle');
+            return;
+        }
 
-        $cycle->signups()->each(function($signup) use ($mailer, $cycle) {
-            $this->mailer->sendSignupClosedEmail($signup, $cycle);
+        if (Cycle::currentCycle()->isSignupOpen()) {
+            $this->error('Sign-up is still open. Cycle ' . Cycle::currentCycle()->name . ' signup closing at ' . Cycle::currentCycle()->signup_closes_at->toDayDateTimeString());
+            return;
+        }
+
+        $recipients = CycleMailer::sendSignUpClosedEmail();
+
+        $recipients->each(function($recipient) {
+            $this->info(
+                    'Sign-up closed email queued up for id:' . $recipient->id
+                    . ' - name: ' . $recipient->name
+                    . ' - nickname: ' . $recipient->getNicknameOrShortname()
+                );
         });
     }
 }
