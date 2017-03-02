@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Mail;
 
 class UserMailer extends Mailer
 {
-
     /**
      * Sends the verification email.
      *
