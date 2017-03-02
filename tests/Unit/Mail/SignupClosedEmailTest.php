@@ -1,23 +1,25 @@
 <?php
 
-namespace Tests\Unit\Email;
+namespace Tests\Unit\Mail;
 
-use App\Mail\SignupClosingReminderEmail;
+use App\Mail\SignupClosedEmail;
 use App\Mailers\UserMailer;
 use App\Models\Cycle;
+use App\Models\UltimateHistory;
 use App\Models\User;
+use App\Models\Week;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-class SignupClosingReminderEmailTest extends TestCase
+class SignupClosedEmailTest extends TestCase
 {
     use DatabaseMigrations;
 
     /** @test */
-    function signup_closing_reminder_email_is_being_sent()
+    function signup_closed_announcement_email_is_being_sent()
     {
         Mail::fake();
 
@@ -25,9 +27,9 @@ class SignupClosingReminderEmailTest extends TestCase
         $cycle = factory(Cycle::class)->create();
         $user = factory(User::class)->create();
 
-        $mailer->sendSignupClosingReminderEmail($user,$cycle);
+        $mailer->sendSignUpClosedEmail($user,$cycle);
 
-        Mail::assertSent(SignupClosingReminderEmail::class, function ($mail) use ($user, $cycle) {
+        Mail::assertSent(SignupClosedEmail::class, function ($mail) use ($user) {
             return $mail->hasTo($user->email);
         });
     }
@@ -39,7 +41,7 @@ class SignupClosingReminderEmailTest extends TestCase
         $cycle = factory(Cycle::class)->create();
         $user = factory(User::class)->create();
 
-        $mailer->sendSignupClosingReminderEmail($user,$cycle);
+        $mailer->sendSignUpClosedEmail($user,$cycle);
         $this->assertTrue(true);
     }
 }
