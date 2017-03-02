@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit\Mail;
 
 use App\Mail\TeamAnnouncementEmail;
 use App\Mailers\UserMailer;
