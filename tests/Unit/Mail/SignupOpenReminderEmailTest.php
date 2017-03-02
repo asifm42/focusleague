@@ -17,7 +17,7 @@ class SignupOpenReminderEmailTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    function signup_closing_reminder_email_is_being_sent()
+    function signup_open_reminder_email_is_being_sent()
     {
         Mail::fake();
 
