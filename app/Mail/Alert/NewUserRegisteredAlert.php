@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Alert;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegisteredAlert extends Mailable implements ShouldQueue
+class NewUserRegisteredAlert extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

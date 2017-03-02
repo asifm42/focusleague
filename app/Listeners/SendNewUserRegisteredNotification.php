@@ -3,21 +3,23 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
-use App\Mail\UserRegisteredAlert;
+use App\Mailers\AlertMailer as Mailer;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
 class SendNewUserRegisteredNotification implements ShouldQueue
 {
+    protected $mailer;
+
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Mailer $mailer)
     {
-        //
+        $this->mailer = $mailer;
     }
 
     /**
@@ -28,7 +30,6 @@ class SendNewUserRegisteredNotification implements ShouldQueue
      */
     public function handle(UserRegistered $event)
     {
-        Mail::to('asifm42@gmail.com', 'Asif Mohammed')
-                ->queue(new UserRegisteredAlert($event->user));
+        $this->mailer->sendNewUserRegisteredAlert($event->user);
     }
 }

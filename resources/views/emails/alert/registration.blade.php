@@ -26,7 +26,7 @@ Cell Number:
     {{ $user->cell_number }}
 
 Birthday:
-    {{ $user->birthday }}
+    {{ $user->birthday->toFormattedDateString() }} ({{ $user->age() }} years old)
 
 Environment:
     {{ App::environment() }}
