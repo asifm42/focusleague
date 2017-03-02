@@ -1,4 +1,4 @@
-@component('emails.layouts.message')
+@component('emails.layouts.message', ['user' => $user])
 <h1>Sign-up for Cycle {{ $cycle->name }} is now open!</h1>
 
 @component('mail::button', ['url' => route('cycle.signup.create', $cycle->id), 'color' => 'blue'])
