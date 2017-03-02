@@ -1,30 +1,35 @@
-A new cycle signup for FOCUS League at {{ $signup['created_at'] }}
+A new cycle signup for FOCUS League {{ $signup->cycle->name }} at {{ $signup->created_at->toDayDateTimeString() }}
 
 Name:
-    {{ $user['name'] }}
+    {{ $signup->user->name }}
 
 Nickname:
-    {{ $user['nickname'] }}
+    {{ $signup->user->nickname }}
 
 Cycle:
-    {{ $cycle['name'] }}
+    {{ $signup->cycle->name }}
 
 Dates Available:
-@foreach($dates_attending as $date)
+@foreach($datesAttending as $date)
+    {{ $date }}
+@endforeach
+
+Dates Missing:
+@foreach($datesMissing as $date)
     {{ $date }}
 @endforeach
 
 Will captain?:
-    {{ $signup['will_captain'] }}
+    {{ $signup->will_captain }}
 
 Div pref 1?:
-    {{ $signup['div_pref_first'] }}
+    {{ $signup->div_pref_first }}
 
 Div pref 2?:
-    {{ $signup['div_pref_second'] }}
+    {{ $signup->div_pref_second }}
 
 Note:
-    {{ $signup['note'] }}
+    {{ $signup->note }}
 
 
 Environment:
