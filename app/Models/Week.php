@@ -41,6 +41,16 @@ class Week extends Model
      */
     public function week_index()
     {
+        return $this->index;
+    }
+
+    /**
+     * Get the index of the week within the cycle.
+     *
+     * @return integer
+     */
+    public function index()
+    {
         $cycle_weeks = $this->cycle->weeks;
         $num=0;
         foreach ($cycle_weeks as $week) {

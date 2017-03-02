@@ -4,6 +4,7 @@ namespace App\Mailers;
 use App\Mail as Mailable;
 use App\Models\Cycle;
 use App\Models\CycleSignup;
+use App\Models\Sub;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Week;
@@ -34,29 +35,14 @@ class UserMailer extends Mailer
     }
 
     /**
-     * Sends an email to the user confirming their sign-up as an sub.
+     * Sends an email to the user confirming their sign-up as a sub.
      *
      * @return void
      */
-    public function sendSubSignupEmail(User $user, Week $week, Cycle $cycle)
+    public function sendSubSignupConfirmationEmail(Sub $sub)
     {
-        $view = 'emails.sub_signup';
-        $subject = 'Sub Signup Confirmation';
-        $data=[];
-        $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle->toArray();
-        $data['date'] = $week->starts_at->toFormattedDateString();
-
-        $sub = $week->subs->find($user->id);
-        $data['note'] = $sub->note;
-        $data['sub_created_at'] = $sub->created_at->toFormattedDateString();
-        $data['week_index'] = $week->week_index();
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
-
-        return $this->sendTo($user, $subject, $view, $data);
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
+        Mail::to($sub->user->email, $sub->user->name)
+            ->queue(new Mailable\SubSignupConfirmation($sub));
     }
 
     /**

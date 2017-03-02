@@ -27,6 +27,6 @@ class SendSubSignupConfirmation
      */
     public function handle(UserSignedUpAsASub $event)
     {
-        $this->mailer->sendSubSignupEmail($event->user, $event->week, $event->cycle);
+        $this->mailer->sendSubSignupEmail($event->sub);
     }
 }
