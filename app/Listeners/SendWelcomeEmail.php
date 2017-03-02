@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\UserVerified as Event;
 use App\Mail\WelcomeEmail;
+use App\Mailers\UserMailer as Mailer;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -11,14 +12,16 @@ use Illuminate\Support\Facades\Mail;
 
 class SendWelcomeEmail implements ShouldQueue
 {
+    protected $mailer;
+
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Mailer $mailer)
     {
-
+        $this->mailer = $mailer;
     }
 
     /**
@@ -29,7 +32,6 @@ class SendWelcomeEmail implements ShouldQueue
      */
     public function handle(Event $event)
     {
-        Mail::to($event->user->email, $event->user->name)
-            ->queue(new WelcomeEmail($event->user));
+        $this->mailer->sendWelcomeEmail($event->user);
     }
 }

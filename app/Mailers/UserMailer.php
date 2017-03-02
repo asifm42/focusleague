@@ -2,7 +2,6 @@
 namespace App\Mailers;
 
 use App\Mail as Mailable;
-use App\Mail\TeamAnnouncementEmail;
 use App\Models\Cycle;
 use App\Models\CycleSignup;
 use App\Models\Team;
@@ -31,13 +30,10 @@ class UserMailer extends Mailer
      *
      * @return void
      */
-    public function welcome(User $user)
+    public function sendWelcomeEmail(User $user)
     {
-        $view = 'emails.welcome';
-        $data = $user->toArray();
-        $subject = 'Welcome to FOCUS League';
-
-        return $this->sendTo($user, $subject, $view, $data);
+        Mail::to($user->email, $user->name)
+            ->queue(new Mailable\WelcomeEmail($user));
     }
 
     /**
@@ -96,7 +92,7 @@ class UserMailer extends Mailer
     public function sendTeamAnnouncementEmail(User $user, Cycle $cycle, Team $team)
     {
         Mail::to($user->email, $user->name)
-            ->queue(new TeamAnnouncementEmail($user, $cycle, $team));
+            ->queue(new Mailable\TeamAnnouncementEmail($user, $cycle, $team));
     }
 
     /**
