@@ -13,8 +13,6 @@ class SubSignupConfirmation extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public $sub;
-    public $weekIndex;
-    public $cycle;
 
     /**
      * Create a new message instance.
