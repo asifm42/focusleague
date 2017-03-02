@@ -34,7 +34,7 @@ class AlertMailer extends Mailer
     }
 
     /**
-     * Sends an cycle signup alert email to the admin.
+     * Sends a new user registered alert email to the admin.
      *
      * @return void
      */
@@ -42,5 +42,16 @@ class AlertMailer extends Mailer
     {
         Mail::to('asifm42@gmail.com', 'Asif Mohammed')
             ->queue(new Alert\NewUserRegisteredAlert($user));
+    }
+
+    /**
+     * Sends an user verified alert email to the admin.
+     *
+     * @return void
+     */
+    public function sendUserVerifiedAlert(User $user)
+    {
+        Mail::to('asifm42@gmail.com', 'Asif Mohammed')
+            ->queue(new Alert\UserEmailVerifiedAlert($user));
     }
 }
