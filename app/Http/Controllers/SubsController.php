@@ -75,7 +75,9 @@ class SubsController extends Controller
 
         $week->subs()->attach(auth()->user()->id, ['note'=>$request->input('note')]);
 
-        event(new UserSignedUpAsASub(auth()->user(), $week, $cycle));
+        $sub = Sub::findOrFail($week->subs()->where('user_id', auth()->user()->id)->first()->pivot->id);
+
+        event(new UserSignedUpAsASub($sub));
 
         flash()->success('You are signed up to sub!');
 

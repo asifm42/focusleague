@@ -1,13 +1,8 @@
 <?php
 namespace App\Mailers;
 
-use App\Mail as Mailable;
-use App\Mail\TeamAnnouncementEmail;
+use App\Mailers\UserMailer;
 use App\Models\Cycle;
-use App\Models\CycleSignup;
-use App\Models\Team;
-use App\Models\User;
-use App\Models\Week;
 use Illuminate\Support\Facades\Mail;
 
 class CycleMailer extends Mailer

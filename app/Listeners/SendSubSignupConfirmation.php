@@ -27,6 +27,6 @@ class SendSubSignupConfirmation
      */
     public function handle(UserSignedUpAsASub $event)
     {
-        $this->mailer->sendSubSignupEmail($event->sub);
+        $this->mailer->sendSubSignupConfirmationEmail($event->sub);
     }
 }

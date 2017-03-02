@@ -3,20 +3,22 @@
 namespace App\Listeners;
 
 use App\Events\UserSignedUpAsASub;
+use App\Mailers\AlertMailer as Mailer;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Mail;
 
 class SendSubSignupAlert
 {
+    protected $mailer;
+
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Mailer $mailer)
     {
-        //
+        $this->mailer = $mailer;
     }
 
     /**
@@ -27,6 +29,8 @@ class SendSubSignupAlert
      */
     public function handle(UserSignedUpAsASub $event)
     {
+        $this->mailer->sendSubSignupAlert($event->sub);
+return;
         $data=[];
         $data['user'] = $event->user->toArray();
         $data['date'] = $event->week->starts_at->toDateTimeString();
