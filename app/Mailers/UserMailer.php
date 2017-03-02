@@ -116,8 +116,6 @@ class UserMailer extends Mailer
     {
         Mail::to($user->email, $user->name)
             ->queue(new Mailable\SignupClosedEmail($user, $cycle));
-
-        return;
     }
 
     /**
@@ -206,8 +204,6 @@ return;
     {
         Mail::to($user->email, $user->name)
             ->queue(new Mailable\SignupOpenReminderEmail($user, $cycle));
-
-        return;
     }
 
     /**
