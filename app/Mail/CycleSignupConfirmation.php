@@ -2,9 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Cycle;
 use App\Models\CycleSignup;
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
