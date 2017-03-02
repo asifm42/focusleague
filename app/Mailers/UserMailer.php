@@ -97,47 +97,6 @@ class UserMailer extends Mailer
     {
         Mail::to($user->email, $user->name)
             ->queue(new TeamAnnouncementEmail($user, $cycle, $team));
-return;
-
-        $view = 'emails.team_announcement';
-        $subject = 'Teams are set!';
-        $data=[];
-        $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle->toArray();
-        $data['team'] = $team->toArray();
-        $data['captains'] = [];
-        $data['cost'] = 0;
-        $data['balance'] = $user->getBalanceString();
-
-        foreach($team->captains as $captain) {
-            if ($captain->user->nickname) {
-                $name = ucwords($captain->user->name) . ' aka ' . ucwords($captain->user->nickname);
-            } else {
-                $name = ucwords($captain->user->name);
-            }
-            $data['captains'][] = ['name'=>$name, 'email'=>$captain->user->email];
-        }
-
-        $weeks_attending = count($user->availability->where('cycle_id', $cycle->id)->where('pivot.attending', 1));
-
-        switch ($weeks_attending) {
-            case 2:
-                $data['cost'] = config('focus_cost.cycle.two_weeks');
-                break;
-            case 3:
-                $data['cost'] = config('focus_cost.cycle.three_weeks');
-                break;
-            case 4:
-                $data['cost'] = config('focus_cost.cycle.four_weeks');
-                break;
-        }
-
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
-
-        return $this->sendTo($user, $subject, $view, $data);
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
     }
 
     /**
