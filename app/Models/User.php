@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Traits\CanResetPassword;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\CanResetPassword;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $dates = ['season_pass_ends_on', 'created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['birthday', 'season_pass_ends_on', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be casted to native types.
@@ -46,40 +47,40 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * Get the user's birthday.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getBirthdayAttribute($value)
-    {
-        $originalDate = $value;
-        return date("m-d-Y", strtotime($originalDate));
-    }
+    // /**
+    //  * Get the user's birthday.
+    //  *
+    //  * @param  string  $value
+    //  * @return string
+    //  */
+    // public function getBirthdayAttribute($value)
+    // {
+    //     $originalDate = $value;
+    //     return date("m-d-Y", strtotime($originalDate));
+    // }
 
-    /**
-     * Set the user's birthday.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function setBirthdayAttribute($value)
-    {
-        $this->attributes['birthday'] = date("Y-m-d", strtotime($value));
-    }
+    // /**
+    //  * Set the user's birthday.
+    //  *
+    //  * @param  string  $value
+    //  * @return string
+    //  */
+    // public function setBirthdayAttribute($value)
+    // {
+    //     $this->attributes['birthday'] = date("Y-m-d", strtotime($value));
+    // }
 
-    /**
-     * Get the user's birthday.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getBirthdayString()
-    {
-        $originalDate = $this->attributes['birthday'];
-        return date("M j, Y", strtotime($originalDate));
-    }
+    // /**
+    //  * Get the user's birthday.
+    //  *
+    //  * @param  string  $value
+    //  * @return string
+    //  */
+    // public function getBirthdayString()
+    // {
+    //     $originalDate = $this->attributes['birthday'];
+    //     return date("M j, Y", strtotime($originalDate));
+    // }
 
     /**
      * Get the user's phone number.
@@ -431,5 +432,10 @@ class User extends Authenticatable
     public static function notSignedUpForCycle(Cycle $cycle)
     {
         return Self::all()->diff($cycle->signups);
+    }
+
+    public function age()
+    {
+        return $this->birthday->diffInYears(Carbon::now());
     }
 }
