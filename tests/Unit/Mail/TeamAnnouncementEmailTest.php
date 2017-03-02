@@ -20,12 +20,33 @@ class TeamAnnouncementEmailTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    function users_placed_on_a_team_for_the_cycle_will_receive_team_announcement()
+    function team_announcement_email_is_being_sent()
     {
         Mail::fake();
 
         $mailer = new UserMailer;
         $cycle = factory(Cycle::class)->create();
+        $user = factory(User::class)->create();
+        $team = $cycle->teams()->save(factory(Team::class)->make());
+
+        $mailer->sendTeamAnnouncementEmail($user, $cycle, $team);
+
+        Mail::assertSent(TeamAnnouncementEmail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
+    }
+
+    /** @test */
+    function the_view_is_being_generated_with_no_errors()
+    {
+        $mailer = new UserMailer;
+        $cycle = factory(Cycle::class)->create([
+            'format' => '1 Mens 7v7, 1 Mixed 7v7'
+            ]);
+        $user = factory(User::class)->create();
+        $team = $cycle->teams()->save(factory(Team::class)->make());
+
+        // add weeks for cycle
         $startTime = $cycle->starts_at;
         $cycle->weeks()->saveMany([
             factory(Week::class)->make([
@@ -42,76 +63,48 @@ class TeamAnnouncementEmailTest extends TestCase
             ]),
         ]);
 
-        $user1 = User::find($cycle->created_by);
-        $user2 = factory(User::class)->create();
-        $user3 = factory(User::class)->create();
-        $user4 = factory(User::class)->create();
-        $user5 = factory(User::class)->create();
-        $teams = $cycle->teams()->saveMany(factory(Team::class, 4)->make());
-
-
-        $cycle->signups()->attach($user1->id, [
+        // add signup for user with team assignement
+        $cycle->signups()->attach($user->id, [
             'div_pref_first'    => 'mens',
             'div_pref_second'   => 'mens',
             'will_captain'      => false,
-            'team_id' => $teams->get(0)->id,
+            'team_id' => $team->id,
         ]);
 
-        $cycle->weeks->each(function($week) use ($user1) {
-            $user1->availability()->attach($week->id, [
+        // add availability
+        $cycle->weeks->each(function($week) use ($user) {
+            $user->availability()->attach($week->id, [
                 'attending' => true
             ]);
         });
 
-        $cycle->signups()->attach($user2->id, [
+        // [TO-DO] add 2 previous transactions for the user
+
+        $mailer->sendTeamAnnouncementEmail($user, $cycle, $team);
+
+        // add a captain
+        $captain1 = factory(User::class)->create();
+        $cycle->signups()->attach($captain1->id, [
             'div_pref_first'    => 'mens',
             'div_pref_second'   => 'mens',
             'will_captain'      => false,
-            'team_id' => $teams->get(1)->id,
+            'captain'      => true,
+            'team_id' => $team->id,
         ]);
 
-        $cycle->weeks->each(function($week) use ($user2) {
-            $user2->availability()->attach($week->id, [
-                'attending' => true
-            ]);
-        });
+        $mailer->sendTeamAnnouncementEmail($user, $cycle, $team);
 
-        // $teams->get(0)->addPlayer($user1);
+        // add another captain
+        $captain2 = factory(User::class)->create();
+        $cycle->signups()->attach($captain2->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'captain'      => true,
+            'team_id' => $team->id,
+        ]);
 
-        $this->assertEquals(4, $cycle->teams->count());
-        $this->assertEquals(1, $cycle->teams->get(0)->players->count());
-        $this->assertEquals(1, $cycle->teams->get(1)->players->count());
-        $this->assertEquals($user1->id, $cycle->teams->get(0)->hasPlayer($user1)->user->id);
-        $this->assertNull($cycle->teams->get(0)->hasPlayer($user2));
-        $this->assertNull($cycle->teams->get(0)->hasPlayer($user3));
-        $this->assertEquals($user2->id, $cycle->teams->get(1)->hasPlayer($user2)->user->id);
-        $this->assertNull($cycle->teams->get(1)->hasPlayer($user1));
-        $this->assertNull($cycle->teams->get(1)->hasPlayer($user3));
-        // $this->assertTrue($cycle->teams->get(0)->hasPlayer($user1));
-        // $this->assertFalse($cycle->teams->get(0)->hasPlayer($user2));
-        // $this->assertFalse($cycle->teams->get(0)->hasPlayer($user3));
-        // $this->assertTrue($cycle->teams->get(1)->hasPlayer($user2));
-        // $this->assertFalse($cycle->teams->get(1)->hasPlayer($user1));
-        // $this->assertFalse($cycle->teams->get(1)->hasPlayer($user3));
-
-        $cycle->teams->each(function ($team) use ($cycle, $mailer) {
-            $team->players->each(function ($player) use ($cycle, $team, $mailer) {
-                if ($player->user) {
-                    $mailer->sendTeamAnnouncementEmail($player->user, $cycle, $team);
-                }
-            });
-        });
-
-        Mail::assertSent(TeamAnnouncementEmail::class, function ($mail) use ($user2) {
-            return !$mail->hasTo($user2->email);
-        });
-
-        Mail::assertSent(TeamAnnouncementEmail::class, function ($mail) use ($user3) {
-            return !$mail->hasTo($user3->email);
-        });
-
-        Mail::assertSent(TeamAnnouncementEmail::class, function ($mail) use ($user1) {
-            return $mail->hasTo($user1->email);
-        });
+        $mailer->sendTeamAnnouncementEmail($user, $cycle, $team);
+        $this->assertTrue(true);
     }
 }
