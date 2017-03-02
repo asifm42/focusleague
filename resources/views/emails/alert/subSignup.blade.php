@@ -10,14 +10,10 @@ Email:
     {{ $sub->user->email }}
 
 Date:
-    {{ $sub->week->starts_at->toFormattedDateString() }}
+    Wk{{ $sub->week->index() }} - {{ $sub->week->starts_at->toFormattedDateString() }}
 
 Note:
     {{ $sub->note }}
-
-
-
-
 
 
 Environment:
