@@ -3,20 +3,23 @@
 namespace App\Listeners;
 
 use App\Events\UserUpdatedSubSignup;
+use App\Mailers\AlertMailer as Mailer;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Mail;
 
-class SendSubSignupUpdateAlert
+class SendSubSignupUpdateAlert implements ShouldQueue
 {
+    protected $mailer;
+
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Mailer $mailer)
     {
-        //
+        $this->mailer = $mailer;
     }
 
     /**
@@ -27,6 +30,10 @@ class SendSubSignupUpdateAlert
      */
     public function handle(UserUpdatedSubSignup $event)
     {
+
+        $this->mailer->sendSubSignUpUpdateAlert($event->sub, $event->updatedBy);
+        return;
+
         $data=[];
         $data['changed_by'] = $event->updatedBy->toArray();
         $data['subUser'] = $event->sub->user->toArray();

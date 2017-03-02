@@ -22,6 +22,18 @@ class AlertMailer extends Mailer
     }
 
     /**
+     * Sends an sub signup update alert email to the admin.
+     *
+     * @return void
+     */
+    public function sendSubSignUpUpdateAlert(Sub $sub, User $updatedBy)
+    {
+        Mail::to('asifm42@gmail.com', 'Asif Mohammed')
+            ->cc('gizmolito@gmail.com', 'Nicholas Carranza')
+            ->queue(new Alert\SubSignupUpdateAlert($sub, $updatedBy));
+    }
+
+    /**
      * Sends an cycle signup alert email to the admin.
      *
      * @return void
