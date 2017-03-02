@@ -27,35 +27,14 @@ class CycleSignupConfirmation extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, Cycle $cycle, CycleSignup $signup)
+    public function __construct(CycleSignup $signup)
     {
-
-
-        $this->user = $user;
-
-        // // $data['cycle'] = $cycle->toArray();
-
-        $this->cycle = $cycle;
-
-        // $data['signup'] = $signup->toArray();
-
+        $this->user = $signup->user;
+        $this->cycle = $signup->cycle;
         $this->signup = $signup;
-        $this->cost = config('focus_cost');
-
-        // $data['cost'] = '$24';
-        // $this->dates = (object) [
-        //     'attending' => null,
-        //     'missing'   => null
-        // ];
-
+        $this->cost = config('focus.cost');
         $this->attendingDates = [];
         $this->missingDates = [];
-
-        // // $this->dates->attending = [];
-        // // $this->dates->missing = [];
-        // // $data['dates_attending'] = [];
-        // // $data['dates_missing'] = [];
-
         $this->weeks = $this->user->availability()->where('cycle_id',$this->cycle->id)->get();
 
         foreach($this->weeks as $week){
@@ -75,7 +54,7 @@ class CycleSignupConfirmation extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->from('support@focusleague.com', 'FOCUS League')
-                    ->subject('Cycle Signup Confirmation')
+                    ->subject('Cycle ' . $this->cycle->name . ' Signup Confirmation')
                     ->markdown('emails.cycle_signup_confirmation');
     }
 }

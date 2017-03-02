@@ -36,8 +36,6 @@ class SendCycleSignupConfirmation
      */
     public function handle(UserSignedUpForCycle $event)
     {
-        // Mail::to($event->user->email, $event->user->name)
-        //     ->queue(new CycleSignupConfirmation($event->user, $event->cycle, $event->cycleSignup));
-        $this->mailer->sendCycleSignupConfirmation($event->user, $event->cycle, $event->cycleSignup);
+        $this->mailer->sendCycleSignupConfirmation($event->cycleSignup);
     }
 }

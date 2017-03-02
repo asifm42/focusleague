@@ -45,40 +45,10 @@ class UserMailer extends Mailer
      *
      * @return void
      */
-    public function sendCycleSignupConfirmation(User $user, Cycle $cycle, CycleSignup $signup)
+    public function sendCycleSignupConfirmation(CycleSignup $signup)
     {
-        $view = 'emails.cycle_signup';
-
-        $subject = 'Cycle Signup Confirmation';
-        $data = [];
-        $data['user'] = $user->toArray();
-        $data['cycle'] = $cycle->toArray();
-        $data['signup'] = $signup->toArray();
-        $data['cost'] = '$24';
-        $data['dates_attending'] = [];
-        $data['dates_missing'] = [];
-        $weeks = $user->availability()->where('cycle_id',$cycle->id)->get();
-
-        foreach($weeks as $week){
-            if ($week->pivot->attending) {
-                $data['dates_attending'][] = $week->starts_at->toFormattedDateString();
-            } else {
-                $data['dates_missing'][] = $week->starts_at->toFormattedDateString();;
-            }
-        }
-
-        if (count($data['dates_attending']) === 3){
-            $data['cost'] = '$21';
-        } elseif (count($data['dates_attending']) === 2) {
-            $data['cost'] = '$18';
-        }
-
-        return $this->sendTo($user, $subject, $view, $data);
-
-        // // add mailgun tag header
-        // $headers = ['x-mailgun-tag' => 'status_reminder'];
-
-        // return $this->sendTo($user, $subject, $view, $data, $headers);
+        Mail::to($signup->user->email, $signup->user->name)
+            ->queue(new Mailable\CycleSignupConfirmation($signup));
     }
 
     /**

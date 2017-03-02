@@ -1,4 +1,4 @@
-@component('emails.layouts.message')
+@component('emails.layouts.message', ['user' => $signup->user ])
 <p>Thanks for signing up for Cycle {{ $cycle->name }}!</p>
 
 @if($signup->will_captain)
@@ -14,15 +14,15 @@
 <p>We plan to see you at HSP on </p>
 <ul>
 @foreach($attendingDates as $date)
-<li>{{ $date }}</li>
+    <li>{{ $date }}</li>
 @endforeach
 </ul>
 @if(count($missingDates))
 <p>We'll miss you on </p>
 <ul>
-@foreach($missingDates as $date)
-<li>{{ $date }}</li>
-@endforeach
+    @foreach($missingDates as $date)
+        <li>{{ $date }}</li>
+    @endforeach
 </ul>
 @endif
 
