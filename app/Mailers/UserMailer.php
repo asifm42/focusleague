@@ -12,20 +12,6 @@ use Illuminate\Support\Facades\Mail;
 class UserMailer extends Mailer
 {
     /**
-     * Sends the verification email.
-     *
-     * @return void
-     */
-    public function verification(User $user)
-    {
-        $view = 'emails.verification';
-        $data = $user->toArray();
-        $subject = 'FOCUS League - Verify your email';
-
-        return $this->sendTo($user, $subject, $view, $data);
-    }
-
-    /**
      * Sends the welcome email.
      *
      * @return void
