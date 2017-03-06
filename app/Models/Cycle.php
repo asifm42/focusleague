@@ -40,7 +40,7 @@ class Cycle extends Model
      */
     public function weeks()
     {
-        return $this->hasMany('App\Models\Week', 'cycle_id');//->orderBy('starts_at');
+        return $this->hasMany('App\Models\Week', 'cycle_id')->orderBy('starts_at');
     }
 
     /**
