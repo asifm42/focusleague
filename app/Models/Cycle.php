@@ -40,7 +40,7 @@ class Cycle extends Model
      */
     public function weeks()
     {
-        return $this->hasMany('App\Models\Week', 'cycle_id')->orderBy('starts_at');
+        return $this->hasMany('App\Models\Week', 'cycle_id');//->orderBy('starts_at');
     }
 
     /**
@@ -169,5 +169,33 @@ class Cycle extends Model
     public function usersNotSignedUp()
     {
         return User::all()->diff($this->signups);
+    }
+
+    public function addWeek()
+    {
+        if (is_null($this->weeks->last())) {
+            $this->weeks()->create([
+                'starts_at' => $this->starts_at,
+                'ends_at' => $this->starts_at->addHours(2)
+            ]);
+        } else {
+            $this->weeks()->create([
+                'starts_at' => $this->weeks->last()->starts_at->addWeek(),
+                'ends_at' => $this->weeks->last()->starts_at->addWeek()->addHours(2)
+            ]);
+        }
+
+        // have to reload fresh instance since we are adding the weeks relationship to memory when checking for the last week.
+        return $this->fresh();
+    }
+
+    public function addWeeks($quantity = 1)
+    {
+        foreach (range(1, $quantity) as $i) {
+            $this->fresh()->addWeek();
+        }
+
+        // have to reload fresh instance since we are adding the weeks relationship to memory when checking for the last week in the addWeek method;
+        return $this->fresh();
     }
 }

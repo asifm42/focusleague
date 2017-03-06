@@ -17,7 +17,7 @@ class CreateWeeksTable extends Migration
             $table->integer('cycle_id')->unsigned();
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
-            $table->boolean('rained_out');
+            $table->boolean('rained_out')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
