@@ -38,6 +38,14 @@ class Cycle extends Model
     /**
      * Get the cycle weeks
      */
+    public function creator()
+    {
+        return $this->belongsTo('App\Models\user', 'created_by');
+    }
+
+    /**
+     * Get the cycle weeks
+     */
     public function weeks()
     {
         return $this->hasMany('App\Models\Week', 'cycle_id')->orderBy('starts_at');
