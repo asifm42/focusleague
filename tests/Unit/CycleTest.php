@@ -49,22 +49,7 @@ class CycleTest extends TestCase
     /** @test */
     function can_get_list_of_signups()
     {
-        $cycle = factory(Cycle::class)->create();
-        $startTime = $cycle->starts_at;
-        $cycle->weeks()->saveMany([
-            factory(Week::class)->make([
-                'starts_at' => $startTime
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-        ]);
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
 
         $user1 = User::find($cycle->created_by);
         $user2 = factory(User::class)->create();
@@ -108,22 +93,7 @@ class CycleTest extends TestCase
     /** @test */
     function can_get_list_of_users_not_signed_up()
     {
-        $cycle = factory(Cycle::class)->create();
-        $startTime = $cycle->starts_at;
-        $cycle->weeks()->saveMany([
-            factory(Week::class)->make([
-                'starts_at' => $startTime
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-        ]);
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
 
         $user1 = User::find($cycle->created_by);
         $user2 = factory(User::class)->create();
@@ -154,5 +124,61 @@ class CycleTest extends TestCase
         $this->assertEquals(8, $cycle->usersNotSignedUp()->count());
         $this->assertFalse($cycle->usersNotSignedUp()->contains($user2));
         $this->assertTrue($cycle->usersNotSignedUp()->contains($users->get(4)));
+    }
+
+    /** @test */
+    function can_add_a_week_to_a_cycle_with_no_weeks()
+    {
+        $cycle = factory(Cycle::class)->create();
+        $this->assertEquals(0, $cycle->weeks->count());
+
+        $cycle = $cycle->addWeek();
+
+        $this->assertEquals(1, $cycle->weeks->count());
+        $this->assertEquals($cycle->starts_at, $cycle->weeks->get(0)->starts_at);
+        $this->assertEquals($cycle->weeks->get(0)->starts_at->addHours(2), $cycle->weeks->get(0)->ends_at);
+    }
+
+    /** @test */
+    function can_add_a_week_to_a_cycle_with_existing_weeks()
+    {
+        $cycle = factory(Cycle::class)->create()->addWeek();
+        $this->assertEquals(1, $cycle->weeks->count());
+        $this->assertEquals($cycle->starts_at, $cycle->weeks->get(0)->starts_at);
+
+        $cycle = $cycle->addWeek();
+
+        $this->assertEquals(2, $cycle->weeks->count());
+        $this->assertEquals($cycle->weeks->last()->starts_at, $cycle->weeks->first()->starts_at->addWeek(1));
+        $this->assertEquals($cycle->weeks->last()->starts_at->addHours(2), $cycle->weeks->last()->ends_at);
+    }
+
+    /** @test */
+    function can_add_multiple_weeks_to_a_cycle_with_no_weeks()
+    {
+        $cycle = factory(Cycle::class)->create();
+        $this->assertEquals(0, $cycle->weeks->count());
+
+        $cycle = $cycle->addWeeks(3);
+
+        $this->assertEquals(3, $cycle->weeks->count());
+        $this->assertEquals($cycle->starts_at, $cycle->weeks->get(0)->starts_at);
+        $this->assertEquals($cycle->starts_at->copy()->addWeek(1), $cycle->weeks->get(1)->starts_at);
+        $this->assertEquals($cycle->starts_at->copy()->addWeek(2), $cycle->weeks->get(2)->starts_at);
+    }
+
+    /** @test */
+    function can_add_multiple_weeks_to_a_cycle_with_existing_weeks()
+    {
+        $cycle = factory(Cycle::class)->create()->addWeek();
+        $this->assertEquals(1, $cycle->weeks->count());
+
+        $cycle = $cycle->addWeeks(3);
+
+        $this->assertEquals(4, $cycle->weeks->count());
+        $this->assertEquals($cycle->starts_at, $cycle->weeks->get(0)->starts_at);
+        $this->assertEquals($cycle->starts_at->copy()->addWeek(1), $cycle->weeks->get(1)->starts_at);
+        $this->assertEquals($cycle->starts_at->copy()->addWeek(2), $cycle->weeks->get(2)->starts_at);
+        $this->assertEquals($cycle->starts_at->copy()->addWeek(3), $cycle->weeks->get(3)->starts_at);
     }
 }
