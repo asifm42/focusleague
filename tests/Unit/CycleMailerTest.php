@@ -32,21 +32,6 @@ class CycleMailerTest extends TestCase
     protected function arrange()
     {
         $cycle = factory(Cycle::class)->create();
-        // $startTime = $cycle->starts_at;
-        // $cycle->weeks()->saveMany([
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime
-        //     ]),
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime->addWeek(1)
-        //     ]),
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime->addWeek(1)
-        //     ]),
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime->addWeek(1)
-        //     ]),
-        // ]);
 
         $this->usersSignedUp = factory(User::class, 3)->create();
         $this->usersNotSignedUp = factory(User::class, 5)->create();
@@ -79,7 +64,7 @@ class CycleMailerTest extends TestCase
         // assert that the unregistered users did get the email
         $this->usersNotSignedUp->each(function ($user) {
             Mail::assertSent(SignupOpenAnnounceEmail::class, function ($mail) use ($user) {
-                return $mail->hasTo($user->email);
+                return !$mail->hasTo($user->email);
             });
         });
 
