@@ -116,6 +116,20 @@ class UserMailer extends Mailer
         return;
     }
 
+    /**
+     * Sends an email to all Users who have a balance
+     *
+     * @return void
+     */
+    public static function sendBalanceReminderEmails()
+    {
+        $mailer = new Self;
+        return User::all()->filter(function ($user) {
+            return $user->getBalance() > 0;
+        })->each(function ($user) use ($mailer) {
+            $mailer->sendBalanceReminderEmail($user);
+        });
+    }
 
     /**
      * Sends an email to the user encouraging feeback from the last cycle and reminding about upcoming cycle sign-up closing.
