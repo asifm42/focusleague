@@ -7,7 +7,6 @@ use App\Mailers\UserMailer;
 use App\Models\Cycle;
 use App\Models\Transaction;
 use App\Models\User;
-use App\Models\Week;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
