@@ -21,7 +21,7 @@ use Tests\TestCase;
 
 class CycleMailerTest extends TestCase
 {
-
+////////  TO-DO UPDATE THE TESTS. CAN'T ASSERT PROPERLY WHEN MULTIPLE EMAILS ARE SENT
     use DatabaseMigrations;
 
     public $creator;
@@ -50,6 +50,161 @@ class CycleMailerTest extends TestCase
         $this->assertFalse($cycle->usersNotSignedUp()->contains($this->usersSignedUp->get(2)));
         $this->assertTrue($cycle->usersNotSignedUp()->contains($this->usersNotSignedUp->get(2)));
         $this->cycle = $cycle;
+    }
+
+    /** @test */
+    function a_user_not_signed_up_for_the_current_cycle_is_sent_an_open_announcement_email()
+    {
+        $cycle = factory(Cycle::class)->create();
+        $user = $cycle->creator;
+
+        $this->assertFalse($cycle->signups->contains($user));
+        Mail::fake();
+
+        // send announcment
+        $recipients = CycleMailer::sendSignupOpenAnnouncementEmail();
+        $this->assertEquals(1, $recipients->count());
+        $this->assertTrue($recipients->contains($user));
+
+        Mail::assertSent(SignupOpenAnnounceEmail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
+    }
+
+    /** @test */
+    function a_user_signed_up_for_the_current_cycle_is_not_sent_an_open_announcement_email()
+    {
+        $cycle = factory(Cycle::class)->create();
+        $user = $cycle->creator;
+
+        $cycle->signups()->attach($user->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+        ]);
+
+        $this->assertTrue($cycle->signups->contains($user));
+
+        Mail::fake();
+
+        // send announcment
+        $recipients = CycleMailer::sendSignupOpenAnnouncementEmail();
+        $this->assertEquals(0, $recipients->count());
+        $this->assertFalse($recipients->contains($user));
+        Mail::assertNotSent(SignupOpenAnnounceEmail::class);
+
+        // // Send open reminder
+        // $recipients = CycleMailer::sendSignupOpenReminderEmail();
+        // $this->assertEquals(0, $recipients->count());
+        // $this->assertFalse($recipients->contains($user));
+
+        // Mail::assertNotSent(SignupOpenReminderEmail::class);
+
+        // // Send closing reminder
+        // $recipients = CycleMailer::sendSignupClosingReminderEmail();
+        // $this->assertEquals(0, $recipients->count());
+        // $this->assertFalse($recipients->contains($user));
+
+        // Mail::assertNotSent(SignupClosingReminderEmail::class);
+
+        // send closed announcement
+        // $recipients = CycleMailer::();
+        // $this->assertEquals(0, $recipients->count());
+        // $this->assertFalse($recipients->contains($user));
+
+        // Mail::assertNotSent(::class);
+    }
+
+    /** @test */
+    function a_user_not_signed_up_for_the_current_cycle_is_sent_an_open_reminder_email()
+    {
+        $cycle = factory(Cycle::class)->create();
+        $user = $cycle->creator;
+
+        $cycle->signups()->attach($user->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+        ]);
+
+        $this->assertTrue($cycle->signups->contains($user));
+
+        Mail::fake();
+
+        // send announcment
+        $recipients = CycleMailer::sendSignupOpenAnnouncementEmail();
+        $this->assertEquals(0, $recipients->count());
+        $this->assertFalse($recipients->contains($user));
+        Mail::assertNotSent(SignupOpenAnnounceEmail::class);
+
+        // Send open reminder
+        $recipients = CycleMailer::sendSignupOpenReminderEmail();
+        $this->assertEquals(0, $recipients->count());
+        $this->assertFalse($recipients->contains($user));
+
+        Mail::assertNotSent(SignupOpenReminderEmail::class);
+
+        // Send closing reminder
+        $recipients = CycleMailer::sendSignupClosingReminderEmail();
+        $this->assertEquals(0, $recipients->count());
+        $this->assertFalse($recipients->contains($user));
+
+        Mail::assertNotSent(SignupClosingReminderEmail::class);
+
+        // send closed announcement
+        // $recipients = CycleMailer::();
+        // $this->assertEquals(0, $recipients->count());
+        // $this->assertFalse($recipients->contains($user));
+
+        // Mail::assertNotSent(::class);
+    }
+
+    /** @test */
+    function a_user_signed_up_for_the_current_cycle_is_not_sent_an_open_reminder_email()
+    {
+
+    }
+
+    /** @test */
+    function a_user_not_signed_up_for_the_current_cycle_is_sent_a_closing_reminder_email()
+    {
+
+    }
+
+    /** @test */
+    function a_user_signed_up_for_the_current_cycle_is_not_sent_a_closing_reminder_email()
+    {
+
+    }
+
+    /** @test */
+    function a_user_signed_up_for_the_current_cycle_is_sent_a_closed_announcement_email()
+    {
+
+    }
+
+    /** @test */
+    function a_user_not_signed_up_for_the_current_cycle_is_not_sent_a_closed_announcement_email()
+    {
+
+    }
+
+    /** @test */
+    function a_user_on_a_team_is_sent_a_team_announcement()
+    {
+
+    }
+
+    /** @test */
+    function a_user_signed_up_but_not_on_a_team_is_not_sent_a_team_announcement()
+    {
+
+    }
+
+    /** @test */
+    function a_user_signed_up_for_the_current_cycle_is_not_sent_a_closing_reminder_email()
+    {
+
     }
 
     /** @test */
