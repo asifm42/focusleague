@@ -114,10 +114,12 @@ span.event-xs  {
                     </h5>
                     <!-- <h5><span class = "emphasize">F</span>ostering <span class = "emphasize">O</span>rganized <strong>C</strong>ompetitive <strong>U</strong>ltimate <strong>S</strong>eries</h5> -->
 
+            <!-- start game status -->
 <div class="row">
+<div class="col-xs-12">
                     @if($current_cycle && $current_cycle->gameToday())
                         <div    class="jumbotron"
-                                style="background-color: #ffff99;" >
+                                style="background-color: #ffff99; margin-bottom:0" >
                             <h4>
                                 Game Status for {{ Carbon::today()->format("l, F jS") }}
                             </h4>
@@ -129,7 +131,7 @@ span.event-xs  {
                                 </p>
                             @else
                                 <p>
-                                    Games are on. However, if HSP is closed due to weather, games will be canceled. HSP will communicate park closure via their <a href="http://www.houstonsportspark.com">website</a> and <a href="https://twitter.com/HoustonSportsPk?ref_src=twsrc%5Etfw">twitter feed</a>. Check one of those resources before heading to the fields.
+                                    Games are on. However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
                                 </p>
                             @endif
                             <div>
@@ -137,6 +139,10 @@ span.event-xs  {
                             </div>
                         </div>
                     @endif
+</div>
+</div>
+<div class = "row">
+            <!-- end game status -->
 
                     @if(auth()->check())
                         <p>
@@ -232,10 +238,34 @@ span.event-xs  {
                     <h3>
                         Fostering Organized Competitive Ultimate Series
                     </h3>
+            <!-- start game status -->
+                <div class="row">
+                    <div class="col-xs-12">
                     @if($current_cycle && $current_cycle->gameToday())
-
+                        <div    class="jumbotron"
+                                style="background-color: #ffff99; margin-bottom:0" >
+                            <h4>
+                                Game Status for {{ Carbon::today()->format("l, F jS") }}
+                            </h4>
+                            @if($current_cycle->currentWeek()->hasStatus())
+                                {!! $current_cycle->currentWeek()->status() !!}
+                            @elseif($current_cycle->currentWeek()->isRainedOut())
+                                <p>
+                                    Games are canceled due to weather.
+                                </p>
+                            @else
+                                <p>
+                                    Games are on. However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
+                                </p>
+                            @endif
+                            <div>
+                                <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe>
+                            </div>
+                        </div>
                     @endif
-
+                    </div>
+                </div>
+            <!-- end game status -->
                 <div class = "row">
                     <div class="col-xs-12">
                     @if($current_cycle->isSignupOpen())
