@@ -137,6 +137,7 @@ class CycleTest extends TestCase
         $this->assertEquals(1, $cycle->weeks->count());
         $this->assertEquals($cycle->starts_at, $cycle->weeks->get(0)->starts_at);
         $this->assertEquals($cycle->weeks->get(0)->starts_at->addHours(2), $cycle->weeks->get(0)->ends_at);
+        $this->assertEquals($cycle->weeks->last()->ends_at->endOfDay(), $cycle->ends_at);
     }
 
     /** @test */
@@ -151,6 +152,7 @@ class CycleTest extends TestCase
         $this->assertEquals(2, $cycle->weeks->count());
         $this->assertEquals($cycle->weeks->last()->starts_at, $cycle->weeks->first()->starts_at->addWeek(1));
         $this->assertEquals($cycle->weeks->last()->starts_at->addHours(2), $cycle->weeks->last()->ends_at);
+        $this->assertEquals($cycle->weeks->last()->ends_at->endOfDay(), $cycle->ends_at);
     }
 
     /** @test */
@@ -165,6 +167,7 @@ class CycleTest extends TestCase
         $this->assertEquals($cycle->starts_at, $cycle->weeks->get(0)->starts_at);
         $this->assertEquals($cycle->starts_at->copy()->addWeek(1), $cycle->weeks->get(1)->starts_at);
         $this->assertEquals($cycle->starts_at->copy()->addWeek(2), $cycle->weeks->get(2)->starts_at);
+        $this->assertEquals($cycle->weeks->last()->ends_at->endOfDay(), $cycle->ends_at);
     }
 
     /** @test */
@@ -180,5 +183,6 @@ class CycleTest extends TestCase
         $this->assertEquals($cycle->starts_at->copy()->addWeek(1), $cycle->weeks->get(1)->starts_at);
         $this->assertEquals($cycle->starts_at->copy()->addWeek(2), $cycle->weeks->get(2)->starts_at);
         $this->assertEquals($cycle->starts_at->copy()->addWeek(3), $cycle->weeks->get(3)->starts_at);
+        $this->assertEquals($cycle->weeks->last()->ends_at->endOfDay(), $cycle->ends_at);
     }
 }
