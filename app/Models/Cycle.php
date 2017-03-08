@@ -182,16 +182,19 @@ class Cycle extends Model
     public function addWeek()
     {
         if (is_null($this->weeks->last())) {
-            $this->weeks()->create([
+            $week = $this->weeks()->create([
                 'starts_at' => $this->starts_at,
                 'ends_at' => $this->starts_at->addHours(2)
             ]);
         } else {
-            $this->weeks()->create([
+            $week = $this->weeks()->create([
                 'starts_at' => $this->weeks->last()->starts_at->addWeek(),
                 'ends_at' => $this->weeks->last()->starts_at->addWeek()->addHours(2)
             ]);
         }
+
+        $this->ends_at = $week->ends_at->endOfDay();
+        $this->save();
 
         // have to reload fresh instance since we are adding the weeks relationship to memory when checking for the last week.
         return $this->fresh();
