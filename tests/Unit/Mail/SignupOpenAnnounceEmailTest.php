@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-class SignupOpenReminderEmailTest extends TestCase
+class SignupOpenAnnouncementEmailTest extends TestCase
 {
     use DatabaseMigrations;
 
