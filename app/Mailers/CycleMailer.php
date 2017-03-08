@@ -68,7 +68,7 @@ class CycleMailer extends Mailer
         $cycle = Cycle::currentCycle();
         $mailer = new UserMailer;
 
-        return $cycle->signups()->each(function($signup) use ($mailer, $cycle) {
+        return $cycle->signups->each(function($signup) use ($mailer, $cycle) {
             $mailer->sendSignupClosedEmail($signup, $cycle);
         });
     }
