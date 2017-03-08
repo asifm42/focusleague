@@ -55,18 +55,27 @@ time.icon span
   color: #2f2f2f;
 }
 
-span.event,
-span.event-xs  {
+div.event  {/*
     display: inline-block;
     line-height: 5em;
-    vertical-align: top;
-    padding-left: 20px;
-    font-size: 1em;
+    vertical-align: top;*/
+    padding-left: 10px;
+    font-size: 1.1em;
 }
 
 .schedule > li,
 .schedule-list > li {
-    padding:10px 15px 3px 10px;
+}
+
+.schedule > li {
+    display:block;
+    padding:8px;
+}
+
+.schedule-list > li {
+    display:flex;
+    align-items:center;
+    padding:10px;
 }
 
 .schedule-list > .list-group-item:first-child {
@@ -75,24 +84,18 @@ span.event-xs  {
 .schedule-list > .list-group-item:last-child {
     border-radius: 0;
     border-bottom: 0;
+    display: block;
+    padding:8px;
 }
 
 .schedule {
     max-height:433px;
-/*    overflow-x: hidden;
-    overflow-y: scroll;*/
-/*    border-top:solid #ddd 1px;
-    border-bottom:solid #ddd 1px;
-    border: #ddd 1px;
-    border-radius:3px;*/
 }
 
-
 .schedule-list {
-    max-height:368px;
+    max-height:365px;
     overflow-x: hidden;
     overflow-y: scroll;
-/*    border-top:solid #ddd 1px;*/
     border-bottom:solid #ddd 1px;
     border-bottom-left-radius:3px;
     border-bottom-right-radius:3px;
