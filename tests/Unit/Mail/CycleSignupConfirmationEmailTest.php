@@ -24,25 +24,8 @@ class CycleSignupConfirmationEmailTest extends TestCase
         Mail::fake();
 
         $mailer = new UserMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
         $user = factory(User::class)->create();
-
-        // add weeks for cycle
-        $startTime = $cycle->starts_at;
-        $cycle->weeks()->saveMany([
-            factory(Week::class)->make([
-                'starts_at' => $startTime
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-        ]);
 
         $cycle->signups()->attach($user->id, [
                 'div_pref_first'    => 'mens',
@@ -70,25 +53,8 @@ class CycleSignupConfirmationEmailTest extends TestCase
     function the_view_is_being_generated_with_no_errors()
     {
         $mailer = new UserMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
         $user = factory(User::class)->create();
-
-        // add weeks for cycle
-        $startTime = $cycle->starts_at;
-        $cycle->weeks()->saveMany([
-            factory(Week::class)->make([
-                'starts_at' => $startTime
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-        ]);
 
         $cycle->signups()->attach($user->id, [
                 'div_pref_first'    => 'mens',
