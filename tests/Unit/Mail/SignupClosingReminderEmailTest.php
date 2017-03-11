@@ -22,7 +22,7 @@ class SignupClosingReminderEmailTest extends TestCase
         Mail::fake();
 
         $mailer = new UserMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
         $user = factory(User::class)->create();
 
         $mailer->sendSignupClosingReminderEmail($user,$cycle);
@@ -36,7 +36,7 @@ class SignupClosingReminderEmailTest extends TestCase
     function the_view_is_being_generated_with_no_errors()
     {
         $mailer = new UserMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
         $user = factory(User::class)->create();
 
         $mailer->sendSignupClosingReminderEmail($user,$cycle);
