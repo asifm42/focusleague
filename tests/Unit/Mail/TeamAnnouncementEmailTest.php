@@ -46,23 +46,6 @@ class TeamAnnouncementEmailTest extends TestCase
         $user = factory(User::class)->create();
         $team = $cycle->teams()->save(factory(Team::class)->make());
 
-        // add weeks for cycle
-        // $startTime = $cycle->starts_at;
-        // $cycle->weeks()->saveMany([
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime
-        //     ]),
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime->addWeek(1)
-        //     ]),
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime->addWeek(1)
-        //     ]),
-        //     factory(Week::class)->make([
-        //         'starts_at' => $startTime->addWeek(1)
-        //     ]),
-        // ]);
-
         // add signup for user with team assignement
         $cycle->signups()->attach($user->id, [
             'div_pref_first'    => 'mens',
