@@ -1,5 +1,5 @@
 @component('emails.layouts.message', [ 'user' => $sub->user ])
-<p>Thanks for signing up as a sub for Cycle {{ $sub->week->cycle->name }} - Week {{ $sub->week->index() }} on {{ $sub->week->starts_at->toFormattedDateString() }}!</p>
+##Thanks for signing up as a sub for Cycle {{ $sub->week->cycle->name }} - Week {{ $sub->week->index() }} on {{ $sub->week->starts_at->toFormattedDateString() }}!
 
 <p>As mentioned before, a sub spot is not guaranteed. We'll be in touch soon if we need your talent.</p>
 
