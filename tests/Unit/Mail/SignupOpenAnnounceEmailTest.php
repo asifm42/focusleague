@@ -36,7 +36,7 @@ class SignupOpenAnnouncementEmailTest extends TestCase
     function the_view_is_being_generated_with_no_errors()
     {
         $mailer = new UserMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(3);
         $user = factory(User::class)->create();
 
         $mailer->sendSignupOpenAnnouncementEmail($user,$cycle);

@@ -1,6 +1,11 @@
 @component('emails.layouts.message', ['user' => $user])
 <h1>Sign-up for Cycle {{ $cycle->name }} is now open!</h1>
 
+Cycle {{ $cycle->name }} will be {{ $cycle->weeks->count() }} weeks:
+@foreach($cycle->weeks as $week)
+* {{ $week->starts_at->toDayDateTimeString() }}
+@endforeach
+
 @component('mail::button', ['url' => route('cycle.signup.create', $cycle->id), 'color' => 'blue'])
 SIGN UP FOR CYCLE {{ $cycle->name }}
 @endcomponent
