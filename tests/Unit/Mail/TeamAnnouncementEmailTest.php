@@ -25,7 +25,7 @@ class TeamAnnouncementEmailTest extends TestCase
         Mail::fake();
 
         $mailer = new UserMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
         $user = factory(User::class)->create();
         $team = $cycle->teams()->save(factory(Team::class)->make());
 
@@ -42,26 +42,26 @@ class TeamAnnouncementEmailTest extends TestCase
         $mailer = new UserMailer;
         $cycle = factory(Cycle::class)->create([
             'format' => '1 Mens 7v7, 1 Mixed 7v7'
-            ]);
+            ])->addWeeks(4);
         $user = factory(User::class)->create();
         $team = $cycle->teams()->save(factory(Team::class)->make());
 
         // add weeks for cycle
-        $startTime = $cycle->starts_at;
-        $cycle->weeks()->saveMany([
-            factory(Week::class)->make([
-                'starts_at' => $startTime
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-        ]);
+        // $startTime = $cycle->starts_at;
+        // $cycle->weeks()->saveMany([
+        //     factory(Week::class)->make([
+        //         'starts_at' => $startTime
+        //     ]),
+        //     factory(Week::class)->make([
+        //         'starts_at' => $startTime->addWeek(1)
+        //     ]),
+        //     factory(Week::class)->make([
+        //         'starts_at' => $startTime->addWeek(1)
+        //     ]),
+        //     factory(Week::class)->make([
+        //         'starts_at' => $startTime->addWeek(1)
+        //     ]),
+        // ]);
 
         // add signup for user with team assignement
         $cycle->signups()->attach($user->id, [

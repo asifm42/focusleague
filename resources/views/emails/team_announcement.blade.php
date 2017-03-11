@@ -1,16 +1,16 @@
 @component('emails.layouts.message', ['user'=>$user])
-<p>Cycle {{ $cycle->name }} teams have been set!</p>
+##Cycle {{ $cycle->name }} teams have been set!
 
-<p>The format for the cycle is {{ $cycle->format }}.<p>
+The format for the cycle is **{{ $cycle->format }}**.
 
-<p>You are on team <strong><em>{{ ucwords($team->name) }}</em></strong> in the {{ ucfirst($team->division) }} division.</p>
+You are on team **_{{ ucwords($team->name) }}_** in the **{{ ucfirst($team->division) }}** division.
 
 @if ($team->captains->count() > 1)
-    <p>Your captains are:</p>
+Your captains are:
 @elseif (count($team->captains) == 1)
-    <p>Your captain is:</p>
+Your captain is:
 @else
-    <p>We are working on selecting a captain since no one volunteered. Please let us know if you have changed your mind and are willing to captain this cycle.</p>
+We are working on selecting a captain since no one volunteered. Please let us know if you have changed your mind and are willing to captain this cycle.
 @endif
 
 @if ($team->captains->count() > 0)
