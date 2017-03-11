@@ -51,7 +51,7 @@ class TeamTest extends TestCase
         $user2 = factory(User::class)->create();
         $users = factory(User::class, 8)->create();
 
-        $teams = factory(Team::class, 4)->create();
+        $teams = $cycle->teams()->saveMany(factory(Team::class, 4)->make());
 
         $cycle->signups()->attach($user1->id, [
             'div_pref_first'    => 'mens',
