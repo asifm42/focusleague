@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Mailers;
 
 use App\Mailers\UserMailer;
 use App\Models\Cycle;
-use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
 
 class CycleMailer extends Mailer
 {
