@@ -2,9 +2,12 @@
 
 namespace App\Mailers;
 
+use App\Mail\SubTeamAnnouncementEmail;
 use App\Mailers\UserMailer;
 use App\Models\Cycle;
-// use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use App\Models\Week;
+use Illuminate\Support\Facades\Mail;
 
 class CycleMailer extends Mailer
 {
@@ -93,5 +96,26 @@ class CycleMailer extends Mailer
                 }
             });
         });
+    }
+
+    /**
+     * Sends an email to the captains announcing subs for the week
+     *
+     * @return void
+     */
+    public static function sendSubTeamAnnouncementEmail(Week $week)
+    {
+        $captains = collect();
+        foreach($week->cycle->teams as $team) {
+            foreach($team->captains as $captain) {
+                $captains->push($captain->user);
+            }
+        }
+
+        if ($captains) {
+            Mail::to($captains)
+                ->cc(User::where('admin', true)->get())
+                ->queue(new SubTeamAnnouncementEmail($week));
+        }
     }
 }

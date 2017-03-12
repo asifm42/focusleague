@@ -132,6 +132,17 @@ class UserMailer extends Mailer
     }
 
     /**
+     * Sends an email to the user confirming their sub spot
+     *
+     * @return void
+     */
+    public function sendSubSpotConfirmationEmail(Sub $sub)
+    {
+        Mail::to($sub->user->email, $sub->user->name)
+            ->queue(new Mailable\SubSpotConfirmationEmail($sub));
+    }
+
+    /**
      * Sends an email to the user encouraging feeback from the last cycle and reminding about upcoming cycle sign-up closing.
      *
      * @return void
