@@ -11,7 +11,7 @@
 @foreach($week->cycle->teams()->where('division', 'mens')->get() as $team)
 **Team {{ $team->name }}**
 @foreach($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
-* {{ $sub->name }} _aka_ {{ $sub->nickname }} - {{ $sub->email }}
+* {{ $sub->nickname }} ({{ $sub->name }}) - {{ $sub->email }}
 @endforeach
 @endforeach
 @endcomponent
@@ -36,7 +36,7 @@
 @foreach($week->cycle->teams()->where('division', 'womens')->get() as $team)
 **Team {{ $team->name }}**
 @foreach($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
-* {{ $sub->name }} _aka_ {{ $sub->nickname }} - {{ $sub->email }}
+* {{ $sub->nickname }} ({{ $sub->name }}) - {{ $sub->email }}
 @endforeach
 @endforeach
 @endcomponent
