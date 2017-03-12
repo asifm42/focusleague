@@ -76,3 +76,62 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+
+$factory->state(App\Models\User::class, 'male', function ($faker) {
+    $divPref = rand(1,4);
+    if ($divPref === 1) {
+        // might need to use 2 and 3 to determine rank
+        // $divPref = '["mens" => 1, "mixed" => 0, "womens" => 0]';
+        $divPref1 = 'mens';
+        $divPref2 = 'mixed';
+    } elseif ($divPref === 2) {
+        // $divPref = '["mens" => 1, "mixed" => 2, "womens" => 0]';
+        $divPref1 = 'mixed';
+        $divPref2 = 'mens';
+    } elseif ($divPref === 3) {
+        // $divPref = '["mens" => 2, "mixed" => 1, "womens" => 0]';
+        $divPref1 = 'mens';
+        $divPref2 = NULL;
+    } else {
+        // $divPref = '["mens" => 0, "mixed" => 1, "womens" => 0]';
+        $divPref1 = 'mixed';
+        $divPref2 = NULL;
+    }
+
+    return [
+        'gender' => 'male',
+        'division_preference_first' => $divPref1,
+        'division_preference_second' => $divPref2
+    ];
+});
+
+
+
+$factory->state(App\Models\User::class, 'female', function ($faker) {
+    $divPref = rand(1,4);
+    if ($divPref === 1) {
+        // $divPref = '["mens" => 0, "mixed" => 0, "womens" => 1]';
+        $divPref1 = 'womens';
+        $divPref2 = 'mixed';
+    } elseif ($divPref === 2) {
+        // $divPref = '["mens" => 0, "mixed" => 2, "womens" => 1]';
+        $divPref1 = 'mixed';
+        $divPref2 = 'womens';
+    } elseif ($divPref === 3) {
+        // $divPref = '["mens" => 0, "mixed" => 1, "womens" => 2]';
+        $divPref1 = 'womens';
+        $divPref2 = NULL;
+    } else {
+        // $divPref = '["mens" => 0, "mixed" => 1, "womens" => 0]';
+        $divPref1 = 'mixed';
+        $divPref2 = NULL;
+    }
+
+    return [
+        'gender' => 'female',
+        'division_preference_first' => $divPref1,
+        'division_preference_second' => $divPref2
+    ];
+});

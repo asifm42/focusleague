@@ -1,6 +1,8 @@
 @component('mail::message')
 {{-- Greeting --}}
-@if (isset($user))
+@if (isset($greeting))
+{{ $greeting }}
+@elseif (isset($user))
 Hi {{ title_case($user->getNicknameOrFirstName()) }},
 @else
 Hi FOCUS Leaguer,
