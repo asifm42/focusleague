@@ -204,8 +204,8 @@
                             <div class="panel-body">
                                 <p>Subs - $10/week</p>
                                 <p>Sign up for 2 weeks - $18</p>
-                                <p>Sign up for 3 weeks - $21</p>
-                                <p>Sign up for 4 weeks - $24</p>
+                                <p>Sign up for 3 weeks - $25</p>
+                                <p>Sign up for 4 weeks - $30</p>
                             </div>
                         </div>
                     </div>
