@@ -155,5 +155,5 @@ Route::group(['middleware' => ['auth','admin']], function() {
     /*
         Log routes
      */
-    Route::get('logs',              ['as' => 'admin.logs', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
+    Route::get('logs',              ['as' => 'god.logs', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
 });
