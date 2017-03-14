@@ -9,10 +9,13 @@
 @component('mail::panel')
 <h2 style="text-align: center;" markdown="1">MENS</h2>
 @foreach($week->cycle->teams()->where('division', 'mens')->get() as $team)
+
 **Team {{ $team->name }}**
-@foreach($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
+@forelse($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
 * {{ $sub->nickname }} ({{ $sub->name }}) - {{ $sub->email }}
-@endforeach
+@empty
+* no subs
+@endforelse
 @endforeach
 @endcomponent
 @endif
@@ -23,9 +26,11 @@
 @foreach($week->cycle->teams()->where('division', 'mixed')->get() as $team)
 
 **Team {{ $team->name }}**
-@foreach($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
+@forelse($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
 * {{ $sub->nickname }} ({{ $sub->name }}) - {{ $sub->email }}
-@endforeach
+@empty
+* no subs
+@endforelse
 @endforeach
 @endcomponent
 @endif
@@ -34,10 +39,13 @@
 @component('mail::panel')
 <h2 style="text-align: center;" markdown="1">WOMENS</h2>
 @foreach($week->cycle->teams()->where('division', 'womens')->get() as $team)
+
 **Team {{ $team->name }}**
-@foreach($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
+@forelse($week->subs()->wherePivot('team_id', $team->id)->get() as $sub)
 * {{ $sub->nickname }} ({{ $sub->name }}) - {{ $sub->email }}
-@endforeach
+@empty
+* no subs
+@endforelse
 @endforeach
 @endcomponent
 @endif
