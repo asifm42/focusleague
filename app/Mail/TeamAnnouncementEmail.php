@@ -43,6 +43,13 @@ class TeamAnnouncementEmail extends Mailable implements ShouldQueue
     public $cost;
 
     /**
+     * Boolean to show if user is a captain or not
+     *
+     * @var bool
+     */
+    public $isCaptain;
+
+    /**
      * Create a new message instance.
      *
      * @return void
@@ -52,6 +59,7 @@ class TeamAnnouncementEmail extends Mailable implements ShouldQueue
         $this->user = $user;
         $this->cycle = $cycle;
         $this->team = $team;
+        $this->isCaptain = (bool) $cycle->signups->where('id', $user->id)->first()->pivot->captain;
 
         switch ($user->availability->where('cycle_id', $cycle->id)->where('pivot.attending', 1)->count()) {
             case 2:
