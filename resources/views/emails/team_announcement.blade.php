@@ -5,6 +5,18 @@ The format for the cycle is **{{ $cycle->format }}**.
 
 You are on team **_{{ ucwords($team->name) }}_** in the **{{ ucfirst($team->division) }}** division.
 
+@if ($isCaptain)
+Thank you for volunteering to captain. We will be needing your leadership this cycle.
+@endif
+
+@if ($isCaptain)
+@if ($team->captains->count() > 2)
+Your co-captains are:
+@elseif (count($team->captains) == 2)
+Your co-captain is:
+@else
+@endif
+@else
 @if ($team->captains->count() > 1)
 Your captains are:
 @elseif (count($team->captains) == 1)
@@ -12,10 +24,12 @@ Your captain is:
 @else
 We are working on selecting a captain since no one volunteered. Please let us know if you have changed your mind and are willing to captain this cycle.
 @endif
+@endif
 
 @if ($team->captains->count() > 0)
 <ul>
     @foreach($team->captains as $captain)
+        @if ($captain->user->id !== $user->id)
         <li>
         @if ($captain->user->nickname)
             {{ ucwords($captain->user->name) . ' aka ' . ucwords($captain->user->nickname) }}
@@ -24,6 +38,7 @@ We are working on selecting a captain since no one volunteered. Please let us kn
         @endif
             {{' - ' . $captain->user->email }}
         </li>
+        @endif
     @endforeach
 </ul>
 @endif
