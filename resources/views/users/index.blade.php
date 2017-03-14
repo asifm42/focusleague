@@ -27,7 +27,14 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
+                                <td>
+                                    <a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a>
+                                    @if(auth()->user()->id !== $user->id)
+                                        <a href="{{ route('users.impersonate', $user->id) }}" class="pull-right text-muted" data-trigger="hover focus" data-toggle="tooltip" data-placement="top" title="Impersonate user">
+                                            <i class="fa fa-fw fa-user-secret"></i>
+                                        </a>
+                                    @endif
+                                </td>
                                 <td>{!! $user->nickname ? $user->nickname : '<em>null</em>' !!}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->cell_number }}</td>

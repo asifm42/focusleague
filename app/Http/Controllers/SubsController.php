@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\EditSubSignupFormRequest;
 use App\Http\Requests\UpdateSubSignupRequest;
 use App\Http\Requests\SubTeamPlacementRequest;
+use App\Mailers;
 use App\Models\Cycle;
 use App\Models\Sub;
 use App\Models\Team;
@@ -37,7 +38,7 @@ class SubsController extends Controller
     public function create(Request $request, $id)
     {
         if ($id === 'current') {
-            $cycle = Cycle::current_cycle();
+            $cycle = Cycle::currentCycle();
             if (!$cycle) {
                 flash()->info('Sorry, there is no current cycle at the moment.');
 
@@ -75,7 +76,9 @@ class SubsController extends Controller
 
         $week->subs()->attach(auth()->user()->id, ['note'=>$request->input('note')]);
 
-        event(new UserSignedUpAsASub(auth()->user(), $week, $cycle));
+        $sub = Sub::findOrFail($week->subs()->where('user_id', auth()->user()->id)->first()->pivot->id);
+
+        event(new UserSignedUpAsASub($sub));
 
         flash()->success('You are signed up to sub!');
 
@@ -212,12 +215,21 @@ class SubsController extends Controller
         $sub->load('team');
         // fire off event
 
-        $transaction = Transaction::where('cycle_id', $sub->week->cycle->id)
+        // See if there is a deleted transaction and undelete it
+        $deletedTransaction = Transaction::onlyTrashed()
+            ->where('cycle_id', $sub->week->cycle->id)
                     ->where('week_id', $sub->week_id)
                     ->where('user_id', $sub->user_id)
                     ->where('type', 'charge')->first();
 
-        if(empty($transaction)) {
+        $transaction = Transaction::where('cycle_id', $sub->week->cycle->id)
+            ->where('week_id', $sub->week_id)
+            ->where('user_id', $sub->user_id)
+            ->where('type', 'charge')->first();
+
+        if($deletedTransaction && empty($transaction)) {
+            $deletedTransaction->restore();
+        } elseif (empty($transaction)) {
             Transaction::create([
                 'cycle_id' => $sub->week->cycle->id,
                 'week_id' => $sub->week_id,
@@ -233,4 +245,60 @@ class SubsController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Remove a sub from a team
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function removeFromTeam(Request $request, $id)
+    {
+        $sub = Sub::findOrFail($id);
+        $sub->load('user', 'team');
+        $team = $sub->team;
+        $sub->team()->dissociate();
+        $sub->save();
+
+        // fire off event
+
+        $transaction = Transaction::where('cycle_id', $sub->week->cycle->id)
+                    ->where('week_id', $sub->week_id)
+                    ->where('user_id', $sub->user_id)
+                    ->where('type', 'charge')
+                    ->first();
+
+        if($transaction) {
+            $transaction->delete();
+        }
+
+        flash()->success($sub->user->getNicknameOrShortName() . ' removed from Team ' . ucwords($team->name) . ' as a sub.');
+
+        return redirect()->back();
+    }
+
+
+    /**
+     * Email sub announcement
+     *
+     * @param  int  $cycleId
+     * @return \Illuminate\Http\Response
+     */
+    public function announce($weekId)
+    {
+        $cycleMailer = new Mailers\CycleMailer;
+        $userMailer = new Mailers\UserMailer;
+        $week = Week::findOrFail($weekId);
+
+        $cycleMailer->sendSubTeamAnnouncementEmail($week);
+
+        foreach($week->subs as $subUser) {
+            if(is_null($subUser->pivot->team_id)) continue;
+            $sub = Sub::findOrFail($subUser->pivot->id);
+            $userMailer ->sendSubSpotConfirmationEmail($sub);
+        }
+
+        flash()->success('Sub announcment has been mailed to Subs and Captains.');
+
+        return redirect()->route('admin.dashboard');
+    }
 }

@@ -14,6 +14,10 @@ class UserUpdatedSubSignup extends Event
 {
     use SerializesModels;
 
+    public $updatedBy;
+    public $week;
+    public $sub;
+
     /**
      * Create a new event instance.
      *

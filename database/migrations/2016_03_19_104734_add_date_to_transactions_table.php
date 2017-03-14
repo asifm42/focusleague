@@ -13,7 +13,7 @@ class AddDateToTransactionsTable extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->date('date')->after('amount');
+            $table->date('date')->after('amount')->default('CURRENT_TIMESTAMP');
         });
     }
 

@@ -25,7 +25,6 @@
                         {!! Former::text('email')
                             ->addClass('form-control')
                             ->placeholder('Required email address')
-                            ->value($email)
                             ->autofocus('autofocus')
                         !!}
                     </div>

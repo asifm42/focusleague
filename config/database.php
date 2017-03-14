@@ -52,6 +52,24 @@ return [
             'prefix'   => '',
         ],
 
+        'sqlite_testing_flat_file_setup' => [
+            'driver'   => 'sqlite',
+            'database' => storage_path('stubdb.sqlite'),
+            'prefix'   => '',
+        ],
+
+        'sqlite_testing_flat_file' => [
+            'driver'   => 'sqlite',
+            'database' => storage_path('testdb.sqlite'),
+            'prefix'   => '',
+        ],
+
+        'sqlite_testing_in_memory' => [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ],
+
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),

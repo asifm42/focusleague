@@ -1,25 +1,42 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+namespace Tests;
+
+use App\Exceptions\Handler;
+use Exception;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+
+abstract class TestCase extends BaseTestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
+    use CreatesApplication;
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
+    // Use this version if you're on PHP 7
+    // https://gist.github.com/adamwathan/c9752f61102dc056d157
+    // https://adamwathan.me/2016/01/21/disabling-exception-handling/
+    protected function disableExceptionHandling()
     {
-        $app = require __DIR__.'/../bootstrap/app.php';
+        $this->app->instance(ExceptionHandler::class, new class extends Handler {
+            public function __construct() {}
 
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+            public function report(Exception $e)
+            {
+                // no-op
+            }
 
-        return $app;
+            public function render($request, Exception $e) {
+                throw $e;
+            }
+        });
+    }
+
+    protected function dieDumpResponseContent()
+    {
+        $this->dd();
+    }
+
+    protected function dd()
+    {
+        dd($this->response->getContent());
     }
 }

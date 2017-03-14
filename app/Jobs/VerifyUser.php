@@ -7,9 +7,8 @@ use App\Events\UserVerified;
 use App\Exceptions\InvalidConfirmationCodeException;
 use App\Jobs\Job;
 use App\Models\User;
-use Illuminate\Contracts\Bus\SelfHandling;
 
-class VerifyUser extends Job implements SelfHandling
+class VerifyUser extends Job
 {
 
     protected $confirmationCode;

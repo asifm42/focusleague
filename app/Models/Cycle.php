@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Carbon;
 
 class Cycle extends Model
 {
@@ -33,6 +34,14 @@ class Cycle extends Model
     protected $hidden = [
 
     ];
+
+    /**
+     * Get the cycle weeks
+     */
+    public function creator()
+    {
+        return $this->belongsTo('App\Models\user', 'created_by');
+    }
 
     /**
      * Get the cycle weeks
@@ -98,10 +107,10 @@ class Cycle extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function current_cycle()
+    public static function currentCycle()
     {
         $now = Carbon::now();
-        return Cycle::where('signup_opens_at', '<', $now)
+        return Self::where('signup_opens_at', '<', $now)
                     ->where('ends_at', '>', $now)
                     ->first();
     }
@@ -111,10 +120,10 @@ class Cycle extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function next_cycle()
+    public static function nextCycle()
     {
         $now = Carbon::now();
-        return Cycle::where('signup_opens_at', '>', $now)
+        return Self::where('signup_opens_at', '>', $now)
                     ->orderBy('signup_opens_at', 'asc')->first();
     }
 
@@ -165,4 +174,39 @@ class Cycle extends Model
         return $this->weeks()->where('starts_at', 'like', $searchDate)->first();
     }
 
+    public function usersNotSignedUp()
+    {
+        return User::all()->diff($this->signups);
+    }
+
+    public function addWeek()
+    {
+        if (is_null($this->weeks->last())) {
+            $week = $this->weeks()->create([
+                'starts_at' => $this->starts_at,
+                'ends_at' => $this->starts_at->addHours(2)
+            ]);
+        } else {
+            $week = $this->weeks()->create([
+                'starts_at' => $this->weeks->last()->starts_at->addWeek(),
+                'ends_at' => $this->weeks->last()->starts_at->addWeek()->addHours(2)
+            ]);
+        }
+
+        $this->ends_at = $week->ends_at->endOfDay();
+        $this->save();
+
+        // have to reload fresh instance since we are adding the weeks relationship to memory when checking for the last week.
+        return $this->fresh();
+    }
+
+    public function addWeeks($quantity = 1)
+    {
+        foreach (range(1, $quantity) as $i) {
+            $this->fresh()->addWeek();
+        }
+
+        // have to reload fresh instance since we are adding the weeks relationship to memory when checking for the last week in the addWeek method;
+        return $this->fresh();
+    }
 }

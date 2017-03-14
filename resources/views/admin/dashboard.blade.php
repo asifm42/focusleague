@@ -37,6 +37,9 @@
 <button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#subEmailsModal">
     Sub Email List
 </button>
+<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#subAnnounceModal">
+    Announce Subs to Subs and Captains
+</button>
                     </div>
                 </div>
             @endif
@@ -153,5 +156,23 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="subAnnounceModal" tabindex="-1" role="dialog" aria-labelledby="subAnnounceModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="subEmailsAnnounceLabel">Announce Subs for Cycle {{ $current_cycle->name }} - Wk{{$current_cycle->currentWeek()->index()}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>This will send an individual email to each sub on a team confirming their spot for tonight.</p>
+                <p>And it will send one email to all captains announcing this week's subs to them.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{route('subs.announce', $current_cycle->currentWeek()->id)}}" type="button" class="btn btn-primary">Announce</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 
 @stop

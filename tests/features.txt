@@ -1,0 +1,53 @@
+Create accounts
+log in as a player
+log in as a captain
+log in as an admin
+log in as a god
+
+add your ultimate history
+edit your ultimate history
+
+edit your profile
+edit your profile viewing preferences
+view a player's dashboard
+
+add cycles
+edit cycles
+view cycles
+
+sign up for a cycle
+edit your sign up
+delete your sign up
+
+sign up as a sub for a week
+edit your sub sign up
+delete your sub sign up
+
+add a team to a cycle
+edit team properties
+add a player to a team
+remove a player from a team
+designate a player(s) as a captain for the team
+publish a team
+
+add a game to the week
+edit a game
+delete a game
+report score for a game
+
+add a post
+edit a post
+publish a post
+delete a post
+
+mark a week as a rainout
+
+email a team
+email a player
+email a captain
+email a sub-sign up
+
+add a transaction
+edit a transaction
+delete a transaction
+

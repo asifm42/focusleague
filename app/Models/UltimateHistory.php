@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
 
 class UltimateHistory extends Model
 {
-    use TrimScalarValues;
 
     protected $table = 'ultimate_history';
 

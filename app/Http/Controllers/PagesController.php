@@ -17,8 +17,8 @@ class PagesController extends Controller
      */
     public function welcome()
     {
-        $data['current_cycle'] = Cycle::current_cycle();
-        $data['next_cycle'] = Cycle::next_cycle();
+        $data['current_cycle'] = Cycle::currentCycle();
+        $data['next_cycle'] = Cycle::nextCycle();
 
         return view('site.welcome', $data);
     }

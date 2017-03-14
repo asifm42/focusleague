@@ -3,9 +3,7 @@
 namespace App\Events;
 
 use App\Events\Event;
-use App\Models\Cycle;
-use App\Models\User;
-use App\Models\Week;
+use App\Models\Sub;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
@@ -18,11 +16,9 @@ class UserSignedUpAsASub extends Event
      *
      * @return void
      */
-    public function __construct(User $user, Week $week, Cycle $cycle)
+    public function __construct(Sub $sub)
     {
-        $this->user = $user;
-        $this->week = $week;
-        $this->cycle = $cycle;
+        $this->sub = $sub;
     }
 
 
