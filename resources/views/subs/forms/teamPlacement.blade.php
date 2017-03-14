@@ -21,7 +21,7 @@
             !!}
         @endif
 
-        <h4>Cycle {{ $cycle->name }} - Week {{ $sub->week->week_index() }}</h4>
+        <h4>Cycle {{ $cycle->name }} - Week {{ $sub->week->index() }}</h4>
 
         {!! Former::text('nickname')
             ->label('Player')
@@ -46,13 +46,16 @@
             !!}
             {!! Former::close() !!}
 
-            {{-- {!! Form::delete(route( 'sub.destroy', $sub->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) !!} --}}
         @else
             {!! Former::submit()
                 ->addClass('btn btn-primary')
                 ->value('Save')
             !!}
             {!! Former::close() !!}
+            @if ($sub->team_id)
+
+            <a href="{{route( 'subs.deleteTeamPlacement', $sub->id)}}" class='pull-right btn btn-danger'>Remove from team</a>
+            @endif
         @endif
     </div>
 </div>
