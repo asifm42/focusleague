@@ -28,7 +28,7 @@ class CheckIfUserEmailIsConfirmed
     {
         $user = User::where('email', $event->credentials['email'])->first();
 
-        if (! $user->confirmed) {
+        if ($user && ! $user->confirmed) {
             throw new UnverifiedAccountException($user);
         }
     }
