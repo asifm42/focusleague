@@ -55,7 +55,7 @@ class TransactionsController extends Controller
             $data['typeahead_name'] = $user->name . " (" . $user->getNicknameOrShortName() . ")";
         }
         $users = User::all();
-        $names = '';
+        $names = [];
         foreach($users as $user){
             $names[] = ['id' => $user->id, 'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")"];
         }

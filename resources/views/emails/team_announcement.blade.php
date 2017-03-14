@@ -1,39 +1,57 @@
-@extends('layouts.email')
+@component('emails.layouts.message', ['user'=>$user])
+##Cycle {{ $cycle->name }} teams have been set!
 
-@section('content')
-    <p>Cycle {{ $cycle['name'] }} teams have been set!</p>
+The format for the cycle is **{{ $cycle->format }}**.
 
-    <p>The format for the cycle is {{ $cycle['format'] }}.<p>
+You are on team **_{{ ucwords($team->name) }}_** in the **{{ ucfirst($team->division) }}** division.
 
-    <p>You are on team <em>{{ ucwords($team['name']) }}</em> in the {{ ucfirst($team['division']) }} division.</p>
+@if ($isCaptain)
+Thank you for volunteering to captain. We will be needing your leadership this cycle.
+@endif
 
-    @if (count($captains) > 1)
-        <p>Your captains are:</p>
-        <ul>
-            @foreach($captains as $captain)
-                <li>{{ $captain['name'] }} - {{ $captain['email'] }}</li>
-            @endforeach
-        </ul>
-    @elseif (count($captains) == 1)
-        <p>Your captain is {{ $captains[0]['name'] }} and can be reached at {{ $captains[0]['email'] }}.</p>
-    @else
-        <p>We are working on selecting a captain since no one volunteered. Please let us know if you have changed your mind and are willing to captain this cycle.</p>
-    @endif
+@if ($isCaptain)
+@if ($team->captains->count() > 2)
+Your co-captains are:
+@elseif (count($team->captains) == 2)
+Your co-captain is:
+@else
+@endif
+@else
+@if ($team->captains->count() > 1)
+Your captains are:
+@elseif (count($team->captains) == 1)
+Your captain is:
+@else
+We are working on selecting a captain since no one volunteered. Please let us know if you have changed your mind and are willing to captain this cycle.
+@endif
+@endif
 
-    <p>Your fees for this cycle is ${{ $cost }}.00. Your current balance is {{ $balance }}. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $cycle['name'] }} fees" in the note if possible.</p>
-    <ul>
-        <li>Paypal to asifm42@gmail.com</li>
-        <li>Chase Quickpay to asifm42@gmail.com</li>
-        <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
-        <li>Check to "Asif Mohammed"</li>
-        <li>Exact cash to Asif Mohammed, Nick Carranza or your team captain at the fields. Please <a href="{{ route('contact.create') }}">contact us</a> with the amount and who you paid so we can credit your balance properly.</li>
-    </ul>
+@if ($team->captains->count() > 0)
+<ul>
+    @foreach($team->captains as $captain)
+        @if ($captain->user->id !== $user->id)
+        <li>
+        @if ($captain->user->nickname)
+            {{ ucwords($captain->user->name) . ' aka ' . ucwords($captain->user->nickname) }}
+        @else
+            {{ ucwords($captain->user->name) }}
+        @endif
+            {{' - ' . $captain->user->email }}
+        </li>
+        @endif
+    @endforeach
+</ul>
+@endif
 
-    <p>More details such as your team's schedule and other teams can be found on the <a href="{{ route('cycles.view', $cycle['id']) }}">cycle details</a> page.</p>
+<p>Your fee for this cycle is ${{ $cost }}.00. Your current balance is {{ $user->getBalanceString() }}. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $cycle->name }} fees" in the note if possible.</p>
+@component('site.payment_methods', ['balance' => $user->getBalance()])
+@endcomponent
 
-    <p>Games are at the <a href="https://goo.gl/maps/QCZxXVm6Ua32">Houston Sports Park</a>.</p>
+<p>More details such as your team's schedule and other teams can be found on the <a href="{{ route('cycles.view', $cycle->id) }}">cycle details</a> page.</p>
 
-    <p>Please bring a white and non-grey dark jersey. Captains will be flipping for jersey color prior to start time.</p>
+<p>Games are at the <a href="https://goo.gl/maps/QCZxXVm6Ua32">Houston Sports Park</a>.</p>
 
-    <p>Let's play hard. Let's play fair.</p>
-@endsection
+<p>Please bring a white and non-grey dark jersey. Captains will be flipping for jersey color prior to start time.</p>
+
+<p>Let's play hard. Let's play fair.</p>
+@endcomponent

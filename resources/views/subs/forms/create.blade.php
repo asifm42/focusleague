@@ -77,7 +77,7 @@
             !!}
             {!! Former::close() !!}
 
-            {!! Form::delete(route( 'sub.destroy', $sub->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) !!}
+            {{-- Form::delete(route( 'sub.destroy', $sub->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) --}}
         @else
             {!! Former::submit()
                 ->addClass('btn btn-primary')

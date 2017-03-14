@@ -197,7 +197,7 @@ Vue.component('team', {
     props: [
         'cycle', 'gender', 'count',
         'notOnATeam', 'weekCounts',
-        'title', 'teamId', 'signups',
+        'teamName', 'teamId', 'signups',
         'division'
     ],
 
@@ -208,7 +208,6 @@ Vue.component('team', {
                 }, this);
             return filtered;
         },
-
         // title: function() {
         //     return 'team name';
         // },
@@ -267,13 +266,13 @@ Vue.component('team', {
     //     }
     // },
 
-    // created: function() {
-    //     console.log(this.teamId);
-    //     $.getJSON('../../api/teams/' + this.teamId, function(team) {
-    //         console.log(team.players);
-    //         this.list = team.players;
-    //     }.bind(this));
-    // }
+    created: function() {
+        console.log('teamname', this.teamName);
+        // $.getJSON('../../api/teams/' + this.teamId, function(team) {
+        //     console.log(team.players);
+        //     this.list = team.players;
+        // }.bind(this));
+    }
 });
 
 var data = {

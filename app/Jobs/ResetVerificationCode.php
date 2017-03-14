@@ -7,10 +7,9 @@ use App\Exceptions\SaveModelException;
 use App\Exceptions\UserVerifiedException;
 use App\Jobs\Job;
 use App\Models\User;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ResetVerificationCode extends Job implements SelfHandling
+class ResetVerificationCode extends Job
 {
 
     protected $email;

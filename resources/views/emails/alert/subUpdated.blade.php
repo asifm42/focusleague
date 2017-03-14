@@ -1,22 +1,22 @@
-A sub signup was updated for FOCUS League at {{ $sub_updated_at }}
+A sub signup was updated for FOCUS League Cycle {{ $sub->week->cycle->name }} Wk{{ $sub->week->index() }} at {{ $sub->updated_at->toDayDateTimeString() }}
 
 Updated by:
-    {{ $changed_by['name'] }}
+    {{ $updatedBy->name }}
 
 Nickname:
-    {{ $subUser['nickname'] }}
+    {{ $sub->user->nickname }}
 
 Name:
-    {{ $subUser['name'] }}
+    {{ $sub->user->name }}
 
 Email:
-    {{ $subUser['email'] }}
+    {{ $sub->user->email }}
 
-Week:
-    {{ $date }}
+Date:
+    Wk{{ $sub->week->index() }} - {{ $sub->week->starts_at->toFormattedDateString() }}
 
 Note:
-    {{ $note }}
+    {{ $sub->note }}
 
 
 Environment:

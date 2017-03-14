@@ -18,13 +18,8 @@
                         @if ($balance > 0)
                             <h6>You currently owe ${{ $balance }}.</h6>
                             <h6>You can pay via the following methods:</h6>
-                            <ul>
-                                <li>Paypal to asifm42@gmail.com</li>
-                                <li>Chase Quickpay to asifm42@gmail.com</li>
-                                <li>Square Cash at <a href="https://cash.me/asifm42">cash.me/asifm42</a> (pay with your debit card, no account needed)</li>
-                                <li>Check to "Asif Mohammed"</li>
-                                <li>Cash to Asif at the fields</li>
-                            </ul>
+                            @component('site.payment_methods', ['balance' => $user->getBalance()])
+                            @endcomponent
                         @elseif ($balance == 0)
                             <h6>Your balance is $0.00.</h6>
                             <h6>Thank you for being current!</h6>
@@ -248,7 +243,7 @@
                                 <h6>Gender</h6>
                                 <p>{{ $user->gender }}</p>
                                 <h6>Birthday</h6>
-                                <p>{{ $user->getBirthdayString() }}</p>
+                                <p>{{ $user->birthday->toFormattedDateString() }}</p>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <h6>Cell Number</h6>

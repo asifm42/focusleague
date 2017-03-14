@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Week extends Model
 {
-    use TrimScalarValues, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that should be mutated to dates.
@@ -41,6 +40,16 @@ class Week extends Model
      * @return integer
      */
     public function week_index()
+    {
+        return $this->index;
+    }
+
+    /**
+     * Get the index of the week within the cycle.
+     *
+     * @return integer
+     */
+    public function index()
     {
         $cycle_weeks = $this->cycle->weeks;
         $num=0;

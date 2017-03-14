@@ -1,17 +1,17 @@
-@extends('layouts.email')
+@component('emails.layouts.message', ['user' => $user])
+<p>Just a quick friendly reminder to sign-up for Cycle {{ $cycle->name }}! We would hate to not see your beautiful face out there.</p>
 
-@section('content')
+Cycle {{ $cycle->name }} will be {{ $cycle->weeks->count() }} weeks:
+@foreach($cycle->weeks as $week)
+* {{ $week->starts_at->toDayDateTimeString() }}
+@endforeach
 
-    <p>Just a quick friendly reminder to sign-up for Cycle {{ $cycleArr['name'] }}!{{-- at {{ $cycle->signup_closes_at->toDayDateTimeString() }}.--}} We would hate to not see your beautiful face out there.</p>
+@component('mail::button', ['url' => route('cycle.signup.create', $cycle->id), 'color' => 'blue'])
+SIGN UP FOR CYCLE {{ $cycle->name }}
+@endcomponent
 
-    <p><a href="{{ route('cycle.signup.create', $cycleArr['id']) }}">SIGN UP FOR CYCLE {{ $cycleArr['name'] }}</a></p>
-
-    <p>Thanks for your support!</p>
-@stop
-
-
-@section('unsubscribe')
-
-    <p><a href="%tag_unsubscribe_url%">Unsubscribe</a> from Cycle {{ $cycleArr['name'] }} sign-up reminders.</p>
-
-@stop
+<p>Thanks for your support!</p>
+@slot('unsubscribe')
+<p><a href="%tag_unsubscribe_url%">Unsubscribe</a> from Cycle {{ $cycle->name }} sign-up reminders.</p>
+@endslot
+@endcomponent

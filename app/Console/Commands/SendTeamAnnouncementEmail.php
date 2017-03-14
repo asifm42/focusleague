@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use App\Mailers\CycleMailer;
 use App\Models\Cycle;
-use App\Mailers\UserMailer;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class SendTeamAnnouncementEmail extends Command
 {
@@ -39,21 +40,18 @@ class SendTeamAnnouncementEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::current_cycle();
-        $teams = $cycle->teams;
-        $teams->load('players', 'players.user');
-        $mailer = new UserMailer;
-
-        if ($cycle->areTeamsPublished()) {
-            foreach ($teams as $team){
-                foreach ($team->players as $player){
-                    $mailer->sendTeamAnnouncementEmail($player->user, $cycle, $team);
-                }
-            }
-
-            $this->info('Team announcement emails queued up!');
-        } else {
-            $this->error('Teams are not published yet.');
+        if (! Cycle::currentCycle()) {
+            $this->error('No Current Cycle');
+            return;
         }
+
+        if (! Cycle::currentCycle()->areTeamsPublished()) {
+            $this->error('Teams are not published yet.');
+            return;
+        }
+
+        CycleMailer::sendTeamAnnouncementEmail();
+
+        $this->info('Team announcement emails queued up!');
     }
 }

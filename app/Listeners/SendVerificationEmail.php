@@ -3,33 +3,30 @@
 namespace App\Listeners;
 
 use App\Events\Event;
-use App\Mailers\UserMailer as Mailer;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\VerifyEmail as VerifyEmailNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
-class SendVerificationEmail
+class SendVerificationEmail implements ShouldQueue
 {
-    protected $mailer;
-
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct(Mailer $mailer)
+    public function __construct()
     {
-        $this->mailer = $mailer;
-    }
 
+    }
 
     /**
      * Handle the event.
      *
-     * @param  UserRegistered  $event
+     * @param  Event  $event
      * @return void
      */
     public function handle(Event $event)
     {
-        $this->mailer->verification($event->user);
+        $event->user->notify(new VerifyEmailNotification());
     }
 }

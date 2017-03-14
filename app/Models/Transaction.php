@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon;
 
 class Transaction extends Model
 {
-    use TrimScalarValues, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that should be mutated to dates.

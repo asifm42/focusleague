@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendNonReturnerReminderEmail::class,
         \App\Console\Commands\SendSignupClosingReminderEmail::class,
         \App\Console\Commands\SendSignupOpenReminderEmail::class,
+        \App\Console\Commands\SendSignupOpenAnnouncementEmail::class,
         \App\Console\Commands\ApplyRainOutCredit::class,
         // \App\Console\Commands\ChangeEmails::class,
         \App\Console\Commands\RevenueToDate::class,
@@ -62,5 +63,15 @@ class Kernel extends ConsoleKernel
         //          ->sendOutputTo(storage_path().'/logs/nonReturnerReminderEmailLog_' . date('Y_m_d') . '.log')
         //          ->emailOutputTo('asifm42@gmail.com');
 
+    }
+
+    /**
+     * Register the Closure based commands for the application.
+     *
+     * @return void
+     */
+    protected function commands()
+    {
+        require base_path('routes/console.php');
     }
 }

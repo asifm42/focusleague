@@ -1,13 +1,7 @@
-@extends('layouts.email')
-
-@section('content')
+@component('emails.layouts.message', ['user' => $user])
 
 <p>
-Thank you for signing up for the first FOCUS League cycle; Cycle 2016-01.
-</p>
-
-<p>
-Demand was much more than anticipated with 61 sign-ups! We are honored by the support from the community.
+Thank you for signing up for the FOCUS League Cycle {{ $cycle->name }}.
 </p>
 
 <p>
@@ -15,11 +9,11 @@ Sign-up is now closed and we are working on selecting captains and setting up te
 </p>
 
 <p>
-Teams, format &amp; schedule will be announced by 6p tmw.
+Teams, format &amp; schedule will be announced by 6p before game time.
 </p>
 
 <p>
-We currently have field 3 at 8p. Games will start around 8:15-8:20p allowing some time to warm-up. Please bring a white and a non-grey dark jersey.
+Please check the board near the HSP entrance for field assignment. We have the field from 8p-10p. Games will start around 8:15-8:20p allowing some time to warm-up. Please bring a white and a non-grey dark jersey.
 </p>
 
 <p>
@@ -27,8 +21,6 @@ We currently have field 3 at 8p. Games will start around 8:15-8:20p allowing som
 </p>
 
 <p>
-See you at HSP tomorrow!
+Play hard, play fair!
 </p>
-
-
-@endsection
+@endcomponent
