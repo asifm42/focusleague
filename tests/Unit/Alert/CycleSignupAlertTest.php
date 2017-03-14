@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Mail;
 
+use App\Events\UserSignedUpForCycle;
 use App\Mail\Alert\CycleSignupAlert;
 use App\Mailers\AlertMailer;
 use App\Models\Cycle;
@@ -24,25 +25,8 @@ class CycleSignupAlertTest extends TestCase
         Mail::fake();
 
         $mailer = new AlertMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
         $user = factory(User::class)->create();
-
-        // add weeks for cycle
-        $startTime = $cycle->starts_at;
-        $cycle->weeks()->saveMany([
-            factory(Week::class)->make([
-                'starts_at' => $startTime
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-        ]);
 
         $cycle->signups()->attach($user->id, [
                 'div_pref_first'    => 'mens',
@@ -71,25 +55,8 @@ class CycleSignupAlertTest extends TestCase
     function the_view_is_being_generated_with_no_errors()
     {
         $mailer = new AlertMailer;
-        $cycle = factory(Cycle::class)->create();
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
         $user = factory(User::class)->create();
-
-        // add weeks for cycle
-        $startTime = $cycle->starts_at;
-        $cycle->weeks()->saveMany([
-            factory(Week::class)->make([
-                'starts_at' => $startTime
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-            factory(Week::class)->make([
-                'starts_at' => $startTime->addWeek(1)
-            ]),
-        ]);
 
         $cycle->signups()->attach($user->id, [
                 'div_pref_first'    => 'mens',
@@ -113,5 +80,38 @@ class CycleSignupAlertTest extends TestCase
 
         $mailer->sendCycleSignUpAlert($signup);
         $this->assertTrue(true);
+    }
+
+    /** @test */
+    function the_listener_is_sending_the_correct_mailable()
+    {
+        Mail::fake();
+
+        $mailer = new AlertMailer;
+        $cycle = factory(Cycle::class)->create()->addWeeks(4);
+        $user = factory(User::class)->create();
+
+        $cycle->signups()->attach($user->id, [
+                'div_pref_first'    => 'mens',
+                'div_pref_second'   => 'mens',
+                'will_captain'      => false,
+            ]);
+
+        // add availability
+        $cycle->weeks->each(function($week) use ($user) {
+            $user->availability()->attach($week->id, [
+                'attending' => true
+            ]);
+        });
+
+        $signup = CycleSignup::findOrFail($cycle->signups()->find($user->id)->pivot->id);
+
+
+        event(new UserSignedUpForCycle($user, $cycle, $signup));
+
+        Mail::assertSent(CycleSignupAlert::class, function ($mail) use ($user) {
+            return $mail->hasTo('asifm42@gmail.com') &&
+                    $mail->hasCc('gizmolito@gmail.com');
+        });
     }
 }
