@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Factories\UserFactory;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\UserEditFormRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Controllers\Controller;
 use App\Models\Cycle;
 use App\Models\User;
 use App\Updaters\UserUpdater;
-use Illuminate\Http\Request;
 use Former;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
