@@ -252,7 +252,7 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     Route::get(     'subs/{id}/team',               ['as' => 'subs.teamPlacementForm', 'uses' => 'SubsController@teamPlacementForm']);
     Route::post(    'subs/{id}/team',               ['as' => 'subs.placeOnATeam', 'uses' => 'SubsController@placeOnATeam']);
     Route::patch(    'subs/{id}/team',               ['as' => 'subs.updateTeamPlacement', 'uses' => 'SubsController@placeOnATeam']);
-    // Route::get(    'subs/{id}/team/remove',               ['as' => 'subs.deleteTeamPlacement', 'uses' => 'SubsController@removeFromTeam']);
+    Route::get(    'subs/{id}/team/remove',               ['as' => 'subs.deleteTeamPlacement', 'uses' => 'SubsController@removeFromTeam']);
     Route::get(    'weeks/{id}/subs/announce',               ['as' => 'subs.announce', 'uses' => 'SubsController@announce']);
 
     /*
