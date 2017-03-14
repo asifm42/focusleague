@@ -71,7 +71,9 @@
                 </ul>
 
                 @if (!$cycle->teams_published)
-                    <a href="{{ route('cycle.teams.publish', $cycle->id) }}" class="btn btn-default btn-lg btn-block">Publish teams</a>
+                    <button type="button" class="btn btn-default btn-lg btn-block js-publish-teams" data-toggle="modal" data-target="#publishTeamsModal">
+                        Publish Teams
+                    </button>
                 @else
                     <button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#announceTeamsModal">
                         Email Team Announcement
@@ -96,14 +98,13 @@
             @endif
 
             <div class="col-xs-12 col-md-6">
-                <team title={{ $team->name }} team-id={{ $team->id }} division={{ $team->division }} :signups="signups"  :cycle="cycle"></team>
+                <team team-name="{{ $team->name }}" team-id="{{ $team->id }}" division="{{ $team->division }}" :signups="signups"  :cycle="cycle"></team>
             </div>
 
             @if (($teamCount % 2) === 0 || ($teamCount) === $cycle->teams->count())
                 </div>
             @endif
         @endforeach
-
     </div>
 
     <template id="signups-template">
@@ -147,7 +148,7 @@
     </template>
     <template id="signup-template">
         <td style="padding-left:5px">
-            <a title="@{{ signup.name }}" href="users/@{{ signup.id }}">@{{ signup.name }}</a>
+            <a title="@{{ signup.name }}" href="/users/@{{ signup.id }}">@{{ signup.name }}</a>
             <span v-if="signup.pivot.captain"><i class="fa fa-star text-warning"></i></span>
             <span v-if="signup.pivot.note"><i class="fa fa-sticky-note text-warning"
                         data-toggle="tooltip"
@@ -201,7 +202,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    @{{ title }}
+                    @{{ teamName }}
                     <span v-if="division.toLowerCase() === 'mens'">
                         <i class="fa fa-male fa-fw text-primary"></i>
                     </span>
@@ -318,11 +319,61 @@
                 html:true,
                 trigger: 'focus'
             });
+
+            $('.js-publish-teams').click(function() {
+                var html = '<h5 class="text-center">Captains List</h4><ul class="list-unstyled">';
+                $.getJSON('../../api/cycles/' + {{$cycle->id}}, function(cycle) {
+                    console.log(cycle);
+                    jQuery.each(cycle.teams, function(i, team) {
+                        // html += "<h5>Team " + team.name + " Captains</h5>";
+                        html += '<li style="border-bottom:solid 1px #ccc; margin-top:5px;"><strong>Team ' + team.name + '</strong></li>';
+                        if (_.size(team.captains)>0) {
+                            jQuery.each(team.captains, function(i, captain) {
+                                html += "<li>"+ captain.user.name + "<br></li>";
+                                // html += captain.user.name + "<br>";
+                            });
+                        } else {
+                            html += '<li class="text-danger">No captains selected!</li>';
+                            // html += '<h6 class="text-danger">No captains selected!</h6>';
+                        }
+                    });
+                    html += "</ul>";
+                    $('.js-captains').html(html);
+                });
+            })
+
+            // publish modal launch
+            // get update captains from server
+            //
         });
     </script>
 @stop
 
 @section('modals')
+<div class="modal fade" id="publishTeamsModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="publishTeamsModalLabel">Publish Teams</h4>
+      </div>
+      <div class="modal-body">
+        <div class="js-captains">
+            <div class="text-center">
+                <h5>Captains List</h5>
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <p class="text-right">Are you sure that you are ready to publish teams?</p>
+      </div>
+      <div class="modal-footer">
+            <a href="{{ route('cycle.teams.publish', $cycle->id) }}" class="btn btn-primary">Publish teams</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <div class="modal fade" id="announceTeamsModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
