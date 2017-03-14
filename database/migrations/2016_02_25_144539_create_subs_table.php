@@ -16,7 +16,7 @@ class CreateSubsTable extends Migration
             $table->increments('id');
             $table->integer('week_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->longtext('note')->nullable;
+            $table->longtext('note')->nullable();
             $table->integer('team_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
