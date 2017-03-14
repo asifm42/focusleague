@@ -252,6 +252,8 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
     Route::get(     'subs/{id}/team',               ['as' => 'subs.teamPlacementForm', 'uses' => 'SubsController@teamPlacementForm']);
     Route::post(    'subs/{id}/team',               ['as' => 'subs.placeOnATeam', 'uses' => 'SubsController@placeOnATeam']);
     Route::patch(    'subs/{id}/team',               ['as' => 'subs.updateTeamPlacement', 'uses' => 'SubsController@placeOnATeam']);
+    // Route::get(    'subs/{id}/team/remove',               ['as' => 'subs.deleteTeamPlacement', 'uses' => 'SubsController@removeFromTeam']);
+    Route::get(    'weeks/{id}/subs/announce',               ['as' => 'subs.announce', 'uses' => 'SubsController@announce']);
 
     /*
      * Admin Ultimate History Routes
@@ -283,5 +285,6 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 
 Route::group(['middleware' => ['api']], function() {
     Route::put(     'api/cyclesignups/{id}',         ['as' => 'api.cyclesignups.put', 'uses' => 'CycleSignupsController@apiUpdate']);
+    // Route::get(     'api/cycles/{cycle}',         ['as' => 'api.cycles.get', 'uses' => 'CyclesController@apiGetJson']);
 });
 
