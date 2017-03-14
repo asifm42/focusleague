@@ -118,4 +118,17 @@ class CyclesController extends Controller
         //
     }
 
+    /**
+     * Get the resource in json style
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function apiGetJson(Cycle $cycle)
+    {
+        $cycle->load('signups', 'weeks', 'weeks.subs', 'weeks.games', 'signups.availability', 'teams', 'teams.captains', 'teams.captains.user');
+
+        return  response()->json($cycle);
+    }
+
 }
