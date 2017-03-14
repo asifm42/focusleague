@@ -84,6 +84,33 @@ class ChargeCyclePlayerFee extends Command
             $signup->transactions()->save($transaction);
 
             $this->info('$' . $data['amount'] . ' Player fee charged for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());
+
+            if ($signup->transactions()->where('type','credit')->where('cycle_id',$cycle->id)->count() >= 1) {
+                continue;
+            }
+
+            // Give discount for admin or captain
+            if ($signup->isAdmin()) {
+                $signup->transactions()->create([
+                    'cycle_id' => $cycle->id,
+                    'type' => 'credit',
+                    'created_by' => 1,
+                    'date' => $cycle->starts_at->format('Y-m-d'),
+                    'description' => 'Cycle ' . $cycle->name . ' Admin Discount',
+                    'amount' => $data['amount']
+                ]);
+                $this->info('$' . $data['amount'] . ' Admin Discount for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());
+            } elseif ($signup->pivot->captain) {
+                $signup->transactions()->create([
+                    'cycle_id' => $cycle->id,
+                    'type' => 'credit',
+                    'created_by' => 1,
+                    'date' => $cycle->starts_at->format('Y-m-d'),
+                    'description' => 'Cycle ' . $cycle->name . ' Captain Discount',
+                    'amount' => $data['amount'] * 0.25
+                ]);
+                $this->info('$' . $data['amount'] * 0.25 . ' Captain Discount for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());
+            }
         }
     }
 }
