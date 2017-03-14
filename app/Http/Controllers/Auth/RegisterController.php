@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use App\Traits\RegistersUsers;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RedirectsUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -70,6 +71,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $data['birthday'] =  Carbon::createFromFormat('m/d/Y', $data['birthday']);
+
         $user = new User($data);
 
         // Manually add the non-fillable attributes
