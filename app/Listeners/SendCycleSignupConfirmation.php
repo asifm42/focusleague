@@ -25,7 +25,7 @@ class SendCycleSignupConfirmation
      */
     public function __construct(Mailer $mailer)
     {
-        $this->mailer = mailer;
+        $this->mailer = $mailer;
     }
 
     /**
