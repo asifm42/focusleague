@@ -10,6 +10,7 @@
         "doctrine/dbal": "2.5.5",
         "ellipsesynergie/api-response": "^0.12.3",
         "guzzlehttp/guzzle": "~5.3|~6.0",
+        "guzzlehttp/psr7": "^1.4",
         "hieu-le/active": "~3.3.0",
         "laracasts/flash": "2.0.*",
         "laravel/dusk": "^1.0",
@@ -18,6 +19,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "~5.0",
         "mailgun/mailgun-php": "~2.1.2",
+        "php-http/curl-client": "^1.7",
         "propaganistas/laravel-phone": "~2.0",
         "rap2hpoutre/laravel-log-viewer": "^0.8.0",
         "vinkla/hashids": "3.1.*"
