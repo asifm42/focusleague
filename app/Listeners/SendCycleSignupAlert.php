@@ -29,6 +29,6 @@ class SendCycleSignupAlert
      */
     public function handle(UserSignedUpForCycle $event)
     {
-        $this->mailer->sendSubSignupAlert($event->signup);
+        $this->mailer->sendCycleSignupAlert($event->cycleSignup);
     }
 }
