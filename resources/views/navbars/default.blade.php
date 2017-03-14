@@ -83,6 +83,12 @@
 
                             <li class="divider"></li>
                         @endif
+                        @if (auth()->user()->isGod())
+                            <li class="dropdown-header">God</li>
+                            <li class="{{ active_class(if_uri_pattern('logs', 'active')) }}"><a href="{{ route('god.logs') }}"><i class="fa fa-tachometer"></i>&nbsp; System Logs</a></li>
+
+                            <li class="divider"></li>
+                        @endif
                         <li class="{{ active_class(if_uri_pattern('signout', 'active')) }}"><a href="{{ route('sessions.signout') }}"><i class="fa fa-sign-out"></i>&nbsp; Sign out</a></li>
                     </ul>
                 </li>
