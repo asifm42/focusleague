@@ -20,7 +20,11 @@ Dates Missing:
 @endforeach
 
 Will captain?:
-    {{ $signup->will_captain }}
+@if($signup->will_captain)
+    Yes
+@else
+    No
+@endif
 
 Div pref 1?:
     {{ $signup->div_pref_first }}
