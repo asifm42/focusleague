@@ -35,10 +35,20 @@
             ->addClass('btn btn-primary')
             ->value('Save')
         !!}
-        @if($edit === true)
-            {!! Form::delete(route( 'teams.destroy', $team->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) !!}
-        @endif
         {!! Former::close() !!}
+        @if($edit === true)
+
+            {!! Former::open()
+                ->method('DELETE')
+                ->class('pull-right')
+                ->action(route('teams.destroy', $team->id))
+            !!}
+            {!! Former::submit()
+                ->addClass('btn btn-danger')
+                ->value('Delete')
+            !!}
+            {!! Former::close() !!}
+        @endif
     </div>
 </div>
 

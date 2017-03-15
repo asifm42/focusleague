@@ -116,7 +116,7 @@
                                 @elseif($sub_weeks)
                                     <dd>You are signed up as a sub for the following weeks</dd>
                                     @foreach($sub_weeks as $sub_week)
-                                        <dd><a href="{{ route('sub.edit', $sub_week['deets']->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
+                                        <dd><a href="{{ route('sub.edit', $sub_week['deets']->pivot->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
                                     @endforeach
                                     <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
                                 @else

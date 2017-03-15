@@ -3,19 +3,18 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Traits\TrimScalarValues;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Team extends Model
 {
-    use TrimScalarValues, SoftDeletes;
+    use SoftDeletes;
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -92,12 +91,37 @@ class Team extends Model
     }
 
     /**
-     * Get the subs that have been placed on this team
+     * Sees if this has the player on its roster
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \App\Models\CycleSignup | null
      */
     public function hasPlayer(User $user)
     {
         return $this->players->where('user_id', $user->id)->first();
+    }
+
+    /**
+     * Adds a player to the roster
+     *
+     * @return self
+     */
+    public function addPlayer(User $user)
+    {
+        // find the user's current signup
+        // update the team id
+        // return this
+    }
+
+    /**
+     * Adds a player to the roster
+     *
+     * @return self
+     */
+    public function addPlayers($users)
+    {
+        // iterate over users
+        // find the user's current signup
+        // update the team id
+        // return this
     }
 }

@@ -18,7 +18,7 @@ class CycleTeamsController extends Controller
     public function index($id)
     {
         if ($id === 'current') {
-            $cycle = Cycle::current_cycle();
+            $cycle = Cycle::currentCycle();
             if (!$cycle) {
                 flash()->info('Sorry, there is no current cycle at the moment.');
 

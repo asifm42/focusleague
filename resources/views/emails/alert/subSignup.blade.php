@@ -1,23 +1,19 @@
-A new sub signup for FOCUS League at {{ $sub_created_at }}
+A new sub signup for FOCUS League Cycle {{ $sub->week->cycle->name }} Wk{{ $sub->week->index() }} at {{ $sub->created_at->toDayDateTimeString() }}
 
 Nickname:
-    {{ $user['nickname'] }}
+    {{ $sub->user->nickname }}
 
 Name:
-    {{ $user['name'] }}
+    {{ $sub->user->name }}
 
 Email:
-    {{ $user['email'] }}
+    {{ $sub->user->email }}
 
 Date:
-    {{ $date }}
+    Wk{{ $sub->week->index() }} - {{ $sub->week->starts_at->toFormattedDateString() }}
 
 Note:
-    {{ $note }}
-
-
-
-
+    {{ $sub->note }}
 
 
 Environment:

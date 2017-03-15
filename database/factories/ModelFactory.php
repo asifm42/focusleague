@@ -94,18 +94,6 @@ $factory->define(App\Models\UltimateHistory::class, function (Faker\Generator $f
     ];
 });
 
-$factory->define(App\Models\Cycle::class, function (Faker\Generator $faker) {
-    return [
-        'created_by' => 1,
-        'signup_opens_at' => '2016-03-09 00:00:00',
-        'signup_closes_at' => '2016-03-14 20:00:00',
-        'starts_at' => '2016-03-15 20:00:00',
-        'ends_at' => '2016-04-05 22:00:00',
-        'name' => '2016-01',
-        'format' => 'TBD',
-    ];
-});
-
 $factory->define(App\Models\Week::class, function (Faker\Generator $faker) {
     return [
         'cycle_id' => 1,

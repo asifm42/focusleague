@@ -60,7 +60,7 @@
         !!}
         {!! Former::select('payment_type')
             ->addClass('form-control')
-            ->options(['paypal' => 'Paypal', 'chase quickpay' => 'Chase Quickpay', 'square cash' => 'Square Cash', 'check' => 'Check', 'cash' => 'Cash',])
+            ->options(['paypal' => 'Paypal', 'venmo' => 'Venmo', 'chase quickpay' => 'Chase Quickpay', 'square cash' => 'Square Cash', 'check' => 'Check', 'cash' => 'Cash',])
             ->placeholder('Optional payment type')
             ->help('Required if type is payment')
         !!}

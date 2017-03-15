@@ -89,7 +89,7 @@
         {!! Former::checkboxes('weeks[]')
             ->label('Availability')
             ->addClass('availability-js')
-            ->help('You must be available 2 out of the 3 weeks to sign up')
+            ->help('You must be available 2 out of the ' . $cycle->weeks->count() . ' weeks to sign up')
             ->checkboxes($checkbox_options)
         !!}
 
@@ -153,16 +153,16 @@
                 }
 
                 if (checked_count == 2) {
-                    $('.cost-text').text('$18');
+                    $('.cost-text').text( '$' + {{  $cost['cycle']['two_weeks'] }});
                     $('div.cost-stmt').show(1000);
                 } else if (checked_count == 3) {
-                    $('.cost-text').text('$21');
+                    $('.cost-text').text('$' + {{ $cost['cycle']['three_weeks'] }});
                     $('div.cost-stmt').show(1000);
                 } else if (checked_count == 4) {
-                    $('.cost-text').text('$24');
+                    $('.cost-text').text('$' + {{ $cost['cycle']['four_weeks'] }});
                     $('div.cost-stmt').show(1000);
                 } else {
-                    $('.cost-text').text('$18');
+                    $('.cost-text').text('$' + {{ $cost['cycle']['two_weeks'] }});
                     $('div.cost-stmt').hide(1000);
                 }
             });

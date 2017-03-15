@@ -28,7 +28,7 @@ class TeamsController extends Controller
      */
     public function create()
     {
-        $cycle = Cycle::current_cycle();
+        $cycle = Cycle::currentCycle();
 
         return view('teams.create')->withCycle($cycle);
     }
@@ -72,7 +72,7 @@ class TeamsController extends Controller
 
         Former::populate($team);
 
-        return view('teams.create')->withCycle($cycle)
+        return view('teams.edit')->withCycle($cycle)
                 ->withTeam($team);
     }
 
@@ -87,6 +87,7 @@ class TeamsController extends Controller
     {
         $team = Team::findOrFail($id);
         $team->fill($request->all());
+        $team->save();
 
         return redirect()->route('cycle.teams.builder', ['id' => $team->cycle_id]);
     }
@@ -99,6 +100,9 @@ class TeamsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $team = Team::findOrFail($id);
+        $team->delete();
+
+        return redirect()->route('cycle.teams.builder', ['id' => $team->cycle_id]);
     }
 }

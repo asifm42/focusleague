@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mailers\CycleMailer;
 use App\Models\Cycle;
-use App\Models\User;
-use App\Mailers\UserMailer;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class SendSignupOpenReminderEmail extends Command
 {
@@ -40,35 +40,24 @@ class SendSignupOpenReminderEmail extends Command
      */
     public function handle()
     {
-        $cycle = Cycle::current_cycle();
-
-        // check if there is a current cycle
-        if (!$cycle){
-            $this->error('No current cycle.');
+        if (! Cycle::currentCycle()) {
+            $this->error('No Current Cycle');
             return;
         }
 
-        $cycle->load('signups');
-
-        // check to see if sign-up is open
-        if (!$cycle->isSignupOpen()){
-            $this->error('Sign-up is not open. Cycle ' . $cycle->name . ' signup closing/closed at ' . $cycle->signup_closes_at->toDayDateTimeString());
+        if (! Cycle::currentCycle()->isSignupOpen()) {
+            $this->error('Sign-up is not open. Cycle ' . Cycle::currentCycle()->name . ' signup closing/closed at ' . Cycle::currentCycle()->signup_closes_at->toDayDateTimeString());
             return;
         }
 
-        $users = User::all();
-        $mailer = new UserMailer;
+        $recipients = CycleMailer::sendSignupOpenReminderEmail();
 
-        $usersNotSignedUp = $users->diff($cycle->signups);
-
-        // remove rice players
-        $usersNotSignedUp = $usersNotSignedUp->filter(function ($item) {
-                return !in_array($item->id, config('groups.rice'));
-            });
-
-        foreach($usersNotSignedUp as $user){
-            $mailer->sendSignupOpenReminderEmail($user, $cycle);
-            $this->info('Sign-up open reminder email queued up for id:'. $user->id . ' - name: ' . $user->name . ' - nickname: ' . $user->getNicknameOrShortname());
-        }
+        $recipients->each(function($recipient) {
+            $this->info(
+                    'Sign-up open reminder email queued up for id:' . $recipient->id
+                    . ' - name: ' . $recipient->name
+                    . ' - nickname: ' . $recipient->getNicknameOrShortname()
+                );
+        });
     }
 }

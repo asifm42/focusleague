@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -19,6 +19,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserVerified' => [
             'App\Listeners\SendWelcomeEmail',
+            'App\Listeners\SendUserEmailVerifiedAlert',
             'App\Listeners\AddUserToAnnouncementEmailList',
             // 'App\Listeners\SignInUser',
         ],
@@ -27,6 +28,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserUpdated' => [
             'App\Listeners\UpdateUserInAnnouncementEmailList',
+        ],
+        'Illuminate\Auth\Events\Attempting' => [
+            'App\Listeners\CheckIfUserEmailIsConfirmed',
+        ],
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LogLoginDetails',
         ],
         'App\Events\UserSignedUpForCycle' => [
             'App\Listeners\SendCycleSignupConfirmation',
@@ -44,12 +51,11 @@ class EventServiceProvider extends ServiceProvider
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
      */
-    public function boot(DispatcherContract $events)
+    public function boot()
     {
-        parent::boot($events);
+        parent::boot();
 
         //
     }

@@ -15,9 +15,9 @@ class AdminsController extends Controller
     public function dashboard() {
         $user = auth()->user();
         $data['user'] = $user;
-        $cycle = Cycle::current_cycle();
+        $cycle = Cycle::currentCycle();
         $cycle->load('teams', 'teams.captains');
-                         \Debugbar::info($cycle->teams);
+                         // \Debugbar::info($cycle->teams);
         $data['current_cycle'] = $cycle;
         $data['current_cycle_signups'] = $data['current_cycle']->signups()->get()->load('availability');
 
