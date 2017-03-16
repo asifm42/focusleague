@@ -7,6 +7,7 @@
     <div class="page-header">
         <div class="container">
             <h4>Frequently Asked Questions</h4>
+            <p>Helpful information about the league</p>
         </div>
     </div>
     <div class="container">
