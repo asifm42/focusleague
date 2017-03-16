@@ -43,9 +43,9 @@ class SendBalanceReminderEmail extends Command
 
         $recipients->each(function($recipient) {
             $this->info(
-                    'Balance reminder email queued for id:'. $user->id
-                    . ' - name: ' . $user->getNicknameOrShortname()
-                    . ' - balance: ' . $user->getBalance()
+                    'Balance reminder email queued for id:'. $recipient->id
+                    . ' - name: ' . $recipient->getNicknameOrShortname()
+                    . ' - balance: ' . $recipient->getBalance()
                 );
         });
     }
