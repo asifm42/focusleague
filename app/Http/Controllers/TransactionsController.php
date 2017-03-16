@@ -105,7 +105,7 @@ class TransactionsController extends Controller
      */
     public function edit($id) {
         $users = User::all();
-        $names = '';
+        $names = [];
         foreach($users as $user){
             $names[] = ['id' => $user->id, 'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")"];
         }
