@@ -32,7 +32,7 @@ class StoreTransactionRequest extends Request
             'cycle_id'          => 'integer',
             'week_id'           => 'integer',
             'type'              => 'required|in:charge,payment,credit',
-            'payment_type'      => 'required_if:type,payment|in:paypal,chase quickpay,square cash,check,cash',
+            'payment_type'      => 'required_if:type,payment|in:paypal,venmo,chase quickpay,square cash,check,cash',
             'description'       => 'required|max:500',
             'amount'            => 'required|numeric',
             'date'              => 'date',
