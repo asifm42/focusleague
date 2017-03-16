@@ -84,7 +84,16 @@
             !!}
             {!! Former::close() !!}
 
-            {!! Form::delete(route( 'transactions.destroy', $transaction->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) !!}
+            {!! Former::open()
+                ->method('DELETE')
+                ->class('pull-right')
+                ->action(route('transactions.destroy', $transaction->id))
+            !!}
+            {!! Former::submit()
+                ->addClass('btn btn-danger')
+                ->value('Delete')
+            !!}
+            {!! Former::close() !!}
         @else
             {!! Former::submit()
                 ->addClass('btn btn-primary')
