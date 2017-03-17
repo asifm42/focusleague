@@ -20,10 +20,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // Notify team of failing job...
         Queue::failing( function(JobFailed $event) {
-
             $data['jobName'] = $event->job->getName();
             $data['jsonEncodedData'] = json_encode($event->job->payload());
-            // $data['connection'] = $event->connectionName;
+            $data['exception'] = $event->exception;
 
             // Add current timestring
             $data['timeString']     = Carbon::now()->toDayDateTimeString();
