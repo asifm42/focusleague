@@ -8,6 +8,10 @@ Data:
 
     {!! $jsonEncodedData !!}
 
+Exception:
+
+    {!! $exception !!}
+
 Environment:
 
     {{ App::environment() }}
