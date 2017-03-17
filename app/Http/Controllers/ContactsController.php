@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Requests\ContactRequest;
-use Carbon;
-use Former;
-use Mail;
+use App\Mail\Alert\ContactAlert;
+use Carbon\Carbon;
+use Former\Facades\Former;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactsController extends Controller
 {
@@ -45,17 +44,11 @@ class ContactsController extends Controller
      */
     public function send(ContactRequest $request)
     {
-        $data['name'] = $request->input('name');
-        $data['email'] = $request->input('email');
-        $data['msg'] = $request->input('message');
-        $data['timestamp'] = Carbon::now()->toDayDateTimeString();
-
-        Mail::queue(['text' => 'emails.alert.contact'], $data, function($message) use ($data)
-        {
-            $message->from($data['email'], $data['name'])
-                    ->to('asifm42@gmail.com', 'Asif Mohammed')
-                    ->subject('FOCUS League Contact us page');
-        });
+        Mail::queue(new ContactAlert(
+            $request->input('name'),
+            $request->input('email'),
+            $request->input('message')
+        ));
 
         flash()->success('Your contact has been recieved. We will be in touch soon. Thanks.');
 
