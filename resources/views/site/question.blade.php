@@ -1,3 +1,6 @@
+@if(isset($anchor))
+<div id={{ $anchor }}>
+@endif
 <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="heading_{{ $id }}">
         <h4 class="panel-title">
@@ -12,3 +15,6 @@
         </div>
     </div>
 </div>
+@if(isset($anchor))
+</div>
+@endif
