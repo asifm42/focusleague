@@ -16,6 +16,9 @@
                 <div class="panel-group" id="faq_list" role="tablist" aria-multiselectable="true">
 
 @component('site.question', [ 'id' => '1'])
+    @slot('anchor')
+        what-is-the-focus-league
+    @endslot
     @slot('question')
         What is the FOCUS League?
     @endslot
@@ -25,6 +28,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '2'])
+    @slot('anchor')
+        what-is-the-spirit-of-the-focus-league
+    @endslot
     @slot('question')
         What is the spirit of the FOCUS League?
     @endslot
@@ -36,6 +42,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '3'])
+    @slot('anchor')
+        what-is-the-format
+    @endslot
     @slot('question')
         What is the format?
     @endslot
@@ -45,6 +54,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '4'])
+    @slot('anchor')
+        what-if-i-dont-want-to-play-in-a-certain-division
+    @endslot
     @slot('question')
         What if I don’t want to play in a certain division (i.e mens, womens, mixed)?
     @endslot
@@ -54,6 +66,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '5'])
+    @slot('anchor')
+        what-is-the-schedule
+    @endslot
     @slot('question')
         What is the schedule?
     @endslot
@@ -63,6 +78,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '6'])
+    @slot('anchor')
+        who-can-play
+    @endslot
     @slot('question')
         Who can play?
     @endslot
@@ -76,6 +94,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '7'])
+    @slot('anchor')
+        what-if-i-am-a-beginner
+    @endslot
     @slot('question')
         What if I am a beginner?
     @endslot
@@ -91,6 +112,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '8'])
+    @slot('anchor')
+        how-do-i-sign-up
+    @endslot
     @slot('question')
         How do I sign up?
     @endslot
@@ -100,6 +124,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '9'])
+    @slot('anchor')
+        when-will-sign-ups-open
+    @endslot
     @slot('question')
         When will sign ups open?
     @endslot
@@ -109,6 +136,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '10'])
+    @slot('anchor')
+        what-if-i-cant-play-all-weeks
+    @endslot
     @slot('question')
         What if I can't play all 3-4 weeks?
     @endslot
@@ -118,8 +148,11 @@
 @endcomponent
 
 @component('site.question', ['id' => '11'])
+    @slot('anchor')
+        what-is-a-sub
+    @endslot
     @slot('question')
-        What's a sub?
+        What is a sub?
     @endslot
     @slot('answer')
         <p>If a player can't make at least 2 of the 3-4 weeks in the cycle or they have missed the sign-up period, then they can sign up as a weekly sub. If there is a spot open for that night, the sub will be notified via email or phone. Sub sign-up links can be found on the cycle details page or on the <a href="{{ route('users.dashboard')}}">player dashboard</a>.</p>
@@ -127,6 +160,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '12'])
+    @slot('anchor')
+        how-much-does-it-cost
+    @endslot
     @slot('question')
         How much does it cost?
     @endslot
@@ -139,6 +175,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '13'])
+    @slot('anchor')
+        can-i-get-a-refund-if-i-miss-a-week
+    @endslot
     @slot('question')
         Can I get a refund if I miss a week?
     @endslot
@@ -148,6 +187,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '14'])
+    @slot('anchor')
+        how-do-i-make-a-payment
+    @endslot
     @slot('question')
         How do I make a payment?
     @endslot
@@ -159,6 +201,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '15'])
+    @slot('anchor')
+        why-are-you-charging-money
+    @endslot
     @slot('question')
         Why are you charging money?
     @endslot
@@ -168,6 +213,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '16'])
+    @slot('anchor')
+        what-do-i-bring-to-the-games
+    @endslot
     @slot('question')
         What do I bring to the games?
     @endslot
@@ -182,6 +230,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '17'])
+    @slot('anchor')
+        what-are-the-team-captains-duties
+    @endslot
     @slot('question')
         What are the team captain's duties?
     @endslot
@@ -191,6 +242,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '18'])
+    @slot('anchor')
+        what-are-the-benefits-of-being-a-team-captain
+    @endslot
     @slot('question')
         What are the benefits of being a team captain?
     @endslot
@@ -200,6 +254,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '19'])
+    @slot('anchor')
+        how-do-i-sign-up-as-a-team-captain
+    @endslot
     @slot('question')
         How do I sign up as a team captain?
     @endslot
@@ -209,6 +266,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '20'])
+    @slot('anchor')
+        what-does-focus-stand-for
+    @endslot
     @slot('question')
         What does FOCUS stand for?
     @endslot
@@ -218,6 +278,9 @@
 @endcomponent
 
 @component('site.question', ['id' => '21'])
+    @slot('anchor')
+        what-is-ultimate
+    @endslot
     @slot('question')
         What is Ultimate?
     @endslot
@@ -232,4 +295,14 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
+
+@section('scripts')
+<script>
+   $(document).ready( function () {
+        if(window.location.hash.length > 0) {
+            $(window.location.hash).find('.panel-collapse').show();
+        }
+    })
+</script>
+@endsection
