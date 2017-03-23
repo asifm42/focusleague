@@ -101,6 +101,18 @@ class Team extends Model
     }
 
     /**
+     * Gets all the players that have a balance
+     *
+     * @return self
+     */
+    public function getDelinquents()
+    {
+        return $this->players->filter(function ($signup) {
+            return ($signup->user->getBalance() > 0);
+        });
+    }
+
+    /**
      * Adds a player to the roster
      *
      * @return self
