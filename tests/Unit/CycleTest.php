@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Cycle;
+use App\Models\Team;
 use App\Models\User;
 use App\Models\Week;
 use Carbon\Carbon;
@@ -184,5 +185,78 @@ class CycleTest extends TestCase
         $this->assertEquals($cycle->starts_at->copy()->addWeek(2), $cycle->weeks->get(2)->starts_at);
         $this->assertEquals($cycle->starts_at->copy()->addWeek(3), $cycle->weeks->get(3)->starts_at);
         $this->assertEquals($cycle->weeks->last()->ends_at->endOfDay(), $cycle->ends_at);
+    }
+
+    /** @test */
+    function can_get_a_list_of_signups_not_on_a_team()
+    {
+        $cycle = factory(Cycle::class)->create();
+        $team = $cycle->teams()->save(factory(Team::class)->make());
+        $users = factory(User::class, 4)->create();
+        // create 4 users, 2 on a team, 2 not on a team
+        $cycle->signups()->attach($users->get(0)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+        ]);
+        $cycle->signups()->attach($users->get(1)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+        ]);
+        $cycle->signups()->attach($users->get(2)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id
+        ]);
+        $cycle->signups()->attach($users->get(3)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id
+        ]);
+
+        $this->assertTrue($cycle->signupsNotOnATeam()->contains($users->get(0)));
+        $this->assertTrue($cycle->signupsNotOnATeam()->contains($users->get(1)));
+        $this->assertFalse($cycle->signupsNotOnATeam()->contains($users->get(2)));
+        $this->assertFalse($cycle->signupsNotOnATeam()->contains($users->get(3)));
+    }
+
+    /** @test */
+    function can_get_a_list_of_signups_on_a_team()
+    {
+        $cycle = factory(Cycle::class)->create();
+
+        $team = $cycle->teams()->save(factory(Team::class)->make());
+        $users = factory(User::class, 4)->create();
+        // create 4 users, 2 on a team, 2 not on a team
+        $cycle->signups()->attach($users->get(0)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+        ]);
+        $cycle->signups()->attach($users->get(1)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+        ]);
+        $cycle->signups()->attach($users->get(2)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id
+        ]);
+        $cycle->signups()->attach($users->get(3)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id
+        ]);
+
+        $this->assertFalse($cycle->signupsOnATeam()->contains($users->get(0)));
+        $this->assertFalse($cycle->signupsOnATeam()->contains($users->get(1)));
+        $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(2)));
+        $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(3)));
     }
 }
