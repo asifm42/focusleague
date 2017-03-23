@@ -209,4 +209,14 @@ class Cycle extends Model
         // have to reload fresh instance since we are adding the weeks relationship to memory when checking for the last week in the addWeek method;
         return $this->fresh();
     }
+
+    public function signupsNotOnATeam()
+    {
+        return $this->signups()->wherePivot('team_id', null)->get();
+    }
+
+    public function signupsOnATeam()
+    {
+        return $this->signups()->wherePivot('team_id', '!=', null)->get();
+    }
 }
