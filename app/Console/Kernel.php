@@ -60,7 +60,7 @@ class Kernel extends ConsoleKernel
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendDelinquentsList')
-                 ->weekly()->tuesdays()->at('13:00')
+                 ->weekly()->tuesdays()->at('13:00');
 
         // $schedule->command('emails:sendNonReturnerReminderEmail')
         //          ->weekly()->tuesdays()->at('07:00')
