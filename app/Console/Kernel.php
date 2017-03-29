@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
         // \App\Console\Commands\ChangeEmails::class,
         \App\Console\Commands\RevenueToDate::class,
         \App\Console\Commands\SendAvailabilityEmail::class,
+        \App\Console\Commands\SendDelinquentsListEmail::class,
     ];
 
     /**
@@ -57,6 +58,9 @@ class Kernel extends ConsoleKernel
                  ->weekly()->tuesdays()->at('10:00')
                  ->sendOutputTo(storage_path().'/logs/signupClosingReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
+
+        $schedule->command('emails:sendDelinquentsList')
+                 ->weekly()->tuesdays()->at('13:00');
 
         // $schedule->command('emails:sendNonReturnerReminderEmail')
         //          ->weekly()->tuesdays()->at('07:00')
