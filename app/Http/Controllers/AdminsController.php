@@ -15,7 +15,9 @@ class AdminsController extends Controller
     public function dashboard() {
         $user = auth()->user();
         $data['user'] = $user;
-        $cycle = Cycle::currentCycle();
+        if (! $cycle = Cycle::currentCycle()) {
+            return 'no current cycle';
+        };
         $cycle->load('teams', 'teams.captains');
                          // \Debugbar::info($cycle->teams);
         $data['current_cycle'] = $cycle;

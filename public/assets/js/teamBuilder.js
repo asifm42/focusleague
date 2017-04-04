@@ -84,7 +84,7 @@ Vue.component('signups', {
 Vue.component('signup', {
     template: '#signup-template',
 
-    props: ['signup', 'cycle', 'onATeam', 'teamOptions', 'selected'],
+    props: ['signup', 'cycle', 'onATeam', 'teamOptions', 'selected', 'nicknameOrShortName'],
 
     // data: function() {
     //     return {
@@ -121,6 +121,19 @@ Vue.component('signup', {
                 // content+= '<option value='+team.id+'>' + team.name + '</option>';
             }, this);
             return content;
+        },
+
+        nicknameOrShortName: function () {
+            var pieces = [];
+            // console.log(this.signup.pivot);
+            if (this.signup.nickname) {
+                return this.signup.nickname;
+            } else if (this.signup.name.split(' ').length > 1) {
+                pieces = this.signup.name.split(' ');
+                return pieces[0].charAt(0).toUpperCase() + pieces[0].slice(1) + pieces[1].charAt(0).toUpperCase() + pieces[1].slice(1,3);
+            } else {
+                return this.signup.name;
+            }
         }
     },
 

@@ -148,7 +148,7 @@
     </template>
     <template id="signup-template">
         <td style="padding-left:5px">
-            <a title="@{{ signup.name }}" href="/users/@{{ signup.id }}">@{{ signup.name }}</a>
+            <a title="@{{ signup.name }}" href="/users/@{{ signup.id }}">@{{ nicknameOrShortName }}</a>
             <span v-if="signup.pivot.captain"><i class="fa fa-star text-warning"></i></span>
             <span v-if="signup.pivot.note"><i class="fa fa-sticky-note text-warning"
                         data-toggle="tooltip"
