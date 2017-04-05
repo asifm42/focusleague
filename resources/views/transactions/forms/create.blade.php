@@ -276,19 +276,26 @@
                     }
 
                 });
-
-                console.log(weekOptions);
-                // var weeks = {"Option 1": "value1",
-                //               "Option 2": "value2",
-                //               "Option 3": "value3"
-                //             };
             });
 
-            @if($currentCycle)
+
+
+            @if(isset($currentCycle))
                 $('.js-cycle').val({!! $currentCycle->id !!});
+            @elseif(isset($transaction))
+                @if(isset($transaction->cycle) && !is_null($transaction->cycle))
+                    $('.js-cycle').val({!! $transaction->cycle->id !!});
+                    $('.js-cycle').trigger('change');
+                @endif
+                @if(isset($transaction->week) && !is_null($transaction->week))
+                    $('.js-week').val({!! $transaction->week->id !!});
+                    $('.js-week').trigger('change');
+                @endif
+            @else
+                $('.js-cycle').trigger('change');
             @endif
 
-            $('.js-cycle').trigger('change');
+
         })
     </script>
 @stop
