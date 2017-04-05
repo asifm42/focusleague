@@ -114,6 +114,12 @@ class TransactionsController extends Controller
         $transaction->load('cycle','user','week');
 
         Former::populate($transaction);
+        if ($transaction->type == 'payment') {
+            Former::populateField('transaction_type', $transaction->payment_type);
+        } else {
+            Former::populateField('transaction_type', $transaction->type);
+        }
+
 
         $data['transaction'] = $transaction;
         $data['names'] = json_encode($names);
