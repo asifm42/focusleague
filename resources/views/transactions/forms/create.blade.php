@@ -43,8 +43,9 @@
             <div class="col-xs-4 col-md-4">
                 {!! Former::select('cycle_id')
                     ->label('Cycle')
-                    ->addClass('form-control')
-                    ->placeholder('Optional cycle id')
+                    ->addClass('js-cycle')
+                    ->addGroupClass('js-cycle-group')
+                    ->placeholder('Optional cycle')
                     ->options([ 0 => 'N/A'])
                     ->fromQuery($cycles->sortByDesc('name'), 'name', 'id')
                 !!}
@@ -52,8 +53,9 @@
             <div class="col-xs-4 col-md-4">
                 {!! Former::select('week_id')
                     ->label('Week')
-                    ->addClass('form-control')
-                    ->placeholder('Optional week id')
+                    ->addClass('js-week')
+                    ->addGroupClass('js-week-group')
+                    ->placeholder('Optional week')
                     ->options([ 0 => 'N/A'])
                     ->fromQuery($weeks->sortByDesc('starts_at'), 'starts_at', 'id')
                 !!}
@@ -130,6 +132,9 @@
 
 @section('scripts')
     <script>
+        var cycles = {!! $cycles !!},
+            weeks = {!! $weeks !!};
+
         $(document).ready( function () {
             var users = new Bloodhound({
                 local:{!! $names !!},
@@ -166,16 +171,25 @@
             $('.users-typeahead-js').bind('typeahead:select', function(ev, suggestion) {
                 console.log('Selection: ', suggestion);
                 $('input[name = user_id]').val(suggestion.id);
+                if (suggestion.balance > 0) {
+                    $('input[name = amount]').val(suggestion.balance);
+                } else if (suggestion.balance <= 0) {
+                    $('input[name = amount]').val('');
+                }
             });
 
             @if(isset($typeahead_name))
                 $('.users-typeahead-js').typeahead('val', "{!! $typeahead_name !!}");
             @endif
 
-            $('.js-transaction-type').change(function($evt) {
-                $selectedValue = $evt.target.selectedOptions.item(0).value;
+            @if (isset($balance) && $balance > 0)
+                $('input[name = amount]').val({!! $balance !!});
+            @endif
 
-                switch ($selectedValue) {
+            $('.js-transaction-type').change(function(evt) {
+                selectedValue = evt.target.selectedOptions.item(0).value;
+
+                switch (selectedValue) {
                     case 'paypal':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('paypal');
@@ -218,6 +232,63 @@
                         break;
                 }
             });
+
+            $('.js-cycle').change(function(evt) {
+                var weekOptions = {},
+                    cycle,
+                    cycleId = evt.target.selectedOptions.item(0).value,
+                    $weekSelect = $('.js-week');
+
+                if (cycleId > 0) {
+                    cycle = cycles[cycleId-1];
+                    cycle.weeks.forEach(function (week, index) {
+                        weekOptions[cycle.name + '-' + week.id] = 'Wk' + (index+1) + ' - ' + moment(new Date(week.starts_at)).format('MMM D');
+                    });
+
+                    $('.js-week-group').css('opacity', 1);
+                    $weekSelect.prop('disabled', false);
+                } else {
+                    cycles.forEach(function (cycle, index) {
+                        cycle.weeks.forEach(function (week, index) {
+                            if (index == 0) {
+                                weekOptions[cycle.name + '-' + '00'] = 'Cycle ' + cycle.name;
+                            }
+
+                            weekOptions[cycle.name + '-' + week.id] = moment(new Date(week.starts_at)).format('MMM D');
+                        });
+                    });
+
+                    $('.js-week-group').css('opacity', 0.5);
+                    $weekSelect.prop('disabled', 'disabled').val('');
+                }
+
+                $weekSelect.empty()
+                    .append('<option value="" disabled="disabled" selected="selected">Optional week</option>')
+                    .append('<option value="0">N/A</option>');
+
+                $.each(weekOptions, function(key,value) {
+                    if(key.slice(8) == '00') {
+                        $weekSelect.append($("<option></option>")
+                        .attr("value", '').prop("disabled", "disabled").text(value));
+                    } else {
+                        $weekSelect.append($("<option></option>")
+                        .attr("value", key.slice(8)).text(value));
+                    }
+
+                });
+
+                console.log(weekOptions);
+                // var weeks = {"Option 1": "value1",
+                //               "Option 2": "value2",
+                //               "Option 3": "value3"
+                //             };
+            });
+
+            @if($currentCycle)
+                $('.js-cycle').val({!! $currentCycle->id !!});
+            @endif
+
+            $('.js-cycle').trigger('change');
         })
     </script>
 @stop

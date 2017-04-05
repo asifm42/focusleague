@@ -2252,6 +2252,7 @@ select.form-control[multiple],select[multiple]{background:0 0}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .alert,.navbar-default{margin-bottom:0}
 .alert{border-top-right-radius:0;border-top-left-radius:0}
+.nav.footer li{vertical-align:top}
 .page-header{margin-top:0}
 .logo-navbar{height:45px;margin-top:-10px}
 .logo-welcome-desktop{height:150px;margin-top:30px}

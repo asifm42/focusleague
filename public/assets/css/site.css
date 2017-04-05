@@ -9989,6 +9989,10 @@ input[type="checkbox"]:disabled:checked:after,
     margin-bottom: 0;
 }
 
+.nav.footer li {
+    vertical-align: top;
+}
+
 .page-header {
     margin-top: 0;
 }
