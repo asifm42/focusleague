@@ -34,12 +34,14 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('cycle', function ($value) {
             if ($value === 'current') {
-                $cycle = Cycle::currentCycle();
-                if (!$cycle) {
+                if (is_null($cycle = Cycle::currentCycle())) {
                     throw new NoCurrentCycleException();
                 }
                 return $cycle;
             } else {
+                if ($cycle = Cycle::findByName($value)) {
+                    return $cycle;
+                }
                 return Cycle::findOrFail($value);
             }
         });
