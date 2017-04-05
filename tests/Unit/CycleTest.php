@@ -18,7 +18,6 @@ class CycleTest extends TestCase
     /** @test */
     function can_get_current_cycle()
     {
-
         if(Carbon::now()->dayOfWeek == Carbon::WEDNESDAY) {
             $signupOpen = Carbon::today();
         } else {
@@ -258,5 +257,16 @@ class CycleTest extends TestCase
         $this->assertFalse($cycle->signupsOnATeam()->contains($users->get(1)));
         $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(2)));
         $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(3)));
+    }
+
+    /** @test */
+    function can_find_a_cycle_by_name()
+    {
+        $cycle01 = factory(Cycle::class)->create(['name'=>'2017-04']);
+        $cycle02 = factory(Cycle::class)->create(['name'=>'2017-10']);
+
+        $this->assertEquals($cycle01->id, Cycle::findByName('2017-04')->id);
+        $this->assertEquals($cycle02->id, Cycle::findByName('2017-10')->id);
+        $this->assertNull(Cycle::findByName('2017-06'));
     }
 }
