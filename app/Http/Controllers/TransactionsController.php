@@ -53,17 +53,23 @@ class TransactionsController extends Controller
         if ($request->has('user_id')) {
             $user = User::findOrFail($request->input('user_id'));
             $data['typeahead_name'] = $user->name . " (" . $user->getNicknameOrShortName() . ")";
+            $data['balance'] = $user->getBalance();
         }
         $users = User::all();
         $names = [];
         foreach($users as $user){
-            $names[] = ['id' => $user->id, 'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")"];
+            $names[] = [
+                'id' => $user->id,
+                'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")",
+                'balance' => $user->getBalance(),
+            ];
         }
 
         $data['users'] = $users;
         $data['names'] = json_encode($names);
-        $data['cycles'] = Cycle::all();
-        $data['weeks'] = Week::all();
+        $data['cycles'] = Cycle::with('weeks')->get()->sortByDesc('signup_opens_at');
+        $data['currentCycle'] = Cycle::currentCycle();
+        $data['weeks'] = Week::with('cycle')->get()->sortByDesc('starts_at');
 
         return view('transactions.create', $data);
     }
@@ -107,19 +113,29 @@ class TransactionsController extends Controller
         $users = User::all();
         $names = [];
         foreach($users as $user){
-            $names[] = ['id' => $user->id, 'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")"];
+            $names[] = [
+                'id' => $user->id,
+                'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")",
+                'balance' => $user->getBalance(),
+            ];
         }
 
         $transaction = Transaction::findOrFail($id);
         $transaction->load('cycle','user','week');
 
         Former::populate($transaction);
+        if ($transaction->type == 'payment') {
+            Former::populateField('transaction_type', $transaction->payment_type);
+        } else {
+            Former::populateField('transaction_type', $transaction->type);
+        }
+
 
         $data['transaction'] = $transaction;
         $data['names'] = json_encode($names);
         $data['typeahead_name'] = $transaction->user->name . " (" . $transaction->user->getNicknameOrShortName() . ")";
-        $data['cycles'] = Cycle::all();
-        $data['weeks'] = Week::all();
+        $data['cycles'] = Cycle::with('weeks')->get()->sortByDesc('signup_opens_at');
+        $data['weeks'] = Week::with('cycle')->get()->sortByDesc('starts_at');
 
         return view('transactions.edit', $data);
     }
