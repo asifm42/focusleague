@@ -19,14 +19,6 @@
                 ->action(route('transactions.store'))
             !!}
         @endif
-        {!! Former::text('date')
-            ->name('date')
-            ->label('Transaction Date')
-            ->id('trans_date_picker-js')
-            ->addClass('form-control')
-            ->placeholder('Optional date')
-            ->help('MM/DD/YYYY')
-        !!}
         {!! Former::text('name')
             ->label('Player name')
             ->addClass('users-typeahead-js')
@@ -37,41 +29,73 @@
         {!! Former::hidden('user_id')
             ->required()
         !!}
-        {!! Former::select('cycle_id')
-            ->label('Cycle')
-            ->addClass('form-control')
-            ->placeholder('Optional cycle id')
-            ->options([ 0 => 'N/A'])
-            ->fromQuery($cycles, 'name', 'id')
-        !!}
-        {!! Former::select('week_id')
-            ->label('Week')
-            ->addClass('form-control')
-            ->placeholder('Optional week id')
-            ->options([ 0 => 'N/A'])
-            ->fromQuery($weeks, 'starts_at', 'id')
-        !!}
-        {!! Former::select('type')
-            ->label('Transaction Type')
-            ->addClass('form-control')
-            ->options(['charge' => 'Charge', 'payment' => 'Payment', 'credit' => 'Credit',])
-            ->placeholder('Required type')
-            ->required()
-        !!}
-        {!! Former::select('payment_type')
-            ->addClass('form-control')
-            ->options(['paypal' => 'Paypal', 'venmo' => 'Venmo', 'chase quickpay' => 'Chase Quickpay', 'square cash' => 'Square Cash', 'check' => 'Check', 'cash' => 'Cash',])
-            ->placeholder('Optional payment type')
-            ->help('Required if type is payment')
-        !!}
+        <div class="row">
+            <div class="col-xs-4 col-md-4">
+                {!! Former::text('date')
+                    ->name('date')
+                    ->label('Transaction Date')
+                    ->id('trans_date_picker-js')
+                    ->addClass('form-control')
+                    ->placeholder('Optional date')
+                    ->help('MM/DD/YYYY')
+                !!}
+            </div>
+            <div class="col-xs-4 col-md-4">
+                {!! Former::select('cycle_id')
+                    ->label('Cycle')
+                    ->addClass('form-control')
+                    ->placeholder('Optional cycle id')
+                    ->options([ 0 => 'N/A'])
+                    ->fromQuery($cycles->sortByDesc('name'), 'name', 'id')
+                !!}
+            </div>
+            <div class="col-xs-4 col-md-4">
+                {!! Former::select('week_id')
+                    ->label('Week')
+                    ->addClass('form-control')
+                    ->placeholder('Optional week id')
+                    ->options([ 0 => 'N/A'])
+                    ->fromQuery($weeks->sortByDesc('starts_at'), 'starts_at', 'id')
+                !!}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 col-md-8">
+                {!! Former::select('transaction_type')
+                    ->label('Type')
+                    ->addClass('js-transaction-type')
+                    ->placeholder('Required type')
+                    ->options([
+                        'paypal' => 'Paypal payment',
+                        'venmo' => 'Venmo payment',
+                        'chase quickpay' => 'Chase Quickpay payment',
+                        'square cash' => 'Square Cash payment',
+                        'check' => 'Check payment',
+                        'cash' => 'Cash payment',
+                        'charge' => 'Charge',
+                        'credit' => 'Credit',
+                    ])
+                    ->required()
+                !!}
+                {!! Former::hidden('type')
+                    ->addClass('js-type')
+                    ->required()
+                !!}
+                {!! Former::hidden('payment_type')
+                    ->addClass('js-payment-type')
+                !!}
+            </div>
+            <div class="col-xs-4 col-md-4">
+                {!! Former::text('amount')
+                    ->addClass('form-control')
+                    ->placeholder("Req'd amount")
+                    ->required()
+                !!}
+            </div>
+        </div>
         {!! Former::textarea('description')
-            ->addClass('form-control')
+            ->addClass('js-description')
             ->placeholder('Required description')
-            ->required()
-        !!}
-        {!! Former::text('amount')
-            ->addClass('form-control')
-            ->placeholder('Required amount')
             ->required()
         !!}
     </div>
@@ -109,15 +133,13 @@
         $(document).ready( function () {
             var users = new Bloodhound({
                 local:{!! $names !!},
-              // local: ['Asif Johnson', 'Asif Jason', 'Mask'],
-    // local: [{ val: 'one', name:'asif' }, { val: 'two', name: 'chase' }],
-    // local: [{ id: 1, name: 'asif johnson', val: 'asif' }, { id: 2, name: 'asif jason', val:'jason' }, { id: 3, name: 'Mask', val:'mask' }],
-    // identify: function(obj) { return obj.id; },
-              queryTokenizer: Bloodhound.tokenizers.whitespace,
-              datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
             });
+
             $(function () {
                 $('#trans_date_picker-js').datetimepicker({
+                    defaultDate: moment().format('MM/DD/YYYY'),
                     format: 'MM/DD/YYYY',
                 });
             });
@@ -126,18 +148,17 @@
                 minLength: 1,
                 highlight: true,
                 hint:true
-            },
-            {
-              name: 'users',
-              source: users,
-              display: function(obj) { return obj.name; },
-                templates: {
-                    empty: [
-                        '<div class="noitems">',
-                        'No Players Found',
-                        '</div>'
-                    ].join('\n')
-                }
+            }, {
+                  name: 'users',
+                  source: users,
+                  display: function(obj) { return obj.name; },
+                    templates: {
+                        empty: [
+                            '<div class="noitems">',
+                            'No Players Found',
+                            '</div>'
+                        ].join('\n')
+                    }
             });
 
             $('.twitter-typeahead').css('display', 'block');
@@ -150,6 +171,53 @@
             @if(isset($typeahead_name))
                 $('.users-typeahead-js').typeahead('val', "{!! $typeahead_name !!}");
             @endif
+
+            $('.js-transaction-type').change(function($evt) {
+                $selectedValue = $evt.target.selectedOptions.item(0).value;
+
+                switch ($selectedValue) {
+                    case 'paypal':
+                        $('.js-type').val('payment');
+                        $('.js-payment-type').val('paypal');
+                        $('.js-description').val('Payment id: ');
+                        break;
+                    case 'venmo':
+                        $('.js-type').val('payment');
+                        $('.js-payment-type').val('venmo');
+                        $('.js-description').val('Payment');
+                        break;
+                    case 'chase quickpay':
+                        $('.js-type').val('payment');
+                        $('.js-payment-type').val('chase quickpay');
+                        $('.js-description').val('Payment');
+                        break;
+                    case 'square cash':
+                        $('.js-type').val('payment');
+                        $('.js-payment-type').val('square cash');
+                        $('.js-description').val('Payment');
+                        break;
+                    case 'check':
+                        $('.js-type').val('payment');
+                        $('.js-payment-type').val('check');
+                        $('.js-description').val('Payment');
+                        break;
+                    case 'cash':
+                        $('.js-type').val('payment');
+                        $('.js-payment-type').val('cash');
+                        $('.js-description').val('Cash to Asif at the fields');
+                        break;
+                    case 'charge':
+                        $('.js-type').val('charge');
+                        $('.js-payment-type').val('');
+                        $('.js-description').val('');
+                        break;
+                    case 'credit':
+                        $('.js-type').val('credit');
+                        $('.js-payment-type').val('');
+                        $('.js-description').val('');
+                        break;
+                }
+            });
         })
     </script>
 @stop
