@@ -219,4 +219,9 @@ class Cycle extends Model
     {
         return $this->signups()->wherePivot('team_id', '!=', null)->get();
     }
+
+    public static function findByName($name)
+    {
+        return SELF::where('name', $name)->first();
+    }
 }
