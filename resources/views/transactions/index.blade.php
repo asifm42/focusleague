@@ -16,7 +16,7 @@
                     <table class="table table-striped table-condensed table-bordered">
                         @if (auth()->user()->isAdmin())
                             <tr>
-                                <th colspan=8>Balance Details for {{ $user->name }} ( {{$user->getNicknameOrShortname() }})</th>
+                                <th colspan=8>Balance Details for <a href="{{ route('users.show', $user->id) }}">{{ $user->name }} ({{ $user->getNicknameOrShortname() }})</a></th>
                             </tr>
                         @endif
                         <tr>
