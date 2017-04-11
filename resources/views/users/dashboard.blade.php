@@ -4,9 +4,15 @@
 @section('content')
     <div class="page-header">
         <div class="container">
-            <h4 class="hidden-md hidden-lg">Dashboard</h4>
-            <h3 class="hidden-xs hidden-sm">Dashboard</h3>
-            <p>Overview of your account.</p>
+            @if(auth()->user() == $user)
+                <h4 class="hidden-md hidden-lg">Your Dashboard</h4>
+                <h3 class="hidden-xs hidden-sm">Your Dashboard</h3>
+                <p>Overview of your account.</p>
+            @elseif(auth()->user()->isAdmin())
+                <h4 class="hidden-md hidden-lg">{{$user->getNicknameOrShortName() }}'s Dashboard</h4>
+                <h3 class="hidden-xs hidden-sm">{{$user->getNicknameOrShortName() }}'s Dashboard</h3>
+                <p>Overview of your {{ $user->name }}'s account.</p>
+            @endif
         </div>
     </div>
     <div class="container">
@@ -289,7 +295,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <h6>Defensive or Offensive player</h6>
                                 <p>{{ $user->ultimateHistory->def_or_off }}</p>
-                                <h6>your best skill</h6>
+                                <h6>Your best skill</h6>
                                 <p>{{ $user->ultimateHistory->best_skill }}</p>
                                 <h6>Skill you most want to improve</h6>
                                 <p>{{ $user->ultimateHistory->skill_to_improve }}</p>
