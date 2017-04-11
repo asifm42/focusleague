@@ -43,6 +43,8 @@ class UsersController extends Controller
     {
         $users = User::all();
 
+        $data['title'] = 'Delinquents';
+
         $data['users'] = $users->filter(function ($item) {
             return $item->getBalance() > 0;
         });
