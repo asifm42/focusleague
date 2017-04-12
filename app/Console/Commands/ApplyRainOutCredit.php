@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Cycle;
 use App\Models\Transaction;
 use App\Models\Week;
+use App\Notifications\Rainout;
+use Illuminate\Console\Command;
 
 class ApplyRainOutCredit extends Command
 {
@@ -41,9 +42,9 @@ class ApplyRainOutCredit extends Command
     public function handle()
     {
         // get the cycle id
-        $cycle_id = $this->ask('What is the id of the cycle?');
+        $cycle_name = $this->ask('What is the name of the cycle?');
 
-        $cycle = Cycle::find($cycle_id);
+        $cycle = Cycle::findByName($cycle_name);
 
         $headers = ['week id', 'date', 'rainedOut'];
 
@@ -60,14 +61,16 @@ class ApplyRainOutCredit extends Command
             return;
         }
 
+        $sendNotification = ($this->ask('Send notification?') == 'true') ? true : false;
+
         $data = [
-            'cycle_id'      => $cycle_id,
+            'cycle_id'      => $cycle->id,
             'week_id'       => $week_id,
             'type'          => 'credit',
             'created_by'    => 1,
             'date'          => $week->starts_at->format('Y-m-d'),
             'description'   => 'Rainout credit',
-            'amount'        => config('focus_cost.rainout_credit')
+            'amount'        => config('focus.cost.rainout_credit')
         ];
 
         $totalAmountCredited = 0;
@@ -89,7 +92,7 @@ class ApplyRainOutCredit extends Command
             }
 
             // if signup has already been credited, move on
-            if ($signup->transactions()->where('type','credit')->where('cycle_id',$cycle->id)->where('week_id', $week->id)->count() >= 1) {
+            if ($signup->transactions()->where('type','credit')->where('cycle_id', $cycle->id)->where('week_id', $week->id)->count() >= 1) {
                 continue;
             }
 
@@ -104,6 +107,8 @@ class ApplyRainOutCredit extends Command
 
             // save the signup's transaction
             $signup->transactions()->save($transaction);
+
+            if ($sendNotification) $signup->notify(new Rainout($week));
 
             $totalAmountCredited += $transaction->amount;
 
