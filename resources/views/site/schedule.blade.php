@@ -95,7 +95,7 @@
                   <strong>May</strong>
                   <span>24</span>
                 </time>
-                <div class="event">Cycle&nbsp;2017-03 Registration&nbsp;Opens</div>
+                <div class="event">Cycle&nbsp;2017-04 Registration&nbsp;Opens</div>
             </li>
             <li class="list-group-item">
                 <time datetime="2017-05-30" class="icon">
