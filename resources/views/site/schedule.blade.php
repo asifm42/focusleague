@@ -117,7 +117,7 @@
                 <time datetime="2017-06-13" class="icon">
                   <em>Tuesday</em>
                   <strong>June</strong>
-                  <span>16</span>
+                  <span>13</span>
                 </time>
                 <div class="event">Cycle 2017-04 Wk3 of 4</div>
             </li>
