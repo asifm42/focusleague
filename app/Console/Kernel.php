@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendSignupOpenReminderEmail::class,
         \App\Console\Commands\SendSignupOpenAnnouncementEmail::class,
         \App\Console\Commands\ApplyRainOutCredit::class,
+        \App\Console\Commands\SendGameOnNotification::class,
         // \App\Console\Commands\ChangeEmails::class,
         \App\Console\Commands\RevenueToDate::class,
         \App\Console\Commands\SendAvailabilityEmail::class,
