@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Cycle;
 use App\Models\Transaction;
 use App\Models\Week;
-use App\Notifications\Rainout;
+use App\Notifications\GameOn;
 use Illuminate\Console\Command;
 
 class SendGameOnNotification extends Command
