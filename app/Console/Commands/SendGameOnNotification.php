@@ -15,7 +15,7 @@ class SendGameOnNotification extends Command
      *
      * @var string
      */
-    protected $signature = 'credit:sendGameOnNotification';
+    protected $signature = 'emails:sendGameOnNotification';
 
     /**
      * The console command description.
