@@ -14,8 +14,6 @@ class StoreTransactionRequest extends Request
     public function authorize()
     {
         if (auth()->user()->isAdmin()) {
-            // dd($this->request->all());
-            // dd($this->getValidatorInstance()->errors());
             return true;
         }
         return false;
