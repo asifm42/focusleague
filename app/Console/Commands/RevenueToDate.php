@@ -47,21 +47,42 @@ class RevenueToDate extends Command
         $users = User::all();
         $weeks = Week::all();
         $headers = ['Charges', 'Credits', 'Payments', 'Revenue', 'Outstanding', 'Cost', 'Income'];
-        $charges = 0;
-        $credits = 0;
-        $payments = 0;
+        // $charges = 0;
+        // $credits = 0;
+        // $payments = 0;
         $outstanding = 0;
-        $cost = 0;
+        // $cost = 0;
 
-        foreach($transactions as $transaction) {
-            if ($transaction->type === 'charge') {
-                $charges += $transaction->amount;
-            } elseif ($transaction->type === 'credit') {
-                $credits += $transaction->amount;
-            } elseif ($transaction->type === 'payment') {
-                $payments += $transaction->amount;
-            }
-        }
+        $transactions = $transactions->filter(function ($transaction){
+            return $transaction->created_at->gt(Carbon::parse('2016-12-31'));
+        });
+
+        $cost = $weeks->filter(function ($week) {
+                return $week->created_at->gt(Carbon::parse('2016-12-31'))
+                    && $week->starts_at->lt(Carbon::now())
+                    && !$week->isRainedOut();
+            })->count() * (95*2);
+
+        $charges = $transactions->filter(function($transaction) {
+                return $transaction->type === 'charge';
+            })->sum('amount');
+
+        $credits = $transactions->filter(function($transaction) {
+                return $transaction->type === 'credit';
+            })->sum('amount');
+
+        $payments = $transactions->filter(function($transaction) {
+                return $transaction->type === 'payment';
+            })->sum('amount');
+        // foreach($transactions as $transaction) {
+        //     if ($transaction->type === 'charge') {
+        //         $charges += $transaction->amount;
+        //     } elseif ($transaction->type === 'credit') {
+        //         $credits += $transaction->amount;
+        //     } elseif ($transaction->type === 'payment') {
+        //         $payments += $transaction->amount;
+        //     }
+        // }
 
         foreach($users as $user) {
             $balance = $user->getBalance();
@@ -80,11 +101,15 @@ class RevenueToDate extends Command
         //     }
         // }
 
-        foreach($weeks as $week) {
-            if ($week->starts_at->lt(Carbon::now()) && !$week->isRainedOut()) {
-                $cost += 160;
-            }
-        }
+        // foreach($weeks as $week) {
+        //     if ($week->starts_at->lt(Carbon::now()) && !$week->isRainedOut()) {
+        //         if ($week->starts_at->gt(Carbon::parse('2016-12-31'))) {
+        //             $cost += (95*2);
+        //         } else {
+        //             $cost += 160;
+        //         }
+        //     }
+        // }
 
 
         $revenue = $charges - $credits;
