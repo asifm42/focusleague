@@ -19,15 +19,6 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="/css/app.css">
-@if (App::environment('production'))
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}">
-@elseif (App::environment('local'))
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/default.css') }}">
-   {{--<link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap-datetimepicker.css') }}" --}}
-@else
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.css') }}">
-@endif
 
 
 @yield('styles')

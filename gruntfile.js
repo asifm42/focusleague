@@ -58,10 +58,10 @@ module.exports = function (grunt) {
             sitecss: {
                 files: {
                     'public/assets/css/site.css': [
-                        'bower_components/bootswatch-dist/css/bootstrap.css',
-                        'bower_components/fontawesome/css/font-awesome.css',
-                        'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
-                        'public/assets/css/default.css'
+                        // 'bower_components/bootswatch-dist/css/bootstrap.css',
+                        // 'bower_components/fontawesome/css/font-awesome.css',
+                        // 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
+                        // 'public/assets/css/default.css'
                     ]
                 }
             }
@@ -92,8 +92,8 @@ module.exports = function (grunt) {
                 }
             },
             site: {
-                src: 'public/assets/js/site.js',
-                dest: 'public/assets/js/site.min.js'
+                // src: 'public/assets/js/site.js',
+                // dest: 'public/assets/js/site.min.js'
             },
             teamBuilder: {
                 src: 'public/assets/js/teamBuilder.js',
