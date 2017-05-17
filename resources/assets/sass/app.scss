@@ -1,2 +1,15 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "node_modules/bootswatch/paper/variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Bootswatch
+@import "node_modules/bootswatch/paper/bootswatch";
+
+// Font Awesome
+@import "node_modules/font-awesome/scss/font-awesome";
