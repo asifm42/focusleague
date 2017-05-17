@@ -297,7 +297,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
    $(document).ready( function () {
         if(window.location.hash.length > 0) {
@@ -305,4 +305,4 @@
         }
     })
 </script>
-@endsection
+@endpush

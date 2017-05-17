@@ -130,7 +130,7 @@
     </div>
 </div>
 
-@section('scripts')
+@push('scripts')
     <script>
         var cycles = {!! $cycles !!},
             weeks = {!! $weeks !!};
@@ -298,4 +298,4 @@
 
         })
     </script>
-@stop
+@endpush

@@ -258,7 +258,7 @@
 </div>
 @stop
 
-@section('scripts')
+@push('scripts')
     @if (app()->environment('production'))
         <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
@@ -347,7 +347,7 @@
             //
         });
     </script>
-@stop
+@endpush
 
 @section('modals')
 <div class="modal fade" id="publishTeamsModal" tabindex="-1" role="dialog">
