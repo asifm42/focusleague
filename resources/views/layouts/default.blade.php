@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 
     <meta name="description" content="The FOCUS League is a competitve ultimate frisbee league in Houston, TX." />
 
     <title>@yield('title')</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
@@ -17,6 +18,7 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1e3e47">
     <meta name="theme-color" content="#ffffff">
 
+    <link rel="stylesheet" href="/css/app.css">
 @if (App::environment('production'))
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}">
 @elseif (App::environment('local'))
@@ -26,6 +28,7 @@
 @else
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.css') }}">
 @endif
+
 
 @yield('styles')
 
@@ -46,14 +49,27 @@
     <script type='text/javascript' src="{{ url('assets/js/site.js') }}"></script>
 @endif
 
+<script src="/js/manifest.js"></script>
+<script src="/js/vendor.js"></script>
+<script src="/js/app.js"></script>
+
 <script>
-    $(document).ready( function () {
-        // For popovers on the navbar
-        // $('[data-toggle="popover"]').popover();
-    })
+    $(document).ready(function(){
+
+      $('[data-toggle="popover"]').popover();
+
+      $('[data-toggle="tooltip"]').tooltip();
+
+      $('[data-toggle="dropdown"]').dropdown();
+
+      // $('.timeago').each(function(){
+      //   $(this).text( moment( $(this).attr('datetime') ).fromNow() );
+      // });
+
+    });
 </script>
 
-@yield('scripts')
+@stack('scripts')
 
 {{-- @include('google.analytics') --}}
 

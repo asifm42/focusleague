@@ -1,19 +1,20 @@
 @extends('layouts.default')
-@section('title','FOCUS League – Users')
+@section('title','FOCUS League – ' . $title)
 
 @section('content')
     <div class="page-header">
         <div class="container">
             <h4 class="hidden-md hidden-lg">{{ $title or "All users" }}</h4>
             <h3 class="hidden-xs hidden-sm">{{ $title or "All users" }}</h3>
-            <p>See a list of all {{ $title or "users" }}.</p>
+            <p>See a list of all {{ $title }}.</p>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="table-responsive">
-                    <table class="table table-striped table-condensed table-bordered">
+                    <table class="table table-striped table-condensed table-bordered focus-users-table">
+                    <thead>
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
@@ -25,6 +26,8 @@
                             <th>Balance</th>
                             <th>Admin</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
@@ -47,9 +50,25 @@
                                 </td>
                             </tr>
                         @endforeach
+                    </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+  <script>
+    $(document).ready(function(){
+
+      $('.focus-users-table').DataTable({
+        "language": {
+          "info": "Showing _START_ to _END_ of _TOTAL_ users."
+        },
+        "paging":    false,
+        "searching": true
+      });
+
+    });
+  </script>
+@endpush

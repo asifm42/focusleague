@@ -29,6 +29,7 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'Users';
         $data['users'] = $users = User::all();
 
         return view('users.index', $data);
