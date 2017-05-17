@@ -51,7 +51,7 @@ class ResetPassword extends Notification
         $mailMessage = (new MailMessage)
             ->line('You are receiving this email because we received a password reset request for the FOCUS League account associated with this email address.')
             ->line('If this was you, please start the reset process by clicking the link below. Please note this link will expire in 60 minutes.')
-            ->action('Reset Password', url('password/reset', $this->token))
+            ->action('Reset Password', url(config('app.url').route('password.reset', $this->token, false)))
             ->line('If you did not request a password reset, then please disregard this email; no further action is required.');
 
         if (isset($notifiable->name)) {
