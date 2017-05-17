@@ -46,6 +46,13 @@ require("datatables.net-bs/css/dataTables.bootstrap.css");
 // https://momentjs.com/
 window.moment = require('moment');
 
+// https://twitter.github.io/typeahead.js/
+window.typeahead = require('typeahead.js');
+window.Bloodhound = require('bloodhound-js');
+
+// https://github.com/uxsolutions/bootstrap-datepicker
+window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
+
 // http://selectize.github.io/selectize.js/
 // window.selectize = require('selectize');
 
