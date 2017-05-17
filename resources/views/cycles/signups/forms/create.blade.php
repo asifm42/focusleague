@@ -126,7 +126,7 @@
     {!! Former::close() !!}
 </div>
 
-@section('scripts')
+@push('scripts')
     <script>
         $(document).ready( function () {
             $('.availability-js').change(function(){
@@ -170,4 +170,4 @@
             $('.availability-js').change();
         })
     </script>
-@stop
+@endpush

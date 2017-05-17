@@ -97,10 +97,10 @@
     {!! Former::close() !!}
 </div>
 
-@section('scripts')
+@push('scripts')
     <script>
         $(document).ready( function () {
 
         })
     </script>
-@stop
+@endpush

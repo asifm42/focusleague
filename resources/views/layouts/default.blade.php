@@ -43,15 +43,15 @@
 
 @include('layouts.footer')
 
+<script src="/js/manifest.js"></script>
+<script src="/js/vendor.js"></script>
+<script src="/js/app.js"></script>
+
 @if (App::environment('production'))
     <script type='text/javascript' src="{{ url('assets/js/site.min.js') }}"></script>
 @else
     <script type='text/javascript' src="{{ url('assets/js/site.js') }}"></script>
 @endif
-
-<script src="/js/manifest.js"></script>
-<script src="/js/vendor.js"></script>
-<script src="/js/app.js"></script>
 
 <script>
     $(document).ready(function(){
