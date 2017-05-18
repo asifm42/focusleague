@@ -17,12 +17,12 @@
                     <div class="panel-heading">Current Cycle</div>
                     <div class="panel-body">
                         <dl class="horizontal">
-                            <dt>Name:</dt>
+                            <dt>Name</dt>
                             <dd>{{ $current_cycle->name }}</dd>
                             <dt>Format</dt>
-                            <dd>{{ $current_cycle->format }}</dd>
+                            <dd>{!! $current_cycle->format !!}</dd>
                             <dt>Teams published?</dt>
-                            <dd>{{ ($current_cycle->teams_publised) ? 'Yes' : 'No' }}</dd>
+                            <dd>{{ ($current_cycle->teams_published) ? 'Yes' : 'No' }}</dd>
                             <dt>Status</dt>
                             <dd>{{ $current_cycle->status() }}</dd>
                         </dl>
