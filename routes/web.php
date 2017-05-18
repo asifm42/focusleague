@@ -149,6 +149,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::delete(  'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.destroy', 'uses' => 'UltimateHistoryController@destroy']);
 });
 
+Route::get('captains/dashboard', 'CaptainDashboardController@show')->name('captain.dashboard');
 
 Route::group(['middleware' => ['auth','admin']], function() {
 
