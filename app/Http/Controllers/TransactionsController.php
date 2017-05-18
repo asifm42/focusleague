@@ -56,6 +56,7 @@ class TransactionsController extends Controller
             $data['balance'] = $user->getBalance();
         }
         $users = User::all();
+        $users->load('transactions');
         $names = [];
         foreach($users as $user){
             $names[] = [
