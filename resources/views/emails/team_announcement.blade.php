@@ -1,7 +1,7 @@
 @component('emails.layouts.message', ['user'=>$user])
 ##Cycle {{ $cycle->name }} teams have been set!
 
-The format for the cycle is **{{ $cycle->format }}**.
+The format for the cycle is **{!! strip_tags($cycle->format) !!}**.
 
 You are on team **_{{ ucwords($team->name) }}_** in the **{{ ucfirst($team->division) }}** division.
 

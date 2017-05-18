@@ -79,7 +79,7 @@
                             </dl>
                             <dl>
                                 <dt>Format</dt>
-                                <dd>{{ $cycle->format }}</dd>
+                                <dd>{!! $cycle->format !!}</dd>
                             </dl>
                             <dl>
                                 <dt>Current Status</dt>
