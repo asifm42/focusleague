@@ -41,7 +41,7 @@ class TeamAnnouncementEmailTest extends TestCase
     {
         $mailer = new UserMailer;
         $cycle = factory(Cycle::class)->create([
-            'format' => '1 Mens 7v7, 1 Mixed 7v7'
+            'format' => '1 Mens 7v7, 1 Mixed 7v7. <br />Games to 15, 1 TO/half + floater.'
             ])->addWeeks(4);
         $user = factory(User::class)->create();
         $team = $cycle->teams()->save(factory(Team::class)->make());
