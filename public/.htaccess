@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # Redirect non-www urls to www urls
+    RewriteCond %{HTTP_HOST} ^focusleague.com [NC]
+    RewriteRule ^(.*)$ http://www.focusleague.com/$1 [L,R=301]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]
