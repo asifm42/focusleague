@@ -198,7 +198,7 @@ if (token) {
 // https://datatables.net/
 window.datatables = __webpack_require__(5);
 window.datatables_bs = __webpack_require__(10);
-__webpack_require__(180);
+__webpack_require__(181);
 
 // https://momentjs.com/
 window.moment = __webpack_require__(0);
@@ -208,7 +208,7 @@ window.typeahead = __webpack_require__(186);
 window.Bloodhound = __webpack_require__(158);
 
 // https://github.com/uxsolutions/bootstrap-datepicker
-window.datetimepicker = __webpack_require__(171);
+window.datetimepicker = __webpack_require__(172);
 
 // http://selectize.github.io/selectize.js/
 // window.selectize = require('selectize');
@@ -248,7 +248,7 @@ module.exports = __webpack_require__(160);
 /***/ (function(module, exports, __webpack_require__) {
 
 var Promise = __webpack_require__(19).Promise;
-var request = __webpack_require__(181);
+var request = __webpack_require__(182);
 
 module.exports = function(o) {
   return new Promise(function(resolve, reject) {
@@ -755,7 +755,7 @@ function callbackToDeferred(fn) {
 /***/ 163:
 /***/ (function(module, exports, __webpack_require__) {
 
-var storage2 = __webpack_require__(175);
+var storage2 = __webpack_require__(176);
 var _ = __webpack_require__(3);
 
 var LOCAL_STORAGE;
@@ -1302,12 +1302,182 @@ module.exports = '1.0.0';
 /***/ 169:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(170)();
-exports.push([module.i, "table.dataTable {\n  clear: both;\n  margin-top: 6px !important;\n  margin-bottom: 6px !important;\n  max-width: none !important;\n  border-collapse: separate !important;\n}\ntable.dataTable td,\ntable.dataTable th {\n  -webkit-box-sizing: content-box;\n  box-sizing: content-box;\n}\ntable.dataTable td.dataTables_empty,\ntable.dataTable th.dataTables_empty {\n  text-align: center;\n}\ntable.dataTable.nowrap th,\ntable.dataTable.nowrap td {\n  white-space: nowrap;\n}\n\ndiv.dataTables_wrapper div.dataTables_length label {\n  font-weight: normal;\n  text-align: left;\n  white-space: nowrap;\n}\ndiv.dataTables_wrapper div.dataTables_length select {\n  width: 75px;\n  display: inline-block;\n}\ndiv.dataTables_wrapper div.dataTables_filter {\n  text-align: right;\n}\ndiv.dataTables_wrapper div.dataTables_filter label {\n  font-weight: normal;\n  white-space: nowrap;\n  text-align: left;\n}\ndiv.dataTables_wrapper div.dataTables_filter input {\n  margin-left: 0.5em;\n  display: inline-block;\n  width: auto;\n}\ndiv.dataTables_wrapper div.dataTables_info {\n  padding-top: 8px;\n  white-space: nowrap;\n}\ndiv.dataTables_wrapper div.dataTables_paginate {\n  margin: 0;\n  white-space: nowrap;\n  text-align: right;\n}\ndiv.dataTables_wrapper div.dataTables_paginate ul.pagination {\n  margin: 2px 0;\n  white-space: nowrap;\n}\ndiv.dataTables_wrapper div.dataTables_processing {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 200px;\n  margin-left: -100px;\n  margin-top: -26px;\n  text-align: center;\n  padding: 1em 0;\n}\n\ntable.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting,\ntable.dataTable thead > tr > td.sorting_asc,\ntable.dataTable thead > tr > td.sorting_desc,\ntable.dataTable thead > tr > td.sorting {\n  padding-right: 30px;\n}\ntable.dataTable thead > tr > th:active,\ntable.dataTable thead > tr > td:active {\n  outline: none;\n}\ntable.dataTable thead .sorting,\ntable.dataTable thead .sorting_asc,\ntable.dataTable thead .sorting_desc,\ntable.dataTable thead .sorting_asc_disabled,\ntable.dataTable thead .sorting_desc_disabled {\n  cursor: pointer;\n  position: relative;\n}\ntable.dataTable thead .sorting:after,\ntable.dataTable thead .sorting_asc:after,\ntable.dataTable thead .sorting_desc:after,\ntable.dataTable thead .sorting_asc_disabled:after,\ntable.dataTable thead .sorting_desc_disabled:after {\n  position: absolute;\n  bottom: 8px;\n  right: 8px;\n  display: block;\n  font-family: 'Glyphicons Halflings';\n  opacity: 0.5;\n}\ntable.dataTable thead .sorting:after {\n  opacity: 0.2;\n  content: \"\\e150\";\n  /* sort */\n}\ntable.dataTable thead .sorting_asc:after {\n  content: \"\\e155\";\n  /* sort-by-attributes */\n}\ntable.dataTable thead .sorting_desc:after {\n  content: \"\\e156\";\n  /* sort-by-attributes-alt */\n}\ntable.dataTable thead .sorting_asc_disabled:after,\ntable.dataTable thead .sorting_desc_disabled:after {\n  color: #eee;\n}\n\ndiv.dataTables_scrollHead table.dataTable {\n  margin-bottom: 0 !important;\n}\n\ndiv.dataTables_scrollBody > table {\n  border-top: none;\n  margin-top: 0 !important;\n  margin-bottom: 0 !important;\n}\ndiv.dataTables_scrollBody > table > thead .sorting:after,\ndiv.dataTables_scrollBody > table > thead .sorting_asc:after,\ndiv.dataTables_scrollBody > table > thead .sorting_desc:after {\n  display: none;\n}\ndiv.dataTables_scrollBody > table > tbody > tr:first-child > th,\ndiv.dataTables_scrollBody > table > tbody > tr:first-child > td {\n  border-top: none;\n}\n\ndiv.dataTables_scrollFoot > table {\n  margin-top: 0 !important;\n  border-top: none;\n}\n\n@media screen and (max-width: 767px) {\n  div.dataTables_wrapper div.dataTables_length,\n  div.dataTables_wrapper div.dataTables_filter,\n  div.dataTables_wrapper div.dataTables_info,\n  div.dataTables_wrapper div.dataTables_paginate {\n    text-align: center;\n  }\n}\ntable.dataTable.table-condensed > thead > tr > th {\n  padding-right: 20px;\n}\ntable.dataTable.table-condensed .sorting:after,\ntable.dataTable.table-condensed .sorting_asc:after,\ntable.dataTable.table-condensed .sorting_desc:after {\n  top: 6px;\n  right: 6px;\n}\n\ntable.table-bordered.dataTable th,\ntable.table-bordered.dataTable td {\n  border-left-width: 0;\n}\ntable.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child,\ntable.table-bordered.dataTable td:last-child,\ntable.table-bordered.dataTable td:last-child {\n  border-right-width: 0;\n}\ntable.table-bordered.dataTable tbody th,\ntable.table-bordered.dataTable tbody td {\n  border-bottom-width: 0;\n}\n\ndiv.dataTables_scrollHead table.table-bordered {\n  border-bottom-width: 0;\n}\n\ndiv.table-responsive > div.dataTables_wrapper > div.row {\n  margin: 0;\n}\ndiv.table-responsive > div.dataTables_wrapper > div.row > div[class^=\"col-\"]:first-child {\n  padding-left: 0;\n}\ndiv.table-responsive > div.dataTables_wrapper > div.row > div[class^=\"col-\"]:last-child {\n  padding-right: 0;\n}\n", ""]);
+
+/**
+ * Expose `Emitter`.
+ */
+
+if (true) {
+  module.exports = Emitter;
+}
+
+/**
+ * Initialize a new `Emitter`.
+ *
+ * @api public
+ */
+
+function Emitter(obj) {
+  if (obj) return mixin(obj);
+};
+
+/**
+ * Mixin the emitter properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
+ */
+
+function mixin(obj) {
+  for (var key in Emitter.prototype) {
+    obj[key] = Emitter.prototype[key];
+  }
+  return obj;
+}
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.on =
+Emitter.prototype.addEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
+    .push(fn);
+  return this;
+};
+
+/**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.once = function(event, fn){
+  function on() {
+    this.off(event, on);
+    fn.apply(this, arguments);
+  }
+
+  on.fn = fn;
+  this.on(event, on);
+  return this;
+};
+
+/**
+ * Remove the given callback for `event` or all
+ * registered callbacks.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.off =
+Emitter.prototype.removeListener =
+Emitter.prototype.removeAllListeners =
+Emitter.prototype.removeEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+
+  // all
+  if (0 == arguments.length) {
+    this._callbacks = {};
+    return this;
+  }
+
+  // specific event
+  var callbacks = this._callbacks['$' + event];
+  if (!callbacks) return this;
+
+  // remove all handlers
+  if (1 == arguments.length) {
+    delete this._callbacks['$' + event];
+    return this;
+  }
+
+  // remove specific handler
+  var cb;
+  for (var i = 0; i < callbacks.length; i++) {
+    cb = callbacks[i];
+    if (cb === fn || cb.fn === fn) {
+      callbacks.splice(i, 1);
+      break;
+    }
+  }
+  return this;
+};
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter}
+ */
+
+Emitter.prototype.emit = function(event){
+  this._callbacks = this._callbacks || {};
+  var args = [].slice.call(arguments, 1)
+    , callbacks = this._callbacks['$' + event];
+
+  if (callbacks) {
+    callbacks = callbacks.slice(0);
+    for (var i = 0, len = callbacks.length; i < len; ++i) {
+      callbacks[i].apply(this, args);
+    }
+  }
+
+  return this;
+};
+
+/**
+ * Return array of callbacks for `event`.
+ *
+ * @param {String} event
+ * @return {Array}
+ * @api public
+ */
+
+Emitter.prototype.listeners = function(event){
+  this._callbacks = this._callbacks || {};
+  return this._callbacks['$' + event] || [];
+};
+
+/**
+ * Check if this emitter has `event` handlers.
+ *
+ * @param {String} event
+ * @return {Boolean}
+ * @api public
+ */
+
+Emitter.prototype.hasListeners = function(event){
+  return !! this.listeners(event).length;
+};
+
 
 /***/ }),
 
 /***/ 170:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(171)();
+exports.push([module.i, "table.dataTable {\n  clear: both;\n  margin-top: 6px !important;\n  margin-bottom: 6px !important;\n  max-width: none !important;\n  border-collapse: separate !important;\n}\ntable.dataTable td,\ntable.dataTable th {\n  -webkit-box-sizing: content-box;\n  box-sizing: content-box;\n}\ntable.dataTable td.dataTables_empty,\ntable.dataTable th.dataTables_empty {\n  text-align: center;\n}\ntable.dataTable.nowrap th,\ntable.dataTable.nowrap td {\n  white-space: nowrap;\n}\n\ndiv.dataTables_wrapper div.dataTables_length label {\n  font-weight: normal;\n  text-align: left;\n  white-space: nowrap;\n}\ndiv.dataTables_wrapper div.dataTables_length select {\n  width: 75px;\n  display: inline-block;\n}\ndiv.dataTables_wrapper div.dataTables_filter {\n  text-align: right;\n}\ndiv.dataTables_wrapper div.dataTables_filter label {\n  font-weight: normal;\n  white-space: nowrap;\n  text-align: left;\n}\ndiv.dataTables_wrapper div.dataTables_filter input {\n  margin-left: 0.5em;\n  display: inline-block;\n  width: auto;\n}\ndiv.dataTables_wrapper div.dataTables_info {\n  padding-top: 8px;\n  white-space: nowrap;\n}\ndiv.dataTables_wrapper div.dataTables_paginate {\n  margin: 0;\n  white-space: nowrap;\n  text-align: right;\n}\ndiv.dataTables_wrapper div.dataTables_paginate ul.pagination {\n  margin: 2px 0;\n  white-space: nowrap;\n}\ndiv.dataTables_wrapper div.dataTables_processing {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 200px;\n  margin-left: -100px;\n  margin-top: -26px;\n  text-align: center;\n  padding: 1em 0;\n}\n\ntable.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting,\ntable.dataTable thead > tr > td.sorting_asc,\ntable.dataTable thead > tr > td.sorting_desc,\ntable.dataTable thead > tr > td.sorting {\n  padding-right: 30px;\n}\ntable.dataTable thead > tr > th:active,\ntable.dataTable thead > tr > td:active {\n  outline: none;\n}\ntable.dataTable thead .sorting,\ntable.dataTable thead .sorting_asc,\ntable.dataTable thead .sorting_desc,\ntable.dataTable thead .sorting_asc_disabled,\ntable.dataTable thead .sorting_desc_disabled {\n  cursor: pointer;\n  position: relative;\n}\ntable.dataTable thead .sorting:after,\ntable.dataTable thead .sorting_asc:after,\ntable.dataTable thead .sorting_desc:after,\ntable.dataTable thead .sorting_asc_disabled:after,\ntable.dataTable thead .sorting_desc_disabled:after {\n  position: absolute;\n  bottom: 8px;\n  right: 8px;\n  display: block;\n  font-family: 'Glyphicons Halflings';\n  opacity: 0.5;\n}\ntable.dataTable thead .sorting:after {\n  opacity: 0.2;\n  content: \"\\e150\";\n  /* sort */\n}\ntable.dataTable thead .sorting_asc:after {\n  content: \"\\e155\";\n  /* sort-by-attributes */\n}\ntable.dataTable thead .sorting_desc:after {\n  content: \"\\e156\";\n  /* sort-by-attributes-alt */\n}\ntable.dataTable thead .sorting_asc_disabled:after,\ntable.dataTable thead .sorting_desc_disabled:after {\n  color: #eee;\n}\n\ndiv.dataTables_scrollHead table.dataTable {\n  margin-bottom: 0 !important;\n}\n\ndiv.dataTables_scrollBody > table {\n  border-top: none;\n  margin-top: 0 !important;\n  margin-bottom: 0 !important;\n}\ndiv.dataTables_scrollBody > table > thead .sorting:after,\ndiv.dataTables_scrollBody > table > thead .sorting_asc:after,\ndiv.dataTables_scrollBody > table > thead .sorting_desc:after {\n  display: none;\n}\ndiv.dataTables_scrollBody > table > tbody > tr:first-child > th,\ndiv.dataTables_scrollBody > table > tbody > tr:first-child > td {\n  border-top: none;\n}\n\ndiv.dataTables_scrollFoot > table {\n  margin-top: 0 !important;\n  border-top: none;\n}\n\n@media screen and (max-width: 767px) {\n  div.dataTables_wrapper div.dataTables_length,\n  div.dataTables_wrapper div.dataTables_filter,\n  div.dataTables_wrapper div.dataTables_info,\n  div.dataTables_wrapper div.dataTables_paginate {\n    text-align: center;\n  }\n}\ntable.dataTable.table-condensed > thead > tr > th {\n  padding-right: 20px;\n}\ntable.dataTable.table-condensed .sorting:after,\ntable.dataTable.table-condensed .sorting_asc:after,\ntable.dataTable.table-condensed .sorting_desc:after {\n  top: 6px;\n  right: 6px;\n}\n\ntable.table-bordered.dataTable th,\ntable.table-bordered.dataTable td {\n  border-left-width: 0;\n}\ntable.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child,\ntable.table-bordered.dataTable td:last-child,\ntable.table-bordered.dataTable td:last-child {\n  border-right-width: 0;\n}\ntable.table-bordered.dataTable tbody th,\ntable.table-bordered.dataTable tbody td {\n  border-bottom-width: 0;\n}\n\ndiv.dataTables_scrollHead table.table-bordered {\n  border-bottom-width: 0;\n}\n\ndiv.table-responsive > div.dataTables_wrapper > div.row {\n  margin: 0;\n}\ndiv.table-responsive > div.dataTables_wrapper > div.row > div[class^=\"col-\"]:first-child {\n  padding-left: 0;\n}\ndiv.table-responsive > div.dataTables_wrapper > div.row > div[class^=\"col-\"]:last-child {\n  padding-right: 0;\n}\n", ""]);
+
+/***/ }),
+
+/***/ 171:
 /***/ (function(module, exports) {
 
 /*
@@ -1364,7 +1534,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 171:
+/***/ 172:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! version : 4.17.47
@@ -4010,7 +4180,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 173:
+/***/ 174:
 /***/ (function(module, exports) {
 
 
@@ -4040,7 +4210,7 @@ module.exports = function(arr, fn, initial){
 
 /***/ }),
 
-/***/ 174:
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -4234,11 +4404,11 @@ module.exports = function(arr, fn, initial){
 
 /***/ }),
 
-/***/ 175:
+/***/ 176:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Storage = __webpack_require__(178);
-var cookie = __webpack_require__(176);
+var Storage = __webpack_require__(179);
+var cookie = __webpack_require__(177);
 
 var _storage_support = true;
 
@@ -4281,7 +4451,7 @@ if(_storage_support) {
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, exports) {
 
 function createCookie(name, value, days) {
@@ -4323,7 +4493,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 177:
+/***/ 178:
 /***/ (function(module, exports) {
 
 module.exports = function(obj) {
@@ -4340,10 +4510,10 @@ module.exports = function(obj) {
 
 /***/ }),
 
-/***/ 178:
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
-var numKeys = __webpack_require__(177);
+var numKeys = __webpack_require__(178);
 
 function Storage(obj, set, clear) {
 	this._obj = obj || {};
@@ -4404,7 +4574,132 @@ module.exports = Storage;
 
 /***/ }),
 
-/***/ 179:
+/***/ 18:
+/***/ (function(module, exports, __webpack_require__) {
+
+var LruCache = __webpack_require__(161);
+var _ = __webpack_require__(3);
+
+var pendingRequestsCount = 0;
+var pendingRequests = {};
+var maxPendingRequests = 6;
+var sharedCache = new LruCache(10);
+
+function Transport(o) {
+  o = o || {};
+
+  this.cancelled = false;
+  this.lastReq = null;
+
+  this._send = o.transport;
+  this._get = o.limiter ? o.limiter(this._get) : this._get;
+
+  this._cache = o.cache === false ? new LruCache(0) : sharedCache;
+}
+
+Transport.setMaxPendingRequests = function setMaxPendingRequests(num) {
+  maxPendingRequests = num;
+};
+
+Transport.resetCache = function resetCache() {
+  sharedCache.reset();
+};
+
+_.mixin(Transport.prototype, {
+
+  _fingerprint: function(o) {
+    o = o || {};
+    return o.url + o.type + JSON.stringify(o.data || {}); 
+  },
+
+  _get: function(o, cb) {
+    var that = this, fingerprint, jqXhr;
+
+    fingerprint = this._fingerprint(o);
+
+    // #149: don't make a network request if there has been a cancellation
+    // or if the url doesn't match the last url Transport#get was invoked with
+    if (this.cancelled || fingerprint !== this.lastReq) { return; }
+
+    // a request is already in progress, piggyback off of it
+    if (jqXhr = pendingRequests[fingerprint]) {
+      // jqXhr.done(done).fail(fail);
+      jqXhr.then(done, fail);
+    }
+
+    // under the pending request threshold, so fire off a request
+    else if (pendingRequestsCount < maxPendingRequests) {
+      pendingRequestsCount++;
+      pendingRequests[fingerprint] =
+        // this._send(o).done(done).fail(fail).always(always);
+        this._send(o).then(function(resp) {
+          done(resp);
+          always();
+        }, function() {
+          fail();
+          always();
+        });
+    }
+
+    // at the pending request threshold, so hang out in the on deck circle
+    else {
+      this.onDeckRequestArgs = [].slice.call(arguments, 0);
+    }
+
+    function done(resp) {
+      cb(null, resp);
+      that._cache.set(fingerprint, resp);
+    }
+
+    function fail() {
+      cb(true);
+    }
+
+    function always() {
+      pendingRequestsCount--;
+      delete pendingRequests[fingerprint];
+
+      // ensures request is always made for the last query
+      if (that.onDeckRequestArgs) {
+        that._get.apply(that, that.onDeckRequestArgs);
+        that.onDeckRequestArgs = null;
+      }
+    }
+  },
+
+  get: function(o, cb) {
+    var resp, fingerprint;
+
+    cb = cb || _.noop;
+    o = _.isString(o) ? { url: o } : (o || {});
+
+    fingerprint = this._fingerprint(o);
+
+    this.cancelled = false;
+    this.lastReq = fingerprint;
+
+    // in-memory cache hit
+    if (resp = this._cache.get(fingerprint)) {
+      cb(null, resp);
+    }
+
+    // go to network
+    else {
+      this._get(o, cb);
+    }
+  },
+
+  cancel: function() {
+    this.cancelled = true;
+  }
+});
+
+module.exports = Transport;
+
+
+/***/ }),
+
+/***/ 180:
 /***/ (function(module, exports) {
 
 /*
@@ -4657,141 +4952,16 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 18:
-/***/ (function(module, exports, __webpack_require__) {
-
-var LruCache = __webpack_require__(161);
-var _ = __webpack_require__(3);
-
-var pendingRequestsCount = 0;
-var pendingRequests = {};
-var maxPendingRequests = 6;
-var sharedCache = new LruCache(10);
-
-function Transport(o) {
-  o = o || {};
-
-  this.cancelled = false;
-  this.lastReq = null;
-
-  this._send = o.transport;
-  this._get = o.limiter ? o.limiter(this._get) : this._get;
-
-  this._cache = o.cache === false ? new LruCache(0) : sharedCache;
-}
-
-Transport.setMaxPendingRequests = function setMaxPendingRequests(num) {
-  maxPendingRequests = num;
-};
-
-Transport.resetCache = function resetCache() {
-  sharedCache.reset();
-};
-
-_.mixin(Transport.prototype, {
-
-  _fingerprint: function(o) {
-    o = o || {};
-    return o.url + o.type + JSON.stringify(o.data || {}); 
-  },
-
-  _get: function(o, cb) {
-    var that = this, fingerprint, jqXhr;
-
-    fingerprint = this._fingerprint(o);
-
-    // #149: don't make a network request if there has been a cancellation
-    // or if the url doesn't match the last url Transport#get was invoked with
-    if (this.cancelled || fingerprint !== this.lastReq) { return; }
-
-    // a request is already in progress, piggyback off of it
-    if (jqXhr = pendingRequests[fingerprint]) {
-      // jqXhr.done(done).fail(fail);
-      jqXhr.then(done, fail);
-    }
-
-    // under the pending request threshold, so fire off a request
-    else if (pendingRequestsCount < maxPendingRequests) {
-      pendingRequestsCount++;
-      pendingRequests[fingerprint] =
-        // this._send(o).done(done).fail(fail).always(always);
-        this._send(o).then(function(resp) {
-          done(resp);
-          always();
-        }, function() {
-          fail();
-          always();
-        });
-    }
-
-    // at the pending request threshold, so hang out in the on deck circle
-    else {
-      this.onDeckRequestArgs = [].slice.call(arguments, 0);
-    }
-
-    function done(resp) {
-      cb(null, resp);
-      that._cache.set(fingerprint, resp);
-    }
-
-    function fail() {
-      cb(true);
-    }
-
-    function always() {
-      pendingRequestsCount--;
-      delete pendingRequests[fingerprint];
-
-      // ensures request is always made for the last query
-      if (that.onDeckRequestArgs) {
-        that._get.apply(that, that.onDeckRequestArgs);
-        that.onDeckRequestArgs = null;
-      }
-    }
-  },
-
-  get: function(o, cb) {
-    var resp, fingerprint;
-
-    cb = cb || _.noop;
-    o = _.isString(o) ? { url: o } : (o || {});
-
-    fingerprint = this._fingerprint(o);
-
-    this.cancelled = false;
-    this.lastReq = fingerprint;
-
-    // in-memory cache hit
-    if (resp = this._cache.get(fingerprint)) {
-      cb(null, resp);
-    }
-
-    // go to network
-    else {
-      this._get(o, cb);
-    }
-  },
-
-  cancel: function() {
-    this.cancelled = true;
-  }
-});
-
-module.exports = Transport;
-
-
-/***/ }),
-
-/***/ 180:
+/***/ 181:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(169);
+var content = __webpack_require__(170);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(179)(content, {});
+var update = __webpack_require__(180)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -4809,16 +4979,16 @@ if(false) {
 
 /***/ }),
 
-/***/ 181:
+/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * Module dependencies.
  */
 
-var Emitter = __webpack_require__(184);
-var reduce = __webpack_require__(173);
-var requestBase = __webpack_require__(182);
+var Emitter = __webpack_require__(169);
+var reduce = __webpack_require__(174);
+var requestBase = __webpack_require__(183);
 var isObject = __webpack_require__(136);
 
 /**
@@ -4868,7 +5038,7 @@ function isHost(obj) {
  * Expose `request`.
  */
 
-var request = module.exports = __webpack_require__(183).bind(null, Request);
+var request = module.exports = __webpack_require__(184).bind(null, Request);
 
 /**
  * Determine XHR.
@@ -5893,7 +6063,7 @@ request.put = function(url, data, fn){
 
 /***/ }),
 
-/***/ 182:
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -6066,7 +6236,7 @@ exports.field = function(name, val) {
 
 /***/ }),
 
-/***/ 183:
+/***/ 184:
 /***/ (function(module, exports) {
 
 // The node and browser modules expose versions of this with the
@@ -6101,176 +6271,6 @@ function request(RequestConstructor, method, url) {
 }
 
 module.exports = request;
-
-
-/***/ }),
-
-/***/ 184:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/**
- * Expose `Emitter`.
- */
-
-if (true) {
-  module.exports = Emitter;
-}
-
-/**
- * Initialize a new `Emitter`.
- *
- * @api public
- */
-
-function Emitter(obj) {
-  if (obj) return mixin(obj);
-};
-
-/**
- * Mixin the emitter properties.
- *
- * @param {Object} obj
- * @return {Object}
- * @api private
- */
-
-function mixin(obj) {
-  for (var key in Emitter.prototype) {
-    obj[key] = Emitter.prototype[key];
-  }
-  return obj;
-}
-
-/**
- * Listen on the given `event` with `fn`.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.on =
-Emitter.prototype.addEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
-    .push(fn);
-  return this;
-};
-
-/**
- * Adds an `event` listener that will be invoked a single
- * time then automatically removed.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.once = function(event, fn){
-  function on() {
-    this.off(event, on);
-    fn.apply(this, arguments);
-  }
-
-  on.fn = fn;
-  this.on(event, on);
-  return this;
-};
-
-/**
- * Remove the given callback for `event` or all
- * registered callbacks.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.off =
-Emitter.prototype.removeListener =
-Emitter.prototype.removeAllListeners =
-Emitter.prototype.removeEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-
-  // all
-  if (0 == arguments.length) {
-    this._callbacks = {};
-    return this;
-  }
-
-  // specific event
-  var callbacks = this._callbacks['$' + event];
-  if (!callbacks) return this;
-
-  // remove all handlers
-  if (1 == arguments.length) {
-    delete this._callbacks['$' + event];
-    return this;
-  }
-
-  // remove specific handler
-  var cb;
-  for (var i = 0; i < callbacks.length; i++) {
-    cb = callbacks[i];
-    if (cb === fn || cb.fn === fn) {
-      callbacks.splice(i, 1);
-      break;
-    }
-  }
-  return this;
-};
-
-/**
- * Emit `event` with the given args.
- *
- * @param {String} event
- * @param {Mixed} ...
- * @return {Emitter}
- */
-
-Emitter.prototype.emit = function(event){
-  this._callbacks = this._callbacks || {};
-  var args = [].slice.call(arguments, 1)
-    , callbacks = this._callbacks['$' + event];
-
-  if (callbacks) {
-    callbacks = callbacks.slice(0);
-    for (var i = 0, len = callbacks.length; i < len; ++i) {
-      callbacks[i].apply(this, args);
-    }
-  }
-
-  return this;
-};
-
-/**
- * Return array of callbacks for `event`.
- *
- * @param {String} event
- * @return {Array}
- * @api public
- */
-
-Emitter.prototype.listeners = function(event){
-  this._callbacks = this._callbacks || {};
-  return this._callbacks['$' + event] || [];
-};
-
-/**
- * Check if this emitter has `event` handlers.
- *
- * @param {String} event
- * @return {Boolean}
- * @api public
- */
-
-Emitter.prototype.hasListeners = function(event){
-  return !! this.listeners(event).length;
-};
 
 
 /***/ }),
@@ -6328,7 +6328,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(174);
+__webpack_require__(175);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
