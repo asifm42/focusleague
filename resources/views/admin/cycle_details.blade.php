@@ -17,14 +17,22 @@
                     <div class="panel-heading">Cycle Details</div>
                     <div class="panel-body">
                         <dl class="horizontal">
-                            <dt>Name:</dt>
+                            <dt>Name</dt>
                             <dd>{{ $cycle->name }}</dd>
                             <dt>Format</dt>
-                            <dd>{{ $cycle->format }}</dd>
+                            <dd>{!! $cycle->format !!}</dd>
                             <dt>Starts At</dt>
-                            <dd>{{ $cycle->starts_at }}</dd>
+                            <dd>{{ $cycle->starts_at->toDayDateTimeString() }}</dd>
                             <dt>Ends At</dt>
-                            <dd>{{ $cycle->ends_at }}</dd>
+                            <dd>{{ $cycle->ends_at->toDayDateTimeString() }}</dd>
+                            <dt>Weeks</dt>
+                            <dd>
+                            <ul class='list-unstyled'>
+                                @foreach($cycle->weeks as $week)
+                                    <li>Week {{ ($week->index()) . ' - ' . $week->starts_at->toFormattedDateString() }}</li>
+                                @endforeach
+                            </ul>
+                        </dd>
                         </dl>
                     </div>
                 </div>

@@ -130,7 +130,7 @@
     </div>
 </div>
 
-@section('scripts')
+@push('scripts')
     <script>
         var cycles = {!! $cycles !!},
             weeks = {!! $weeks !!};
@@ -277,11 +277,9 @@
 
                 });
             });
-
-
-
             @if(isset($currentCycle))
                 $('.js-cycle').val({!! $currentCycle->id !!});
+                $('.js-cycle').trigger('change');
             @elseif(isset($transaction))
                 @if(isset($transaction->cycle) && !is_null($transaction->cycle))
                     $('.js-cycle').val({!! $transaction->cycle->id !!});
@@ -294,8 +292,6 @@
             @else
                 $('.js-cycle').trigger('change');
             @endif
-
-
         })
     </script>
-@stop
+@endpush

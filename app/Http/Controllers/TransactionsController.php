@@ -56,6 +56,7 @@ class TransactionsController extends Controller
             $data['balance'] = $user->getBalance();
         }
         $users = User::all();
+        $users->load('transactions');
         $names = [];
         foreach($users as $user){
             $names[] = [
@@ -87,9 +88,9 @@ class TransactionsController extends Controller
 
         $transaction = $this->transactionFactory->make($data);
 
-        flash()->success('Transaction posted');
+        flash()->success('Transaction posted for <a href="' . route('users.balance', $transaction->user->id) . '">' . $transaction->user->name . '</a>.');
 
-        return redirect()->route('users.balance', $transaction->user_id);
+        return redirect()->route('transactions.create');
     }
 
     /**

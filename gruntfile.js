@@ -44,11 +44,11 @@ module.exports = function (grunt) {
             sitejs: {
                 files: {
                     'public/assets/js/site.js': [
-                        'bower_components/jquery/dist/jquery.js',
-                        'bower_components/moment/moment.js',
-                        'bower_components/bootswatch-dist/js/bootstrap.js',
-                        'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
-                        'bower_components/typeahead.js/dist/typeahead.bundle.js',
+                        // 'bower_components/jquery/dist/jquery.js',
+                        // 'bower_components/moment/moment.js',
+                        // 'bower_components/bootswatch-dist/js/bootstrap.js',
+                        // 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+                        // 'bower_components/typeahead.js/dist/typeahead.bundle.js',
                         // 'bower_components/jquery-popupwindow/jquery.popupwindow.js',
                         'bower_components/underscore/underscore.js',
                         'bower_components/underscore.string/dist/underscore.string.js',
@@ -58,10 +58,10 @@ module.exports = function (grunt) {
             sitecss: {
                 files: {
                     'public/assets/css/site.css': [
-                        'bower_components/bootswatch-dist/css/bootstrap.css',
-                        'bower_components/fontawesome/css/font-awesome.css',
-                        'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
-                        'public/assets/css/default.css'
+                        // 'bower_components/bootswatch-dist/css/bootstrap.css',
+                        // 'bower_components/fontawesome/css/font-awesome.css',
+                        // 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
+                        // 'public/assets/css/default.css'
                     ]
                 }
             }
@@ -92,8 +92,8 @@ module.exports = function (grunt) {
                 }
             },
             site: {
-                src: 'public/assets/js/site.js',
-                dest: 'public/assets/js/site.min.js'
+                // src: 'public/assets/js/site.js',
+                // dest: 'public/assets/js/site.min.js'
             },
             teamBuilder: {
                 src: 'public/assets/js/teamBuilder.js',

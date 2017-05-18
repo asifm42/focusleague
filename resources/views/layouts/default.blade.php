@@ -19,15 +19,6 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="/css/app.css">
-@if (App::environment('production'))
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.min.css') }}">
-@elseif (App::environment('local'))
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/default.css') }}">
-   {{--<link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap-datetimepicker.css') }}" --}}
-@else
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/site.css') }}">
-@endif
 
 
 @yield('styles')
@@ -42,12 +33,6 @@
 @yield('content')
 
 @include('layouts.footer')
-
-@if (App::environment('production'))
-    <script type='text/javascript' src="{{ url('assets/js/site.min.js') }}"></script>
-@else
-    <script type='text/javascript' src="{{ url('assets/js/site.js') }}"></script>
-@endif
 
 <script src="/js/manifest.js"></script>
 <script src="/js/vendor.js"></script>

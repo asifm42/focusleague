@@ -79,7 +79,7 @@
                             </dl>
                             <dl>
                                 <dt>Format</dt>
-                                <dd>{{ $cycle->format }}</dd>
+                                <dd>{!! $cycle->format !!}</dd>
                             </dl>
                             <dl>
                                 <dt>Current Status</dt>
@@ -260,7 +260,7 @@
     </div>
 @stop
 
-@section('scripts')
+@push('scripts')
     <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.js'></script>
     <script>
         $('document').ready(function() {
@@ -291,4 +291,4 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
-@stop
+@endpush

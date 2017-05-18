@@ -101,7 +101,7 @@
 @stop
 
 
-@section('scripts')
+@push('scripts')
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
     <!-- <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script> -->
@@ -128,4 +128,4 @@
         });
       });
     </script>
-  @stop
+@endpush

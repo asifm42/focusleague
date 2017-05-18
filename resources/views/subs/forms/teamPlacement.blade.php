@@ -60,7 +60,7 @@
     </div>
 </div>
 
-@section('scripts')
+@push('scripts')
     <script>
         $(document).ready( function () {
             // For popovers on the navbar
@@ -68,4 +68,4 @@
 
         })
     </script>
-@stop
+@endpush

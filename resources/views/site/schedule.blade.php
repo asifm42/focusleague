@@ -10,46 +10,6 @@
             </li>
 <div class="schedule-list">
             <li class="list-group-item list-group-item-info">
-                <time datetime="2017-03-29" class="icon">
-                  <em>Wednesday</em>
-                  <strong>March</strong>
-                  <span>29</span>
-                </time>
-                <div class="event">Cycle&nbsp;2017-02 Registration&nbsp;Opens</div>
-            </li>
-            <li class="list-group-item">
-                <time datetime="2017-04-04" class="icon">
-                  <em>Tuesday</em>
-                  <strong>April</strong>
-                  <span>4</span>
-                </time>
-                <div class="event">Cycle 2017-02 Wk1 of 4</div>
-            </li>
-            <li class="list-group-item">
-                <time datetime="2017-04-11" class="icon">
-                  <em>Tuesday</em>
-                  <strong>April</strong>
-                  <span>11</span>
-                </time>
-                <div class="event">Cycle 2017-02 Wk2 of 4</div>
-            </li>
-            <li class="list-group-item">
-                <time datetime="2017-04-18" class="icon">
-                  <em>Tuesday</em>
-                  <strong>April</strong>
-                  <span>18</span>
-                </time>
-                <div class="event">Cycle 2017-02 Wk3 of 4</div>
-            </li>
-            <li class="list-group-item">
-                <time datetime="2017-04-25" class="icon">
-                  <em>Tuesday</em>
-                  <strong>April</strong>
-                  <span>25</span>
-                </time>
-                <div class="event">Cycle 2017-02 Wk4 of 4</div>
-            </li>
-            <li class="list-group-item list-group-item-info">
                 <time datetime="2017-04-26" class="icon">
                   <em>Wednesday</em>
                   <strong>April</strong>
