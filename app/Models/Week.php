@@ -14,7 +14,21 @@ class Week extends Model
      *
      * @var array
      */
-    protected $dates = ['starts_at', 'ends_at', 'created_at', 'updated_at', 'deleted_at'];
+    // protected $dates = ['starts_at', 'ends_at', 'created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'rained_out' => 'boolean',
+        'starts_at' => 'datetime',
+        'ends_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -78,7 +92,25 @@ class Week extends Model
      */
     public function signups()
     {
-        return $this->belongsToMany('App\Models\User', 'availability')->withPivot('id', 'attending')->withTimestamps();
+        return $this->belongsToMany('App\Models\User', 'availability')->withPivot('id', 'attending')->whereNull('availability.deleted_at')->withTimestamps();
+    }
+
+    /**
+     * Get the players (users) who are assigned to a team and are attending.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function players()
+    {
+        $week = $this;
+        // signups who are assigned to a team
+        return $this->signups
+            ->filter(function($signup) use ($week) {
+                return $signup->isAvailable($week->id);
+            })
+            ->filter(function($signup) use ($week) {
+                return $week->cycle->signupsOnATeam()->contains($signup->id);
+            });
     }
 
     /**
@@ -90,6 +122,20 @@ class Week extends Model
     {
         return $this->belongsToMany('App\Models\User', 'subs')
                     ->withPivot('id', 'note', 'team_id')
+                    ->whereNull('subs.deleted_at') // for soft deletes
+                    ->withTimestamps();
+    }
+
+    /**
+     * Get the users who have signed up as a sub for the week.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function subsOnATeam()
+    {
+        return $this->belongsToMany('App\Models\User', 'subs')
+                    ->withPivot('id', 'note', 'team_id')
+                    ->whereNotNull('team_id')
                     ->whereNull('subs.deleted_at') // for soft deletes
                     ->withTimestamps();
     }
@@ -106,7 +152,23 @@ class Week extends Model
         return ! is_null($this->status);
     }
 
-    public function status() {
-        return $this->status;
+    // public function status() {
+    //     return $this->status;
+    // }
+
+    public function updateStatus($status) {
+        $this->status = $status;
+        $this->save();
+        return $this;
+    }
+
+    public function markAsRainedOut() {
+        $this->rained_out = true;
+        $this->save();
+        return $this;
+    }
+
+    public function transactions() {
+        return $this->hasMany('App\Models\Transaction');
     }
 }

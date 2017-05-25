@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Week;
 use App\Traits\CanResetPassword;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -437,5 +438,28 @@ class User extends Authenticatable
     public function age()
     {
         return $this->birthday->diffInYears(Carbon::now());
+    }
+
+    public function applyRainoutCredit(Week $week)
+    {
+        // Do not apply a credit if the user already has one
+        if ($this->credits->where('week_id', $week->id)->count() >= 1) {
+            return;
+        }
+
+        return Transaction::rainoutCredit($this, $week);
+    }
+
+    public function isCaptain(Cycle $cycle = null)
+    {
+        if (is_null($cycle)) {
+            $cycle = Cycle::currentCycle();
+        }
+
+        if (is_null($cycle)) {
+            return false;
+        }
+
+        return $cycle->captains()->contains($this);
     }
 }

@@ -77,7 +77,11 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-
+$factory->state(App\Models\User::class, 'admin', function ($faker) {
+    return [
+        'admin' => true
+    ];
+});
 
 $factory->state(App\Models\User::class, 'male', function ($faker) {
     $divPref = rand(1,4);

@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\Week;
+use Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Carbon;
 
 class Transaction extends Model
 {
@@ -102,5 +104,38 @@ class Transaction extends Model
             $this->attributes['date'] = date("Y-m-d", strtotime($value));
         }
 
+    }
+
+    public static function rainoutCredit(User $user, Week $week)
+    {
+        $data = [
+            'cycle_id'      => $week->cycle->id,
+            'week_id'       => $week->id,
+            'type'          => 'credit',
+            'created_by'    => auth()->id() || 1,
+            'date'          => $week->starts_at->format('Y-m-d'),
+            'description'   => 'Rainout credit',
+            'amount'        => config('focus.cost.rainout_credit')
+        ];
+
+        // create the transaction
+        $transaction = new Self($data);
+
+        // if user is a captain, then factor in the 25% discount they received.
+        if ($user->isCaptain($week->cycle)) {
+            $transaction->amount = round ( ($transaction->amount * 0.75), 2, PHP_ROUND_HALF_DOWN );
+            $transaction->description = 'Rainout captain credit';
+        }
+
+        // if user is a sub then up the credit to 10 and update the description
+        if ($week->subsOnATeam->contains($user)) {
+            $transaction->amount = config('focus.cost.cycle.sub');
+            $transaction->description = 'Rainout sub credit';
+        }
+
+        // save the signup's transaction
+        $user->transactions()->save($transaction);
+
+        return $transaction->fresh();
     }
 }

@@ -152,6 +152,12 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group(['middleware' => ['auth','admin']], function() {
 
+    Route::post(    'weeks/{id}/rainout',           ['as' => 'weeks.rainout', 'uses' => 'WeekController@rainout']);
+    Route::get('weeks/{id}', 'WeekController@show')->name('weeks.show');
+
+    Route::get('games/{id}', 'GameController@edit')->name('games.edit');
+    Route::post('games/{id}', 'GameController@update')->name('games.update');
+
     /*
         Log routes
      */

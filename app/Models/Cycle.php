@@ -224,4 +224,9 @@ class Cycle extends Model
     {
         return SELF::where('name', $name)->first();
     }
+
+    public function captains()
+    {
+        return $this->signups()->wherePivot('captain', '!=', false)->get();
+    }
 }

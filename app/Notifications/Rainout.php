@@ -43,10 +43,22 @@ class Rainout extends Notification
      */
     public function toMail($notifiable)
     {
+        $msg = 'Cycle ' . $this->week->cycle->name . ' Wk ' . $this->week->index() . ' has been canceled due to weather.';
+
+        if ($notifiable->isCaptain($this->week->cycle)) {
+            $msg += ' A $3.75 rainout credit will be added to your account.';
+        } else if ($this->week->players()->contains($notifiable)) {
+            $msg += ' A $' . config('focus.cost.rainout_credit') . ' rainout credit will be added to your account.';
+        } else if ($this->week->subsOnATeam->contains($notifiable)){
+            $msg += ' A $' . config('focus.cost.sub') . ' rainout credit will be added to your account.';
+        } else {
+            $msg = ' A rainout credit may be added to your account.';
+        }
+
         return (new MailMessage)
                 ->subject('Game OFF - Rainout')
                 ->greeting('Game OFF')
-                    ->line('Cycle ' . $this->week->cycle->name . ' Wk ' . $this->week->index() . ' has been rained out. A rainout credit will be added to your account.')
+                    ->line($msg)
                     ->line('We hope to see you next week.');
     }
 

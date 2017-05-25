@@ -269,4 +269,47 @@ class CycleTest extends TestCase
         $this->assertEquals($cycle02->id, Cycle::findByName('2017-10')->id);
         $this->assertNull(Cycle::findByName('2017-06'));
     }
+
+    /** @test */
+    function get_a_list_of_all_captains()
+    {
+        // get a list of all captains
+        $cycle = factory(Cycle::class)->create();
+
+        $team = $cycle->teams()->save(factory(Team::class)->make());
+        $users = factory(User::class, 4)->create();
+        // create 4 users, 2 are a captain, 2 are not
+        $cycle->signups()->attach($users->get(0)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id,
+        ]);
+        $cycle->signups()->attach($users->get(1)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id
+        ]);
+        $cycle->signups()->attach($users->get(2)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id,
+            'captain'           => true,
+        ]);
+        $cycle->signups()->attach($users->get(3)->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id'           => $team->id,
+            'captain'           => true,
+        ]);
+
+        $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(0)));
+        $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(1)));
+        $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(2)));
+        $this->assertTrue($cycle->signupsOnATeam()->contains($users->get(3)));
+        $this->assertEquals(2, $cycle->captains()->count());
+    }
 }
