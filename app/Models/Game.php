@@ -52,4 +52,10 @@ class Game extends Model
         return $this->belongsToMany('App\Models\Team')
         ->withPivot('id','points_scored');
     }
+
+    public function score($teamId, $points)
+    {
+        $this->teams()->updateExistingPivot($teamId, ['points_scored' => $points]);
+        return $this;
+    }
 }
