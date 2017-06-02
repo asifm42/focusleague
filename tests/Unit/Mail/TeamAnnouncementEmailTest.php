@@ -29,6 +29,14 @@ class TeamAnnouncementEmailTest extends TestCase
         $user = factory(User::class)->create();
         $team = $cycle->teams()->save(factory(Team::class)->make());
 
+        // add signup for user with team assignement
+        $cycle->signups()->attach($user->id, [
+            'div_pref_first'    => 'mens',
+            'div_pref_second'   => 'mens',
+            'will_captain'      => false,
+            'team_id' => $team->id,
+        ]);
+
         $mailer->sendTeamAnnouncementEmail($user, $cycle, $team);
 
         Mail::assertSent(TeamAnnouncementEmail::class, function ($mail) use ($user) {
