@@ -105,11 +105,13 @@
   <script>
     $(document).ready(function(){
 
+      $.fn.dataTable.moment( 'MM-DD-YYYY' );
       $('.focus-transactions-table').DataTable({
         "dom": '<"toolbar">frtip',
         "language": {
           "info": "Showing _START_ to _END_ of _TOTAL_ transactions."
         },
+
         "paging":    false,
         "searching": true
       });
