@@ -77,7 +77,7 @@ class Transaction extends Model
     }
 
     /**
-     * Get the user's birthday.
+     * Get the transaction date.
      *
      * @param  string  $value
      * @return string
@@ -89,7 +89,7 @@ class Transaction extends Model
     }
 
     /**
-     * Set the user's birthday.
+     * Set the transaction date.
      *
      * @param  string  $value
      * @return string
@@ -101,6 +101,5 @@ class Transaction extends Model
         } else {
             $this->attributes['date'] = date("Y-m-d", strtotime($value));
         }
-
     }
 }

@@ -41,10 +41,10 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Cycle</th>
-                                <th>Week</th>
+                                {{-- <th>Week</th> --}}
                                 <th>Description</th>
                                 <th>Type</th>
-                                <th>Method</th>
+                                {{-- <th>Method</th> --}}
                                 <th class="text-right">Amount</th>
                                 @if (auth()->user()->isAdmin())
                                     <th>Admin</th>
@@ -55,11 +55,9 @@
                             @foreach ($transactions as $transaction)
                                 <tr>
                                     <td>{{ $transaction->date }}</td>
-                                    <td>{{ $transaction->cycle ? $transaction->cycle->name : 'N/A'}}</td>
-                                    <td>{{ $transaction->week ? $transaction->week->starts_at->toFormattedDateString() : 'N/A'}}</td>
+                                    <td>{{ $transaction->cycle ? $transaction->cycle->name : 'N/A'}} {{ $transaction->week ? ' - Wk' . $transaction->week->index() : ''}}</td>
                                     <td>{{ $transaction->description }}</td>
-                                    <td>{{ ucwords($transaction->type) }}</td>
-                                    <td>{{ $transaction->payment_type ? ucwords($transaction->payment_type) : 'N/A' }}</td>
+                                    <td>{{ ucwords($transaction->type) }} {{ $transaction->payment_type ? ' - ' . ucwords($transaction->payment_type) : '' }}</td>
                                     @if ($transaction->type === 'payment' || $transaction->type === 'credit')
                                         <td class="text-right">-${{ number_format($transaction->amount, 2, '.', '') }}</td>
                                     @else
@@ -105,11 +103,13 @@
   <script>
     $(document).ready(function(){
 
+      $.fn.dataTable.moment( 'MM-DD-YYYY' );
       $('.focus-transactions-table').DataTable({
         "dom": '<"toolbar">frtip',
         "language": {
           "info": "Showing _START_ to _END_ of _TOTAL_ transactions."
         },
+
         "paging":    false,
         "searching": true
       });

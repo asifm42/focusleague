@@ -21,6 +21,7 @@
     "cross-env": "^3.2.3",
     "datatables.net": "^1.10.13",
     "datatables.net-bs": "^1.10.13",
+    "drmonty-datatables-plugins": "^1.10.12",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "font-awesome": "^4.7.0",
     "grunt": "^0.4.5",

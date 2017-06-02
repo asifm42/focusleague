@@ -41,6 +41,7 @@ if (token) {
 // https://datatables.net/
 window.datatables = require('datatables.net');
 window.datatables_bs = require('datatables.net-bs');
+require("drmonty-datatables-plugins/sorting/datetime-moment");
 require("datatables.net-bs/css/dataTables.bootstrap.css");
 
 // https://momentjs.com/
