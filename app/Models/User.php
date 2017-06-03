@@ -356,7 +356,7 @@ class User extends Authenticatable
     public function getBalanceString()
     {
         $balance = $this->getBalance();
-        // $balanceStr = '$' . number_format(abs($balance), 2, '.', ',');
+
         $balanceStr = '$' . number_format(abs($balance) / 100, 2);
 
         if ( $balance < 0 ) {

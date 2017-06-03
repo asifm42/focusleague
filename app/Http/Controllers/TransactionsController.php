@@ -38,7 +38,8 @@ class TransactionsController extends Controller
 
         $data['user'] = $user;
         $data['transactions'] = $user->transactions;
-        $data['balance'] = $user->getBalanceInDollars();
+        $data['balance'] = $user->getBalance();
+        $data['balanceString'] = $user->getBalanceString();
 
         return view('transactions.index', $data);
     }
