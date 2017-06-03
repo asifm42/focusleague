@@ -24,11 +24,11 @@
             <div class="col-xs-12 col-md-12">
                 <h5>
                     @if ($balance < 0 )
-                        Credit: <span class="text-primary">${{ $balance }}</span>
+                        Credit: <span class="text-primary">{{ $balanceString }}</span>
                     @elseif ($balance == 0 )
-                        Balance: <span>${{ $balance }}</span>
+                        Balance: <span>{{ $balanceString }}</span>
                     @else
-                        Amount owed: <span class="text-danger">${{ $balance }}</span>
+                        Amount owed: <span class="text-danger">{{ $balanceString }}</span>
                     @endif
                 </h5>
             </div>
@@ -41,10 +41,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Cycle/Week</th>
-                                {{-- <th>Week</th> --}}
                                 <th>Description</th>
-                                {{-- <th>Type</th> --}}
-                                {{-- <th>Method</th> --}}
                                 <th class="text-right">Amount</th>
                                 @if (auth()->user()->isAdmin())
                                     <th>Admin</th>
@@ -93,11 +90,11 @@
             <div class="col-xs-12 col-md-12">
                 <h5 class="pull-right">
                     @if ($balance < 0 )
-                        Credit: <span class="text-primary">${{ $balance }}</span>
+                        Credit: <span class="text-primary">{{ $balanceString }}</span>
                     @elseif ($balance == 0 )
-                        Balance: <span>${{ $balance }}</span>
+                        Balance: <span>{{ $balanceString }}</span>
                     @else
-                        Amount owed: <span class="text-danger">${{ $balance }}</span>
+                        Amount owed: <span class="text-danger">{{ $balanceString }}</span>
                     @endif
                 </h5>
             </div>
