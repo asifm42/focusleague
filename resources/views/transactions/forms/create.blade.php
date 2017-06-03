@@ -189,6 +189,7 @@
             @if (isset($balance) && $balance > 0)
                 $('input[name = amount]').val({!! $balance !!});
                 $('input[name = amount]').focus();
+                $('input[name = transaction_type]').focus();
             @endif
 
             $('.js-transaction-type').change(function(evt) {
