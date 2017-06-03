@@ -24,7 +24,7 @@
                         @if ($balance > 0)
                             <h6>You currently owe ${{ $balance }}.</h6>
                             <h6>You can pay via the following methods:</h6>
-                            @component('site.payment_methods', ['balance' => $user->getBalance()])
+                            @component('site.payment_methods', ['balance' => $user->getBalanceInDollars()])
                             @endcomponent
                         @elseif ($balance == 0)
                             <h6>Your balance is $0.00.</h6>

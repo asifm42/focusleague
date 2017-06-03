@@ -26,7 +26,7 @@
 </ul>
 @endif
 
-<p>Your cycle fee is ${{ $signup->cost() }}. We'll charge your account when we place you on a team.</p>
+<p>Your cycle fee is ${{ $signup->costInDollars() }}. We'll charge your account when we place you on a team.</p>
 
 <p>If you need to change any of that, you can <a href="{{ route('cycle.signup.edit', $cycle->id) }}">edit your sign-up info here</a>.</p>
 

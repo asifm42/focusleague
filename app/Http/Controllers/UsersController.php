@@ -98,7 +98,7 @@ class UsersController extends Controller
         $data['next_cycle'] = Cycle::nextCycle();
         $data['current_cycle_sub_weeks'] = [];
         $data['next_cycle_sub_weeks'] = [];
-        $data['balance'] = number_format($user->getBalance(), 2, '.', ',');
+        $data['balance'] = $user->getBalanceInDollars();
         if ($data['current_cycle']) {
             $data['current_cycle_signup'] = $user->current_cycle_signup();
 
@@ -141,7 +141,7 @@ class UsersController extends Controller
         $data['next_cycle'] = Cycle::nextCycle();
         $data['current_cycle_sub_weeks'] = [];
         $data['next_cycle_sub_weeks'] = [];
-        $data['balance'] = $user->getBalance();
+        $data['balance'] = $user->getBalanceInDollars();
         if ($data['current_cycle']) {
             $data['current_cycle_signup'] = $user->current_cycle_signup();
 

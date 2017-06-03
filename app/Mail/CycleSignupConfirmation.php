@@ -30,7 +30,6 @@ class CycleSignupConfirmation extends Mailable implements ShouldQueue
         $this->user = $signup->user;
         $this->cycle = $signup->cycle;
         $this->signup = $signup;
-        $this->cost = config('focus.cost');
         $this->attendingDates = [];
         $this->missingDates = [];
         $this->weeks = $this->user->availability()->where('cycle_id',$this->cycle->id)->get();

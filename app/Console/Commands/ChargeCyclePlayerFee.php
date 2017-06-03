@@ -70,14 +70,14 @@ class ChargeCyclePlayerFee extends Command
             }
 
             if ($count === 4){
-                $data['description'] = 'Cycle ' . $cycle->name . ' - 4 week player fee';
-                $data['amount'] = config('focus_cost.cycle.four_weeks');
+                $data['description'] = '4 week player fee';
+                $data['amount'] = config('focus.cost.cycle.four_weeks');
             } elseif ($count === 3){
-                $data['description'] = 'Cycle ' . $cycle->name . ' - 3 week player fee';
-                $data['amount'] = config('focus_cost.cycle.three_weeks');
+                $data['description'] = '3 week player fee';
+                $data['amount'] = config('focus.cost.cycle.three_weeks');
             } elseif ($count === 2) {
-                $data['description'] = 'Cycle ' . $cycle->name . ' - 2 week player fee';
-                $data['amount'] = config('focus_cost.cycle.two_weeks');
+                $data['description'] = '2 week player fee';
+                $data['amount'] = config('focus.cost.cycle.two_weeks');
             }
 
             $transaction = new Transaction($data);
@@ -96,7 +96,7 @@ class ChargeCyclePlayerFee extends Command
                     'type' => 'credit',
                     'created_by' => 1,
                     'date' => $cycle->starts_at->format('Y-m-d'),
-                    'description' => 'Cycle ' . $cycle->name . ' Admin Discount',
+                    'description' => 'Admin Discount',
                     'amount' => $data['amount']
                 ]);
                 $this->info('$' . $data['amount'] . ' Admin Discount for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());
@@ -106,7 +106,7 @@ class ChargeCyclePlayerFee extends Command
                     'type' => 'credit',
                     'created_by' => 1,
                     'date' => $cycle->starts_at->format('Y-m-d'),
-                    'description' => 'Cycle ' . $cycle->name . ' Captain Discount',
+                    'description' => 'Captain Discount',
                     'amount' => $data['amount'] * 0.25
                 ]);
                 $this->info('$' . $data['amount'] * 0.25 . ' Captain Discount for id:'. $signup->id . ' name: ' . $signup->getNicknameOrShortname());

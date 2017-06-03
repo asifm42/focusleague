@@ -38,7 +38,8 @@ class TransactionsController extends Controller
 
         $data['user'] = $user;
         $data['transactions'] = $user->transactions;
-        $data['balance'] = number_format($user->getBalance(), 2, '.', ',');
+        $data['balance'] = $user->getBalance();
+        $data['balanceString'] = $user->getBalanceString();
 
         return view('transactions.index', $data);
     }
@@ -53,7 +54,7 @@ class TransactionsController extends Controller
         if ($request->has('user_id')) {
             $user = User::findOrFail($request->input('user_id'));
             $data['typeahead_name'] = $user->name . " (" . $user->getNicknameOrShortName() . ")";
-            $data['balance'] = $user->getBalance();
+            $data['balance'] = $user->getBalanceInDollars();
         }
         $users = User::all();
         $users->load('transactions');
@@ -62,7 +63,7 @@ class TransactionsController extends Controller
             $names[] = [
                 'id' => $user->id,
                 'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")",
-                'balance' => $user->getBalance(),
+                'balance' => $user->getBalanceInDollars(),
             ];
         }
 
@@ -84,6 +85,7 @@ class TransactionsController extends Controller
     public function store(StoreTransactionRequest $request)
     {
         $data = $request->all();
+        $data['amount'] *= 100;
         $data['created_by'] = auth()->user()->id;
 
         $transaction = $this->transactionFactory->make($data);
@@ -117,7 +119,7 @@ class TransactionsController extends Controller
             $names[] = [
                 'id' => $user->id,
                 'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")",
-                'balance' => $user->getBalance(),
+                'balance' => $user->getBalanceInDollars(),
             ];
         }
 
@@ -133,6 +135,7 @@ class TransactionsController extends Controller
 
 
         $data['transaction'] = $transaction;
+        Former::populateField('amount', $transaction->amount_in_dollars);
         $data['names'] = json_encode($names);
         $data['typeahead_name'] = $transaction->user->name . " (" . $transaction->user->getNicknameOrShortName() . ")";
         $data['cycles'] = Cycle::with('weeks')->get()->sortByDesc('signup_opens_at');
@@ -151,7 +154,9 @@ class TransactionsController extends Controller
      */
     public function update(UpdateTransactionRequest $request, $id)
     {
-        $transaction = $this->transactionUpdater->update($id, $request->all());
+        $data = $request->all();
+        $data['amount'] *= 100;
+        $transaction = $this->transactionUpdater->update($id, $data);
 
         flash()->success('Transaction updated');
 

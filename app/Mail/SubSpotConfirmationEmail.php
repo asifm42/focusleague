@@ -34,7 +34,7 @@ class SubSpotConfirmationEmail extends Mailable implements ShouldQueue
     public function __construct(Sub $sub)
     {
         $this->sub = $sub;
-        $this->cost  = config('focus_cost.cycle.sub');
+        $this->cost  = number_format(config('focus.cost.cycle.sub') / 100, 2);
     }
 
     /**

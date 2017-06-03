@@ -30,7 +30,7 @@
             ->required()
         !!}
         <div class="row">
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-12 col-md-4">
                 {!! Former::text('date')
                     ->name('date')
                     ->label('Transaction Date')
@@ -40,7 +40,7 @@
                     ->help('MM/DD/YYYY')
                 !!}
             </div>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-5 col-md-4">
                 {!! Former::select('cycle_id')
                     ->label('Cycle')
                     ->addClass('js-cycle')
@@ -50,7 +50,7 @@
                     ->fromQuery($cycles->sortByDesc('name'), 'name', 'id')
                 !!}
             </div>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-7 col-md-4">
                 {!! Former::select('week_id')
                     ->label('Week')
                     ->addClass('js-week')
@@ -91,14 +91,15 @@
                 {!! Former::text('amount')
                     ->addClass('form-control')
                     ->placeholder("Req'd amount")
+                    ->prepend('$')
+                    ->addGroupClass('amount')
                     ->required()
                 !!}
             </div>
         </div>
         {!! Former::textarea('description')
             ->addClass('js-description')
-            ->placeholder('Required description')
-            ->required()
+            ->placeholder('Optional description')
         !!}
     </div>
 
@@ -144,7 +145,7 @@
 
             $(function () {
                 $('#trans_date_picker-js').datetimepicker({
-                    defaultDate: moment().format('MM/DD/YYYY'),
+                    defaultDate: moment(),
                     format: 'MM/DD/YYYY',
                 });
             });
@@ -158,7 +159,7 @@
                   source: users,
                   display: function(obj) { return obj.name; },
                     templates: {
-                        empty: [
+                        notFound: [
                             '<div class="noitems">',
                             'No Players Found',
                             '</div>'
@@ -180,10 +181,15 @@
 
             @if(isset($typeahead_name))
                 $('.users-typeahead-js').typeahead('val', "{!! $typeahead_name !!}");
+                $('.users-typeahead-js').typeahead('open');
+                $('.users-typeahead-js').typeahead('close');
+                $('.users-typeahead-js').trigger('typeahead:change');
             @endif
 
             @if (isset($balance) && $balance > 0)
                 $('input[name = amount]').val({!! $balance !!});
+                $('input[name = amount]').focus();
+                $('input[name = transaction_type]').focus();
             @endif
 
             $('.js-transaction-type').change(function(evt) {
@@ -193,27 +199,27 @@
                     case 'paypal':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('paypal');
-                        $('.js-description').val('Payment id: ');
+                        $('.js-description').val('id: ');
                         break;
                     case 'venmo':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('venmo');
-                        $('.js-description').val('Payment');
+                        $('.js-description').val('');
                         break;
                     case 'chase quickpay':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('chase quickpay');
-                        $('.js-description').val('Payment');
+                        $('.js-description').val('');
                         break;
                     case 'square cash':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('square cash');
-                        $('.js-description').val('Payment');
+                        $('.js-description').val('');
                         break;
                     case 'check':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('check');
-                        $('.js-description').val('Payment');
+                        $('.js-description').val('');
                         break;
                     case 'cash':
                         $('.js-type').val('payment');
@@ -242,7 +248,7 @@
                 if (cycleId > 0) {
                     cycle = cycles[cycleId-1];
                     cycle.weeks.forEach(function (week, index) {
-                        weekOptions[cycle.name + '-' + week.id] = 'Wk' + (index+1) + ' - ' + moment(new Date(week.starts_at)).format('MMM D');
+                        weekOptions[cycle.name + '-' + week.id] = 'Wk' + (index+1) + ' - ' + moment(week.starts_at).format('MMM D');
                     });
 
                     $('.js-week-group').css('opacity', 1);
@@ -254,7 +260,7 @@
                                 weekOptions[cycle.name + '-' + '00'] = 'Cycle ' + cycle.name;
                             }
 
-                            weekOptions[cycle.name + '-' + week.id] = moment(new Date(week.starts_at)).format('MMM D');
+                            weekOptions[cycle.name + '-' + week.id] = moment(week.starts_at).format('MMM D');
                         });
                     });
 

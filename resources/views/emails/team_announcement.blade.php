@@ -43,8 +43,8 @@ We are working on selecting a captain since no one volunteered. Please let us kn
 </ul>
 @endif
 
-<p>Your fee for this cycle is ${{ $cost }}.00. Your current balance is {{ $user->getBalanceString() }}. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $cycle->name }} fees" in the note if possible.</p>
-@component('site.payment_methods', ['balance' => $user->getBalance()])
+<p>Your fee for this cycle is ${{ $cost }}. Your current balance is {{ $user->getBalanceString() }}. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $cycle->name }} fees" in the note if possible.</p>
+@component('site.payment_methods', ['balance' => $user->getBalanceInDollars()])
 @endcomponent
 
 <p>More details such as your team's schedule and other teams can be found on the <a href="{{ route('cycles.view', $cycle->id) }}">cycle details</a> page.</p>

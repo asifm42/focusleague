@@ -3,7 +3,7 @@
 
 <p>As mentioned before, a sub spot is not guaranteed. We'll be in touch soon if we need your talent.</p>
 
-<p>Your sub fee is ${{ config('focus.cost.cycle.sub') }}. We'll charge your account if and when we place you on a team.</p>
+<p>Your sub fee is ${{ number_format(config('focus.cost.cycle.sub') / 100, 2) }}. We'll charge your account if and when we place you on a team.</p>
 
 <p>See who else is signed up and other <a href="{{ route('cycles.view', $sub->week->cycle->id) }}">cycle details here</a>.</p>
 

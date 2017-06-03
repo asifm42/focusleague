@@ -33,7 +33,7 @@ class UpdateTransactionRequest extends Request
             'week_id'           => 'integer',
             'type'              => 'required|in:charge,payment,credit',
             'payment_type'      => 'required_if:type,payment|nullable|in:paypal,venmo,chase quickpay,square cash,check,cash',
-            'description'       => 'required|max:500',
+            'description'       => 'max:500',
             'amount'            => 'required|numeric',
             'date'              => 'date',
         ];
