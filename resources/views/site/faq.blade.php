@@ -167,10 +167,10 @@
         How much does it cost?
     @endslot
     @slot('answer')
-        <p>Subs - ${{ config('focus.cost.cycle.sub') }}/week</p>
-        <p>Sign up for 2 weeks - ${{ config('focus.cost.cycle.two_weeks') }}</p>
-        <p>Sign up for 3 weeks - $25</p>
-        <p>Sign up for 4 weeks - $30</p>
+        <p>Subs - ${{ number_format(config('focus.cost.cycle.sub') / 100, 2) }}/week</p>
+        <p>Sign up for 2 weeks - ${{ number_format(config('focus.cost.cycle.two_weeks') / 100, 2) }}</p>
+        <p>Sign up for 3 weeks - ${{ number_format(config('focus.cost.cycle.three_weeks') / 100, 2) }}</p>
+        <p>Sign up for 4 weeks - ${{ number_format(config('focus.cost.cycle.four_weeks') / 100, 2) }}</p>
     @endslot
 @endcomponent
 

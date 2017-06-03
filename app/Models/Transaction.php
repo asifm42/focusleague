@@ -102,4 +102,14 @@ class Transaction extends Model
             $this->attributes['date'] = date("Y-m-d", strtotime($value));
         }
     }
+
+    /**
+     * Get the transactoin amount in dollars.
+     *
+     * @return float
+     */
+    public function getAmountInDollarsAttribute()
+    {
+        return number_format($this->amount / 100, 2);
+    }
 }

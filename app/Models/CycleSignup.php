@@ -117,15 +117,20 @@ class CycleSignup extends Model
         }
 
         if ($attendingDates->count() === 4){
-            return config('focus_cost.cycle.four_weeks');
+            return config('focus.cost.cycle.four_weeks');
         } elseif ($attendingDates->count() === 3){
-            return config('focus_cost.cycle.three_weeks');
+            return config('focus.cost.cycle.three_weeks');
         } elseif ($attendingDates->count() === 2) {
-            return config('focus_cost.cycle.two_weeks');
+            return config('focus.cost.cycle.two_weeks');
         } elseif ($attendingDates->count() === 1) {
-            return config('focus_cost.cycle.sub');
+            return config('focus.cost.cycle.sub');
         } else {
-            return config('focus_cost.cycle.two_weeks');
+            return config('focus.cost.cycle.two_weeks');
         }
+    }
+
+    public function costInDollars()
+    {
+        return number_format($this->cost() / 100, 2);
     }
 }

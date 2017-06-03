@@ -1,6 +1,12 @@
 @extends('layouts.default')
 @section('title','FOCUS League – Create Transaction')
-
+@section('styles')
+<style>
+    .amount > .input-group > .input-group-addon {
+        padding:0 2px 0 0;
+    }
+</style>
+@stop
 @section('content')
     <div class="page-header">
         <div class="container">

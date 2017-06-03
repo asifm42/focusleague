@@ -12,16 +12,16 @@
     <div class="container">
         @if (auth()->user()->isAdmin())
             <div class="row">
-                <div class="col-xs-12 col-md-8">
+                <div class="col-xs-12 col-md-12">
                         <h5>
                             <a href="{{ route('users.show', $user->id) }}">{{ $user->name }} ({{ $user->getNicknameOrShortname() }})</a>
-                            <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default btn-xs pull-right">Add Transaction</a>
+                            <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default pull-right">Add Transaction</a>
                         </h5>
                 </div>
             </div>
         @endif
         <div class="row">
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-12">
                 <h5>
                     @if ($balance < 0 )
                         Credit: <span class="text-primary">${{ $balance }}</span>
@@ -34,16 +34,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-12">
                 <div class = "table-responsive">
                     <table class="table table-striped table-condensed table-bordered focus-transactions-table">
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Cycle</th>
+                                <th>Cycle/Week</th>
                                 {{-- <th>Week</th> --}}
                                 <th>Description</th>
-                                <th>Type</th>
+                                {{-- <th>Type</th> --}}
                                 {{-- <th>Method</th> --}}
                                 <th class="text-right">Amount</th>
                                 @if (auth()->user()->isAdmin())
@@ -56,12 +56,25 @@
                                 <tr>
                                     <td>{{ $transaction->date }}</td>
                                     <td>{{ $transaction->cycle ? $transaction->cycle->name : 'N/A'}} {{ $transaction->week ? ' - Wk' . $transaction->week->index() : ''}}</td>
-                                    <td>{{ $transaction->description }}</td>
-                                    <td>{{ ucwords($transaction->type) }} {{ $transaction->payment_type ? ' - ' . ucwords($transaction->payment_type) : '' }}</td>
+                                    @if($transaction->type == 'charge' || $transaction->type == 'credit')
+                                        <td>{{ $transaction->description }}</td>
+                                    @elseif($transaction->type == 'payment')
+                                        <td>
+                                            Payment
+                                            @if($transaction->payment_type == 'cash')
+                                                 - {{ $transaction->description }}
+                                            @elseif( $transaction->description == 'payment' || $transaction->description == 'Payment' )
+                                                {{ $transaction->payment_type ? ' - ' . ucwords($transaction->payment_type) : '' }}
+                                            @else
+                                                {{ $transaction->payment_type ? ' - ' . ucwords($transaction->payment_type) : '' }}
+                                                - {{ $transaction->description }}
+                                            @endif
+                                        </td>
+                                    @endif
                                     @if ($transaction->type === 'payment' || $transaction->type === 'credit')
-                                        <td class="text-right">-${{ number_format($transaction->amount, 2, '.', '') }}</td>
+                                        <td class="text-right">-${{ $transaction->amount_in_dollars }}</td>
                                     @else
-                                        <td class="text-right text-danger">${{ number_format($transaction->amount, 2, '.', '') }}</td>
+                                        <td class="text-right text-danger">${{ $transaction->amount_in_dollars }}</td>
                                     @endif
                                     @if (auth()->user()->isAdmin())
                                         <td class="text-center">
@@ -77,7 +90,7 @@
         </div>
 
         @if (auth()->user()->isAdmin())
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-12">
                 <h5 class="pull-right">
                     @if ($balance < 0 )
                         Credit: <span class="text-primary">${{ $balance }}</span>
@@ -89,7 +102,7 @@
                 </h5>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-md-8">
+                <div class="col-xs-12 col-md-12">
                         <h5>
                             <a href="{{ route('users.show', $user->id) }}">{{ $user->name }} ({{ $user->getNicknameOrShortname() }})</a>
                             <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default btn-xs pull-right">Add Transaction</a>

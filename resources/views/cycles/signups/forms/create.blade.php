@@ -93,13 +93,26 @@
             ->checkboxes($checkbox_options)
         !!}
 
-        <div class="cost-stmt text-info" style="display: none;"><p>Your account will be charged <span class="cost-text"></span></p></div>
+        <div class="cost-stmt text-info" style="display: none;">
+            <p>Your account will be charged <span class="cost-text"></span></p>
+        </div>
+
+
+    <?php
+        if ($cycle->weeks->count() > 3) {
+            $captainHelpMsg = 'You must be available 3 out of the ' . $cycle->weeks->count() . ' weeks to be a captain';
+        } else {
+            $captainHelpMsg = 'You must be available all ' . $cycle->weeks->count() . ' weeks to be a captain';
+        }
+    ?>
+
+
         <div class='will_captain_group-js' style="display:none;">
             {!! Former::checkbox('will_captain')
                 ->label('Are you willing to captain this cycle?')
                 ->text('&nbsp;&nbsp;'.'Yes')
                 ->class('form control will_captain-js')
-                ->help('You must be available all 3 weeks to be a captain')
+                ->help($captainHelpMsg)
             !!}
         </div>
         {!! Former::textarea('note')

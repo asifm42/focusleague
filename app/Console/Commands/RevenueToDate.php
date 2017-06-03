@@ -47,11 +47,7 @@ class RevenueToDate extends Command
         $users = User::all();
         $weeks = Week::all();
         $headers = ['Charges', 'Credits', 'Payments', 'Revenue', 'Outstanding', 'Cost', 'Income'];
-        // $charges = 0;
-        // $credits = 0;
-        // $payments = 0;
         $outstanding = 0;
-        // $cost = 0;
 
         $transactions = $transactions->filter(function ($transaction){
             return $transaction->created_at->gt(Carbon::parse('2016-12-31'));
@@ -61,7 +57,7 @@ class RevenueToDate extends Command
                 return $week->created_at->gt(Carbon::parse('2016-12-31'))
                     && $week->starts_at->lt(Carbon::now())
                     && !$week->isRainedOut();
-            })->count() * (95*2);
+            })->count() * (9500*2);
 
         $charges = $transactions->filter(function($transaction) {
                 return $transaction->type === 'charge';
@@ -74,15 +70,6 @@ class RevenueToDate extends Command
         $payments = $transactions->filter(function($transaction) {
                 return $transaction->type === 'payment';
             })->sum('amount');
-        // foreach($transactions as $transaction) {
-        //     if ($transaction->type === 'charge') {
-        //         $charges += $transaction->amount;
-        //     } elseif ($transaction->type === 'credit') {
-        //         $credits += $transaction->amount;
-        //     } elseif ($transaction->type === 'payment') {
-        //         $payments += $transaction->amount;
-        //     }
-        // }
 
         foreach($users as $user) {
             $balance = $user->getBalance();
@@ -91,38 +78,17 @@ class RevenueToDate extends Command
             }
         }
 
-        // foreach ($cycles as $cycle) {
-        //     if($cycle->ends_at->lt(Carbon::now())) {
-        //         foreach($cycle->weeks as $week) {
-        //             if ($week->starts_at->lt(Carbon::now()) && !$week->isRainedOut()) {
-        //                 $cost += 160;
-        //             }
-        //         }
-        //     }
-        // }
-
-        // foreach($weeks as $week) {
-        //     if ($week->starts_at->lt(Carbon::now()) && !$week->isRainedOut()) {
-        //         if ($week->starts_at->gt(Carbon::parse('2016-12-31'))) {
-        //             $cost += (95*2);
-        //         } else {
-        //             $cost += 160;
-        //         }
-        //     }
-        // }
-
-
         $revenue = $charges - $credits;
         $income = $revenue - $cost;
 
         $data = [[
-            'Charges'       => '$'.$charges,
-            'Credits'       => '$'.$credits,
-            'Payments'      => '$'.$payments,
-            'Revenue'       => '$'.$revenue,
-            'Outstanding'   => '$'.$outstanding,
-            'Cost'          => '$'.$cost,
-            'Income'        => '$'.$income,
+            'Charges'       => '$' . number_format($charges / 100, 2),
+            'Credits'       => '$' . number_format($credits / 100, 2),
+            'Payments'      => '$' . number_format($payments / 100, 2),
+            'Revenue'       => '$' . number_format($revenue / 100, 2),
+            'Outstanding'   => '$' . number_format($outstanding / 100, 2),
+            'Cost'          => '$' . number_format($cost / 100, 2),
+            'Income'        => '$' . number_format($income / 100, 2),
         ]];
 
         $this->table($headers, $data);

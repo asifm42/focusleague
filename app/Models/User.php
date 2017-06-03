@@ -343,12 +343,21 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's balance in dollars
+     */
+    public function getBalanceInDollars()
+    {
+        return number_format($this->getBalance() / 100, 2);
+    }
+
+    /**
      * Get the user's balance as a string with dollar sign
      */
     public function getBalanceString()
     {
         $balance = $this->getBalance();
-        $balanceStr = '$' . number_format(abs($balance), 2, '.', ',');
+        // $balanceStr = '$' . number_format(abs($balance), 2, '.', ',');
+        $balanceStr = '$' . number_format(abs($balance) / 100, 2);
 
         if ( $balance < 0 ) {
             $balanceStr = '-' . $balanceStr;

@@ -238,7 +238,7 @@ class SubsController extends Controller
                 'description' => 'Sub fee',
                 'created_by' => auth()->user()->id,
                 'date' => $sub->week->starts_at->format('Y-m-d'),
-                'amount' => config('focus_cost.cycle.sub')
+                'amount' => config('focus.cost.cycle.sub')
             ]);
         }
         flash()->success($sub->user->getNicknameOrShortName() . ' placed on Team ' . ucwords($sub->team->name) . ' as a sub.');

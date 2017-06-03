@@ -14,15 +14,15 @@ return [
 
     'cost' => [
         'cycle' => [
-            'sub' => 10,
-            'two_weeks' => 18,
-            'three_weeks' => 25,
-            'four_weeks' => 30,
+            'sub' => 1000,
+            'two_weeks' => 1800,
+            'three_weeks' => 2500,
+            'four_weeks' => 3000,
         ],
 
-        'rainout_credit' => 5,
+        'rainout_credit' => 500,
 
-        'hourly_field_cost' => 95,
+        'hourly_field_cost' => 9500,
     ],
 
     /*

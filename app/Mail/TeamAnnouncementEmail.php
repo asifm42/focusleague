@@ -63,13 +63,13 @@ class TeamAnnouncementEmail extends Mailable implements ShouldQueue
 
         switch ($user->availability->where('cycle_id', $cycle->id)->where('pivot.attending', 1)->count()) {
             case 2:
-                $this->cost = config('focus_cost.cycle.two_weeks');
+                $this->cost = number_format(config('focus.cost.cycle.two_weeks') / 100, 2);
                 break;
             case 3:
-                $this->cost  = config('focus_cost.cycle.three_weeks');
+                $this->cost  = number_format(config('focus.cost.cycle.three_weeks') / 100, 2);
                 break;
             case 4:
-                $this->cost  = config('focus_cost.cycle.four_weeks');
+                $this->cost  = number_format(config('focus.cost.cycle.four_weeks') / 100, 2);
                 break;
         }
     }
