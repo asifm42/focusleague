@@ -31,6 +31,7 @@ class UsersController extends Controller
     {
         $data['title'] = 'Users';
         $data['users'] = $users = User::all();
+        $data['currentCycle'] = Cycle::currentCycle();
 
         return view('users.index', $data);
     }
@@ -49,6 +50,8 @@ class UsersController extends Controller
         $data['users'] = $users->filter(function ($item) {
             return $item->getBalance() > 0;
         });
+
+        $data['currentCycle'] = Cycle::currentCycle();
 
         return view('users.index', $data);
     }

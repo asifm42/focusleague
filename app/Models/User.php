@@ -438,6 +438,11 @@ class User extends Authenticatable
         return (bool) $this->availability->find($weekId)->pivot->attending;
     }
 
+    /**
+     * Provides a list of users who are not signed up for the given cycle.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function notSignedUpForCycle(Cycle $cycle)
     {
         return Self::all()->diff($cycle->signups);

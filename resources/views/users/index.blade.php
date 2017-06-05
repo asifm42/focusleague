@@ -24,6 +24,9 @@
                             <th>Gender</th>
                             <th>Birthday</th>
                             <th>Balance</th>
+                        @if($currentCycle)
+                            <th>Team</th>
+                        @endif
                             <th>Admin</th>
                         </tr>
                     </thead>
@@ -45,6 +48,12 @@
                                 <td>{{ $user->gender }}</td>
                                 <td>{{ $user->birthday->toFormattedDateString() }}</td>
                                 <td class="text-right"><a href="{{ route('users.balance', $user->id) }}">{{ $user->getBalanceString() }}</a></td>
+
+                                @if($currentCycle && $currentCycle->signupsOnATeam()->contains($user))
+                                    <td>{{ App\Models\Team::find($currentCycle->signupsOnATeam()->find($user)->pivot->team_id)->name }}</td>
+                                @else($currentCycle)
+                                    <td>n/a</td>
+                                @endif
                                 <td class="text-center">
                                     <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default btn-xs">Add Trans</a>
                                 </td>
