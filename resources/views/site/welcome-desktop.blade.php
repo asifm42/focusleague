@@ -23,6 +23,9 @@
                 {!! $current_cycle->currentWeek()->status() !!}
             @elseif($current_cycle->currentWeek()->isRainedOut())
                 <p>
+                    <span class="text-danger"><b>Game OFF</b></span>
+                </p>
+                <p>
                     Games are canceled due to weather.
                 </p>
             @else

@@ -23,11 +23,17 @@
                     {!! $current_cycle->currentWeek()->status() !!}
                 @elseif($current_cycle->currentWeek()->isRainedOut())
                     <p>
+                        <span class="text-danger"><b>Game OFF</b></span>
+                    </p>
+                    <p>
                         Games are canceled due to weather.
                     </p>
                 @else
                     <p>
-                        Games are on. However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
+                        <span class="text-success"><b>Game ON!</b></span>
+                    </p>
+                    <p>
+                        However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
                     </p>
                 @endif
                 <div>
