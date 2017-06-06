@@ -16,9 +16,10 @@
         @if($current_cycle && $current_cycle->gameToday())
             <div    class="jumbotron"
                     style="background-color: #ffff99; margin-bottom:0" >
-                <h4>
+                <h5>
                     Game Status for {{ Carbon::today()->format("l, F jS") }}
-                </h4>
+                    <small>as of {{ $current_cycle->currentWeek()->updated_at->format('g:i A') }}</small>
+                </h5>
                 @if($current_cycle->currentWeek()->hasStatus())
                     {!! $current_cycle->currentWeek()->status() !!}
                 @elseif($current_cycle->currentWeek()->isRainedOut())
