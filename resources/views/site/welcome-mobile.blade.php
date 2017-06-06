@@ -13,35 +13,39 @@
 <!-- ########## START GAME STATUS ########## -->
 <div class="row">
     <div class="col-xs-12">
-        @if($current_cycle && $current_cycle->gameToday())
-            <div    class="jumbotron"
-                    style="background-color: #ffff99; margin-bottom:0" >
-                <h5>
-                    Game Status for {{ Carbon::today()->format("l, F jS") }}
+    @if($current_cycle && $current_cycle->gameToday())
+        <div    class="jumbotron"
+                style="background-color: #ffff99; margin-bottom:0" >
+            <h5>
+                Game Status for {{ Carbon::today()->format("l, F jS") }}<br />
+                @if($current_cycle->currentWeek()->updated_at->isToday() && $current_cycle->currentWeek()->updated_at->lt(Carbon::now()))
                     <small>as of {{ $current_cycle->currentWeek()->updated_at->format('g:i A') }}</small>
-                </h5>
-                @if($current_cycle->currentWeek()->hasStatus())
-                    {!! $current_cycle->currentWeek()->status() !!}
-                @elseif($current_cycle->currentWeek()->isRainedOut())
-                    <p>
-                        <span class="text-danger"><b>Game OFF</b></span>
-                    </p>
-                    <p>
-                        Games are canceled due to weather.
-                    </p>
-                @else
-                    <p>
-                        <span class="text-success"><b>Game ON!</b></span>
-                    </p>
-                    <p>
-                        However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
-                    </p>
+                @elseif(Carbon::now()->gt(Carbon::parse('8 am')))
+                    <small>as of 8:00 am</small>
                 @endif
-                <div>
-                    <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe>
-                </div>
+            </h5>
+            @if($current_cycle->currentWeek()->hasStatus())
+                {!! $current_cycle->currentWeek()->status() !!}
+            @elseif($current_cycle->currentWeek()->isRainedOut())
+                <p>
+                    <span class="text-danger"><b>Game OFF</b></span>
+                </p>
+                <p>
+                    Games are canceled due to weather.
+                </p>
+            @else
+                <p>
+                    <span class="text-success"><b>Game ON!</b></span>
+                </p>
+                <p>
+                    However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
+                </p>
+            @endif
+            <div>
+                <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe>
             </div>
-        @endif
+        </div>
+    @endif
     </div>
 </div>
 <!-- ########## END GAME STATUS ########## -->

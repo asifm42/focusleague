@@ -18,7 +18,11 @@
                 style="background-color: #ffff99; margin-bottom:0" >
             <h4>
                 Game Status for {{ Carbon::today()->format("l, F jS") }}<br />
-                <small>as of {{ $current_cycle->currentWeek()->updated_at->format('g:i A') }}</small>
+                @if($current_cycle->currentWeek()->updated_at->isToday() && $current_cycle->currentWeek()->updated_at->lt(Carbon::now()))
+                    <small>as of {{ $current_cycle->currentWeek()->updated_at->format('g:i A') }}</small>
+                @elseif(Carbon::now()->gt(Carbon::parse('8 am')))
+                    <small>as of 8:00 am</small>
+                @endif
             </h4>
             @if($current_cycle->currentWeek()->hasStatus())
                 {!! $current_cycle->currentWeek()->status() !!}
