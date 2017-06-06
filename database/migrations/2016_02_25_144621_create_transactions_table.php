@@ -19,8 +19,8 @@ class CreateTransactionsTable extends Migration
             $table->integer('week_id')->unsigned()->nullabele();
             $table->enum('type', ['charge', 'credit', 'payment']);
             $table->string('payment_type')->nullable();
-            $table->string('description');
-            $table->decimal('amount', 10, 2);
+            $table->string('description')->nullable();
+            $table->integer('amount');
             $table->integer('created_by')->unsigned();
             $table->timestamps();
 
