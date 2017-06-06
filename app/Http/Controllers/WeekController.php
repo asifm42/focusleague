@@ -22,6 +22,9 @@ class WeekController extends Controller
 
         if (!$request->has('rained_out') || !$request->input('rained_out')) return;
 
+        // if week is already rained out then return
+        if ($week->isRainedOut()) return redirect()->route('weeks.show', $week->id);
+
         // mark as rainout
         $week->markAsRainedOut();
 

@@ -445,4 +445,43 @@ class MarkWeekAsRainedOutTest extends TestCase
             [$sub], Rainout::class
         );
     }
+
+    /** @test */
+    function a_rained_out_week_can_not_be_marked_as_rained_out_again()
+    {
+        // a_rained_out_week_can_not_be_marked_as_rained_out_again
+
+        // create admin
+        $admin = factory(User::class)->states('admin')->create();
+
+        // create a cycle with 4 weeks
+        $cycle = factory(Cycle::class)->create([
+            'created_by' => $admin->id
+        ])->addWeeks(4);
+
+        $week = $cycle->weeks->get(2);
+        $week->markAsRainedOut();
+        $week = $week->fresh();
+
+        $this->assertEquals(1, Cycle::count());
+        $this->assertEquals(4, Week::count());
+        // $this->assertEquals(2, User::count());
+
+        $response = $this->actingAs($admin)->post('/weeks/' . $week->id . '/rainout', [
+            'rained_out' => true,
+            'status' => 'Game OFF'
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertRedirect('/weeks/' . $week->id);
+
+        // get a fresh week;
+        $week = $week->fresh();
+
+        // week should be rained out
+        $this->assertTrue($week->isRainedOut());
+
+        // week should not a have status because it wasn't updated
+        $this->assertNull($week->status);
+    }
 }
