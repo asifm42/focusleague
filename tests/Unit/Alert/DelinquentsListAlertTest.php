@@ -99,20 +99,20 @@ class DelinquentsListTest extends TestCase
             ]);
 
         $userOnATeamWithABalance->transactions()->saveMany([
-            factory(Transaction::class)->make(['amount' => 30.00]),
-            factory(Transaction::class)->make(['amount' => 25.00]),
+            factory(Transaction::class)->make(['amount' => 3000]),
+            factory(Transaction::class)->make(['amount' => 2500]),
         ]);
         $user2OnATeamWithABalance->transactions()->saveMany([
-            factory(Transaction::class)->make(['amount' => 10.00]),
-            factory(Transaction::class)->make(['amount' => 25.00]),
+            factory(Transaction::class)->make(['amount' => 1000]),
+            factory(Transaction::class)->make(['amount' => 2500]),
         ]);
         $userNotOnATeamWithABalance->transactions()->saveMany([
-            factory(Transaction::class)->make(['amount' => 18.00]),
-            factory(Transaction::class)->make(['amount' => 25.00]),
+            factory(Transaction::class)->make(['amount' => 1800]),
+            factory(Transaction::class)->make(['amount' => 2500]),
         ]);
         $userNotSignedUpWithABalance->transactions()->saveMany([
-            factory(Transaction::class)->make(['amount' => 18.00]),
-            factory(Transaction::class)->make(['amount' => 25.00]),
+            factory(Transaction::class)->make(['amount' => 1800]),
+            factory(Transaction::class)->make(['amount' => 2500]),
         ]);
 
         Mail::to('asifm42@gmail.com', 'Asif Mohammed')->send(new DelinquentsList());
@@ -126,16 +126,16 @@ class DelinquentsListTest extends TestCase
         $users = factory(User::class, 5)->create();
 
         $users->get(0)->transactions()->saveMany([
-            factory(Transaction::class)->make(['amount' => 30.00]),
-            factory(Transaction::class)->make(['amount' => 25.00]),
+            factory(Transaction::class)->make(['amount' => 3000]),
+            factory(Transaction::class)->make(['amount' => 2500]),
         ]);
         $users->get(1)->transactions()->saveMany([
-            factory(Transaction::class)->make(['amount' => 30.00]),
-            factory(Transaction::class)->make(['amount' => 25.00]),
+            factory(Transaction::class)->make(['amount' => 3000]),
+            factory(Transaction::class)->make(['amount' => 2500]),
         ]);
         $users->get(3)->transactions()->saveMany([
-            factory(Transaction::class)->make(['amount' => 30.00]),
-            factory(Transaction::class)->make(['amount' => 25.00]),
+            factory(Transaction::class)->make(['amount' => 3000]),
+            factory(Transaction::class)->make(['amount' => 2500]),
         ]);
 
         Mail::to('asifm42@gmail.com', 'Asif Mohammed')->send(new DelinquentsList());
