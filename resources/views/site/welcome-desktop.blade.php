@@ -17,7 +17,8 @@
         <div    class="jumbotron"
                 style="background-color: #ffff99; margin-bottom:0" >
             <h4>
-                Game Status for {{ Carbon::today()->format("l, F jS") }}
+                Game Status for {{ Carbon::today()->format("l, F jS") }}<br />
+                <small>as of {{ $current_cycle->currentWeek()->updated_at->format('g:i A') }}</small>
             </h4>
             @if($current_cycle->currentWeek()->hasStatus())
                 {!! $current_cycle->currentWeek()->status() !!}
@@ -29,8 +30,11 @@
                     Games are canceled due to weather.
                 </p>
             @else
-                <p>
-                    Games are on. However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
+                    <p>
+                        <span class="text-success"><b>Game ON!</b></span>
+                    </p>
+                    <p>
+                    However, if HSP is closed due to weather, games will be canceled. Please check back here and the <a href="https://twitter.com/FocusLeague">FOCUS League twitter feed</a> for the latest game status before heading out to the fields.
                 </p>
             @endif
             <div>
