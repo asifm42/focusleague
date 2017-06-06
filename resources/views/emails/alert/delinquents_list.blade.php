@@ -7,7 +7,7 @@ Team {{ $team->name }}:
 captain: {{ $captain->user->name }} ({{ $captain->user->getNicknameOrShortName() }}) - {{ $captain->user->email }}
 @endforeach
 @forelse($team->getDelinquents() as $delinquent)
-    {{ $delinquent->user->name }} ({{ $delinquent->user->getNicknameOrShortName() }}) - ${{ $delinquent->user->getBalance() }}
+    {{ $delinquent->user->name }} ({{ $delinquent->user->getNicknameOrShortName() }}) - {{ $delinquent->user->getBalanceString() }}
 @empty
     No players with a balance.
 @endforelse
@@ -17,7 +17,7 @@ captain: {{ $captain->user->name }} ({{ $captain->user->getNicknameOrShortName()
 Players signed up for this cycle but not on a team:
 
 @forelse($signupsNotOnATeamWithABalance as $user)
-    {{ $user->name }} ({{ $user->getNicknameOrShortName() }}) - ${{ $user->getBalanceInDollars() }}
+    {{ $user->name }} ({{ $user->getNicknameOrShortName() }}) - {{ $user->getBalanceString() }}
 @empty
     No signups without a team with a balance
 @endforelse
@@ -25,7 +25,7 @@ Players signed up for this cycle but not on a team:
 Players not signed up for this cycle:
 
 @forelse($userNotSignedUpwithABalance as $user)
-    {{ $user->name }} ({{ $user->getNicknameOrShortName() }}) - ${{ $user->getBalanceInDollars() }}
+    {{ $user->name }} ({{ $user->getNicknameOrShortName() }}) - {{ $user->getBalanceString() }}
 @empty
     No users that haven't signed up for the current with a balance
 @endforelse
@@ -35,7 +35,7 @@ Players not signed up for this cycle:
 No current cycle. Users that have a balance:
 
 @forelse($delinquents as $user)
-    {{ $user->name }} ({{ $user->getNicknameOrShortName() }}) - ${{ $user->getBalanceInDollars() }} - {{ $user->email }} - {{ $user->cell_number }}
+    {{ $user->name }} ({{ $user->getNicknameOrShortName() }}) - {{ $user->getBalanceString() }} - {{ $user->email }} - {{ $user->cell_number }}
 @empty
     No users with a balance.
 @endforelse
