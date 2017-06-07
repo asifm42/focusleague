@@ -32,7 +32,7 @@ We are working on selecting a captain since no one volunteered. Please let us kn
 
 Your sub fee for this week is ${{ $cost }}. Your current balance is {{ $sub->user->getBalanceString() }}. Please use one of the following methods of payment (listed in order of preference). Please put "Cycle {{ $sub->week->cycle->name }} - Wk{{ $sub->week->index() }} sub fee" in the note if possible.
 
-@component('site.payment_methods', ['balance' => $sub->user->getBalance()])
+@component('site.payment_methods', ['balance' => $sub->user->getBalanceInDollars()])
 @endcomponent
 
 <p>See who else is on your team and other <a href="{{ route('cycles.view', $sub->week->cycle->id) }}">cycle details here</a>.</p>
