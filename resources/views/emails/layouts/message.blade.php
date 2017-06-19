@@ -21,5 +21,9 @@ Hi FOCUS Leaguer,
     @slot('unsubscribe')
         {{ $unsubscribe }}
     @endslot
+@else
+    @slot('unsubscribe')
+        <p>Don't want FOCUS League emails anymore? Reply back with "Unsubscribe" and we'll take you off the list.</p>
+    @endslot
 @endif
 @endcomponent
