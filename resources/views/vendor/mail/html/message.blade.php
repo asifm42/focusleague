@@ -22,6 +22,7 @@
     @slot('footer')
         @component('mail::footer')
             &copy; {{ date('Y') }} <a href="{{ config('app.url') }}">{{ config('app.name') }}</a>. All rights reserved.
+            <p>Follow us on <a href="https://twitter.com/focusleague">Twitter</a></p><p>Like us on <a href="https://facebook.com/focusleague">Facebook</a></p>
             {{-- Unsubscribe --}}
             @if (isset($unsubscribe))
                 @slot('unsubscribe')
