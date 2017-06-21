@@ -64,7 +64,9 @@
                                                 {{ $transaction->payment_type ? ' - ' . ucwords($transaction->payment_type) : '' }}
                                             @else
                                                 {{ $transaction->payment_type ? ' - ' . ucwords($transaction->payment_type) : '' }}
-                                                - {{ $transaction->description }}
+                                                @if ($transaction->description)
+                                                    - {{ $transaction->description }}
+                                                @endif
                                             @endif
                                         </td>
                                     @endif
