@@ -9,7 +9,7 @@
                 </h6>
             </li>
 <div class="schedule-list">
-            <li class="list-group-item list-group-item-info">
+ {{--            <li class="list-group-item list-group-item-info">
                 <time datetime="2017-04-26" class="icon">
                   <em>Wednesday</em>
                   <strong>April</strong>
@@ -48,8 +48,8 @@
                   <span>23</span>
                 </time>
                 <div class="event">Cycle 2017-03 Wk4 of 4</div>
-            </li>
-            <li class="list-group-item list-group-item-info">
+            </li> --}}
+{{--             <li class="list-group-item list-group-item-info">
                 <time datetime="2017-05-24" class="icon">
                   <em>Wednesday</em>
                   <strong>May</strong>
@@ -88,6 +88,22 @@
                   <span>20</span>
                 </time>
                 <div class="event">Cycle 2017-04 Wk4 of 4</div>
+            </li> --}}
+            <li class="list-group-item list-group-item-info">
+                <time datetime="2017-06-27" class="icon">
+                  <em>Tuesday</em>
+                  <strong>June</strong>
+                  <span>27</span>
+                </time>
+                <div class="event">NO GAME</div>
+            </li>
+            <li class="list-group-item list-group-item-info">
+                <time datetime="2017-07-04" class="icon">
+                  <em>Tuesday</em>
+                  <strong>July</strong>
+                  <span>4</span>
+                </time>
+                <div class="event">NO GAME</div>
             </li>
             <li class="list-group-item list-group-item-info text-center">
                 <h5>July - Sept 2017 - TBA</h5>
