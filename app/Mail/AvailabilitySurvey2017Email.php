@@ -37,7 +37,7 @@ class AvailabilitySurvey2017Email extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->from('support@focusleague.com', 'FOCUS League')
-                    ->subject('Should there be more FOCUS League this year?')
-                    ->markdown('emails.availability_survey_2017');
+                    ->subject('[Update #1] re: Should there be more FOCUS League this year?')
+                    ->markdown('emails.availability_survey_2017_update_1');
     }
 }
