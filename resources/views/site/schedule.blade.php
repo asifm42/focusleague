@@ -49,64 +49,40 @@
                 </time>
                 <div class="event">Cycle 2017-03 Wk4 of 4</div>
             </li> --}}
-{{--             <li class="list-group-item list-group-item-info">
-                <time datetime="2017-05-24" class="icon">
+            <li class="list-group-item list-group-item-info">
+                <time datetime="2017-07-05" class="icon">
                   <em>Wednesday</em>
-                  <strong>May</strong>
-                  <span>24</span>
+                  <strong>July</strong>
+                  <span>5</span>
                 </time>
-                <div class="event">Cycle&nbsp;2017-04 Registration&nbsp;Opens</div>
+                <div class="event">Cycle&nbsp;2017-05 Registration&nbsp;Opens</div>
             </li>
             <li class="list-group-item">
-                <time datetime="2017-05-30" class="icon">
-                  <em>Tuesday</em>
-                  <strong>May</strong>
-                  <span>30</span>
-                </time>
-                <div class="event">Cycle 2017-04 Wk1 of 4</div>
-            </li>
-            <li class="list-group-item">
-                <time datetime="2017-06-06" class="icon">
-                  <em>Tuesday</em>
-                  <strong>June</strong>
-                  <span>6</span>
-                </time>
-                <div class="event">Cycle 2017-04 Wk2 of 4</div>
-            </li>
-            <li class="list-group-item">
-                <time datetime="2017-06-13" class="icon">
-                  <em>Tuesday</em>
-                  <strong>June</strong>
-                  <span>13</span>
-                </time>
-                <div class="event">Cycle 2017-04 Wk3 of 4</div>
-            </li>
-            <li class="list-group-item">
-                <time datetime="2017-06-20" class="icon">
-                  <em>Tuesday</em>
-                  <strong>June</strong>
-                  <span>20</span>
-                </time>
-                <div class="event">Cycle 2017-04 Wk4 of 4</div>
-            </li> --}}
-            <li class="list-group-item list-group-item-info">
-                <time datetime="2017-06-27" class="icon">
-                  <em>Tuesday</em>
-                  <strong>June</strong>
-                  <span>27</span>
-                </time>
-                <div class="event">NO GAME</div>
-            </li>
-            <li class="list-group-item list-group-item-info">
-                <time datetime="2017-07-04" class="icon">
+                <time datetime="2017-07-11" class="icon">
                   <em>Tuesday</em>
                   <strong>July</strong>
-                  <span>4</span>
+                  <span>11</span>
                 </time>
-                <div class="event">NO GAME</div>
+                <div class="event">Cycle 2017-05 Wk1 of 3</div>
+            </li>
+            <li class="list-group-item">
+                <time datetime="2017-07-18" class="icon">
+                  <em>Tuesday</em>
+                  <strong>July</strong>
+                  <span>18</span>
+                </time>
+                <div class="event">Cycle 2017-05 Wk2 of 3</div>
+            </li>
+            <li class="list-group-item">
+                <time datetime="2017-07-25" class="icon">
+                  <em>Tuesday</em>
+                  <strong>July</strong>
+                  <span>25</span>
+                </time>
+                <div class="event">Cycle 2017-05 Wk3 of 3</div>
             </li>
             <li class="list-group-item list-group-item-info text-center">
-                <h5>July - Sept 2017 - TBA</h5>
+                <h5>Aug - Sept 2017 - TBA</h5>
             </li>
           </div>
         </ul>
