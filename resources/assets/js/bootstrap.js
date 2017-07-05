@@ -76,3 +76,8 @@ window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+//
+
+//
+// window.Jasny = require('jasny-bootstrap');
+window.Jasny = require('jasny-bootstrap/dist/js/jasny-bootstrap.js');

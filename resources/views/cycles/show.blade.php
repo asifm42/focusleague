@@ -3,7 +3,7 @@
 
 @section('styles')
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css">
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css"> --}}
     <style>
         .menu-btn {
             position:fixed;
@@ -261,7 +261,7 @@
 @stop
 
 @push('scripts')
-    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.js'></script>
+    {{-- <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.js'></script> --}}
     <script>
         $('document').ready(function() {
             $('#sideNav li a').click(function() {
