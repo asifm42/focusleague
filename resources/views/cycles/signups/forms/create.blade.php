@@ -166,16 +166,16 @@
                 }
 
                 if (checked_count == 2) {
-                    $('.cost-text').text( '$' + {{  $cost['cycle']['two_weeks'] }});
+                    $('.cost-text').text( '$' + parseFloat({{  $cost['cycle']['two_weeks'] }} / 100).toFixed(2));
                     $('div.cost-stmt').show(1000);
                 } else if (checked_count == 3) {
-                    $('.cost-text').text('$' + {{ $cost['cycle']['three_weeks'] }});
+                    $('.cost-text').text( '$' + parseFloat({{  $cost['cycle']['three_weeks'] }} / 100).toFixed(2));
                     $('div.cost-stmt').show(1000);
                 } else if (checked_count == 4) {
-                    $('.cost-text').text('$' + {{ $cost['cycle']['four_weeks'] }});
+                    $('.cost-text').text( '$' + parseFloat({{  $cost['cycle']['four_weeks'] }} / 100).toFixed(2));
                     $('div.cost-stmt').show(1000);
                 } else {
-                    $('.cost-text').text('$' + {{ $cost['cycle']['two_weeks'] }});
+                    $('.cost-text').text( '$' + parseFloat({{  $cost['cycle']['two_weeks'] }} / 100).toFixed(2));
                     $('div.cost-stmt').hide(1000);
                 }
             });
