@@ -10,3 +10,4 @@ focusleague.sublime-project
 focusleague.sublime-workspace
 storage/stubdb.sqlite
 storage/testdb.sqlite
+.env.dusk.local
