@@ -1,20 +1,20 @@
-.alert {
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    margin-bottom:0;
-}
+// .alert {
+//     border-top-right-radius: 0;
+//     border-top-left-radius: 0;
+//     margin-bottom:0;
+// }
 
-.navbar-default{
-    margin-bottom: 0;
-}
+// .navbar-default{
+//     margin-bottom: 0;
+// }
 
-.nav.footer li {
-    vertical-align: top;
-}
+// .nav.footer li {
+//     vertical-align: top;
+// }
 
-.page-header {
-    margin-top: 0;
-}
+// .page-header {
+//     margin-top: 0;
+// }
 
 .logo-navbar{
     height:45px;
@@ -31,61 +31,65 @@
     margin-top:20px
 }
 
-.emphasize {
-    color:000;
-    font-weight:800;
+label.required:after {
+    content:" *";
 }
 
-#faq_list .panel {
-    margin-bottom: 15px;
-}
+// .emphasize {
+//     color:000;
+//     font-weight:800;
+// }
 
-.tt-open {
-    background-color: #fff;
-    border:1px #2196f3 dashed;
-    border-top:0;
-    width:100%;
-    padding:5px;
-}
+// #faq_list .panel {
+//     margin-bottom: 15px;
+// }
 
-#schedule > .panel-body,
-.signup-list .panel-body,
-.team-list .panel-body {
-    padding:0;
-}
+// .tt-open {
+//     background-color: #fff;
+//     border:1px #2196f3 dashed;
+//     border-top:0;
+//     width:100%;
+//     padding:5px;
+// }
 
-// may not need this anymore since it was only for captain star
-.signup-list .panel-body p > i.legend,
-.team-list .panel-body p > i.legend {
-    margin-top:10px;
-    margin-left:5px;
-}
+// #schedule > .panel-body,
+// .signup-list .panel-body,
+// .team-list .panel-body {
+//     padding:0;
+// }
 
-#schedule table,
-.signup-list table,
-.team-list table {
-    margin-bottom: 0;
-}
+// // may not need this anymore since it was only for captain star
+// .signup-list .panel-body p > i.legend,
+// .team-list .panel-body p > i.legend {
+//     margin-top:10px;
+//     margin-left:5px;
+// }
+
+// #schedule table,
+// .signup-list table,
+// .team-list table {
+//     margin-bottom: 0;
+// }
 
 
-#schedule ul.list-unstyled {
-    margin:15px;
-    margin-bottom:26.5px
-}
+// #schedule ul.list-unstyled {
+//     margin:15px;
+//     margin-bottom:26.5px
+// }
 
-@media screen and (max-width: 767px) {
-    #schedule .table-responsive,
-    .signup-list .table-responsive,
-    .team-list .table-responsive {
-        margin-bottom:0;
-        border:none;
-    }
-}
+// @media screen and (max-width: 767px) {
+//     #schedule .table-responsive,
+//     .signup-list .table-responsive,
+//     .team-list .table-responsive {
+//         margin-bottom:0;
+//         border:none;
+//     }
+// }
 
-.tt-hint {
-    color:#a6a6a6;
-}
+// .tt-hint {
+//     color:#a6a6a6;
+// }
 
-.twitter-typeahead {
-    display:block !important;
-}
+// .twitter-typeahead {
+//     display:block !important;
+// }
