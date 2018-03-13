@@ -1,8 +1,8 @@
-                <div class="panel panel-default signup-list">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">{{ $title }} <span class="badge pull-right hidden">{{ $signups->count() }}</span></h4>
+                <div class="card signup-list mt-2 mb-2">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">{{ $title }} <span class="badge pull-right hidden">{{ $signups->count() }}</span></h4>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body p-0">
                     <?php
                         $showDivisions = (isset($showDivisions) && $showDivisions) ? true : false;
                     ?>

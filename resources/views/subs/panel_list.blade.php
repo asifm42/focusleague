@@ -1,8 +1,8 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">{{ ucwords($gender) }} subs</h4>
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title mb-0">{{ ucwords($gender) }} subs</h4>
     </div>
-    <div class="panel-body">
+    <div class="card-body p-2">
         @for($i=0, $len=$cycle->weeks()->count(); $i < $len; $i++ )
         <?php
             $subCount = $cycle->weeks[$i]->subs()->$gender()->count() ;

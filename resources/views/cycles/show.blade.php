@@ -38,51 +38,37 @@
 @stop
 
 @section('content')
-    <div class="page-header">
+{{--     <div class="page-header">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h4 class="hidden-md hidden-lg">Cycle {{ $cycle->name }}</h4>
-                    <h3 class="hidden-xs hidden-sm">Cycle {{ $cycle->name }}</h3>
-                    <p>Cycle overview</p>
+            <div class="row justify-content-center">
+                <div class="col-12">
                 </div>
             </div>
         </div>
-    </div>
-    <button class="btn btn-primary menu-btn visible-xs visible-sm hidden-md hidden-lg" data-toggle="offcanvas" data-target="#sideNav">NAV</button>
-    <div class="container">
-        <nav id="sideNav" class="navmenu navmenu-default navmenu-fixed-left offcanvas-xs offcanvas-sm hidden-md hidden-lg" role="navigation">
+    </div> --}}
+    {{-- <button class="btn btn-primary menu-btn visible-xs visible-sm hidden-md hidden-lg" data-toggle="offcanvas" data-target="#sideNav">NAV</button> --}}
+    <div class="container-fluid">
+{{--         <nav id="sideNav" class="navmenu navmenu-default navmenu-fixed-left offcanvas-xs offcanvas-sm hidden-md hidden-lg" role="navigation">
             <span class="navmenu-brand">Cycle {{ $cycle->name }}</span>
             <ul class="nav navmenu-nav">
                 @include('cycles.showMenuItems')
             </ul>
-        </nav>
-        <div class="row">
-            <div class="hidden-xs hidden-sm col-md-3">
+        </nav> --}}
+        <div class="row justify-content-center">
+{{--             <div class="hidden-xs hidden-sm col-md-3">
                 <ul id="sidebar" class="nav nav-pills nav-stacked well well-sm">
                     @include('cycles.showMenuItems')
                 </ul>
-            </div>
+            </div> --}}
 
-            <div class="col-xs-12 col-md-9">
+            <div class="col-12">
+                <h3>Cycle {{ $cycle->name }}</h3>
                 <div class="row">
-                    <div class="col-xs-12 col-md-4">
-
-                    <div id="details" class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Details</h4>
-                        </div>
-                        <div class="panel-body">
-                            <dl class="hidden">
-                                <dt>Name</dt>
-                                <dd>{{ $cycle->name }}</dd>
-                            </dl>
+                    <div class="col-12 col-md-6">
+                    <div class="card mt-2 mb-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Status</h4>
                             <dl>
-                                <dt>Format</dt>
-                                <dd>{!! $cycle->format !!}</dd>
-                            </dl>
-                            <dl>
-                                <dt>Current Status</dt>
                                 @if ($current_cycle_signup)
                                     @if($cycle->areTeamsPublished())
                                         @if (is_null($current_cycle_signup->pivot->team_id))
@@ -107,7 +93,7 @@
                                     @endif
                                     @if ($cycle->status() === 'SIGNUP_OPEN')
                                         <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-                                        <a class="btn btn-default btn-block" href="{{ route('cycle.signup.edit', $cycle->id) }}">Edit sign up</a>
+                                        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.edit', $cycle->id) }}">Edit sign up</a>
                                     @elseif ($cycle->status() === 'IN_PROGRESS')
                                         <dd>In progess</dd>
                                     @elseif ($cycle->status() === 'SIGNUP_CLOSED')
@@ -124,14 +110,16 @@
                                         <dd>Sign up opens at {{ $cycle->signup_opens_at->toDayDateTimeString() }}</dd>
                                     @elseif ($cycle->status() === 'SIGNUP_OPEN')
                                         <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-                                        <a class="btn btn-default btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
-                                        <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
+                                        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
+                                        {{-- <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a> --}}
                                     @elseif ($cycle->status() === 'SIGNUP_CLOSED')
                                         <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
-                                        <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
+                                        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
+                                        {{-- <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a> --}}
                                     @elseif ($cycle->status() === 'IN_PROGRESS')
                                         <dd>In progess. Sign-ups are closed but you can sign up as a sub.</dd>
-                                        <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a>
+                                        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
+                                        {{-- <a class="btn btn-default btn-block" href="{{ route('sub.create', $cycle->id) }}">Sign up as sub</a> --}}
                                     @elseif ($cycle->status() === 'COMPLETED')
                                         <dd>Completed</dd>
                                     @endif
@@ -139,27 +127,37 @@
                             </dl>
                         </div>
                     </div>
-
                     </div>
-                    <div class="col-xs-12 col-md-8">
+                    <div class="col-12 col-md-6">
+                    <div id="" class="card mt-2 mb-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Format</h4>
 
-                    <div id="schedule" class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Schedule/Results</h4>
+                            <dl>
+                                <dd>{!! $cycle->format !!}</dd>
+                            </dl>
                         </div>
-                        <div class="panel-body">
-                            @if($cycle->areTeamsPublished())
+                    </div>
+                    </div>
+                </div>
+            <div class="row">
+                    <div class="col-12">
+
+                    <div id="schedule" class="card mt-2 mb-2">
+                        <div class="card-body p-0">
+                            <h4 class="card-title mt-2 ml-2">Schedule/Results</h4>
+                            {{-- @if($cycle->areTeamsPublished()) --}}
                         <div class="table-responsive">
-    <table class="table table-condensed table-striped">
-                                <tr class="hidden">
-                                  <th>Div</th>
-                                  <th class="text-center" colspan="3">Teams</th>
-                                  <th class="text-right">Time</th>
-                                </tr>
+                            @if($cycle->areTeamsPublished())
+    <table class="table table-sm table-striped mb-0">
+        @else
+        <table class="table table-sm table-striped mb-0">
+        @endif
                             @for( $i=0, $len = $cycle->weeks()->count(); $i < $len; $i++)
-                                <tr class="warning">
+                                <tr class="table-secondary">
                                     <td colspan="5"><strong>Week {{ ($i+1) . ' - ' . $cycle->weeks[$i]->starts_at->toFormattedDateString() }}</strong></td>
                                 </tr>
+                            @if($cycle->areTeamsPublished())
                                 @if($cycle->weeks[$i]->isRainedOut())
                                     <tr>
                                         <th colspan=5 class="text-center">RAINED OUT</th>
@@ -185,10 +183,11 @@
                                     </tr>
                                 @endforeach
 
+                            @endif
                             @endfor
                             </table>
                             </div>
-                            @else
+                            {{--@else
 
 
                             <ul class='list-unstyled'>
@@ -202,7 +201,7 @@
                                 </ul>
                             @endfor
                             </ul>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
 
@@ -211,36 +210,36 @@
                 </div>
 
                 <div class="row" id="teams">
-                <div class="col-xs-12">
+                <div class="col-12">
                     @if($cycle->areTeamsPublished())
                         <div id="mensTeams" class="row">
                         @foreach($cycle->teams->where('division', 'mens') as $team)
                             <div id="{{ snake_case($team->name) }}" class="col-xs-12 col-sm-6">
-                            @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
+                            @include('teams.card', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                             </div>
                         @endforeach
                         </div>
                         <div id="mixedTeams" class="row">
                         @foreach($cycle->teams->where('division', 'mixed') as $team)
                             <div id="{{ snake_case($team->name) }}" class="col-xs-12 col-sm-6">
-                            @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
+                            @include('teams.card', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                             </div>
                         @endforeach
                         </div>
                         <div id="womensTeams" class="row">
                         @foreach($cycle->teams->where('division', 'womens') as $team)
                             <div id="{{ snake_case($team->name) }}" class="col-xs-12 col-sm-6">
-                            @include('teams.panel', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
+                            @include('teams.card', $data = ['players'=>$team->players->load('user'), 'subs' => $team->subs->load('user'), 'cycle'=>$cycle, 'title' => 'Team '. $team->nameAndDivision(), 'team'=>$team])
                             </div>
                         @endforeach
                         </div>
                     @else
                     <div class = "row">
                     <div id="maleSignups" class="col-xs-12 col-sm-6">
-                        @include('signups.panel', $data = ['signups'=>$currentMaleSignups, 'cycle'=>$cycle, 'title' => 'Male signups', 'showDivisions'=>true])
+                        @include('signups.card', $data = ['signups'=>$currentMaleSignups, 'cycle'=>$cycle, 'title' => 'Male signups', 'showDivisions'=>true])
                     </div>
                     <div id="femaleSignups" class="col-xs-12 col-sm-6">
-                        @include('signups.panel', $data = ['signups'=>$currentFemaleSignups, 'cycle'=>$cycle, 'title' => 'Female signups', 'showDivisions'=>true])
+                        @include('signups.card', $data = ['signups'=>$currentFemaleSignups, 'cycle'=>$cycle, 'title' => 'Female signups', 'showDivisions'=>true])
                     </div>
                     </div>
                     @endif

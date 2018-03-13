@@ -107,12 +107,12 @@ div.event  {/*
 @section('content')
     <div class="container">
 <!-- ########## START XS/SM ########## -->
-        <div class="text-center hidden-md hidden-lg">
+        <div class="text-center d-lg-none">
             @include('site.welcome-mobile')
         </div>
 <!-- ########## END XS/SM ########## -->
 <!-- ########## START MD/LG ########## -->
-        <div class="text-center hidden-xs hidden-sm">
+        <div class="text-center d-none d-lg-block">
             @include('site.welcome-desktop')
         </div>
 <!-- ########## END MD/LG ########## -->

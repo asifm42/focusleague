@@ -5,22 +5,20 @@
     <div class="page-header">
         <div class="container">
             @if(auth()->user() == $user)
-                <h4 class="hidden-md hidden-lg">Your Dashboard</h4>
-                <h3 class="hidden-xs hidden-sm">Your Dashboard</h3>
+                <h4>Your Dashboard</h4>
                 <p>Overview of your account.</p>
             @elseif(auth()->user()->isAdmin())
-                <h4 class="hidden-md hidden-lg">{{$user->getNicknameOrShortName() }}'s Dashboard</h4>
-                <h3 class="hidden-xs hidden-sm">{{$user->getNicknameOrShortName() }}'s Dashboard</h3>
-                <p>Overview of your {{ $user->name }}'s account.</p>
+                <h4>{{$user->getNicknameOrShortName() }}'s Dashboard</h4>
+                <p>Overview of {{ $user->name }}'s account.</p>
             @endif
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-6 col-md-push-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Balance</div>
-                    <div class="panel-body">
+            <div class="col-12 col-md-6 col-md-push-6">
+                <div class="card mt-2 mb-2">
+                    <div class="card-header">Balance</div>
+                    <div class="card-body">
                         @if ($balance > 0)
                             <h6>You currently owe ${{ $balance }}.</h6>
                             <h6>You can pay via the following methods:</h6>
@@ -34,17 +32,17 @@
                             <h6>It will be applied towards your next charge.</h6>
                         @endif
                         @if(auth()->user() == $user)
-                            <a href="{{ route('balance.details') }}" class="btn btn-default btn-block">See balance details</a>
+                            <a href="{{ route('balance.details') }}" class="btn btn-secondary btn-block">See balance details</a>
                         @elseif(auth()->user()->isAdmin())
-                            <a href="{{ route('users.balance', $user->id) }}" class="btn btn-default btn-block">See balance details</a>
+                            <a href="{{ route('users.balance', $user->id) }}" class="btn btn-secondary btn-block">See balance details</a>
                         @else
                         @endif
                     </div>
                 </div>
             @if(!empty($current_cycle))
-                <div class="panel panel-default">
-                    <div class="panel-heading">Current Cycle</div>
-                    <div class="panel-body">
+                <div class="card">
+                    <div class="card-header">Current Cycle</div>
+                    <div class="card-body">
 
                         <dl class="horizontal">
                             <dt>Name</dt>
@@ -239,35 +237,35 @@
                 </div>
             @endif
             </div>
-            <div class="col-xs-12 col-md-6 col-md-pull-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Profile - <a href="{{ route('users.edit', $user->id) }}">Edit</a></div>
-                    <div class="panel-body">
+            <div class="col-12 col-md-6 col-md-pull-6">
+                <div class="card mt-2 mb-2">
+                    <div class="card-header">Profile - <a href="{{ route('users.edit', $user->id) }}">Edit</a></div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
-                                <h6>Name</h6>
+                                <h6 class="font-weight-bold text-muted">Name</h6>
                                 <p>{{ ucwords($user->name) }}</p>
-                                <h6>Nickname</h6>
+                                <h6 class="font-weight-bold text-muted">Nickname</h6>
                                 <p>{{ ucwords($user->getNicknameOrShortName()) }}</p>
-                                <h6>Email</h6>
+                                <h6 class="font-weight-bold text-muted">Email</h6>
                                 <p>{{ $user->email }}</p>
-                                <h6>Gender</h6>
+                                <h6 class="font-weight-bold text-muted">Gender</h6>
                                 <p>{{ $user->gender }}</p>
-                                <h6>Birthday</h6>
+                                <h6 class="font-weight-bold text-muted">Birthday</h6>
                                 <p>{{ $user->birthday->toFormattedDateString() }}</p>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <h6>Cell Number</h6>
+                                <h6 class="font-weight-bold text-muted">Cell Number</h6>
                                 <p>{{ $user->cell_number }}</p>
-                                <h6>Carrier</h6>
+                                <h6 class="font-weight-bold text-muted">Carrier</h6>
                                 <p>{{ $user->mobile_carrier }}</p>
-                                <h6>Dominant Hand</h6>
+                                <h6 class="font-weight-bold text-muted">Dominant Hand</h6>
                                 <p>{{ $user->dominant_hand }}</p>
-                                <h6>Height</h6>
+                                <h6 class="font-weight-bold text-muted">Height</h6>
                                 <p>{{ $user->heightString() }}</p>
-                                <h6>Division Preference First</h6>
+                                <h6 class="font-weight-bold text-muted">Division Preference First</h6>
                                 <p>{{ $user->division_preference_first }}</p>
-                                <h6>Division Preference Second</h6>
+                                <h6 class="font-weight-bold text-muted">Division Preference Second</h6>
                                 <p>{{ $user->division_preference_second }}</p>
 {{--                                 <h6>Season Pass</h6>
                                 <p>Valid through {{ $user->season_pass_ends_on->toFormattedDateString() }}</p> --}}
@@ -275,33 +273,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Ultimate History - <a href="{{ route('users.ultimate_history.edit', $user->id) }}">Edit</a></div>
-                    <div class="panel-body">
+                <div class="card mt-2 mb-2">
+                    <div class="card-header">Ultimate History - <a href="{{ route('users.ultimate_history.edit', $user->id) }}">Edit</a></div>
+                    <div class="card-body">
                         @if ($user->ultimateHistory)
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
-                                <h6>Club affiliation</h6>
+                                <h6 class="font-weight-bold text-muted">Club affiliation</h6>
                                 <p>{{ $user->ultimateHistory->club_affiliation }}</p>
-                                <h6>Years played</h6>
+                                <h6 class="font-weight-bold text-muted">Years played</h6>
                                 <p>{{ $user->ultimateHistory->years_played }}</p>
-                                <h6>Summary</h6>
+                                <h6 class="font-weight-bold text-muted">Summary</h6>
                                 <p>{{ $user->ultimateHistory->summary }}</p>
-                                <h6>Favorite defensive position</h6>
+                                <h6 class="font-weight-bold text-muted">Favorite defensive position</h6>
                                 <p>{{ $user->ultimateHistory->fav_defensive_position }}</p>
-                                <h6>Favorite offensive position</h6>
+                                <h6 class="font-weight-bold text-muted">Favorite offensive position</h6>
                                 <p>{{ $user->ultimateHistory->fav_offensive_position }}</p>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <h6>Defensive or Offensive player</h6>
+                                <h6 class="font-weight-bold text-muted">Defensive or Offensive player</h6>
                                 <p>{{ $user->ultimateHistory->def_or_off }}</p>
-                                <h6>Your best skill</h6>
+                                <h6 class="font-weight-bold text-muted">Your best skill</h6>
                                 <p>{{ $user->ultimateHistory->best_skill }}</p>
-                                <h6>Skill you most want to improve</h6>
+                                <h6 class="font-weight-bold text-muted">Skill you most want to improve</h6>
                                 <p>{{ $user->ultimateHistory->skill_to_improve }}</p>
-                                <h6>Your best throw</h6>
+                                <h6 class="font-weight-bold text-muted">Your best throw</h6>
                                 <p>{{ $user->ultimateHistory->best_throw }}</p>
-                                <h6>Throw you most want to improve</h6>
+                                <h6 class="font-weight-bold text-muted">Throw you most want to improve</h6>
                                 <p>{{ $user->ultimateHistory->throw_to_improve }}</p>
                             </div>
                         </div>

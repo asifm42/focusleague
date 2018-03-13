@@ -1,6 +1,6 @@
 <!-- ########## START FOCUS BANNER ########## -->
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
         <div>
             <img alt="FOCUS League" title="FOCUS League" src="{{ asset('assets/img/logo.png') }}" class="logo-welcome-mobile">
         </div>
@@ -12,13 +12,13 @@
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
 <div class="row">
-    <div class="col-xs-12">
-        <div class="text-center" style="margin:1em 0;">
+    <div class="col-12">
+        <div class="text-center mt-2 mb-2">
             <div class="alert alert-info">
-                <h5 style="color: #fff; margin:0">
+                <h5 >
                     FOCUS League returns on<br>March 20th, 2018!
                 </h5>
-                <h5 style="color: #fff; margin:.5em 0 0 0">
+                <h5 class="m-0 mt-1">
                     Registration for Cycle 2018-01<br>opens on March 14th, 2018
                 </h5>
             </div>
@@ -28,10 +28,10 @@
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START GAME STATUS ########## -->
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
     @if($current_cycle && $current_cycle->gameToday())
-        <div    class="jumbotron"
-                style="background-color: #ffff99; margin-bottom:0" >
+        <div    class="jumbotron mb-0"
+                style="background-color: #ffff99;" >
             <h5>
                 Game Status for {{ Carbon::today()->format("l, F jS") }}<br />
                 @if($current_cycle->currentWeek()->updated_at->isToday() && $current_cycle->currentWeek()->updated_at->lt(Carbon::now()))
@@ -67,7 +67,7 @@
 <!-- ########## END GAME STATUS ########## -->
 <!-- ########## START CYCLE STATUS ########## -->
 <div class = "row">
-    <div class="col-xs-12">
+    <div class="col-12">
     @if($current_cycle && $current_cycle->isSignupOpen())
         <div class="text-center" style="margin:1em 0;">
             <div class="alert alert-success">
@@ -112,7 +112,7 @@
 <!-- ########## END CYCLE STATUS ########## -->
 <!-- ########## START USER BUTTONS ROW ########## -->
 <div class = "row">
-    <div class="col-xs-12">
+    <div class="col-12">
     @if(auth()->check())
         <p>
             <a  href="{{ route('users.dashboard') }}"
@@ -121,20 +121,26 @@
             </a>
         </p>
         @if($current_cycle && !auth()->user()->current_cycle_signup())
-            @if($current_cycle->isSignupOpen())
                 <p>
                     <a  href="{{ route('cycle.signup.create', 'current') }}"
                         class ="btn btn-primary btn-lg">
                         Sign up for Cycle {{ $current_cycle->name }}
                     </a>
                 </p>
-            @endif
-            <p>
+{{--             @if($current_cycle->isSignupOpen())
+                <p>
+                    <a  href="{{ route('cycle.signup.create', 'current') }}"
+                        class ="btn btn-primary btn-lg">
+                        Sign up for Cycle {{ $current_cycle->name }}
+                    </a>
+                </p>
+            @endif --}}
+{{--             <p>
                 <a  href="{{ route('sub.create', 'current') }}"
                     class ="btn btn-info btn-lg">
                         Sign up as a sub for Cycle {{ $current_cycle->name }}
                 </a>
-            </p>
+            </p> --}}
         @endif
     @endif
     </div>
@@ -142,40 +148,53 @@
 <!-- ########## END USER BUTTONS ROW ########## -->
 <!-- ########## START INFO ROW ########## -->
 <div class = "row">
-    <div class = "col-xs-12 col-md-4">
-        <div class="jumbotron how-it-works">
-            <h4>
-                How It Works
-            </h4>
-            <ol class="text-left" style="font-size: 20px;">
-            <li>Register for a cycle</li>
-            <li>Compete 3-4 weeks</li>
-            <li>Rinse &amp; Repeat</li>
-            </ol>
+    <div class="col-12 col-sm-6 mt-2 mb-2">
+        <div class="card h-100 ">
+            <div class="card-body d-flex">
+                <div class="m-auto">
+                    <h4>
+                        The Mission
+                    </h4>
+                    <p class="lead">
+                        To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
+                    </p>
+                    <p>
+                        <a  href="{{ route('site.faq') }}"
+                            class="btn btn-secondary btn-lg">
+                                Learn more
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class = "col-xs-12 col-md-4">
-        @include('site.schedule')
-    </div>
-    <div class = "col-xs-12 col-md-4">
-        <div class="text-center">
-            <div class="jumbotron">
-                <h4>
-                    The Mission
-                </h4>
-                <p>
-                    To structure would-be Ultimate <span style="text-decoration: line-through;">Frisbee</span> pickup games into a league and increase the availability of competitive Ultimate in Houston.
-                </p>
-                <p>
+    <div class="col-12 col-sm-6 mt-2 mb-2">
+        <div class="card h-100">
+            <div class="card-body d-flex">
+                <div class="m-auto">
+                    <h4>
+                        How It Works
+                    </h4>
+                    <ol class="text-left" style="font-size: 20px;">
+                        <li>Register for a cycle</li>
+                        <li>Compete 3-4 weeks</li>
+                        <li>Rinse &amp; Repeat</li>
+                    </ol>
                     <a  href="{{ route('site.faq') }}"
-                        class="btn btn-default btn-lg">
-                            Learn more
+                        class="btn btn-secondary btn-lg">
+                            FAQ
                     </a>
-                </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12 mt-2 mb-2">
+        @include('site.schedule')
+    </div>
+</div>
+
 <!-- ########## END INFO ROW ########## -->
 
 

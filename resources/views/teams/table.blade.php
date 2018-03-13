@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-condensed table-striped">
+    <table class="table table-sm table-striped mb-0">
 {{--     @if(strtolower($team->division) === 'mixed')
         <tr class="default"><th>
         @if(strtolower($players->first()->gender) === 'male')

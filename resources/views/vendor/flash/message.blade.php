@@ -6,7 +6,7 @@
             'body'          => session('flash_notification.message')
         ])
     @else
-        <div class="alert alert-{{ session()->get('flash_notification.level')}} fade in ">
+        <div class="alert alert-{{ session()->get('flash_notification.level')}} fade show rounded-0">
             <button type="button"
                     class="close"
                     data-dismiss="alert"

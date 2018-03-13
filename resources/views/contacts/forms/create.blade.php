@@ -1,36 +1,23 @@
-<div class="panel panel-default">
-
-    <div class="panel-heading">
-        <h3 class="panel-title">Send us a message</h3>
+<h3 class="text-center">Contact Us</h3>
+<p class="text-center">Got a question or feedback? Get in touch!</p>
+<form accept-charset="utf-8" class="form-vertical" method="POST" action="{{ route('contact.send') }}">
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="name" class="required">Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Required first & last name" required>
+                <small id="nameHelp" class="form-text text-muted">Please provide first and last name.</small>
+            </div>
+            <div class="form-group">
+                <label for="email" class="required">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required placeholder="Required email">
+            </div>
+            <div class="form-group">
+                <label for="name" class="required">Message</label>
+                <textarea class="form-control" id="message" rows="5" aria-describedby="messageHelp" placeholder="Required message" required></textarea>
+            </div>
+        </div>
     </div>
-
-    <div class="panel-body">
-        {!! Former::vertical_open()
-            ->action(route('contact.send'))
-        !!}
-
-        {!! Former::text('name')
-            ->addClass('form-control')
-            ->placeholder('Required name')
-            ->autofocus('autofocus')
-            ->required()
-        !!}
-        {!! Former::text('email')
-            ->addClass('form-control')
-            ->placeholder('Required email')
-            ->required()
-        !!}
-        {!! Former::textarea('message')
-            ->addClass('form-control')
-            ->placeholder('Required message')
-            ->required()
-        !!}
-    </div>
-    <div class="panel-footer">
-        {!! Former::submit()
-            ->addClass('btn btn-primary')
-            ->value('Send')
-        !!}
-    </div>
-    {!! Former::close() !!}
-</div>
+    <input class="btn btn btn-primary btn-block" type="submit" value="Send">
+    {{ csrf_field() }}
+</form>
