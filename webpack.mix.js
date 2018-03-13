@@ -13,7 +13,7 @@ const { mix } = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .extract([
-        'lodash', 'jquery', 'bootstrap-sass', 'vue', 'axios', 'datatables.net', 'datatables.net-bs', 'moment', 'drmonty-datatables-plugins',
+        'lodash', 'jquery', 'bootstrap', 'vue', 'axios', 'datatables.net', 'datatables.net-bs', 'moment', 'drmonty-datatables-plugins'
     ])
     .autoload({
         jquery: ['$', 'window.jQuery', 'jQuery', 'jquery'],
