@@ -3,22 +3,22 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
 // Variables
-@import "node_modules/bootswatch/paper/variables";
+@import "node_modules/bootswatch/dist/flatly/variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
 
 // Bootswatch
-@import "node_modules/bootswatch/paper/bootswatch";
+@import "node_modules/bootswatch/dist/flatly/bootswatch";
 
 // Font Awesome
 @import "node_modules/font-awesome/scss/font-awesome";
 
 // bootstrap-datetimepicker
-@import "node_modules/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
+// @import "node_modules/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
 
 // jasny-bootstrap
-@import "node_modules/jasny-bootstrap/scss/jasny-bootstrap";
+// @import "node_modules/jasny-bootstrap/scss/jasny-bootstrap";
 
 // Site
 @import "site";

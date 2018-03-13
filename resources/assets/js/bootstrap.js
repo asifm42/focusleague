@@ -1,5 +1,6 @@
 
 window._ = require('lodash');
+window.Popper = require('popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10,7 +11,7 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
+    require('bootstrap');
 } catch (e) {}
 
 /**
@@ -52,7 +53,7 @@ window.typeahead = require('typeahead.js');
 window.Bloodhound = require('bloodhound-js');
 
 // https://github.com/uxsolutions/bootstrap-datepicker
-window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
+// window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
 
 // http://selectize.github.io/selectize.js/
 // window.selectize = require('selectize');
