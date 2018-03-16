@@ -224,4 +224,22 @@ class Cycle extends Model
     {
         return SELF::where('name', $name)->first();
     }
+
+    /**
+     * Determine if the given user is subbing any weeks during the cycle
+     *
+     * @param  App\Models\User  $user The user to check against.
+     * @return boolean
+     */
+    public function isSubbing($user)
+    {
+        if ($user == null) return false;
+        foreach($this->weeks as $week){
+            $sub = $week->subs->find($user->id);
+            if ($sub) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
