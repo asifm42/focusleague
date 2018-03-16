@@ -1,12 +1,12 @@
-<div class="card">
+<div class="card mt-2 mb-2">
     <div class="card-header">
-        <h4 class="card-title mb-0">{{ ucwords($gender) }} subs</h4>
+        <h6 class="card-title font-weight-bold m-0">{{ ucwords($gender) }} subs</h6>
     </div>
     <div class="card-body p-2">
         @for($i=0, $len=$cycle->weeks()->count(); $i < $len; $i++ )
-        <?php
+        @php
             $subCount = $cycle->weeks[$i]->subs()->$gender()->count() ;
-        ?>
+        @endphp
         <ul class="list-unstyled">
             @if ($subCount > 0)
                 <li class="hidden"><strong>Name</strong><span class="pull-right"><strong>Team</strong></span></li>
@@ -26,9 +26,9 @@
                                         data-title="{{ $sub->pivot->note }}"></i>
                             @endif
                             @if ($sub->pivot->team_id)
-                                <span class="pull-right"><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">{{ ucwords($cycle->teams->find($sub->pivot->team_id)->nameAndDivision()) }}</a></span>
+                                <span class="float-right"><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">{{ ucwords($cycle->teams->find($sub->pivot->team_id)->name)}} {!! $cycle->teams->find($sub->pivot->team_id)->divisionIcon() !!}</a></span>
                             @else
-                                <span class="pull-right"><em><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">Select</a></em></span>
+                                <span class="float-right"><em><a href="{{ route('subs.teamPlacementForm', $sub->pivot->id) }}">Select</a></em></span>
                             @endif
                         </li>
                     @else
