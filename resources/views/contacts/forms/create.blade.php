@@ -13,8 +13,8 @@
                 <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required placeholder="Required email"value="{{ auth()->check() ? auth()->user()->email : '' }}" {{auth()->check() ? 'readonly' : ''}}>
             </div>
             <div class="form-group">
-                <label for="name" class="required">Message</label>
-                <textarea class="form-control" id="message" rows="5" aria-describedby="messageHelp" placeholder="Required message" required></textarea>
+                <label for="message" class="required">Message</label>
+                <textarea name="message" class="form-control" id="message" rows="5" aria-describedby="messageHelp" placeholder="Required message" required></textarea>
             </div>
         </div>
     </div>
