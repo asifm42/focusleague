@@ -51,11 +51,14 @@ class TransactionsController extends Controller
      */
     public function create(Request $request)
     {
+        $data['userId'] = "";
         if ($request->has('user_id')) {
             $user = User::findOrFail($request->input('user_id'));
             $data['typeahead_name'] = $user->name . " ( " . $user->getNicknameOrShortName() . ")";
             $data['balance'] = $user->getBalanceInDollars();
+            $data['userId'] = $user->id;
         }
+
         $users = User::all();
         $users->load('transactions');
         $names = [];
@@ -126,16 +129,8 @@ class TransactionsController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction->load('cycle','user','week');
 
-        Former::populate($transaction);
-        if ($transaction->type == 'payment') {
-            Former::populateField('transaction_type', $transaction->payment_type);
-        } else {
-            Former::populateField('transaction_type', $transaction->type);
-        }
-
 
         $data['transaction'] = $transaction;
-        Former::populateField('amount', $transaction->amount_in_dollars);
         $data['names'] = json_encode($names);
         $data['typeahead_name'] = $transaction->user->name . " (" . $transaction->user->getNicknameOrShortName() . ")";
         $data['cycles'] = Cycle::with('weeks')->get()->sortByDesc('signup_opens_at');
