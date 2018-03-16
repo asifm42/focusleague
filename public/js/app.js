@@ -11,7 +11,7 @@ webpackJsonp([1],[
  * Copyright 2013-2014 Twitter, Inc. and other contributors; Licensed MIT
  */
 
-var assign = __webpack_require__(142);
+var assign = __webpack_require__(143);
 
 var _ = {
   isMsie: function() {
@@ -113,7 +113,7 @@ var _ = {
     return !!result;
   },
 
-  mixin: __webpack_require__(142),
+  mixin: __webpack_require__(143),
 
   identity: function(x) { return x; },
 
@@ -207,7 +207,88 @@ module.exports = _;
 /* 6 */,
 /* 7 */,
 /* 8 */,
-/* 9 */,
+/* 9 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
 /* 10 */,
 /* 11 */,
 /* 12 */,
@@ -340,7 +421,8 @@ module.exports = _;
 /* 139 */,
 /* 140 */,
 /* 141 */,
-/* 142 */
+/* 142 */,
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -437,7 +519,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
@@ -572,7 +654,7 @@ function flush() {
 function attemptVertx() {
   try {
     var r = require;
-    var vertx = __webpack_require__(180);
+    var vertx = __webpack_require__(182);
     vertxNext = vertx.runOnLoop || vertx.runOnContext;
     return useVertxTimer();
   } catch (e) {
@@ -1594,13 +1676,13 @@ return Promise;
 
 })));
 //# sourceMappingURL=es6-promise.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(4)))
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var LruCache = __webpack_require__(182);
+var LruCache = __webpack_require__(184);
 var _ = __webpack_require__(3);
 
 var pendingRequestsCount = 0;
@@ -1721,7 +1803,7 @@ module.exports = Transport;
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports) {
 
 /**
@@ -1740,16 +1822,353 @@ module.exports = isObject;
 
 
 /***/ }),
-/* 146 */,
-/* 147 */
+/* 147 */,
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(148);
-module.exports = __webpack_require__(204);
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(205)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
 
 
 /***/ }),
-/* 148 */
+/* 149 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(151);
+module.exports = __webpack_require__(213);
+
+
+/***/ }),
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -1759,9 +2178,9 @@ module.exports = __webpack_require__(204);
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(149);
+__webpack_require__(152);
 
-window.Vue = __webpack_require__(146);
+window.Vue = __webpack_require__(147);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -1769,25 +2188,23 @@ window.Vue = __webpack_require__(146);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
-
-// const app = new Vue({
-//     el: '#app'
-// });
-
-Vue.component('cycle-signup', __webpack_require__(200));
+Vue.component('cycle-signup', __webpack_require__(202));
+Vue.component('signups-card', __webpack_require__(208));
+Vue.component('signup', __webpack_require__(223));
+Vue.component('team-card', __webpack_require__(226));
+Vue.component('team-builder', __webpack_require__(229));
 
 var app = new Vue({
   el: '#app'
 });
 
 /***/ }),
-/* 149 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {
-window._ = __webpack_require__(8);
-window.Popper = __webpack_require__(10).default;
+window._ = __webpack_require__(5);
+window.Popper = __webpack_require__(11).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -1798,7 +2215,7 @@ window.Popper = __webpack_require__(10).default;
 try {
   window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(1);
 
-  __webpack_require__(11);
+  __webpack_require__(12);
 } catch (e) {}
 
 /**
@@ -1807,7 +2224,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(12);
+window.axios = __webpack_require__(13);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -1826,17 +2243,17 @@ if (token) {
 }
 
 // https://datatables.net/
-window.datatables = __webpack_require__(7);
-window.datatables_bs = __webpack_require__(18);
-__webpack_require__(168);
+window.datatables = __webpack_require__(8);
+window.datatables_bs = __webpack_require__(19);
 __webpack_require__(171);
+__webpack_require__(174);
 
 // https://momentjs.com/
 window.moment = __webpack_require__(0);
 
 // https://twitter.github.io/typeahead.js/
-window.typeahead = __webpack_require__(176);
-window.Bloodhound = __webpack_require__(178);
+window.typeahead = __webpack_require__(178);
+window.Bloodhound = __webpack_require__(180);
 
 // https://github.com/uxsolutions/bootstrap-datepicker
 // window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
@@ -1871,13 +2288,10 @@ window.Bloodhound = __webpack_require__(178);
 
 //
 // window.Jasny = require('jasny-bootstrap');
-window.Jasny = __webpack_require__(199);
+window.Jasny = __webpack_require__(201);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 150 */,
-/* 151 */,
-/* 152 */,
 /* 153 */,
 /* 154 */,
 /* 155 */,
@@ -1893,7 +2307,10 @@ window.Jasny = __webpack_require__(199);
 /* 165 */,
 /* 166 */,
 /* 167 */,
-/* 168 */
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -1920,7 +2337,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 (function (factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(0), __webpack_require__(170)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(0), __webpack_require__(173)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -1964,8 +2381,8 @@ $.fn.dataTable.moment = function ( format, locale ) {
 
 
 /***/ }),
-/* 169 */,
-/* 170 */
+/* 172 */,
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1.10.13
@@ -17279,13 +17696,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 
 
 /***/ }),
-/* 171 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(172);
+var content = __webpack_require__(175);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -17293,7 +17710,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(174)(content, options);
+var update = __webpack_require__(176)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -17310,10 +17727,10 @@ if(false) {
 }
 
 /***/ }),
-/* 172 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(173)(false);
+exports = module.exports = __webpack_require__(9)(false);
 // imports
 
 
@@ -17324,89 +17741,7 @@ exports.push([module.i, "table.dataTable {\n  clear: both;\n  margin-top: 6px !i
 
 
 /***/ }),
-/* 173 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 174 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -17452,7 +17787,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(175);
+var	fixUrls = __webpack_require__(177);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -17765,7 +18100,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 175 */
+/* 177 */
 /***/ (function(module, exports) {
 
 
@@ -17860,7 +18195,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 176 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(setImmediate) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -20316,28 +20651,28 @@ module.exports = function (css) {
         }
     })();
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(141).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(142).setImmediate))
 
 /***/ }),
-/* 177 */,
-/* 178 */
+/* 179 */,
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(179);
+module.exports = __webpack_require__(181);
 
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(3);
-var Promise = __webpack_require__(143).Promise;
-var Remote = __webpack_require__(181);
-var Prefetch = __webpack_require__(183);
-var tokenizers = __webpack_require__(189);
-var oParser = __webpack_require__(190);
-var SearchIndex = __webpack_require__(198);
-var Transport = __webpack_require__(144);
+var Promise = __webpack_require__(144).Promise;
+var Remote = __webpack_require__(183);
+var Prefetch = __webpack_require__(185);
+var tokenizers = __webpack_require__(191);
+var oParser = __webpack_require__(192);
+var SearchIndex = __webpack_require__(200);
+var Transport = __webpack_require__(145);
 
 function Bloodhound(o) {
   o = oParser(o);
@@ -20511,13 +20846,13 @@ module.exports = Bloodhound;
 
 
 /***/ }),
-/* 180 */
+/* 182 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 181 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -20527,7 +20862,7 @@ module.exports = Bloodhound;
  */
 
 var _ = __webpack_require__(3);
-var Transport = __webpack_require__(144);
+var Transport = __webpack_require__(145);
 
 function Remote(o) {
   this.url = o.url;
@@ -20575,7 +20910,7 @@ _.mixin(Remote.prototype, {
 module.exports = Remote;
 
 /***/ }),
-/* 182 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -20679,10 +21014,10 @@ module.exports = LruCache;
 
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var PersistentStorage = __webpack_require__(184);
+var PersistentStorage = __webpack_require__(186);
 var _ = __webpack_require__(3);
 
 var keys = { data: 'data', protocol: 'protocol', thumbprint: 'thumbprint' };
@@ -20773,10 +21108,10 @@ module.exports = Prefetch;
 
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var storage2 = __webpack_require__(185);
+var storage2 = __webpack_require__(187);
 var _ = __webpack_require__(3);
 
 var LOCAL_STORAGE;
@@ -20921,11 +21256,11 @@ module.exports = PersistentStorage;
 
 
 /***/ }),
-/* 185 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Storage = __webpack_require__(186);
-var cookie = __webpack_require__(188);
+var Storage = __webpack_require__(188);
+var cookie = __webpack_require__(190);
 
 var _storage_support = true;
 
@@ -20966,10 +21301,10 @@ if (_storage_support) {
 
 
 /***/ }),
-/* 186 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var numKeys = __webpack_require__(187);
+var numKeys = __webpack_require__(189);
 
 function Storage(obj, set, clear) {
   this._obj = obj || {};
@@ -21029,7 +21364,7 @@ module.exports = Storage;
 
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, exports) {
 
 module.exports = function(obj) {
@@ -21045,7 +21380,7 @@ module.exports = function(obj) {
 
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports) {
 
 function createCookie(name, value, days) {
@@ -21087,7 +21422,7 @@ module.exports = {
 
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -21135,12 +21470,12 @@ module.exports = {
 
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(3);
-var ajax = __webpack_require__(191);
-var VERSION = __webpack_require__(197);
+var ajax = __webpack_require__(193);
+var VERSION = __webpack_require__(199);
 
 module.exports = function(o) {
   var defaults, sorter;
@@ -21334,11 +21669,11 @@ function callbackToDeferred(fn) {
 
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Promise = __webpack_require__(143).Promise;
-var request = __webpack_require__(192);
+var Promise = __webpack_require__(144).Promise;
+var request = __webpack_require__(194);
 
 module.exports = function(o) {
   return new Promise(function(resolve, reject) {
@@ -21351,17 +21686,17 @@ module.exports = function(o) {
 
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * Module dependencies.
  */
 
-var Emitter = __webpack_require__(193);
-var reduce = __webpack_require__(194);
-var requestBase = __webpack_require__(195);
-var isObject = __webpack_require__(145);
+var Emitter = __webpack_require__(195);
+var reduce = __webpack_require__(196);
+var requestBase = __webpack_require__(197);
+var isObject = __webpack_require__(146);
 
 /**
  * Root reference for iframes.
@@ -21410,7 +21745,7 @@ function isHost(obj) {
  * Expose `request`.
  */
 
-var request = module.exports = __webpack_require__(196).bind(null, Request);
+var request = module.exports = __webpack_require__(198).bind(null, Request);
 
 /**
  * Determine XHR.
@@ -22434,7 +22769,7 @@ request.put = function(url, data, fn){
 
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -22603,7 +22938,7 @@ Emitter.prototype.hasListeners = function(event){
 
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports) {
 
 
@@ -22632,13 +22967,13 @@ module.exports = function(arr, fn, initial){
 };
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * Module of mixed-in functions shared between node and client code
  */
-var isObject = __webpack_require__(145);
+var isObject = __webpack_require__(146);
 
 /**
  * Clear previous timeout.
@@ -22804,7 +23139,7 @@ exports.field = function(name, val) {
 
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, exports) {
 
 // The node and browser modules expose versions of this with the
@@ -22842,7 +23177,7 @@ module.exports = request;
 
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports) {
 
 /*
@@ -22855,7 +23190,7 @@ module.exports = '1.0.0';
 
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(3);
@@ -23035,7 +23370,7 @@ module.exports = SearchIndex;
 
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery, __webpack_provided_window_dot_jQuery) {/*!
@@ -24120,19 +24455,19 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(1)))
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(214)
+  __webpack_require__(203)
 }
-var normalizeComponent = __webpack_require__(201)
+var normalizeComponent = __webpack_require__(149)
 /* script */
-var __vue_script__ = __webpack_require__(202)
+var __vue_script__ = __webpack_require__(206)
 /* template */
-var __vue_template__ = __webpack_require__(218)
+var __vue_template__ = __webpack_require__(207)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -24171,124 +24506,96 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 201 */
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(204);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(148)("765e2a99", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bf2ab392\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CycleSignup.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bf2ab392\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CycleSignup.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(9)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fade-enter-active[data-v-bf2ab392], .fade-leave-active[data-v-bf2ab392] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-bf2ab392], .fade-leave-to[data-v-bf2ab392] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\ntime.icon.icon-sm[data-v-bf2ab392] {\n    font-size:0.6em;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 205 */
 /***/ (function(module, exports) {
 
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
     }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
     } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
+      newStyles[id].parts.push(part)
     }
   }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
+  return styles
 }
 
 
 /***/ }),
-/* 202 */
+/* 206 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -24553,29 +24860,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             'show': 'intro',
-            'firstPass': true,
+            'editMode': null,
             'weeksAttending': [],
             'subSignup': false,
             'division_preference_first': '',
             'division_preference_second': '',
             'payment_method': null,
             'will_captain': null,
-            'note': null
+            'note': null,
+            'status': 'creating'
         };
     },
     methods: {
         buildPayload: function buildPayload() {
             var payload = {};
+            if (this.subSignup == false) {
+                payload['div_pref_first'] = this.division_preference_first;
 
-            payload['div_pref_first'] = this.division_preference_first;
+                payload['div_pref_second'] = this.division_preference_second;
 
-            payload['div_pref_second'] = this.division_preference_second;
+                payload['will_captain'] = this.captainPayload();
 
-            payload['will_captain'] = this.will_captain == null ? false : this.will_captain;
+                payload['weeks'] = this.weekPayload();
 
-            payload['weeks'] = this.weekPayload();
-
-            payload['payment_method'] = this.payment_method;
+                payload['payment_method'] = this.payment_method;
+            } else {
+                payload['weeks'] = __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.map(__WEBPACK_IMPORTED_MODULE_1_lodash___default.a.filter(this.weekPayload(), function (week) {
+                    return week.attending;
+                }), 'id');
+            }
 
             payload['note'] = this.note;
 
@@ -24593,25 +24906,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return weeks;
         },
+        captainPayload: function captainPayload() {
+            if (this.will_captain && this.numOfWeeksSigningUp >= 3) {
+                return true;
+            }
+
+            return false;
+        },
         clickConfirmEdit: function clickConfirmEdit(event) {
+            this.editMode = true;
             this.show = event.currentTarget.dataset.show;
         },
         clickFinish: function clickFinish() {
             var _this = this;
 
             console.log('cycles/' + this.cycle.name + '/signups');
-            axios.post('/api/cycles/' + this.cycle.name + '/signups', this.buildPayload()).then(function (response) {
+            var url = '/api/cycles/' + this.cycle.name + '/signups';
+
+            if (this.subSignup) {
+                url = '/api/cycles/' + this.cycle.name + '/subs';
+            }
+            this.status = 'sending';
+            axios.post(url, this.buildPayload()).then(function (response) {
                 console.log(response.data);
+                _this.status = 'updating';
                 if (response.data.status == 'success') {
-                    window.location.href = "/cycles/" + _this.cycle.name;
+                    _this.show = 'success';
                 }
             }).catch(function (error) {
                 console.log(error);
             });
             return true;
         },
+        clickCycleDetails: function clickCycleDetails() {
+            window.location.href = "/cycles/" + this.cycle.name;
+            return;
+        },
         clickContinue: function clickContinue() {
-            if (this.firstPass !== true) {
+            if (this.editMode == true) {
                 if (this.show == 'availability' && this.subSignup) {
                     return this.show = 'sub_message';
                 }
@@ -24691,7 +25023,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             if (this.show == 'payment') {
-                this.firstPass = false;
+                // this.firstPass = false;
 
                 if (this.signingUpForToday) {
                     if (this.cycleSignupLate || this.cycleSignupSuperLate || this.subSignupSuperLate) this.show = 'late_message';
@@ -24821,6 +25153,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     computed: {
+        timeFontSize: function timeFontSize() {
+            return this.cycle.weeks.length > 3;
+        },
         division_preference: function division_preference() {
 
             if (this.division_preference_first == this.division_preference_second) {
@@ -24912,7 +25247,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()().isBetween(lateCutoff, superLateCutoff);
         },
         signingUpForToday: function signingUpForToday() {
-
             var signUpForToday = false;
 
             if (this.gameToday) {
@@ -24946,15 +25280,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.numOfWeeksSigningUp == 1) {
                 if (this.signingUpForToday) {
-                    message = "Since you're only available tonight, we'll have to count you as a sub which means we can't guarantee a spot at this time. We may not place you on a team up until a few minutes before game time. Keep an eye on your phone/email as we will definitely email/text you an update before game time.";
+                    message = "<p class='card-text'>Since you're only available tonight, we'll have to count you as a sub which means we can't guarantee a spot at this time.</p>";
+                    message += "<p class='card-text'>We may not place you on a team up until a few minutes before game time.</p>";
+                    message += "<p class='card-text'>Keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
                 } else {
-                    message = "Since you're only available one week, we'll have to count you as a sub which means we can't guarantee a spot at this time. We may not place you on a team up until a few minutes before game time. On game day, keep an eye on your phone/email as we will definitely email/text you an update before game time.";
+                    message = "<p class='card-text'>Since you're only available one week, we'll have to count you as a sub which means we can't guarantee a spot at this time.</p>";
+                    message += "<p class='card-text'>We may not place you on a team up until a few minutes before game time.</p>";
+                    message += "<p class='card-text'>On game day, keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
                 }
 
                 return message;
             } else {
                 if (this.subSignupAllowed) {
-                    message = "Since the cycle has already started, we'll count you as sub for each week and can't guarantee a spot at this time. We may not place you on a team up until a few minutes before game time each week. On each game day, keep an eye on your phone/email as we will definitely email/text you an update before game time.";
+                    message = "<p class='card-text'>Since the cycle has already started, we'll count you as sub for each week and can't guarantee a spot at this time.</p>";
+                    message += "<p class='card-text'>We may not place you on a team up until a few minutes before game time each week.</p>";
+                    message += "<p class='card-text'>On each game day, keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
 
                     return message;
                 }
@@ -24965,45 +25305,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (!this.signingUpForToday) {
                 if (this.cycleSignupAllowed && this.cycleSignupLate) {
-                    message = "Cycle sign-up closed earlier, but we should be able to fit you in.";
+                    return "<p class='card-text'>Cycle sign-up closed earlier, but we should be able to fit you in.</p>";
                 }
-                return message;
             }
 
             // At this point, they are signing up for today.
 
             // if they are signing up for than one week of a cycle and they are late, show them the late message.
             if (this.numOfWeeksSigningUp > 1 && this.cycleSignupAllowed && this.cycleSignupLate) {
-                message = "Sign-up closed earlier, but we should be able to fit you in for tonight. Keep an eye out for an email/text confirming your spot before heading out.";
+                message = "<p class='card-text'>Sign-up closed earlier, but we should be able to fit you in for tonight.</p>";
+                message += "<p class='card-text'>Keep an eye out for an email/text confirming your spot before heading out.</p>";
+
                 return message;
             }
 
             // at this point, if they are signing up for tonight and are super late, show them super late message
             if (this.cycleSignupSuperLate || this.subSignupSuperLate) {
-                message = "Whoa! Game time is " + __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.gameToday.starts_at).fromNow() + " and we're probably on our way to fields. We may still have some spots for tonight but can't guarantee it. Finish your sign-up and try texting us to see if a spot is open.";
+                message = "<p class='card-text'>Whoa! Game time is " + __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.gameToday.starts_at).fromNow() + " and we're probably on our way to fields.</p>";
+                message += "<p class='card-text'>We may still have some spots for tonight but can't guarantee it.</p>";
+                message += "<p class='card-text'>Finish your sign-up and try texting us to see if a spot is open.</p>";
 
                 return message;
             }
-
-            // if (this.numOfWeeksSigningUp == 1) {
-            //     if (this.cycleSignupSuperLate || this.subSignupSuperLate) {
-            //         message = "It's really close to game time and we're probably on our way to fields. We may still have some spots but can't guarantee it. Finish your sign-up and try texting us to see if a spot is open.";
-            //     }
-
-            //     return message;
-            // } else {
-            //     if (this.cycleSignupAllowed) {
-            //         if (this.cycleSignupLate) {
-            //             message = "Sign-up closed earlier, but we may be able to fit you in for tonight. Keep an eye out for an email/text confirming your spot before heading out.";
-            //         }
-            //     }
-
-            //    if (this.cycleSignupSuperLate && this.subSignupSuperLate) {
-            //         message = "For tonight, it's really close to game time and we're probably on our way to fields. We may still have some spots open. Finish your sign-up and try texting us to see if a spot is open.";
-
-            //         return message;
-            //    }
-            // }
         }
     },
     mounted: function mounted() {
@@ -25012,328 +25335,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // this.weeksAttending = _.map(this.cycle.weeks, 'id');
         this.division_preference_first = this.user.division_preference_first;
         this.division_preference_second = this.user.division_preference_second ? this.user.division_preference_second : this.user.division_preference_first;
+
+        this.editMode = false;
     }
 });
 
 /***/ }),
-/* 203 */,
-/* 204 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(215);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(216)("765e2a99", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bf2ab392\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CycleSignup.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bf2ab392\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CycleSignup.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(173)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fade-enter-active[data-v-bf2ab392], .fade-leave-active[data-v-bf2ab392] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-bf2ab392], .fade-leave-to[data-v-bf2ab392] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n    ", ""]);
-
-// exports
-
-
-/***/ }),
-/* 216 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(217)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 217 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-/* 218 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -25588,7 +25596,10 @@ var render = function() {
                                 "bg-success": _vm.weekAttending(week.id),
                                 "bg-danger": !_vm.weekAttending(week.id)
                               },
-                              attrs: { "data-week_id": week.id },
+                              attrs: {
+                                "data-week_id": week.id,
+                                fontsize: _vm.timeFontSize
+                              },
                               on: { click: _vm.clickWeek }
                             },
                             [
@@ -25610,6 +25621,9 @@ var render = function() {
                                           "time",
                                           {
                                             staticClass: "icon",
+                                            class: {
+                                              "icon-sm": _vm.timeFontSize
+                                            },
                                             attrs: {
                                               datetime: _vm.datetime(
                                                 week.starts_at
@@ -25681,8 +25695,7 @@ var render = function() {
                       {
                         staticClass: "btn btn-primary btn-block mt-3",
                         attrs: {
-                          disabled:
-                            this.weeksAttending.length == 0 ? true : false
+                          disabled: this.numOfWeeksSigningUp == 0 ? true : false
                         },
                         on: { click: _vm.clickContinue }
                       },
@@ -25699,13 +25712,10 @@ var render = function() {
                       _vm._v("Sub sign-up")
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "card-text text-warning" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.sub_message) +
-                          "\n                        "
-                      )
-                    ]),
+                    _c("div", {
+                      staticClass: "card-text text-warning",
+                      domProps: { innerHTML: _vm._s(_vm.sub_message) }
+                    }),
                     _vm._v(" "),
                     _c(
                       "button",
@@ -25977,13 +25987,10 @@ var render = function() {
                       _vm._v("Late Sign-up")
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "card-text text-danger" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.late_message) +
-                          "\n                        "
-                      )
-                    ]),
+                    _c("div", {
+                      staticClass: "card-text text-danger",
+                      domProps: { innerHTML: _vm._s(_vm.late_message) }
+                    }),
                     _vm._v(" "),
                     _c(
                       "button",
@@ -26028,8 +26035,8 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm.show == "confirmation"
-              ? _c("div", { key: "confirmation", staticClass: "card m-2" }, [
+            _vm.show == "confirm"
+              ? _c("div", { key: "confirm", staticClass: "card m-2" }, [
                   _c("div", { staticClass: "card-body" }, [
                     _c("h5", { staticClass: "text-center" }, [
                       _vm._v(
@@ -26187,13 +26194,67 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
+                    _vm.status == "creating"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-block mt-3",
+                            on: { click: _vm.clickFinish }
+                          },
+                          [_vm._v("Yup, sign me up!")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.status == "sending"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-block mt-3",
+                            attrs: { disabled: "" }
+                          },
+                          [
+                            _vm._v("Working "),
+                            _c("i", {
+                              staticClass: "fa fa-spinner fa-spin fa-fw"
+                            })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.status == "updating"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-block mt-3",
+                            on: { click: _vm.clickFinish }
+                          },
+                          [_vm._v("Yup, save it!")]
+                        )
+                      : _vm._e()
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.show == "success"
+              ? _c("div", { key: "success", staticClass: "card m-2" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h5", [
+                      _vm._v(
+                        "You're all signed up, " +
+                          _vm._s(_vm.user.nickname) +
+                          "."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", [_vm._v("See you at the fields!")]),
+                    _vm._v(" "),
                     _c(
                       "button",
                       {
                         staticClass: "btn btn-success btn-block mt-3",
-                        on: { click: _vm.clickFinish }
+                        on: { click: _vm.clickCycleDetails }
                       },
-                      [_vm._v("Yup, sign me up!")]
+                      [_vm._v("Back to Cycle")]
                     )
                   ])
                 ])
@@ -26215,5 +26276,1485 @@ if (false) {
   }
 }
 
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(209)
+}
+var normalizeComponent = __webpack_require__(149)
+/* script */
+var __vue_script__ = __webpack_require__(211)
+/* template */
+var __vue_template__ = __webpack_require__(212)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-5dda7224"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/SignupsCard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5dda7224", Component.options)
+  } else {
+    hotAPI.reload("data-v-5dda7224", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(210);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(148)("3aa6306d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dda7224\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SignupsCard.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dda7224\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SignupsCard.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(9)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fade-enter-active[data-v-5dda7224], .fade-leave-active[data-v-5dda7224] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-5dda7224], .fade-leave-to[data-v-5dda7224] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\ntime.icon.icon-sm[data-v-5dda7224] {\n    font-size:0.6em;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 211 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['cycle', 'gender', 'title'],
+
+    computed: {
+        count: function count() {
+            return this.notOnATeam.length;
+        },
+
+        notOnATeam: function notOnATeam() {
+            var _this = this;
+
+            if (this.cycle == '') return [];
+            if (this.gender !== undefined) {
+                return this.cycle.signups.filter(function (signup) {
+                    return signup.gender.toLowerCase() === _this.gender && signup.pivot.team_id === null;
+                });
+            } else {
+                return this.cycle.signups;
+            }
+        },
+
+        weekCounts: function weekCounts() {
+            var arr = [];
+            if (this.cycle == '') return [];
+            for (var i = 0, len = this.cycle.weeks.length; i < len; i++) {
+                var weekId = this.cycle.weeks[i].id;
+                var count = 0;
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.notOnATeam[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var signup = _step.value;
+
+                        if (this.isAvailable(signup, weekId)) {
+                            count++;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                arr.push(count);
+            }
+
+            return arr;
+        }
+    },
+
+    methods: {
+        addToTeam: function addToTeam(payload) {
+            this.$emit('addToTeam', payload);
+        },
+        isAvailable: function isAvailable(signup, weekId) {
+            var wkId = weekId;
+            var week = _.find(signup.availability, function (week) {
+                return week.id == wkId;
+            }, this);
+            // debugger;
+            if (week.pivot.attending == 1) {
+                return true;
+            }
+
+            return false;
+        }
+    },
+
+    events: {
+        teamPlacement: function teamPlacement(signupId, teamId) {
+            // var player = _.findWhere(this.signups, {id:signupId});
+            // player.pivot.team_id = teamId;
+        }
+    },
+
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v(_vm._s(_vm.title)),
+      _c("span", { staticClass: "badge float-right" }, [
+        _vm._v(_vm._s(_vm.count))
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body p-0" }, [
+      _c("table", { staticClass: "table table-sm table-striped mb-0" }, [
+        _c("tbody", [
+          _c(
+            "tr",
+            { staticClass: "text-center" },
+            [
+              _c("th", [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("th", { staticClass: "text-center" }, [_vm._v("Div1")]),
+              _vm._v(" "),
+              _c("th", { staticClass: "text-center" }, [_vm._v("Div2")]),
+              _vm._v(" "),
+              _vm._l(_vm.cycle.weeks, function(week, key) {
+                return _c("th", { key: week.id, staticClass: "text-center" }, [
+                  _vm._v("Wk" + _vm._s(key + 1))
+                ])
+              }),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c("th")
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.notOnATeam, function(signup) {
+            return _c("signup", {
+              key: signup.id,
+              tag: "tr",
+              attrs: { cycle: _vm.cycle, signup: signup }
+            })
+          })
+        ),
+        _vm._v(" "),
+        _c("tbody", [
+          _c(
+            "tr",
+            { staticClass: "info" },
+            [
+              _c(
+                "th",
+                { staticClass: "text-center", attrs: { colspan: "3" } },
+                [_vm._v("Total")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.weekCounts, function(count, key) {
+                return _c("th", { key: key, staticClass: "text-center" }, [
+                  _vm._v(_vm._s(count))
+                ])
+              }),
+              _vm._v(" "),
+              _c("th", { staticClass: "text-center" }),
+              _vm._v(" "),
+              _c("th", { staticClass: "text-center" })
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", { staticClass: "text-center" }, [
+      _c("i", { staticClass: "fa fa-star" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5dda7224", module.exports)
+  }
+}
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(149)
+/* script */
+var __vue_script__ = __webpack_require__(224)
+/* template */
+var __vue_template__ = __webpack_require__(225)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Signup.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ee7a8be2", Component.options)
+  } else {
+    hotAPI.reload("data-v-ee7a8be2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['cycle', 'signup'],
+    // data: function () {
+    //     return {
+    //         'selected': 0
+    //     }
+    // },
+    computed: {
+        onATeam: function onATeam() {
+            return this.signup.pivot.team_id !== null;
+        },
+
+        selected: {
+            get: function get() {
+                return this.signup.pivot.team_id ? this.signup.pivot.team_id : 0;
+            },
+            set: function set(v) {
+                '';
+            }
+        },
+
+        teamOptions: function teamOptions() {
+            var content = [];
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.cycle.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var team = _step.value;
+
+                    var data = {};
+                    data.text = team.name;
+                    data.value = team.id;
+
+                    if (this.signup.gender.toLowerCase() == 'male' && (team.division.toLowerCase() == 'mixed' || team.division.toLowerCase() == 'mens')) {
+                        content.push(data);
+                    }
+                    if (this.signup.gender.toLowerCase() === 'female' && (team.division.toLowerCase() == 'mixed' || team.division.toLowerCase() == 'womens')) {
+                        content.push(data);
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return content;
+        },
+
+        nicknameOrShortName: function nicknameOrShortName() {
+            var pieces = [];
+            // console.log(this.signup.pivot);
+            if (this.signup.nickname) {
+                return this.signup.nickname;
+            } else if (this.signup.name.split(' ').length > 1) {
+                pieces = this.signup.name.split(' ');
+                return pieces[0].charAt(0).toUpperCase() + pieces[0].slice(1) + pieces[1].charAt(0).toUpperCase() + pieces[1].slice(1, 3);
+            } else {
+                return this.signup.name;
+            }
+        }
+    },
+
+    methods: {
+        addToTeam: function addToTeam(event) {
+            console.log('clicked add to team', this, event);
+
+            if (event.target.type === 'select-one') {
+                // let signup = this.cycle.signups.find(signup => signup.id === this.signup.id);
+                // signup.pivot.team_id = parseInt(event.target.value);
+                this.signup.pivot.team_id = parseInt(event.target.value);
+                // this.selected = parseInt(event.target.value);
+                // this.$emit('addToTeam', {
+                //     signup: this.signup,
+                //     teamId: parseInt(event.target.value)
+                // });
+                // this.$dispatch('signupAddedToATeam', this.signup.id, event.target.value);
+                this.updateTeamOnServer(this.signup);
+            }
+        },
+
+        toggleCaptain: function toggleCaptain(event) {
+            console.log('clicked toggleCaptain', this, event);
+
+            // if (this.signup.pivot.captain == 0) {
+            //     this.signup.pivot.captain = 1;
+            //     console.log('was not captain', this.signup.pivot);
+            // }
+
+            // if (this.signup.pivot.captain == 1) {
+            //     this.signup.pivot.captain = 0;
+            //     console.log('was captain', this.signup.pivot);
+            // }
+            //
+            this.signup.pivot.captain = !this.signup.pivot.captain;
+
+            this.updateCaptainOnServer(this.signup);
+        },
+
+        availabilityIconClass: function availabilityIconClass(week) {
+            var availability = _.find(this.signup.availability, function (signupWeek) {
+                return signupWeek.id == week.id;
+            });
+
+            if (availability.pivot.attending == 1) {
+                return 'fa fa-check fa-fw text-success';
+            }
+            return 'fa fa-times fa-fw text-danger';
+        },
+
+        updateTeamOnServer: function updateTeamOnServer(signup) {
+            axios.put('/api/cyclesignups/' + signup.pivot.id, {
+                'team_id': signup.pivot.team_id
+            }).then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            // $.ajax({
+            //     type: "PUT",
+            //     url: '../../api/cyclesignups/' + signup.pivot.id,
+            //     contentType: "application/json",
+            //     data: JSON.stringify({"team_id": signup.pivot.team_id})
+            // });
+        },
+
+        updateCaptainOnServer: function updateCaptainOnServer(signup) {
+            axios.put('/api/cyclesignups/' + signup.pivot.id, {
+                'captain': signup.pivot.captain
+            }).then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        teamDivisionIcon: function teamDivisionIcon(division) {
+            division = division.toLowerCase();
+
+            switch (division) {
+                case 'mens':
+                    return '<i class="fa fa-male fa-fw text-primary"></i>';
+                    break;
+                case 'mixed':
+                    return '<i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>';
+                    break;
+                case 'womens':
+                    return '<i class="fa fa-female fa-fw text-info"></i>';
+                    break;
+                default:
+                    return;
+            }
+        }
+    },
+
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "tr",
+    [
+      _c("td", { staticClass: "pl-3" }, [
+        _c("a", { attrs: { title: "signup.name", href: "/users/signup.id" } }, [
+          _vm._v(_vm._s(_vm.nicknameOrShortName))
+        ]),
+        _vm._v(" "),
+        _vm.signup.pivot.captain
+          ? _c("span", [_c("i", { staticClass: "fa fa-star text-warning" })])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.signup.pivot.note
+          ? _c("span", [
+              _c("i", {
+                staticClass: "fa fa-sticky-note text-warning",
+                attrs: {
+                  "data-toggle": "tooltip",
+                  "data-placement": "bottom",
+                  "data-container": "body",
+                  "data-trigger": "focus click hover",
+                  "data-html": "true",
+                  "data-title": "signup.pivot.note"
+                }
+              })
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "text-center" }, [
+        _c("span", {
+          domProps: {
+            innerHTML: _vm._s(
+              _vm.teamDivisionIcon(_vm.signup.pivot.div_pref_first)
+            )
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "text-center" }, [
+        _c("span", {
+          domProps: {
+            innerHTML: _vm._s(
+              _vm.teamDivisionIcon(_vm.signup.pivot.div_pref_second)
+            )
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.cycle.weeks, function(week) {
+        return _c("td", { staticClass: "text-center" }, [
+          _c("i", { class: _vm.availabilityIconClass(week) })
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "td",
+        { staticClass: "text-center", on: { click: _vm.toggleCaptain } },
+        [
+          _vm.signup.pivot.will_captain
+            ? _c("i", { staticClass: "fa fa-thumbs-up fa-fw text-primary" })
+            : _c("i", { staticClass: "fa fa-thumbs-down text-default" })
+        ]
+      ),
+      _vm._v(" "),
+      _c("td", { staticClass: "text-center" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.selected,
+                expression: "selected"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: { name: "addTeam" },
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selected = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function($event) {
+                  _vm.addToTeam($event)
+                }
+              ]
+            }
+          },
+          [
+            _c("option", { attrs: { disabled: "", value: "" } }, [
+              _vm._v("Team")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.teamOptions, function(option) {
+              return _c(
+                "option",
+                { key: option.value, domProps: { value: option.value } },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(option.text) +
+                      "\n                "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ee7a8be2", module.exports)
+  }
+}
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(149)
+/* script */
+var __vue_script__ = __webpack_require__(227)
+/* template */
+var __vue_template__ = __webpack_require__(228)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TeamCard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4edc3478", Component.options)
+  } else {
+    hotAPI.reload("data-v-4edc3478", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['cycle', 'team'],
+
+    computed: {
+        players: function players() {
+            var _this = this;
+
+            return this.cycle.signups.filter(function (signup) {
+                return signup.pivot.team_id == _this.team.id;
+            });
+        },
+
+        count: function count() {
+            return this.players.length;
+        },
+
+        weekCounts: function weekCounts() {
+            var arr = [];
+            for (var i = 0, len = this.cycle.weeks.length; i < len; i++) {
+                var weekId = this.cycle.weeks[i].id;
+                var count = 0;
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var player = _step.value;
+
+                        if (this.isAvailable(player, weekId)) {
+                            count++;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                arr.push(count);
+            }
+
+            return arr;
+        }
+    },
+
+    methods: {
+        isAvailable: function isAvailable(signup, weekId) {
+            var wkId = weekId;
+            var week = _.find(signup.availability, function (week) {
+                return week.id == wkId;
+            });
+            // debugger;
+            if (week.pivot.attending == 1) {
+                return true;
+            }
+
+            return false;
+        },
+        teamDivisionIcon: function teamDivisionIcon(division) {
+            division = division.toLowerCase();
+
+            switch (division) {
+                case 'mens':
+                    return '<i class="fa fa-male fa-fw text-primary"></i>';
+                    break;
+                case 'mixed':
+                    return '<i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>';
+                    break;
+                case 'womens':
+                    return '<i class="fa fa-female fa-fw text-info"></i>';
+                    break;
+                default:
+                    return;
+            }
+        }
+    },
+
+    // events: {
+    //     teamPlacement: function(signupId, teamId) {
+    //         var player = _.findWhere(this.signups, {id:signupId});
+    //         player.pivot.team_id = teamId;
+    //     }
+    // },
+
+    created: function created() {
+        console.log('teamname', this.teamName);
+        // $.getJSON('../../api/teams/' + this.teamId, function(team) {
+        //     console.log(team.players);
+        //     this.list = team.players;
+        // }.bind(this));
+    },
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _c("span", { staticClass: "badge float-right" }, [
+        _vm._v(_vm._s(_vm.count))
+      ]),
+      _vm._v("\n            " + _vm._s(_vm.team.name) + "\n            "),
+      _c("span", {
+        domProps: { innerHTML: _vm._s(_vm.teamDivisionIcon(_vm.team.division)) }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body p-0" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c(
+          "table",
+          { staticClass: "table table-sm table-striped mb-0" },
+          [
+            _c("tbody", [
+              _c(
+                "tr",
+                { staticClass: "text-center" },
+                [
+                  _c("th", [_vm._v("Name")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "text-center" }, [_vm._v("Div1")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "text-center" }, [_vm._v("Div2")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.cycle.weeks, function(week, key) {
+                    return _c(
+                      "th",
+                      { key: week.id, staticClass: "text-center" },
+                      [_vm._v("Wk" + _vm._s(key + 1))]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("th")
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.players, function(signup) {
+              return _vm.team.division.toLowerCase() !== "womens"
+                ? _c("tbody", [
+                    signup.gender.toLowerCase() === "male"
+                      ? _c("signup", {
+                          tag: "tr",
+                          attrs: { signup: signup, cycle: _vm.cycle }
+                        })
+                      : _vm._e()
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm.team.division.toLowerCase() === "mixed"
+              ? _c("tr", { staticClass: "warning" }, [
+                  _c("th", { attrs: { colspan: "5" } }, [_vm._v("Females")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.players, function(signup) {
+              return _vm.team.division.toLowerCase() !== "mens"
+                ? _c("tbody", [
+                    signup.gender.toLowerCase() === "female"
+                      ? _c("signup", {
+                          tag: "tr",
+                          attrs: { signup: signup, cycle: _vm.cycle }
+                        })
+                      : _vm._e()
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _c("tbody", [
+              _c(
+                "tr",
+                { staticClass: "info" },
+                [
+                  _c(
+                    "th",
+                    { staticClass: "text-center", attrs: { colspan: "3" } },
+                    [_vm._v("Total")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.weekCounts, function(count, key) {
+                    return _c("th", { key: key, staticClass: "text-center" }, [
+                      _vm._v(_vm._s(count))
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "text-center" }),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "text-center" })
+                ],
+                2
+              )
+            ])
+          ],
+          2
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", { staticClass: "text-center" }, [
+      _c("i", { staticClass: "fa fa-star" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4edc3478", module.exports)
+  }
+}
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(149)
+/* script */
+var __vue_script__ = __webpack_require__(231)
+/* template */
+var __vue_template__ = __webpack_require__(230)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TeamBuilder.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0f075717", Component.options)
+  } else {
+    hotAPI.reload("data-v-0f075717", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("h5", [_vm._v("Cycle " + _vm._s(_vm.cycle.name) + " Team Builder")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Create and add/remove players to teams")])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col col-sm-3" }, [
+        _c(
+          "ul",
+          { staticClass: "list-group" },
+          [
+            _c(
+              "li",
+              { staticClass: "list-group-item list-group-item-success" },
+              [_vm._v("Teams")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.cycle.teams, function(team) {
+              return _c(
+                "li",
+                { key: team.id, staticClass: "list-group-item" },
+                [
+                  _vm._v(
+                    "\n                       " +
+                      _vm._s(team.name) +
+                      "\n                       "
+                  ),
+                  _c("span", {
+                    domProps: {
+                      innerHTML: _vm._s(_vm.teamDivisionIcon(team.division))
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "float-right",
+                      attrs: { href: "/teams/" + team.id + "/edit" }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm._m(0)
+          ],
+          2
+        ),
+        _vm._v(" "),
+        !_vm.cycle.teams_published
+          ? _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-primary btn-lg btn-block js-publish-teams mt-3",
+                attrs: {
+                  type: "button",
+                  "data-toggle": "modal",
+                  "data-target": "#publishTeamsModal"
+                }
+              },
+              [
+                _vm._v(
+                  "\n                       Publish Teams\n               "
+                )
+              ]
+            )
+          : _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-lg btn-block",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#announceTeamsModal"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                       Email Team Announcement\n               "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-default btn-lg btn-block",
+                  attrs: {
+                    href: "/cycles/" + _vm.cycle.id + "/teams/unpublish"
+                  }
+                },
+                [_vm._v("Unpublish teams")]
+              )
+            ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mt-3" }, [
+      _c(
+        "div",
+        { staticClass: "col col-sm-6" },
+        [
+          _c("signups-card", {
+            attrs: { title: "Male signups", gender: "male", cycle: _vm.cycle }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col col-sm-6" },
+        [
+          _c("signups-card", {
+            attrs: {
+              title: "Female signups",
+              gender: "female",
+              cycle: _vm.cycle
+            }
+          })
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row mt-3" },
+      _vm._l(_vm.cycle.teams, function(team) {
+        return _c(
+          "div",
+          { key: team.id, staticClass: "col-12 col-sm-6" },
+          [_c("team-card", { attrs: { team: team, cycle: _vm.cycle } })],
+          1
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item" }, [
+      _c("a", { attrs: { href: "/teams/create" } }, [_vm._v("Add Team")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0f075717", module.exports)
+  }
+}
+
+/***/ }),
+/* 231 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['cycleid', 'cyclePayload'],
+    data: function data() {
+        return {
+            cycle: this.cyclePayload
+        };
+    },
+
+    methods: {
+        teamDivisionIcon: function teamDivisionIcon(division) {
+            division = division.toLowerCase();
+
+            switch (division) {
+                case 'mens':
+                    return '<i class="fa fa-male fa-fw text-primary"></i>';
+                    break;
+                case 'mixed':
+                    return '<i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>';
+                    break;
+                case 'womens':
+                    return '<i class="fa fa-female fa-fw text-info"></i>';
+                    break;
+                default:
+                    return;
+            }
+        }
+    },
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
 /***/ })
-],[147]);
+],[150]);
