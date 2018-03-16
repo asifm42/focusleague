@@ -11,27 +11,14 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-<div class="row">
-    <div class="col-12">
-        <div class="text-center" style="margin:1em 0;">
-            <div class="alert alert-info">
-                <h4>
-                    FOCUS League returns on March 20th, 2018!
-                </h4>
-                <h4 class="m-0 mt-1">
-                    Registration for Cycle 2018-01 opens on March 14th, 2018
-                </h4>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START GAME STATUS ########## -->
 <div class="row">
     <div class="col-12">
     @if($current_cycle && $current_cycle->gameToday())
-        <div    class="jumbotron"
-                style="background-color: #ffff99; margin-bottom:0" >
+        <div    class="jumbotron mb-0 pb-0 pt-3"
+                style="background-color: #ffff99;" >
             <h4>
                 Game Status for {{ Carbon::today()->format("l, F jS") }}<br />
                 @if($current_cycle->currentWeek()->updated_at->isToday() && $current_cycle->currentWeek()->updated_at->lt(Carbon::now()))
@@ -58,7 +45,11 @@
                 </p>
             @endif
             <div>
-                <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe>
+                {{-- <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe> --}}
+
+                {{-- <script type='text/javascript' src='https://darksky.net/widget/small/29.6379651,-95.3959319/us12/en.js?width=100%&height=150&title=Houston Sports Park&textColor=333333&bgColor=transparent&transparency=true&skyColor=333&fontFamily=Default&customFont=&units=us'></script> --}}
+
+                <script type='text/javascript' src='https://darksky.net/widget/graph-bar/29.637965,-95.395932/us12/en.js?width=100%&height=400&title=Houston Sports Park&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=333333&currentDetailsOption=true'></script>
             </div>
         </div>
     @endif
@@ -66,43 +57,104 @@
 </div>
 <!-- ########## END GAME STATUS ########## -->
 <!-- ########## START CYCLE STATUS ########## -->
-<div class = "row">
-    <div class="col-12">
-    @if($current_cycle && $current_cycle->isSignupOpen())
-        <div class="text-center" style="margin:1em 0;">
-            <div class="alert alert-success">
-                <a  href="{{ route('cycles.current') }}">
-                    <h4 style="color: #fff; margin:0">
-                        Sign up for Cycle {{ $current_cycle->name }} is now open!
-                    </h4>
-                </a>
-            </div>
-        </div>
-    @elseif ($current_cycle)
-        <div class="text-center" style="margin:1em 0;">
+
+<div class = "row justify-content-sm-center">
+    <div class="col-12 col-sm-6 col-md-6">
+    @if($current_cycle)
+        <div class="text-center mx-0 my-1">
             <div class="alert alert-info">
-                <a  href="{{ route('cycles.current') }}">
-                    <h4 style="color: #fff; margin:0">
-                    @if(auth()->check() && auth()->user()->current_cycle_signup())
-                        Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }}.
-                    @else
-                        Sign up for Cycle {{ $current_cycle->name }} closed at {{ $current_cycle->signup_closes_at->format('M j g:i a') }} but you can still sign up as a sub.
+                <h5>
+                    Next Game
+                </h5>
+                @if($current_cycle->currentWeek())
+                    <h3>
+                        Cycle {{$current_cycle->name}} - Wk {{ $current_cycle->currentWeek()->week_index() }}
+                    </h3>
+
+                    <time datetime="{{ $current_cycle->currentWeek()->starts_at->format('Y-m-d') }}" class="icon">
+                        <em style="color: red">{{ $current_cycle->currentWeek()->starts_at->format('l') }}</em>
+                        <strong style="background-color: red">{{ $current_cycle->currentWeek()->starts_at->format('F') }}</strong>
+                        <span>{{ $current_cycle->currentWeek()->starts_at->format('j') }}</span>
+                    </time>
+
+                    <h6>
+                        {{ $current_cycle->currentWeek()->starts_at->format('g:i a') }}
+                    </h6>
+                @else
+                    <h3>
+                        Cycle {{$current_cycle->name}} - Wk 1
+                    </h3>
+
+                    <time datetime="{{ $current_cycle->weeks()->first()->starts_at->format('Y-m-d') }}" class="icon">
+                        <em style="color: red">{{ $current_cycle->weeks()->first()->starts_at->format('l') }}</em>
+                        <strong style="background-color: red">{{ $current_cycle->weeks()->first()->starts_at->format('F') }}</strong>
+                        <span>{{ $current_cycle->weeks()->first()->starts_at->format('j') }}</span>
+                    </time>
+
+                    <h6>
+                        {{ $current_cycle->weeks()->first()->starts_at->format('g:i a') }}
+                    </h6>
+                @endif
+                <div class="row m-1 justify-content-sm-center">
+                    <div class="col">
+                        <a class="btn btn-primary w-100" href="{{ route('cycles.current') }}" style="text-decoration: none">Cycle Details</a>
+                    </div>
+                    @if($current_cycle->status() == 'SIGNUP_OPEN'
+                        || $current_cycle->status() == 'SIGNUP_CLOSED'
+                        || $current_cycle->status() == 'IN_PROGRESS'
+                    )
+                        @if(!$current_cycle->isSubbing(auth()->user()))
+                           <div class="col">
+                                <a class="btn btn-primary w-100" href="{{ route('cycle.signup.create', 'current') }}" style="text-decoration: none">Sign up</a>
+                            </div>
+                        @endif
                     @endif
-                    </h4>
-                </a>
+                    @if($current_cycle->status() == 'SIGNUP_OPEN')
+                        <span class='text-center w-100 mt-1'><small>Sign-up closes at {{ $current_cycle->signup_closes_at->format('M j g:i a') }}</small></span>
+                    @elseif($current_cycle->status() == 'SIGNUP_CLOSED')
+                        <span class='text-center w-100 mt-1'><small>Taking late signups and subs</small></span>
+                    @elseif($current_cycle->status() == 'IN_PROGRESS')
+                        <span class='text-center w-100 mt-1'><small>Taking sub signups</small></span>
+                    @endif
+                </div>
             </div>
         </div>
     @endif
     @if($next_cycle)
         @if(!$current_cycle ||
          $current_cycle && !$current_cycle->isSignupOpen())
-        <div class="text-center" style="margin:1em 0;">
+        <div class="text-center mx-0 my-1">
             <div class="alert alert-warning">
-                <a  href="{{ route('cycles.view', $next_cycle->id) }}">
-                    <h4 style="color: #fff; margin:0">
-                    Registration for Cycle {{ $next_cycle->name }} opens on {{ $next_cycle->signup_opens_at->format('M j') }}!
-                    </h4>
-                </a>
+                <h5>
+                    Next Cycle
+                </h5>
+                <h3>
+                Cycle {{ $next_cycle->name }}
+                </h3>
+                <div class="row">
+                    <div class="col justify-content-center">
+                        <h6>Sign-up Opens</h6>
+                        <time datetime="{{ $next_cycle->signup_opens_at->format('Y-m-d') }}" class="icon">
+                            <em>{{ $next_cycle->signup_opens_at->format('l') }}</em>
+                            <strong>{{ $next_cycle->signup_opens_at->format('F') }}</strong>
+                            <span>{{ $next_cycle->signup_opens_at->format('j') }}</span>
+                        </time>
+                    </div>
+                    <div class="col justify-content-center">
+                        <h6>First Game</h6>
+                        <time datetime="{{ $next_cycle->weeks()->first()->starts_at->format('Y-m-d') }}" class="icon">
+                            <em>{{ $next_cycle->weeks()->first()->starts_at->format('l') }}</em>
+                            <strong>{{ $next_cycle->weeks()->first()->starts_at->format('F') }}</strong>
+                            <span>{{ $next_cycle->weeks()->first()->starts_at->format('j') }}</span>
+                        </time>
+                    </div>
+                </div>
+
+                <div class="row m-1 justify-content-sm-center">
+                    <div class="col">
+                        <a class="btn btn-primary w-100" href="{{ route('cycles.view', $next_cycle->id) }}" style="text-decoration: none">Cycle Details</a>
+                    </div>
+                </div>
             </div>
         </div>
         @endif
@@ -111,34 +163,18 @@
 </div>
 <!-- ########## END CYCLE STATUS ########## -->
 <!-- ########## START USER BUTTONS ROW ########## -->
+@if(auth()->check())
 <div class = "row">
-    <div class="col-12 text-center">
-    @if(auth()->check())
+    <div class="col-12">
         <p>
             <a  href="{{ route('users.dashboard') }}"
                 class ="btn btn-primary btn-lg" >
                     <i class="fa fa-tachometer"></i>&nbsp; Your Dashboard
             </a>
         </p>
-        @if($current_cycle && !auth()->user()->current_cycle_signup())
-            @if($current_cycle->isSignupOpen())
-                <p>
-                    <a  href="{{ route('cycle.signup.create', 'current') }}"
-                        class ="btn btn-primary btn-lg">
-                        Sign up for Cycle {{ $current_cycle->name }}
-                    </a>
-                </p>
-            @endif
-            <p>
-                <a  href="{{ route('sub.create', 'current') }}"
-                    class ="btn btn-info btn-lg">
-                        Sign up as a sub for Cycle {{ $current_cycle->name }}
-                </a>
-            </p>
-        @endif
-    @endif
     </div>
 </div>
+@endif
 <!-- ########## END USER BUTTONS ROW ########## -->
 <!-- ########## START INFO ROW ########## -->
 <div class="row">
