@@ -71,6 +71,22 @@ class Team extends Model
     }
 
     /**
+     * Get the team's division icon html
+     */
+    public function divisionIcon($fixedWidth=false)
+    {
+        $division = strtolower($this->division);
+
+        if ($division === 'mens') {
+            return '<i class="fa fa-male text-primary"></i>';
+        } else if ($division === 'womens') {
+            return '<i class="fa fa-female text-info"></i>';
+        } else if ($division === 'mixed') {
+            return '<i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>';
+        }
+    }
+
+    /**
      * Get the games the team is playing in
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
