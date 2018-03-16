@@ -1,4 +1,3 @@
-<div class="panel panel-default">
 <form accept-charset="utf-8" class="form-vertical" method="POST"
     @if ($edit === true)
         action="{{ route('sub.update', $sub->id) }}"
@@ -7,14 +6,11 @@
     @endif
     >
 
-    <div class="panel-heading">
-        <h3 class="panel-title">Sub sign up for Cycle {{ $cycle->name }}</h3>
-    </div>
     @if ($edit === true)
         {!! method_field('patch') !!}
     @endif
 
-<?php
+@php
     $week_options = [];
     $week_already_subbing = [];
     foreach($cycle->weeks as $week) {
@@ -36,56 +32,96 @@
         }
 
     }
+@endphp
+    <div class="row justify-content-center">
+        <h4 class="text-center w-100">
+            Cycle {{ $cycle->name }}
+        </h4>
+        <h4 class="text-center w-100">
+            Sub sign-up
+        </h4>
+    </div>
+    <div class="row justify-content-center">
+        @if ($edit === true)
+            <span class="badge badge-warning">Editing</span>
         @endif
+    </div>
+    <div class="card mt-2 mb-4">
 
-        {!! Former::text('nickname')
-            ->label('Player')
-            ->addClass('form-control')
-            ->placeholder($user->getNicknameOrShortname())
-            ->disabled()
-        !!}
-        @if(count($week_already_subbing) > 0)
-            <div class="text-info"><p>You are already signed up as a sub for the following weeks</p>
-            <ul class="list-unstyled">
-            @foreach($week_already_subbing as $week)
-                <li><a href="{{ route('sub.edit', $week['sub_deets']->id) }}">{{ $week['week']->starts_at->toFormattedDateString() }}</a></li>
-            @endforeach
-            </ul>
+        <div class="card-body">
+                <div class="form-group">
+                    <label for="nickname">Player</label>
+                    <input name="nickname" type="text" class="form-control" id="nickname" aria-describedby="nicknameHelp" placeholder={{ $user->getNicknameOrShortname() }} value={{ $user->getNicknameOrShortname() }} disabled>
+                </div>
+
+            @if(count($week_already_subbing) > 0)
+                <div class="text-info"><p>You are already signed up as a sub for the following weeks</p>
+                <ul class="list-unstyled">
+                @foreach($week_already_subbing as $week)
+                    <li><a href="{{ route('sub.edit', $week['sub_deets']->id) }}">{{ $week['week']->starts_at->toFormattedDateString() }}</a></li>
+                @endforeach
+                </ul>
+                </div>
+            @endif
+
+
+            <div class="form-group {{ $errors->has('week') ? 'has-danger' : ''}}">
+                <label for="week" class="required">Week</label>
+                <select name="week" class="form-control {{ $errors->has('week') ? 'is-invalid' : ''}}" id="week" aria-describedby="weekHelp" placeholder="Required week" required>
+                    <option disabled {{ old('week') ? '' : 'selected' }}>Required week</option>
+                    @foreach($week_options as $key => $option)
+                        @if ($edit === true)
+                            <option value=$key {{ $sub && $sub->week_id == $key ? 'selected' : '' }}>{{ $option }} </option>
+                        @else
+                            <option value=$key>{{ $option }} </option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
-        @endif
-        {!! Former::select('week')
-            ->options($week_options)
-            ->addClass('form-control')
-            ->placeholder('Required week')
-            ->required()
-        !!}
 
-        <div class="cost-stmt text-info"><p>Signing up does not guarantee a spot. We will let you know if a spot opens. Your account will be charged $10 if and when you are placed on a team.</p></div>
+            <div class="cost-stmt text-info"><p>Signing up does not guarantee a spot. We will let you know if a spot opens. Your account will be charged $10 if and when you are placed on a team.</p></div>
 
-        {!! Former::textarea('note')
-            ->label('Note')
-            ->placeholder('Optional note')
-        !!}
+            <div class="form-group {{ $errors->has('note') ? 'has-danger' : ''}}">
+              <label for="note">Note</label>
+                    @if ($edit === true)
+                        <textarea class="form-control" id="note" rows="4" placeholder="Optional note">{{ old('note', $sub->note) }}</textarea>
+                    @else
+                        <textarea class="form-control" id="note" rows="4" placeholder="Optional note">{{ old('note', '') }}</textarea>
+                    @endif
+
+            </div>
+        </div>
     </div>
 
-    <div class="panel-footer">
         @if($edit === true)
-            {!! Former::submit()
-                ->addClass('btn btn-primary')
-                ->value('Save')
-            !!}
-            {!! Former::close() !!}
+        <div class="row mt-3">
+            <div class="col">
+                <form accept-charset="utf-8"method="POST" action="{{ route('sub.destroy', $sub->id) }}" >
+                    {!! method_field('delete') !!}
+                    <input class="btn btn btn-danger btn-block" type="submit" value="Delete" >
 
-            {{-- Form::delete(route( 'sub.destroy', $sub->id), '', ['class' => 'pull-right'],['class' => 'btn btn-danger'] ) --}}
+                    {{ csrf_field() }}
+                </form>
+            </div>
+            <div class="col">
+                    <input class="btn btn btn-primary btn-block" type="submit" value="Save" >
+                    {{ csrf_field() }}
+                </form>
+            </div>
+        </div>
         @else
-            {!! Former::submit()
-                ->addClass('btn btn-primary')
-                ->value('Sign up')
-            !!}
-            {!! Former::close() !!}
+
+                <input class="btn btn btn-primary btn-block mt-3" type="submit" value="Sign up" >
+                {{ csrf_field() }}
+            </form>
         @endif
-    </div>
-</div>
+
+
+
+
+
+
+
 
 @push('scripts')
     <script>
