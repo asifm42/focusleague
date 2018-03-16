@@ -49,13 +49,6 @@ class CycleSignupsController extends Controller
             return redirect()->route('cycle.signup.edit', $cycle->id);
         }
 
-
-        // if sign up is not open and user is not an admin, redirect to edit page
-        if ($cycle->status() !== "SIGNUP_OPEN" && ! $user->isAdmin()){
-            flash()->error('Sorry, sign-up is closed for this cycle. You can sign up as a sub.');
-            return redirect()->route('sub.create', $cycle->id);
-        }
-
         return view('cycles.signups.create')
                 ->withCycle($cycle->load('weeks'))
                 ->withUser($user)
