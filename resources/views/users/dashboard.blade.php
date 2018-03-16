@@ -47,7 +47,7 @@
                     <div class="card-header">Current Cycle</div>
                     <div class="card-body">
 
-                        <dl class="horizontal">
+                        <dl class="mb-0">
                             <dt>Name</dt>
                             <dd>{{ $current_cycle->name }}</dd>
                             <dt>Format</dt>
@@ -154,12 +154,10 @@
                 </div>
             @endif
             @if(!empty($next_cycle))
-                <div class="panel panel-default hidden">
-                    <div class="panel-heading">Next Cycle</div>
-                    <div class="panel-body">
-
-
-                        <dl class="horizontal">
+                <div class="card">
+                    <div class="card-header">Next Cycle</div>
+                    <div class="card-body">
+                        <dl class="mb-0">
                             <dt>Name:</dt>
                             <dd>{{ $next_cycle->name }}</dd>
                             <dt>Format</dt>
@@ -240,12 +238,12 @@
                 </div>
             @endif
             </div>
-            <div class="col-12 col-md-6 col-md-pull-6">
+            <div class="col-12 col-md-6">
                 <div class="card mt-2 mb-2">
                     <div class="card-header">Profile - <a href="{{ route('users.edit', $user->id) }}">Edit</a></div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-12 col-md-6">
                                 <h6 class="font-weight-bold text-muted">Name</h6>
                                 <p>{{ ucwords($user->name) }}</p>
                                 <h6 class="font-weight-bold text-muted">Nickname</h6>
@@ -257,7 +255,7 @@
                                 <h6 class="font-weight-bold text-muted">Birthday</h6>
                                 <p>{{ $user->birthday->toFormattedDateString() }}</p>
                             </div>
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-12 col-md-6">
                                 <h6 class="font-weight-bold text-muted">Cell Number</h6>
                                 <p>{{ $user->cell_number }}</p>
                                 <h6 class="font-weight-bold text-muted">Carrier</h6>
@@ -281,7 +279,7 @@
                     <div class="card-body">
                         @if ($user->ultimateHistory)
                         <div class="row">
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-12 col-md-6">
                                 <h6 class="font-weight-bold text-muted">Club affiliation</h6>
                                 <p>{{ $user->ultimateHistory->club_affiliation }}</p>
                                 <h6 class="font-weight-bold text-muted">Years played</h6>
@@ -293,7 +291,7 @@
                                 <h6 class="font-weight-bold text-muted">Favorite offensive position</h6>
                                 <p>{{ $user->ultimateHistory->fav_offensive_position }}</p>
                             </div>
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-12 col-md-6">
                                 <h6 class="font-weight-bold text-muted">Defensive or Offensive player</h6>
                                 <p>{{ $user->ultimateHistory->def_or_off }}</p>
                                 <h6 class="font-weight-bold text-muted">Your best skill</h6>
