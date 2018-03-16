@@ -55,8 +55,8 @@
 
                             @if (!$current_cycle_signup )
                                 <dt>Schedule</dt>
-                                @foreach( $current_cycle->weeks as $week )
-                                    <dd>{{ $week->starts_at->toFormattedDateString() }}</dd>
+                                @foreach( $current_cycle->weeks as $key=>$week )
+                                    <dd>Wk{{ $key+1 }} - {{ $week->starts_at->toFormattedDateString() }}</dd>
                                 @endforeach
                             @endif
                             <dt>Current Status</dt>
