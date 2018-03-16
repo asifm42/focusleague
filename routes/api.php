@@ -17,6 +17,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
+Route::post('/cycles/{cycle}/signups',   'Api\CycleSignupsController@store')
+    ->name('api.cycle.signups.store')
+    ->middleware('auth:api');
+
 Route::get(     'cycles/{cycle}',     'Api\CyclesController@show')
     ->name('api.cycles.get')
     ->middleware('auth:api');
