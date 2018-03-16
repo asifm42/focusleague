@@ -5,12 +5,12 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="name" class="required">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Required first & last name" required>
+                <input name="name" type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Required first & last name" required value="{{ auth()->check() ? auth()->user()->name : '' }}" {{ auth()->check() ? 'readonly' : '' }}>
                 <small id="nameHelp" class="form-text text-muted">Please provide first and last name.</small>
             </div>
             <div class="form-group">
                 <label for="email" class="required">Email</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required placeholder="Required email">
+                <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required placeholder="Required email"value="{{ auth()->check() ? auth()->user()->email : '' }}" {{auth()->check() ? 'readonly' : ''}}>
             </div>
             <div class="form-group">
                 <label for="name" class="required">Message</label>
