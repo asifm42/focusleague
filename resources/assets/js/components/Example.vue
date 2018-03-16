@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
+            <div class="col-md-8 md-offset-2">
+                <div class="card">
+                    <div class="card-header">Example Component</div>
 
-                    <div class="panel-body">
+                    <div class="card-body">
                         I'm an example component!
                     </div>
                 </div>
