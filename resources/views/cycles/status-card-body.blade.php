@@ -14,7 +14,7 @@
         <dd>Teams will be published before game time.</dd>
     @endif
 
-    @include('signups.self-table', ['cycle' => $cycle, 'cycle_signup' => $cycle_signup])
+    @include('signups.self-status-table', ['cycle' => $cycle, 'cycle_signup' => $cycle_signup])
 
     @if ($cycle->status() === 'SIGNUP_OPEN')
         <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
