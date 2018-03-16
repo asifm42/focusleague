@@ -8,17 +8,13 @@
 </style>
 @stop
 @section('content')
-    <div class="page-header">
-        <div class="container">
-            <h4 class="hidden-md hidden-lg">Edit Transaction</h4>
-            <h3 class="hidden-xs hidden-sm">Edit Transaction</h3>
-            <p>Make changes to a Transaction.</p>
-        </div>
-    </div>
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                @include('transactions.forms.create', ['edit' => true])
+        <div class="row justify-content-center">
+            <h4 class="text-center">Edit a transaction</h4>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-8 col-md-6">
+                @include('transactions.forms.create', ['edit'=>true])
             </div>
         </div>
     </div>

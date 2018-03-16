@@ -1,14 +1,5 @@
-<div class="panel panel-default">
-
-    <div class="panel-heading">
-        @if($edit === true)
-            <h3 class="panel-title">Edit a transaction</h3>
-        @else
-            <h3 class="panel-title">Create a transaction</h3>
-        @endif
-    </div>
-
-    <div class="panel-body">
+<div class="card">
+    <div class="card-body">
         @if($edit === true)
             {!! Former::vertical_open()
                 ->method('PATCH')
@@ -102,34 +93,32 @@
             ->placeholder('Optional description')
         !!}
     </div>
-
-    <div class="panel-footer">
-        @if($edit === true)
-            {!! Former::submit()
-                ->addClass('btn btn-primary')
-                ->value('Save')
-            !!}
-            {!! Former::close() !!}
-
-            {!! Former::open()
-                ->method('DELETE')
-                ->class('pull-right')
-                ->action(route('transactions.destroy', $transaction->id))
-            !!}
-            {!! Former::submit()
-                ->addClass('btn btn-danger')
-                ->value('Delete')
-            !!}
-            {!! Former::close() !!}
-        @else
-            {!! Former::submit()
-                ->addClass('btn btn-primary')
-                ->value('Create')
-            !!}
-            {!! Former::close() !!}
-        @endif
-    </div>
 </div>
+
+@if($edit === true)
+    {!! Former::submit()
+        ->addClass('btn btn-primary btn-block mt-3')
+        ->value('Save')
+    !!}
+    {!! Former::close() !!}
+
+    {!! Former::open()
+        ->method('DELETE')
+        ->class('pull-right')
+        ->action(route('transactions.destroy', $transaction->id))
+    !!}
+    {!! Former::submit()
+        ->addClass('btn btn-danger btn-block mt-3')
+        ->value('Delete')
+    !!}
+    {!! Former::close() !!}
+@else
+    {!! Former::submit()
+        ->addClass('btn btn-primary btn-block mt-3')
+        ->value('Create')
+    !!}
+    {!! Former::close() !!}
+@endif
 
 @push('scripts')
     <script>
