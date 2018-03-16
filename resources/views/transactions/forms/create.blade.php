@@ -132,13 +132,6 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
             });
 
-            $(function () {
-                $('#trans_date_picker-js').datetimepicker({
-                    defaultDate: moment(),
-                    format: 'MM/DD/YYYY',
-                });
-            });
-
             $('.users-typeahead-js').typeahead({
                 minLength: 1,
                 highlight: true,
