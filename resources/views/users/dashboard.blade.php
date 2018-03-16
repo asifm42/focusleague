@@ -20,16 +20,19 @@
                     <div class="card-header">Balance</div>
                     <div class="card-body">
                         @if ($balance > 0)
-                            <h6>You currently owe ${{ $balance }}.</h6>
+                            <h6 class="text-center"><small class="text-uppercase">You owe</small></h6>
+                            <h3 class="text-center mb-4 text-danger">${{ $balance }}</h3>
                             <h6>You can pay via the following methods:</h6>
                             @component('site.payment_methods', ['balance' => $user->getBalanceInDollars()])
                             @endcomponent
                         @elseif ($balance == 0)
-                            <h6>Your balance is $0.00.</h6>
-                            <h6>Thank you for being current!</h6>
+                            <h6 class="text-center"><small class="text-uppercase">Your balance</small></h6>
+                            <h3 class="text-center mb-4">$0.00</h3>
+                            <h5 class="text-center">Thank you for being current!</h5>
                         @elseif ($balance < 0)
-                            <h6>You currently have a credit of ${{ number_format(abs($balance), 2, '.',',') }}.</h6>
-                            <h6>It will be applied towards your next charge.</h6>
+                            <h6 class="text-center"><small class="text-uppercase">Your credit</small></h6>
+                            <h3 class="text-center mb-4 text-info">${{ number_format(abs($balance), 2, '.',',') }}</h3>
+                            <h6 class="text-center">It will be applied towards your next charge.</h6>
                         @endif
                         @if(auth()->user() == $user)
                             <a href="{{ route('balance.details') }}" class="btn btn-secondary btn-block">See balance details</a>
