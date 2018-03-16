@@ -53,7 +53,7 @@ class TransactionsController extends Controller
     {
         if ($request->has('user_id')) {
             $user = User::findOrFail($request->input('user_id'));
-            $data['typeahead_name'] = $user->name . " (" . $user->getNicknameOrShortName() . ")";
+            $data['typeahead_name'] = $user->name . " ( " . $user->getNicknameOrShortName() . ")";
             $data['balance'] = $user->getBalanceInDollars();
         }
         $users = User::all();
@@ -62,7 +62,7 @@ class TransactionsController extends Controller
         foreach($users as $user){
             $names[] = [
                 'id' => $user->id,
-                'name' => $user->name . " (" . $user->getNicknameOrShortName() . ")",
+                'name' => $user->name . " ( " . $user->getNicknameOrShortName() . ")",
                 'balance' => $user->getBalanceInDollars(),
             ];
         }
