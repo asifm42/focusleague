@@ -59,96 +59,10 @@
                                     <dd>Wk{{ $key+1 }} - {{ $week->starts_at->toFormattedDateString() }}</dd>
                                 @endforeach
                             @endif
-                            <dt>Current Status</dt>
-                            @if ($current_cycle_signup)
-                                @if (is_null($current_cycle_signup->pivot->team_id))
-                                    <dd>You are signed up but not placed on a team yet.</dd>
-                                @else
-                                    <dd>You are on team: <em>{{ucwords($current_cycle->teams->find($current_cycle_signup->pivot->team_id)->name)}}</em></dd>
-                                @endif
-                                <table class="table table-condensed table-striped">
-                                    <tr>
-                                        <th class="text-center">Div1</th>
-                                        <th class="text-center">Div2</th>
-                                        @foreach($current_cycle->weeks as $key=>$week)
-                                            <th class="text-center">Wk{{ $key+1 }}</th>
-                                        @endforeach
-                                        <th class="text-center">Will capt?</th>
-                                    </tr>
-                                    <tr>
+                            <dt>Status</dt>
 
-                                    <td class="text-center">
-                                        @if(strtolower($current_cycle_signup->pivot->div_pref_first) === 'mens')
-                                            <i class="fa fa-male fa-fw text-primary"></i>
-                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_first) === 'mixed')
-                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
-                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_first) === 'womens')
-                                            <i class="fa fa-female fa-fw text-info"></i>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @if(strtolower($current_cycle_signup->pivot->div_pref_second) === 'mens')
-                                            <i class="fa fa-male fa-fw text-primary"></i>
-                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_second) === 'mixed')
-                                            <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
-                                        @elseif(strtolower($current_cycle_signup->pivot->div_pref_second) === 'womens')
-                                            <i class="fa fa-female fa-fw text-info"></i>
-                                        @endif
-                                    </td>
+                            @include('cycles.status-card-body', ['cycle' => $current_cycle, 'cycle_signup' => $current_cycle_signup, 'sub_weeks' => $current_cycle_sub_weeks])
 
-                                        @foreach($user->availability()->where('cycle_id', $current_cycle->id)->get() as $week)
-                                            @if($week->pivot->attending)
-                                                <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
-                                            @else
-                                                <td class="text-center"><i class="fa fa-times fa-fw text-danger"></i></td>
-                                            @endif
-                                        @endforeach
-                                        <td class="text-center">
-                                            @if ($current_cycle_signup->pivot->will_captain)
-                                            <i class="fa fa-check fa-fw text-success"></i>
-                                            @else
-                                            <i class="fa fa-times fa-fw text-danger"></i>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @if (!empty($current_cycle_signup->pivot->note))
-                                        <tr>
-                                            <td colspan="6">
-                                                <i class="fa fa-sticky-note text-warning"></i>&nbsp;&nbsp;{{ $current_cycle_signup->pivot->note }}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                </table>
-                                @if ($current_cycle->status() === 'SIGNUP_OPEN')
-                                    <a class="btn btn-default btn-block" href="{{ route('cycle.signup.edit', $current_cycle->id) }}">Edit sign up</a>
-                                @endif
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $current_cycle->id) }}">Cycle Details</a>
-                            @elseif($current_cycle_sub_weeks)
-                                <dd>You are signed up as a sub for the following weeks</dd>
-                                @foreach($current_cycle_sub_weeks as $sub_week)
-                                    <dd><a href="{{ route('sub.edit', $sub_week['deets']->pivot->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
-                                @endforeach
-                                <a class="btn btn-default btn-block" href="{{ route('sub.create', $current_cycle->id) }}">Sign up as sub</a>
-                                <a class="btn btn-info btn-block" href="{{ route('cycles.view', $current_cycle->id) }}">Cycle Details</a>
-                            @else
-                                @if ($current_cycle->status() === 'SIGNUP_OPEN')
-                                    <dd>Sign up is currently open until {{ $current_cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-                                    <a class="btn btn-default btn-block" href="{{ route('cycle.signup.create', $current_cycle->id) }}">Sign up</a>
-                                    <a class="btn btn-default btn-block" href="{{ route('sub.create', $current_cycle->id) }}">Sign up as sub</a>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $current_cycle->id) }}">Cycle Details</a>
-                                @elseif ($current_cycle->status() === 'SIGNUP_CLOSED')
-                                    <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
-                                    <a class="btn btn-default btn-block" href="{{ route('sub.create', $current_cycle->id) }}">Sign up as sub</a>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $current_cycle->id) }}">Cycle Details</a>
-                                @elseif ($current_cycle->status() === 'IN_PROGRESS')
-                                    <dd>In progess</dd>
-                                <a class="btn btn-default btn-block" href="{{ route('sub.create', $current_cycle->id) }}">Sign up as sub</a>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $current_cycle->id) }}">Cycle Details</a>
-                                @elseif ($current_cycle->status() === 'COMPLETED')
-                                    <dd>Completed</dd>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $current_cycle->id) }}">Cycle Details</a>
-                                @endif
-                            @endif
                         </dl>
                     </div>
                 </div>
