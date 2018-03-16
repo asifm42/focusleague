@@ -31,7 +31,7 @@
             <select name="division" class="form-control {{ $errors->has('division') ? 'is-invalid' : ''}}" id="division" aria-describedby="divisionHelp" placeholder="Required division" required>
                 <option disabled {{ old('division') ? '' : 'selected' }}>Required division</option>
                 @foreach($divOptions as $key => $option)
-                <option value="{{ $key }}" {{ old('division') == $key ? 'selected' : '' }}>{{ $option }}</option>
+                <option value="{{ $key }}" {{ old('division', $team->division) == $key ? 'selected' : '' }}>{{ $option }}</option>
                 @endforeach
             </select>
             <div id="divisionFeedback" class="invalid-feedback">{{ $errors->has('division') ? $errors->first('division') : '' }}</div>
