@@ -6,9 +6,9 @@
                         </h6>
                     </div>
                     <div class="card-body p-0">
-                    <?php
-                        $showDivisions = (isset($showDivisions) && $showDivisions) ? true : false;
-                    ?>
+                        @php
+                            $showDivisions = (isset($showDivisions) && $showDivisions) ? true : false;
+                        @endphp
                         @if(strtolower($team->division) === 'mixed')
                             <?php
                                 $malePlayers = $players->filter(function ($value, $key) {
