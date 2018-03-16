@@ -11,7 +11,7 @@ webpackJsonp([1],[
  * Copyright 2013-2014 Twitter, Inc. and other contributors; Licensed MIT
  */
 
-var assign = __webpack_require__(143);
+var assign = __webpack_require__(144);
 
 var _ = {
   isMsie: function() {
@@ -113,7 +113,7 @@ var _ = {
     return !!result;
   },
 
-  mixin: __webpack_require__(143),
+  mixin: __webpack_require__(144),
 
   identity: function(x) { return x; },
 
@@ -203,11 +203,120 @@ module.exports = _;
 
 /***/ }),
 /* 4 */,
-/* 5 */,
+/* 5 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
 /* 6 */,
 /* 7 */,
 /* 8 */,
-/* 9 */
+/* 9 */,
+/* 10 */
 /***/ (function(module, exports) {
 
 /*
@@ -289,7 +398,6 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 10 */,
 /* 11 */,
 /* 12 */,
 /* 13 */,
@@ -422,7 +530,8 @@ function toComment(sourceMap) {
 /* 140 */,
 /* 141 */,
 /* 142 */,
-/* 143 */
+/* 143 */,
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -519,7 +628,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
@@ -1676,10 +1785,10 @@ return Promise;
 
 })));
 //# sourceMappingURL=es6-promise.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(4)))
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var LruCache = __webpack_require__(184);
@@ -1803,7 +1912,7 @@ module.exports = Transport;
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports) {
 
 /**
@@ -1822,8 +1931,8 @@ module.exports = isObject;
 
 
 /***/ }),
-/* 147 */,
-/* 148 */
+/* 148 */,
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -2051,120 +2160,11 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 149 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
 /* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(151);
-module.exports = __webpack_require__(213);
+module.exports = __webpack_require__(222);
 
 
 /***/ }),
@@ -2180,7 +2180,7 @@ module.exports = __webpack_require__(213);
 
 __webpack_require__(152);
 
-window.Vue = __webpack_require__(147);
+window.Vue = __webpack_require__(148);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -2190,9 +2190,9 @@ window.Vue = __webpack_require__(147);
 
 Vue.component('cycle-signup', __webpack_require__(202));
 Vue.component('signups-card', __webpack_require__(208));
-Vue.component('signup', __webpack_require__(223));
-Vue.component('team-card', __webpack_require__(226));
-Vue.component('team-builder', __webpack_require__(229));
+Vue.component('signup', __webpack_require__(213));
+Vue.component('team-card', __webpack_require__(216));
+Vue.component('team-builder', __webpack_require__(219));
 
 var app = new Vue({
   el: '#app'
@@ -2203,8 +2203,8 @@ var app = new Vue({
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {
-window._ = __webpack_require__(5);
-window.Popper = __webpack_require__(11).default;
+window._ = __webpack_require__(6);
+window.Popper = __webpack_require__(12).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -2215,7 +2215,7 @@ window.Popper = __webpack_require__(11).default;
 try {
   window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(1);
 
-  __webpack_require__(12);
+  __webpack_require__(13);
 } catch (e) {}
 
 /**
@@ -2224,7 +2224,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(13);
+window.axios = __webpack_require__(14);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -2243,8 +2243,8 @@ if (token) {
 }
 
 // https://datatables.net/
-window.datatables = __webpack_require__(8);
-window.datatables_bs = __webpack_require__(19);
+window.datatables = __webpack_require__(9);
+window.datatables_bs = __webpack_require__(20);
 __webpack_require__(171);
 __webpack_require__(174);
 
@@ -2257,10 +2257,6 @@ window.Bloodhound = __webpack_require__(180);
 
 // https://github.com/uxsolutions/bootstrap-datepicker
 // window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
-
-// window.datepicker = require('gijgo/combined/js/gijgo');
-// require("gijgo/combined/css/gijgo.css");
-
 
 // http://selectize.github.io/selectize.js/
 // window.selectize = require('selectize');
@@ -17730,7 +17726,7 @@ if(false) {
 /* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(false);
+exports = module.exports = __webpack_require__(10)(false);
 // imports
 
 
@@ -20651,7 +20647,7 @@ module.exports = function (css) {
         }
     })();
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(142).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(143).setImmediate))
 
 /***/ }),
 /* 179 */,
@@ -20666,13 +20662,13 @@ module.exports = __webpack_require__(181);
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(3);
-var Promise = __webpack_require__(144).Promise;
+var Promise = __webpack_require__(145).Promise;
 var Remote = __webpack_require__(183);
 var Prefetch = __webpack_require__(185);
 var tokenizers = __webpack_require__(191);
 var oParser = __webpack_require__(192);
 var SearchIndex = __webpack_require__(200);
-var Transport = __webpack_require__(145);
+var Transport = __webpack_require__(146);
 
 function Bloodhound(o) {
   o = oParser(o);
@@ -20862,7 +20858,7 @@ module.exports = Bloodhound;
  */
 
 var _ = __webpack_require__(3);
-var Transport = __webpack_require__(145);
+var Transport = __webpack_require__(146);
 
 function Remote(o) {
   this.url = o.url;
@@ -21672,7 +21668,7 @@ function callbackToDeferred(fn) {
 /* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Promise = __webpack_require__(144).Promise;
+var Promise = __webpack_require__(145).Promise;
 var request = __webpack_require__(194);
 
 module.exports = function(o) {
@@ -21696,7 +21692,7 @@ module.exports = function(o) {
 var Emitter = __webpack_require__(195);
 var reduce = __webpack_require__(196);
 var requestBase = __webpack_require__(197);
-var isObject = __webpack_require__(146);
+var isObject = __webpack_require__(147);
 
 /**
  * Root reference for iframes.
@@ -22973,7 +22969,7 @@ module.exports = function(arr, fn, initial){
 /**
  * Module of mixed-in functions shared between node and client code
  */
-var isObject = __webpack_require__(146);
+var isObject = __webpack_require__(147);
 
 /**
  * Clear previous timeout.
@@ -24463,7 +24459,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(203)
 }
-var normalizeComponent = __webpack_require__(149)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(206)
 /* template */
@@ -24516,7 +24512,7 @@ var content = __webpack_require__(204);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(148)("765e2a99", content, false, {});
+var update = __webpack_require__(149)("765e2a99", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -24535,7 +24531,7 @@ if(false) {
 /* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(false);
+exports = module.exports = __webpack_require__(10)(false);
 // imports
 
 
@@ -24586,7 +24582,7 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 //
 //
@@ -26285,7 +26281,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(209)
 }
-var normalizeComponent = __webpack_require__(149)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(211)
 /* template */
@@ -26338,7 +26334,7 @@ var content = __webpack_require__(210);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(148)("3aa6306d", content, false, {});
+var update = __webpack_require__(149)("3aa6306d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -26357,7 +26353,7 @@ if(false) {
 /* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(false);
+exports = module.exports = __webpack_require__(10)(false);
 // imports
 
 
@@ -26658,29 +26654,14 @@ if (false) {
 
 /***/ }),
 /* 213 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(149)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(224)
+var __vue_script__ = __webpack_require__(214)
 /* template */
-var __vue_template__ = __webpack_require__(225)
+var __vue_template__ = __webpack_require__(215)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -26719,7 +26700,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 224 */
+/* 214 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26939,7 +26920,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 225 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -27083,15 +27064,15 @@ if (false) {
 }
 
 /***/ }),
-/* 226 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(149)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(227)
+var __vue_script__ = __webpack_require__(217)
 /* template */
-var __vue_template__ = __webpack_require__(228)
+var __vue_template__ = __webpack_require__(218)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -27130,7 +27111,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 227 */
+/* 217 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27287,7 +27268,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 228 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -27421,15 +27402,15 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(149)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(231)
+var __vue_script__ = __webpack_require__(220)
 /* template */
-var __vue_template__ = __webpack_require__(230)
+var __vue_template__ = __webpack_require__(221)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -27468,7 +27449,123 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 230 */
+/* 220 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['cycleid', 'cyclePayload'],
+    data: function data() {
+        return {
+            cycle: this.cyclePayload
+        };
+    },
+
+    methods: {
+        teamDivisionIcon: function teamDivisionIcon(division) {
+            division = division.toLowerCase();
+
+            switch (division) {
+                case 'mens':
+                    return '<i class="fa fa-male fa-fw text-primary"></i>';
+                    break;
+                case 'mixed':
+                    return '<i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>';
+                    break;
+                case 'womens':
+                    return '<i class="fa fa-female fa-fw text-info"></i>';
+                    break;
+                default:
+                    return;
+            }
+        }
+    },
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -27641,120 +27738,10 @@ if (false) {
 }
 
 /***/ }),
-/* 231 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 222 */
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['cycleid', 'cyclePayload'],
-    data: function data() {
-        return {
-            cycle: this.cyclePayload
-        };
-    },
-
-    methods: {
-        teamDivisionIcon: function teamDivisionIcon(division) {
-            division = division.toLowerCase();
-
-            switch (division) {
-                case 'mens':
-                    return '<i class="fa fa-male fa-fw text-primary"></i>';
-                    break;
-                case 'mixed':
-                    return '<i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>';
-                    break;
-                case 'womens':
-                    return '<i class="fa fa-female fa-fw text-info"></i>';
-                    break;
-                default:
-                    return;
-            }
-        }
-    },
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
+// removed by extract-text-webpack-plugin
 
 /***/ })
 ],[150]);
