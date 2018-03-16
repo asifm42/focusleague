@@ -285,6 +285,6 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 
 Route::group(['middleware' => ['api']], function() {
     Route::put(     'api/cyclesignups/{id}',         ['as' => 'api.cyclesignups.put', 'uses' => 'CycleSignupsController@apiUpdate']);
-    Route::get(     'api/cycles/{cycle}',         ['as' => 'api.cycles.get', 'uses' => 'CyclesController@apiGetJson']);
+    // Route::get(     'api/cycles/{cycle}',         ['as' => 'api.cycles.get', 'uses' => 'CyclesController@apiGetJson']);
 });
 
