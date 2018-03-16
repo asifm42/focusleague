@@ -2,17 +2,14 @@
 @section('title','FOCUS League – Balance Details')
 
 @section('content')
-    <div class="page-header">
-        <div class="container">
-            <h4 class="hidden-md hidden-lg">Account Balance Details</h4>
-            <h3 class="hidden-xs hidden-sm">Account Balance Details</h3>
-            <p>See a list of your transactions.</p>
-        </div>
-    </div>
     <div class="container">
+        <div class="row justify-content-center">
+            <h4 class="text-center w-100">Account Balance Details</h4>
+            <p class="text-center">See a list of your transactions.</p>
+        </div>
         @if (auth()->user()->isAdmin())
             <div class="row">
-                <div class="col-xs-12 col-md-12">
+                <div class="col-12 col-sm-12">
                         <h5>
                             <a href="{{ route('users.show', $user->id) }}">{{ $user->name }} ({{ $user->getNicknameOrShortname() }})</a>
                             <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default pull-right">Add Transaction</a>
@@ -20,8 +17,8 @@
                 </div>
             </div>
         @endif
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-12">
                 <h5>
                     @if ($balance < 0 )
                         Credit: <span class="text-primary">{{ $balanceString }}</span>
@@ -34,7 +31,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-sm-12">
                 <div class = "table-responsive">
                     <table class="table table-striped table-condensed table-bordered focus-transactions-table">
                         <thead>
@@ -89,8 +86,8 @@
         </div>
 
         @if (auth()->user()->isAdmin())
-            <div class="col-xs-12 col-md-12">
-                <h5 class="pull-right">
+            <div class="col-12 col-sm-12">
+                <h5 class="float-right">
                     @if ($balance < 0 )
                         Credit: <span class="text-primary">{{ $balanceString }}</span>
                     @elseif ($balance == 0 )
@@ -101,10 +98,10 @@
                 </h5>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-md-12">
+                <div class="col-12 col-sm-12">
                         <h5>
                             <a href="{{ route('users.show', $user->id) }}">{{ $user->name }} ({{ $user->getNicknameOrShortname() }})</a>
-                            <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default btn-xs pull-right">Add Transaction</a>
+                            <a href="{{ route('transactions.create') . '?user_id=' . $user->id }}" class="btn btn-default btn-xs float-right">Add Transaction</a>
                         </h5>
                 </div>
             </div>

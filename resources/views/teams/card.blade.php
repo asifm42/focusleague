@@ -1,6 +1,6 @@
                 <div class="card team-list mt-2 mb-2">
                     <div class="card-header">
-                        <h4 class="card-title mb-0">
+                        <h6 class="card-title font-weight-bold mb-0">
                             {{ 'Team ' . ucwords($team->name) }}
                             @if(strtolower($team->division) === 'mens')
                                 <i class="fa fa-male text-primary"></i>

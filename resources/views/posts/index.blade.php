@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-12 ">
                 @foreach($posts as $post)
-                    <div class="card mt-4 mb-4">
+                    <div class="card mb-4">
                         <div class="card-header">
                             <h5 class="">{{ $post->title }}</h5>
                             <p><small>{{ $post->created_at->toFormattedDateString() }} by {{ $post->author->nickname }}</small></p>
