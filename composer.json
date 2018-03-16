@@ -15,7 +15,7 @@
         "laracasts/flash": "2.0.*",
         "laravel/dusk": "^1.0",
         "laravel/framework": "5.4.*",
-        "laravel/passport": "^2.0",
+        "laravel/passport": "^3.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "~5.0",
         "mailgun/mailgun-php": "~2.1.2",
