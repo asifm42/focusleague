@@ -57,7 +57,7 @@ class CycleSignupsController extends Controller
         }
 
         return view('cycles.signups.create')
-                ->withCycle($cycle)
+                ->withCycle($cycle->load('weeks'))
                 ->withUser($user)
                 ->withCost(config('focus.cost'));
     }
