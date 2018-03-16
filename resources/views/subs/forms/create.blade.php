@@ -1,8 +1,18 @@
 <div class="panel panel-default">
+<form accept-charset="utf-8" class="form-vertical" method="POST"
+    @if ($edit === true)
+        action="{{ route('sub.update', $sub->id) }}"
+    @else
+        action="{{ route('sub.store', $cycle->id) }}"
+    @endif
+    >
 
     <div class="panel-heading">
         <h3 class="panel-title">Sub sign up for Cycle {{ $cycle->name }}</h3>
     </div>
+    @if ($edit === true)
+        {!! method_field('patch') !!}
+    @endif
 
 <?php
     $week_options = [];
@@ -26,17 +36,6 @@
         }
 
     }
-?>
-    <div class="panel-body">
-        @if($edit === true)
-            {!! Former::vertical_open()
-                ->method('PATCH')
-                ->action(route('sub.update', $sub->id))
-            !!}
-        @else
-            {!! Former::vertical_open()
-                ->action(route('sub.store', $cycle->id))
-            !!}
         @endif
 
         {!! Former::text('nickname')

@@ -1,10 +1,15 @@
-<form accept-charset="utf-8" class="form-vertical"
+<form accept-charset="utf-8" class="form-vertical" method="POST"
     @if ($edit === true)
-        method="PATCH" action="{{ route('users.update', $user->id) }}"
+        action="{{ route('users.update', $user->id) }}"
     @else
-        method="POST" action="{{ route('users.store') }}"
+        action="{{ route('users.store') }}"
     @endif
     >
+
+    @if ($edit === true)
+        {!! method_field('patch') !!}
+    @endif
+
     <div class="card mt-4 mb-4">
         <div class="card-body">
             <div class="form-group {{ $errors->has('name') ? 'has-danger' : ''}}">

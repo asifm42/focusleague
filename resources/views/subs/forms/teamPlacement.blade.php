@@ -1,26 +1,26 @@
 <div class="panel panel-default">
+<form accept-charset="utf-8" class="form-vertical" method="POST"
+    @if ($edit === true)
+        action="{{ route('subs.updateTeamPlacement', $sub->id) }}"
+    @else
+        action="{{ route('subs.placeOnATeam', $sub->id) }}"
+    @endif
+    >
 
     <div class="panel-heading">
         <h3 class="panel-title">Place sub on a team</h3>
     </div>
 <?php
+    @if ($edit === true)
+        {!! method_field('patch') !!}
+    @endif
+
     $team_options = [];
     foreach($cycle_teams as $team) {
         $team_options[$team->id] = $team->name;
     }
 ?>
     <div class="panel-body">
-        @if($edit === true)
-            {!! Former::vertical_open()
-                ->method('PATCH')
-                ->action(route('subs.updateTeamPlacement', $sub->id))
-            !!}
-        @else
-            {!! Former::vertical_open()
-                ->action(route('subs.placeOnATeam', $sub->id))
-            !!}
-        @endif
-
         <h4>Cycle {{ $cycle->name }} - Week {{ $sub->week->index() }}</h4>
 
         {!! Former::text('nickname')

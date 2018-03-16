@@ -1,8 +1,18 @@
 <div class="panel panel-default">
+<form accept-charset="utf-8" class="form-vertical" method="POST"
+    @if ($edit === true)
+        action="{{ route('users.ultimate_history.update', $user->id) }}"
+    @else
+        action="{{ route('users.ultimate_history.store', $user->id) }}"
+    @endif
+    >
 
     <div class="panel-heading">
         <h3 class="panel-title">Provide your Ultimate History</h3>
     </div>
+    @if ($edit === true)
+        {!! method_field('patch') !!}
+    @endif
 
     <div class="panel-body">
         @if($edit === true)

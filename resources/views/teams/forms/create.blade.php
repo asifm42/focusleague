@@ -1,20 +1,23 @@
 <div class="panel panel-default">
+<form accept-charset="utf-8" class="form-vertical" method="POST"
+    @if ($edit === true)
+        action="{{ route('teams.update', $team->id) }}"
+    @else
+        action="{{ route('teams.store') }}"
+        @php
+            $team = new \App\Models\Team;
+        @endphp
+    @endif
+    >
 
     <div class="panel-heading">
         <h3 class="panel-title">Create team for Cycle {{ $cycle->name }}</h3>
     </div>
+    @if ($edit === true)
+        {!! method_field('patch') !!}
+    @endif
 
     <div class="panel-body">
-        @if($edit === true)
-            {!! Former::vertical_open()
-                ->method('PATCH')
-                ->action(route('teams.update', $team->id))
-            !!}
-        @else
-            {!! Former::vertical_open()
-                ->action(route('teams.store'))
-            !!}
-        @endif
 
         {!! Former::text('name')
             ->label('Team Name')
