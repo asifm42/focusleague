@@ -83,69 +83,26 @@
                                     <dd>{{ $week->starts_at->toFormattedDateString() }}</dd>
                                 @endforeach
                             @endif
-                            <dt>Current Status</dt>
-                            @if ($next_cycle_signup)
-                                @if (is_null($next_cycle_signup->pivot->team_id))
-                                    <dd>You are signed up but not placed on a team yet.</dd>
-                                @else
-                                    <dd>You are on team: <em>TEAM NAME</em></dd>
-                                @endif
-
-                                @if ($next_cycle_signup->pivot->will_captain == true)
-                                    <dd>You are willing to captain.</dd>
-                                @else
-                                    <dd>You are NOT willing to captain.</dd>
-                                @endif
-                                <table class="table table-condensed table-striped">
-                                    <tr>
-                                        <th>Div1</th>
-                                        <th>Div2</th>
-                                        <th>Wk1</th>
-                                        <th>Wk2</th>
-                                        <th>Wk3</th>
-                                        <th>Wk4</th>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ $next_cycle_signup->pivot->div_pref_first }}</td>
-                                        <td>{{ $next_cycle_signup->pivot->div_pref_second }}</td>
-                                        @foreach($user->availability()->where('cycle_id', $next_cycle->id)->get() as $week)
-                                            @if($week->pivot->attending)
-                                                <td class="text-center"><i class="fa fa-check fa-fw text-success"></i></td>
-                                            @else
-                                                <td class="text-center"><i class="fa fa-times fa-fw text-danger"></i></td>
-                                            @endif
-                                        @endforeach
-                                    </tr>
-                                </table>
-                                @if ($next_cycle->status() === 'SIGNUP_OPEN')
-                                    <a class="btn btn-default btn-block" href="{{ route('cycle.signup.edit', $next_cycle->id) }}">Edit sign up</a>
-                                @endif
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
-                            @elseif($next_cycle_sub_weeks)
-                                <dd>You are signed up as a sub for the following weeks</dd>
-                                @foreach($next_cycle_sub_weeks as $sub_week)
-                                    <dd><a href="{{ route('sub.edit', $sub_week['deets']->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
-                                @endforeach
+                            <dt>Status</dt>
+                            @if ($next_cycle->status() === 'SIGNUP_OPENS_LATER')
+                                <dd>Sign up opens at {{ $next_cycle->signup_opens_at->toDayDateTimeString() }}</dd>
+                                <a class="btn btn-info btn-block mt-3" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
+                            @elseif ($next_cycle->status() === 'SIGNUP_OPEN')
+                                <dd>Sign up is currently open until {{ $next_cycle->signup_closes_at->toDayDateTimeString() }}</dd>
+                                <a class="btn btn-default btn-block" href="{{ route('cycle.signup.create', $next_cycle->id) }}">Sign up</a>
                                 <a class="btn btn-default btn-block" href="{{ route('sub.create', $next_cycle->id) }}">Sign up as sub</a>
                                 <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
-                            @else
-                                @if ($next_cycle->status() === 'SIGNUP_OPEN')
-                                    <dd>Sign up is currently open until {{ $next_cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-                                    <a class="btn btn-default btn-block" href="{{ route('cycle.signup.create', $next_cycle->id) }}">Sign up</a>
-                                    <a class="btn btn-default btn-block" href="{{ route('sub.create', $next_cycle->id) }}">Sign up as sub</a>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
-                                @elseif ($next_cycle->status() === 'SIGNUP_CLOSED')
-                                    <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
-                                    <a class="btn btn-default btn-block" href="{{ route('sub.create', $next_cycle->id) }}">Sign up as sub</a>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
-                                @elseif ($next_cycle->status() === 'IN_PROGRESS')
-                                    <dd>In progess</dd>
+                            @elseif ($next_cycle->status() === 'SIGNUP_CLOSED')
+                                <dd>Sign up is currently closed. You can still sign up as a sub.</dd>
                                 <a class="btn btn-default btn-block" href="{{ route('sub.create', $next_cycle->id) }}">Sign up as sub</a>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
-                                @elseif ($next_cycle->status() === 'COMPLETED')
-                                    <dd>Completed</dd>
-                                    <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
-                                @endif
+                                <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
+                            @elseif ($next_cycle->status() === 'IN_PROGRESS')
+                                <dd>In progess</dd>
+                            <a class="btn btn-default btn-block" href="{{ route('sub.create', $next_cycle->id) }}">Sign up as sub</a>
+                                <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
+                            @elseif ($next_cycle->status() === 'COMPLETED')
+                                <dd>Completed</dd>
+                                <a class="btn btn-info btn-block" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
                             @endif
                         </dl>
                     </div>
