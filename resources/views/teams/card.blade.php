@@ -2,14 +2,8 @@
                     <div class="card-header">
                         <h6 class="card-title font-weight-bold mb-0">
                             {{ 'Team ' . ucwords($team->name) }}
-                            @if(strtolower($team->division) === 'mens')
-                                <i class="fa fa-male text-primary"></i>
-                            @elseif(strtolower($team->division) === 'womens')
-                                <i class="fa fa-female text-info"></i>
-                            @elseif(strtolower($team->division) === 'mixed')
-                                <i class="fa fa-male text-primary"></i><i class="fa fa-female text-info"></i>
-                            @endif
-                        </h4>
+                            {!! $team->divisionIcon() !!}
+                        </h6>
                     </div>
                     <div class="card-body p-0">
                     <?php
