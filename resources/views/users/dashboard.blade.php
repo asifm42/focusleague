@@ -182,8 +182,6 @@
                                 <p>{{ $user->division_preference_first }}</p>
                                 <h6 class="font-weight-bold text-muted">Division Preference Second</h6>
                                 <p>{{ $user->division_preference_second }}</p>
-{{--                                 <h6>Season Pass</h6>
-                                <p>Valid through {{ $user->season_pass_ends_on->toFormattedDateString() }}</p> --}}
                             </div>
                         </div>
                     </div>
@@ -228,7 +226,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
