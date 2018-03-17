@@ -38,15 +38,15 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+// https://momentjs.com/
+window.moment = require('moment');
 
 // https://datatables.net/
 window.datatables = require('datatables.net');
-window.datatables_bs = require('datatables.net-bs');
-require("drmonty-datatables-plugins/sorting/datetime-moment");
-require("datatables.net-bs/css/dataTables.bootstrap.css");
+window.datatables_bs4 = require('datatables.net-bs4');
+require("datatables.net-plugins/sorting/datetime-moment");
+require("datatables.net-responsive");
 
-// https://momentjs.com/
-window.moment = require('moment');
 
 // https://twitter.github.io/typeahead.js/
 window.typeahead = require('typeahead.js');
