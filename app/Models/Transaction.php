@@ -77,33 +77,6 @@ class Transaction extends Model
     }
 
     /**
-     * Get the transaction date.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    // public function getDateAttribute($value)
-    // {
-    //     $originalDate = $value;
-    //     return date("m-d-Y", strtotime($originalDate));
-    // }
-
-    /**
-     * Set the transaction date.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    // public function setDateAttribute($value)
-    // {
-    //     if (empty($value)) {
-    //         $this->attributes['date'] = date("Y-m-d");
-    //     } else {
-    //         $this->attributes['date'] = date("Y-m-d", strtotime($value));
-    //     }
-    // }
-
-    /**
      * Get the transactoin amount in dollars.
      *
      * @return float
