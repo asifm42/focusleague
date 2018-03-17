@@ -52,6 +52,7 @@ class TransactionsController extends Controller
     public function create(Request $request)
     {
         $data['userId'] = "";
+        $data['balance'] = 0;
         if ($request->has('user_id')) {
             $user = User::findOrFail($request->input('user_id'));
             $data['typeahead_name'] = $user->name . " ( " . $user->getNicknameOrShortName() . ")";
