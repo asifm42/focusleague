@@ -30,10 +30,11 @@
 
 @include('flash::message')
 
-@yield('content')
+<div id="app">
+  @yield('content')
+</div>
 
 @include('layouts.footer')
-
 <script src="/js/manifest.js"></script>
 <script src="/js/vendor.js"></script>
 <script src="/js/app.js"></script>

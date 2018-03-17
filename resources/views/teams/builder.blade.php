@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div id="app">
+{{-- <div id="app"> --}}
 {{--     <div class="container">
         <div class="row">
             <div class="col">
@@ -76,7 +76,7 @@
         @endforeach
     </div> --}}
     <team-builder :cycleid="{{ $cycle->id }}" :cycle-payload="{{ $cycle->toJson() }}"></team-builder>
-</div>
+{{-- </div> --}}
 @endsection
 
 

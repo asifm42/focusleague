@@ -2,7 +2,6 @@
 @section('title','FOCUS League – Cycle Sign-up')
 
 @section('content')
-<div id="app">
    <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
@@ -14,7 +13,6 @@
         :user="{{ $user->toJson() }}"
         :cycle="{{ $cycle->toJson() }}"
     ></cycle-signup>
-</div>
     {{-- <div class="container"> --}}
 {{--          <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
