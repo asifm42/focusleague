@@ -2,7 +2,7 @@
 @section('title','FOCUS League – Cycle Details')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <h3>Cycle {{ $cycle->name }}</h3>
         <div class="row">
             <div class="col-12 col-md-6">
