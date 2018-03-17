@@ -96,15 +96,15 @@
 
         <div class="row">
             <div class="col-8 col-md-8">
-                <div class="form-group  {{ $errors->has('transaction_type') ? 'has-danger' : ''}}">
+                <div class="form-group  {{ $errors->has('payment_type') || $errors->has('type') ? 'has-danger' : ''}}">
                     <label for="transaction_type" class="required">Type</label>
-                    <select name="transaction_type" class="form-control js-transaction-type {{ $errors->has('transaction_type') ? 'is-invalid' : ''}}" id="transaction_type" aria-describedby="transaction_typeHelp" placeholder="Required type" required>
+                    <select name="transaction_type" class="form-control js-transaction-type {{ $errors->has('payment_type') || $errors->has('type') ? 'is-invalid' : ''}}" id="transaction_type" aria-describedby="transaction_typeHelp" placeholder="Required type" required>
                         <option disabled  {{ old('transaction_type') ? '' : 'selected' }}>Required type</option>
                         @foreach($transactionTypes as $key => $type)
                             <option value="{{ $key }}" {{ $transaction_type == $key ? 'selected' : '' }}>{{ $type }}</option>
                         @endforeach
                     </select>
-                    <div id="transaction_typeFeedback" class="invalid-feedback">{{ $errors->has('transaction_type') ? $errors->first('transaction_type') : '' }}</div>
+                    <div id="transaction_typeFeedback" class="invalid-feedback">{{ $errors->has('type') ? $errors->first('type') : '' }} {{ $errors->has('payment_type') ? $errors->first('payment_type') : '' }}</div>
                 </div>
                 <input class="form-control js-type" required="" type="hidden" name="type" value="">
                 <input class="form-control js-payment-type" required="" type="hidden" name="payment_type" value="">
