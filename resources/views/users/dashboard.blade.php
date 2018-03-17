@@ -18,21 +18,21 @@
             <div class="col-12 col-md-6 col-md-push-6">
                 <div class="card mt-2 mb-2">
                     <div class="card-header">Balance</div>
-                    <div class="card-body">
+                    <div class="card-body pb-2">
                         @if ($balance > 0)
                             <h6 class="text-center"><small class="text-uppercase">You owe</small></h6>
-                            <h3 class="text-center mb-4 text-danger">${{ $balance }}</h3>
+                            <h3 class="text-center mb-4 text-danger">${{ $user->getBalanceInDollars() }}</h3>
                             <h6>You can pay via the following methods:</h6>
                             @component('site.payment_methods', ['balance' => $user->getBalanceInDollars()])
                             @endcomponent
                         @elseif ($balance == 0)
                             <h6 class="text-center"><small class="text-uppercase">Your balance</small></h6>
                             <h3 class="text-center mb-4">$0.00</h3>
-                            <h5 class="text-center">Thank you for being current!</h5>
+                            <h5 class="text-center text-success">Thank you for being current!</h5>
                         @elseif ($balance < 0)
                             <h6 class="text-center"><small class="text-uppercase">Your credit</small></h6>
-                            <h3 class="text-center mb-4 text-info">${{ number_format(abs($balance), 2, '.',',') }}</h3>
-                            <h6 class="text-center">It will be applied towards your next charge.</h6>
+                            <h3 class="text-center mb-4 text-info">${{ $user->getBalanceInDollars() }}</h3>
+                            <h6 class="text-center text-muted">auto applied to your next charge</h6>
                         @endif
                         @if(auth()->user() == $user)
                             <a href="{{ route('balance.details') }}" class="btn btn-secondary btn-block">See balance details</a>
