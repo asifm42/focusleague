@@ -1,40 +1,6 @@
 @extends('layouts.default')
 @section('title','FOCUS League – Cycle Details')
 
-@section('styles')
-    <style>
-        .menu-btn {
-            position:fixed;
-            right:15px;
-            bottom:15px;
-            z-index: 1000;
-        }
-
-        .affix-top,.affix{
-            position: static;
-        }
-
-        @media (min-width: 979px) {
-          #sidebar.affix-top {
-            position: static;
-            width:228px;
-          }
-
-          #sidebar.affix {
-            position: fixed;
-            top:30px;
-            width:228px;
-          }
-        }
-
-        #sidebar li.active {
-            border:0 #eee solid;
-            border-right-width:4px;
-        }
-
-    </style>
-@stop
-
 @section('content')
     <div class="container-fluid">
         <h3>Cycle {{ $cycle->name }}</h3>
