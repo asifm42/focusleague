@@ -5,7 +5,6 @@
         action="{{ route('transactions.store') }}"
     @endif
     >
-
     @if ($edit === true)
         {!! method_field('patch') !!}
         @php
@@ -15,6 +14,7 @@
             $transactionCycleId = $transaction->cycle->id;
             $transactionWeekId = $transaction->week ? $transaction->week->id : '';
             $transaction_type = $transaction->type;
+            $transactionAmount = $transaction->amount_in_dollars;
         @endphp
     @else
         @php
@@ -25,8 +25,10 @@
             $transactionCycleId = "";// $transaction->cycle->id;
             $transactionWeekId = "";// $transaction->week->id;
             $transaction_type = "";
+            $transactionAmount = $balance;
         @endphp
     @endif
+
 
     @php
         $transactionTypes = [
@@ -90,13 +92,9 @@
                     <div id="weekFeedback" class="invalid-feedback">{{ $errors->has('week_id') ? $errors->first('week_id') : '' }}</div>
                 </div>
             </div>
-
-
-
-
         </div>
-        <div class="row">
 
+        <div class="row">
             <div class="col-8 col-md-8">
                 <div class="form-group  {{ $errors->has('transaction_type') ? 'has-danger' : ''}}">
                     <label for="transaction_type" class="required">Type</label>
@@ -115,7 +113,7 @@
             <div class="col-4 col-md-4">
                 <div class="form-group {{ $errors->has('amount') ? 'has-danger' : ''}}">
                     <label for="amount" class="required">Amount</label>
-                    <input name="amount" type="text" class="form-control {{ $errors->has('amount') ? 'is-invalid' : ''}}" id="amount" aria-describedby="amountHelp" placeholder="Required Amount" required value={{ old('amount', $transaction->amountInDollars) }}>
+                    <input name="amount" type="text" class="form-control {{ $errors->has('amount') ? 'is-invalid' : ''}}" id="amount" aria-describedby="amountHelp" placeholder="Required Amount" required value={{ old('amount', $transactionAmount) }}>
                     <div id="amountFeedback" class="invalid-feedback">{{ $errors->has('amount') ? $errors->first('amount') : '' }}</div>
                 </div>
             </div>
@@ -208,9 +206,9 @@
                 $('.users-typeahead-js').trigger('typeahead:change');
             @endif
 
-            @if (isset($balance) && $balance > 0)
-                $('input[name = amount]').val({!! $balance !!});
-                console.log('balance', {!! $balance !!});
+            @if (isset($transactionAmount) && $transactionAmount > 0)
+                $('input[name = amount]').val({!! $transactionAmount !!});
+                console.log('balance', {!! $transactionAmount !!});
                 $('input[name = amount]').focus();
                 $('input[name = transaction_type]').focus();
             @endif
