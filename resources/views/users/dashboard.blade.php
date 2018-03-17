@@ -2,20 +2,20 @@
 @section('title','FOCUS League – Player Dashboard')
 
 @section('content')
-    <div class="page-header">
-        <div class="container">
-            @if(auth()->user() == $user)
-                <h4>Your Dashboard</h4>
-                <p>Overview of your account.</p>
-            @elseif(auth()->user()->isAdmin())
-                <h4>{{$user->getNicknameOrShortName() }}'s Dashboard</h4>
-                <p>Overview of {{ $user->name }}'s account.</p>
-            @endif
-        </div>
-    </div>
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-6 col-md-push-6">
+            <div class="col">
+                @if(auth()->user() == $user)
+                    <h4>Your Dashboard</h4>
+                    <p>Overview of your account.</p>
+                @elseif(auth()->user()->isAdmin())
+                    <h4>{{$user->getNicknameOrShortName() }}'s Dashboard</h4>
+                    <p>Overview of {{ $user->name }}'s account.</p>
+                @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
                 <div class="card mt-2 mb-2">
                     <div class="card-header">Balance</div>
                     <div class="card-body pb-2">
