@@ -18,23 +18,19 @@
     <div class="col-12">
     @if($current_cycle && $current_cycle->gameToday())
         <div class="jumbotron" style="background-color: #ffff99;" >
-            <p>
-                Tonight
-            </p>
 
             <p class="lead">
                 Cycle {{$current_cycle->name}} - Wk {{ $current_cycle->gameToday()->week_index() }}
             </p>
+            <p>
+                8 pm Tonight
+            </p>
 
-            <time datetime="{{ $current_cycle->gameToday()->starts_at->format('Y-m-d') }}" class="icon">
+            <time datetime="{{ $current_cycle->gameToday()->starts_at->format('Y-m-d') }}" class="icon" >
                 <em>{{ $current_cycle->gameToday()->starts_at->format('l') }}</em>
                 <strong>{{ $current_cycle->gameToday()->starts_at->format('F') }}</strong>
                 <span>{{ $current_cycle->gameToday()->starts_at->format('j') }}</span>
             </time>
-
-            <p class="m-0">
-                8 pm
-            </p>
 
             @if($current_cycle->gameToday()->updated_at->isToday() && $current_cycle->gameToday()->updated_at->lt(Carbon::now()))
                 <p class="m-0"><small>as of {{ $current_cycle->currentWeek()->updated_at->format('g:i A') }}</small></p>
