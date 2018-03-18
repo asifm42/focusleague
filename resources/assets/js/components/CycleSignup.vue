@@ -3,13 +3,11 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
                 <transition name="fade" mode="out-in">
-                    <div class="card m-2" v-if="show == 'intro'" key="intro">
-                        <div class="card-body">
-                            <h4>Great to have you, {{ user.nickname }}!</h4>
-                            <p>We just need some information to sign you up for Cycle {{ cycle.name }}.</p>
+                    <div class="jumbotron m-2" v-if="show == 'intro'" key="intro">
+                        <h4>Great to have you, {{ user.nickname }}!</h4>
+                        <p>We just need some information to sign you up for Cycle {{ cycle.name }}.</p>
 
-                            <button class="btn btn-primary btn-block" v-on:click="clickContinue">Let's get started!</button>
-                        </div>
+                        <button class="btn btn-primary btn-block" v-on:click="clickContinue">Let's get started!</button>
                     </div>
 
                     <div class="card m-2" v-if="show == 'div_pref'" key="div_pref">
@@ -97,12 +95,13 @@
                         </div>
                     </div>
 
-                    <div class="card m-2" v-if="show == 'sub_message'" key="sub_message">
-                        <div class="card-body">
-                            <h4 class="text-center">Sub sign-up</h4>
-                            <div class="card-text text-warning" v-html="sub_message">
-                            </div>
-                            <button class="btn btn-primary btn-block mt-3" v-on:click="clickContinue">Got it. Let's Continue.</button>
+                <div class="jumbotron m-2" v-if="show == 'sub_message'" key="sub_message">
+                    <h4 class="text-center">Sub sign-up</h4>
+                    <div class="text-warning" v-html="sub_message">
+                    </div>
+                    <div class="row mt-3 px-1">
+                        <div class="col">
+                            <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                         </div>
                     </div>
 
@@ -176,13 +175,13 @@
                     </div>
 
 
-                    <div class="card m-2" v-if="show == 'late_message'" key="late_message">
-                        <div class="card-body">
-                            <h4 class="text-center">Late Sign-up</h4>
-                            <div class="card-text text-danger" v-html="late_message">
-                            </div>
-
-                            <button class="btn btn-primary btn-block mt-3" v-on:click="clickContinue">Got it. Let's Continue.</button>
+                <div class="jumbotron m-2" v-if="show == 'late_message'" key="late_message">
+                    <h4 class="text-center">Late Sign-up</h4>
+                    <div class="text-danger" v-html="late_message">
+                    </div>
+                    <div class="row mt-3 px-1">
+                        <div class="col">
+                            <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                         </div>
                     </div>
 
