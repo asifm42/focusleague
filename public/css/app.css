@@ -13204,6 +13204,22 @@ a.text-dark:focus {
   clip: auto;
 }
 
+.tt-open {
+  background-color: #fff;
+  border: 1px #2196f3 dashed;
+  border-top: 0;
+  width: 100%;
+  padding: 5px;
+}
+
+.tt-hint {
+  color: #a6a6a6;
+}
+
+.twitter-typeahead {
+  display: block !important;
+}
+
 table.dataTable {
   clear: both;
   margin-top: 6px !important;
@@ -13474,43 +13490,6 @@ table.dataTable {
   border-collapse: collapse !important;
 }
 
-.logo-navbar {
-  height: 45px;
-  margin-top: -10px;
-}
-
-.logo-welcome-desktop {
-  height: 150px;
-  margin-top: 30px;
-}
-
-.logo-welcome-mobile {
-  height: 100px;
-  margin-top: 20px;
-}
-
-label.required:after {
-  content: " *";
-}
-
-.tt-open {
-  background-color: #fff;
-  border: 1px #2196f3 dashed;
-  border-top: 0;
-  width: 100%;
-  padding: 5px;
-}
-
-.tt-hint {
-  color: #a6a6a6;
-}
-
-.twitter-typeahead {
-  display: block !important;
-}
-
-/* Calendar Icon */
-
 time.icon {
   font-size: 0.9em;
   /* change icon size */
@@ -13575,11 +13554,8 @@ time.icon.icon-xl {
   font-size: 2.5em;
 }
 
-/* Schedule Card */
-
 div.event {
-  /*
-    display: inline-block;
+  /*    display: inline-block;
     line-height: 5em;
     vertical-align: top;*/
   padding-left: 10px;
@@ -13623,5 +13599,24 @@ div.event {
   border-bottom: solid #ddd 1px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+.logo-navbar {
+  height: 45px;
+  margin-top: -10px;
+}
+
+.logo-welcome-desktop {
+  height: 150px;
+  margin-top: 30px;
+}
+
+.logo-welcome-mobile {
+  height: 100px;
+  margin-top: 20px;
+}
+
+label.required:after {
+  content: " *";
 }
 
