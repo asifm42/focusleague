@@ -26,11 +26,12 @@
                 8 pm Tonight
             </p>
 
-            <time datetime="{{ $current_cycle->gameToday()->starts_at->format('Y-m-d') }}" class="icon icon-lg" >
-                <em>{{ $current_cycle->gameToday()->starts_at->format('l') }}</em>
-                <strong>{{ $current_cycle->gameToday()->starts_at->format('F') }}</strong>
-                <span>{{ $current_cycle->gameToday()->starts_at->format('j') }}</span>
-            </time>
+            @component('site.calendar-icon', [
+                'date' => $current_cycle->gameToday()->starts_at,
+                'color' => 'red',
+                'class' => 'icon-lg'
+            ])
+            @endcomponent
 
             <h4>
                 @if($current_cycle->gameToday()->updated_at->isToday() && $current_cycle->gameToday()->updated_at->lt(Carbon::now()))
@@ -109,11 +110,11 @@
                         Cycle {{$current_cycle->name}} - Wk {{ $current_cycle->currentWeek()->week_index() }}
                     </h3>
 
-                    <time datetime="{{ $current_cycle->currentWeek()->starts_at->format('Y-m-d') }}" class="icon">
-                        <em style="color: red">{{ $current_cycle->currentWeek()->starts_at->format('l') }}</em>
-                        <strong style="background-color: red">{{ $current_cycle->currentWeek()->starts_at->format('F') }}</strong>
-                        <span>{{ $current_cycle->currentWeek()->starts_at->format('j') }}</span>
-                    </time>
+                    @component('site.calendar-icon', [
+                        'date' => $current_cycle->currentWeek()->starts_at,
+                        'color' => 'red'
+                    ])
+                    @endcomponent
 
                     <h6>
                         {{ $current_cycle->currentWeek()->starts_at->format('g:i a') }}
@@ -123,11 +124,11 @@
                         Cycle {{$current_cycle->name}} - Wk 1
                     </h3>
 
-                    <time datetime="{{ $current_cycle->weeks()->first()->starts_at->format('Y-m-d') }}" class="icon">
-                        <em style="color: red">{{ $current_cycle->weeks()->first()->starts_at->format('l') }}</em>
-                        <strong style="background-color: red">{{ $current_cycle->weeks()->first()->starts_at->format('F') }}</strong>
-                        <span>{{ $current_cycle->weeks()->first()->starts_at->format('j') }}</span>
-                    </time>
+                    @component('site.calendar-icon', [
+                        'date' => $current_cycle->weeks()->first()->starts_at,
+                        'color' => 'red'
+                    ])
+                    @endcomponent
 
                     <h6>
                         {{ $current_cycle->weeks()->first()->starts_at->format('g:i a') }}
@@ -175,19 +176,21 @@
                 <div class="row">
                     <div class="col justify-content-center">
                         <h6>Sign-up Opens</h6>
-                        <time datetime="{{ $next_cycle->signup_opens_at->format('Y-m-d') }}" class="icon">
-                            <em>{{ $next_cycle->signup_opens_at->format('l') }}</em>
-                            <strong>{{ $next_cycle->signup_opens_at->format('F') }}</strong>
-                            <span>{{ $next_cycle->signup_opens_at->format('j') }}</span>
-                        </time>
+
+                        @component('site.calendar-icon', [
+                            'date' => $next_cycle->signup_opens_at
+                        ])
+                        @endcomponent
+
                     </div>
                     <div class="col justify-content-center">
                         <h6>First Game</h6>
-                        <time datetime="{{ $next_cycle->weeks()->first()->starts_at->format('Y-m-d') }}" class="icon">
-                            <em>{{ $next_cycle->weeks()->first()->starts_at->format('l') }}</em>
-                            <strong>{{ $next_cycle->weeks()->first()->starts_at->format('F') }}</strong>
-                            <span>{{ $next_cycle->weeks()->first()->starts_at->format('j') }}</span>
-                        </time>
+
+                        @component('site.calendar-icon', [
+                            'date' => $next_cycle->weeks()->first()->starts_at
+                        ])
+                        @endcomponent
+
                     </div>
                 </div>
 
