@@ -9,8 +9,8 @@
 
                         <button class="btn btn-primary btn-block" v-on:click="clickContinue">Let's get started!</button>
                     </div>
-
-                    <div class="card m-2" v-if="show == 'div_pref'" key="div_pref">
+                    <div v-if="show == 'div_pref'" key="div_pref">
+                    <div class="card m-2" >
                         <div class="card-body">
                             <h4 class="text-center">Division Preference</h4>
                             <div class="row">
@@ -60,12 +60,24 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <button class="btn btn-primary btn-block mt-3" v-on:click="clickContinue">Continue</button>
                         </div>
                     </div>
-
-                    <div class="card m-2" v-if="show == 'availability'" key="availability">
+                    <div class="row mt-3 px-1">
+                        <div class="col-6">
+                            <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary btn-block" v-on:click="clickContinue">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row mt-3 px-1" v-if="editMode">
+                        <div class="col">
+                            <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="show == 'availability'" key="availability">
+                    <div class="card m-2">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <h4 class="text-center mb-5">Which weeks are you available?</h4>
@@ -90,10 +102,22 @@
                                     </div>
                                  </div>
                             </div>
-
-                            <button class="btn btn-primary btn-block mt-3" v-on:click="clickContinue" :disabled="this.numOfWeeksSigningUp == 0 ? true : false">Continue</button>
                         </div>
                     </div>
+                    <div class="row mt-3 px-1">
+                        <div class="col-6">
+                            <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary btn-block" v-on:click="clickContinue" :disabled="this.numOfWeeksSigningUp == 0 ? true : false">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row mt-3 px-1" v-if="editMode">
+                        <div class="col">
+                            <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="jumbotron m-2" v-if="show == 'sub_message'" key="sub_message">
                     <h4 class="text-center">Sub sign-up</h4>
@@ -104,8 +128,15 @@
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                         </div>
                     </div>
+                    <div class="row mt-3 px-1" v-if="editMode">
+                        <div class="col">
+                            <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="card m-2" v-if="show == 'captain'" key="captain">
+                <div v-if="show == 'captain'" key="captain">
+                    <div class="card m-2">
                         <div class="card-body">
                             <h4 class="text-center">Captain</h4>
                             <p>Awesome. Since you are available all 3 weeks, you're eligible to captain. Interested?</p>
@@ -148,20 +179,33 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <button class="btn btn-primary btn-block mt-3" v-on:click="clickContinue" :disabled="this.will_captain == null ? true : false">Continue</button>
                         </div>
                     </div>
+                    <div class="row mt-3 px-1">
+                        <div class="col-6">
+                            <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary btn-block" v-on:click="clickContinue" :disabled="this.will_captain == null ? true : false">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row mt-3 px-1" v-if="editMode">
+                        <div class="col">
+                            <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="card m-2" v-if="show == 'payment'" key="payment">
+                <div v-if="show == 'payment'" key="payment">
+                    <div class="card m-2">
                         <div class="card-body">
                             <h4 class="text-center">Payment Method</h4>
                             <p class="card-text">Once you are placed on a team, your account will be charged ${{ fees }}.</p>
 
                             <div class="form-group">
                                 <label for="payment_type" class="required">How do you plan to pay?</label>
-                                <select name="payment_type" class="form-control" id="payment_type" aria-describedby="payment_typeHelp" placeholder='Required payment type' @change="selectPaymentMethod" required>
-                                        <option diabled selected>Choose method</option>
+                                <select name="payment_type" class="form-control" id="payment_type" aria-describedby="payment_typeHelp" placeholder='Required payment type' v-model="payment_method" required>
+                                        <option disabled value="" selected>Choose method</option>
                                         <option value="chase_quickpay">Chase Quickpay</option>
                                         <option value="venmo">Venmo</option>
                                         <option value="square_cash">Square Cash</option>
@@ -170,9 +214,22 @@
                                         <option value="cash">Cash</option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary btn-block mt-3" v-on:click="clickContinue" :disabled="this.payment_method == null ? true : false">Continue</button>
                         </div>
                     </div>
+                    <div class="row mt-3 px-1">
+                        <div class="col-6">
+                            <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary btn-block" v-on:click="clickContinue" :disabled="this.payment_method == '' ? true : false">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row mt-3 px-1" v-if="editMode">
+                        <div class="col">
+                            <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="jumbotron m-2" v-if="show == 'late_message'" key="late_message">
@@ -184,26 +241,45 @@
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                         </div>
                     </div>
+                    <div class="row mt-3 px-1" v-if="editMode">
+                        <div class="col">
+                            <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="card m-2" v-if="show == 'note'" key="note">
+                <div v-if="show == 'note'" key="note">
+                    <div class="card m-2">
                         <div class="card-body">
                             <div class="form-group">
                               <label for="note">Anything else you want to tell us?</label>
                               <textarea class="form-control" id="note" rows="6" placeholder="Optional note" @change="noteChange"></textarea>
                             </div>
-
-                            <button class="btn btn-primary btn-block mt-3" v-on:click="clickContinue">Continue</button>
                         </div>
                     </div>
-
-                    <div class="card m-2" v-if="show == 'confirm'" key="confirm">
+                    <div class="row mt-3 px-1">
+                        <div class="col-6">
+                            <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary btn-block" v-on:click="clickContinue">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row mt-3 px-1" v-if="editMode">
+                        <div class="col">
+                            <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="show == 'confirm'" key="confirm">
+                    <div class="card m-2">
                         <div class="card-body">
                             <h5 class="text-center">Ok {{ user.nickname }}. Did we get everything right?</h5>
 
                             <dl>
                                 <dt class="text-muted">
                                     Division Preference
-                                    <button type="button" class="align-baseline btn btn-link d-inline btn-sm" @click="clickConfirmEdit" data-show="div_pref">Edit</button>
+                                    <button type="button" v-if="this.cycleSignupAllowed && this.cycleSignupOpen" class="align-baseline btn btn-link d-inline btn-sm" @click="clickConfirmEdit" data-show="div_pref">Edit</button>
                                 </dt>
                                 <dd class="ml-2">
                                     {{ this.division_preference }}
@@ -217,7 +293,7 @@
 
                                 <dt class="text-muted" v-if="this.numOfWeeksSigningUp >= 3">
                                     Willing to captain?
-                                    <button type="button" class="align-baseline btn btn-link d-inline btn-sm" @click="clickConfirmEdit" data-show="captain">Edit</button>
+                                    <button type="button" v-if="this.cycleSignupAllowed && this.cycleSignupOpen" class="align-baseline btn btn-link d-inline btn-sm" @click="clickConfirmEdit" data-show="captain">Edit</button>
                                 </dt>
                                 <dd class="ml-2" v-if="this.numOfWeeksSigningUp >= 3">
                                     {{ this.will_captain ? "Yes. (Thank You! We'll let you know.)" : "No" }}
@@ -233,25 +309,30 @@
                                     Note
                                     <button type="button" class="align-baseline btn btn-link d-inline btn-sm" @click="clickConfirmEdit" data-show="note">Edit</button>
                                 </dt>
-                                <dd class="ml-2" v-if="this.note != null">
-                                    {{ this.note }}
-                                </dd>
-                                <dd class="ml-2 text-muted font-italic" v-if="this.note == null">
-                                    no note
-                                </dd>
+                                <dd class="ml-2" v-if="this.note != null" v-html="this.note"></dd>
+                                <dd class="ml-2 text-muted font-italic" v-else>no note</dd>
                             </dl>
-
-                            <button v-if="status == 'creating'" class="btn btn-success btn-block mt-3" v-on:click="clickFinish">Yup, sign me up!</button>
-                            <button v-if="status == 'sending'" class="btn btn-success btn-block mt-3" disabled>Working <i class="fa fa-spinner fa-spin fa-fw"></i></button>
-                            <button v-if="status == 'updating'" class="btn btn-success btn-block mt-3" v-on:click="clickFinish">Yup, save it!</button>
                         </div>
                     </div>
-                    <div class="card m-2" v-if="show == 'success'" key="success">
-                        <div class="card-body">
-                            <h5 >You're all signed up, {{ user.nickname }}.</h5>
-                            <h5 >See you at the fields!</h5>
+                    <div class="row mt-3 px-1">
+                        <div class="col">
+                            <button v-if="status == 'creating'" class="btn btn-success btn-block" v-on:click="clickFinish">Yup, sign me up!</button>
+                            <button v-if="status == 'sending'" class="btn btn-success btn-block" disabled>Working <i class="fa fa-spinner fa-spin fa-fw"></i></button>
+                            <button v-if="status == 'updating'" class="btn btn-success btn-block" v-on:click="clickFinish">Yup, save it!</button>
+                        </div>
+                    </div>
+                </div>
 
-                            <button class="btn btn-success btn-block mt-3" v-on:click="clickCycleDetails">Back to Cycle</button>
+                    <div class="jumbotron m-2" v-if="show == 'success'" key="success">
+                        <h5>You're all signed up, {{ user.nickname }}.</h5>
+                        <h5>See you at the fields!</h5>
+                        <div class="row mt-3 px-1">
+                            <div class="col-6">
+                                <button class="btn btn-secondary btn-block" v-on:click="clickDashboard">Dashboard</button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-primary btn-block" v-on:click="clickCycleDetails">Cycle Details</button>
+                            </div>
                         </div>
                     </div>
                 </transition>
@@ -274,7 +355,7 @@
                 'subSignup': false,
                 'division_preference_first': '',
                 'division_preference_second': '',
-                'payment_method': null,
+                'payment_method': "",
                 'will_captain': null,
                 'note': null,
                 'status': 'creating'
@@ -323,7 +404,28 @@
             },
             clickConfirmEdit: function (event) {
                 this.editMode = true;
-                this.show = event.currentTarget.dataset.show;
+                // this.back = 'confirm';
+                this.show = this.back = event.currentTarget.dataset.show;
+
+                // if (this.editMode == true) {
+                //     if (this.show == 'availability' && this.subSignup) {
+                //         this.back = 'availability';
+                //         return this.show = 'sub_message'
+                //     }
+
+                //     if (this.show == 'availability'
+                //         && this.numOfWeeksSigningUp >=3
+                //         && this.will_captain == null)
+                //     {
+                //         this.back = 'availability';
+                //         return this.show = 'captain';
+                //     }
+
+                //     this.back = this.show;
+                //     return this.show = 'confirmation';
+                // }
+
+
             },
             clickFinish: function() {
                 console.log('cycles/' + this.cycle.name + '/signups');
@@ -350,92 +452,10 @@
                 window.location.href = "/cycles/" + this.cycle.name;
                 return;
             },
-            clickContinue: function() {
-                if (this.editMode == true) {
-                    if (this.show == 'availability' && this.subSignup) {
-                        return this.show = 'sub_message'
-                    }
+            clickBack: function() {
+                if (this.show != this.back) return this.show = this.back;
 
-                    if (this.show == 'availability'
-                        && this.numOfWeeksSigningUp >=3
-                        && this.will_captain == null)
-                    {
-                        return this.show = 'captain';
-                    }
-
-                    this.show = 'confirmation';
-                    return;
-                }
-
-                if (this.show == 'intro') {
-                    this.show = 'div_pref'
-                    return;
-                }
-
-                if (this.show == 'div_pref') {
-                    this.show = 'availability'
-                    return;
-                }
-
-                if (this.show == 'availability') {
-                    if (this.numOfWeeksSigningUp == 1) {
-                        this.show = 'sub_message';
-                        return;
-                    }
-
-                    if (this.cycleSignupAllowed) {
-                        if (this.cycleSignupOpen) {
-                            if (this.numOfWeeksSigningUp >= 3) {
-                                this.show = 'captain';
-                                return;
-                            }
-                            if (this.numOfWeeksSigningUp == 2) {
-                                this.show = 'payment';
-                                return;
-                            }
-                        }
-
-                        // at this point we know that cycle signup is allowed but cycle signup is closed.
-                        // if they are signing up for this week, then they are late and we need to show them the message.
-                        // if (this.signingUpForToday) {
-                        //     this.show = 'late_message';
-                        //     return;
-                        // }
-
-                        // at this point, signup is late, but they are signing up for later weeks
-
-                        // if its more than one week, then show payment screen
-                        if (this.numOfWeeksSigningUp >= 2) {
-                            this.show = 'payment';
-                            return;
-                        }
-
-                        // if only signing up for one week, then show them the message box
-                        // if (this.numOfWeeksSigningUp == 1) {
-                        //     this.show = 'message';
-                        //     return;
-                        // }
-                    }
-
-                    // catch all. may not want to show message...
-                    // this.show = 'message';
-
-                    return;
-                }
-
-                if (this.show == 'sub_message') {
-                    this.show = 'payment';
-                    return;
-                }
-
-                if (this.show == 'captain') {
-                    this.show = 'payment';
-                    return;
-                }
-
-                if (this.show == 'payment') {
-                    // this.firstPass = false;
-
+                if (this.show == 'note') {
                     if (this.signingUpForToday) {
                         if (this.cycleSignupLate
                             || this.cycleSignupSuperLate
@@ -444,18 +464,106 @@
                         return;
                     }
 
-                    this.show = 'note';
-                    return;
+                    return this.back = this.show = 'payment';
                 }
 
                 if (this.show == 'late_message') {
-                    this.show = 'note';
-                    return;
+                    return this.back = this.show = 'payment';
+                }
+
+                if (this.show == 'payment') {
+                    if (this.subSignup) {
+                        return this.back = this.show = 'sub_message'
+                    }
+
+                    if (this.cycleSignupAllowed
+                        && this.cycleSignupOpen
+                        && this.numOfWeeksSigningUp >= 3) {
+                        return this.back = this.show = 'captain';
+
+                    }
+
+                    return this.back = this.show = 'availability';
+                }
+
+                if (this.show == 'sub_message' || this.show == 'captain') {
+                    return this.back = this.show = 'availability';
+                }
+
+                if (this.show == 'availability') {
+                    return this.back = this.show = 'div_pref';
+                }
+
+                if (this.show == 'div_pref') {
+                    return this.show = 'intro';
+                }
+            },
+            clickBackToConfirm: function() {
+                this.back = 'note';
+                return this.show = 'confirm';
+            },
+            clickDashboard: function() {
+                window.location.href = "/dashboard/";
+                return;
+            },
+            clickContinue: function() {
+                if (this.show == 'intro') {
+                    this.back = 'intro';
+                    return this.show = 'div_pref'
+                }
+
+                if (this.show == 'div_pref') {
+                    this.back = 'div_pref';
+                    return this.show = 'availability'
+                }
+
+                if (this.show == 'availability') {
+                    this.back = 'availability';
+
+                    if (this.subSignup) {
+                        return this.show = 'sub_message';
+                    }
+
+                    if (this.cycleSignupAllowed
+                        && this.cycleSignupOpen
+                        && this.numOfWeeksSigningUp >= 3) {
+                        return this.show = 'captain';
+                    }
+
+                    return this.show = 'payment';
+                }
+
+                if (this.show == 'sub_message') {
+                    this.back = 'sub_message';
+                    return this.show = 'payment';
+                }
+
+                if (this.show == 'captain') {
+                    this.back = 'captain';
+                    return this.show = 'payment';
+                }
+
+                if (this.show == 'payment') {
+                    this.back = 'payment';
+
+                    if (this.signingUpForToday) {
+                        if (this.cycleSignupLate
+                            || this.cycleSignupSuperLate
+                            || this.subSignupSuperLate)
+                        return this.show = 'late_message';
+                    }
+
+                    return this.show = 'note';
+                }
+
+                if (this.show == 'late_message') {
+                    this.back = 'late_message';
+                    return this.show = 'note';
                 }
 
                 if (this.show == 'note') {
-                    this.show = 'confirm';
-                    return;
+                    this.back = 'note';
+                    return this.show = 'confirm';
                 }
             },
             clickWeek(event) {
@@ -517,10 +625,10 @@
                 }
                 return this.will_captain = false;
             },
-            selectPaymentMethod(event) {
-                console.log('selectPaymentMethod', event.currentTarget.value);
-                this.payment_method = event.currentTarget.value;
-            },
+            // selectPaymentMethod(event) {
+            //     console.log('selectPaymentMethod', event.currentTarget.value);
+            //     this.payment_method = event.currentTarget.value;
+            // },
             noteChange(event) {
                 console.log('noteChange', event.currentTarget.value);
                 this.note = event.currentTarget.value;
@@ -595,7 +703,7 @@
             paymentConfirmation() {
                 let paymentMethod = _.startCase(_.toLower(this.payment_method.replace(/_/g, " ")));
 
-                return 'Will pay <strong>balance + $' + this.fees + '</strong> via <strong>' + paymentMethod + '</strong>.';
+                return 'Will pay <strong>$' + this.fees + '</strong> via <strong>' + paymentMethod + '</strong>.';
             },
             numOfWeeksSigningUp() {
                 return this.weeksAttending.length;
@@ -694,21 +802,21 @@
 
                 if (this.numOfWeeksSigningUp == 1) {
                     if (this.signingUpForToday) {
-                        message = "<p class='card-text'>Since you're only available tonight, we'll have to count you as a sub which means we can't guarantee a spot at this time.</p>";
-                        message += "<p class='card-text'>We may not place you on a team up until a few minutes before game time.</p>";
-                        message += "<p class='card-text'>Keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
+                        message = "<p>Since you're only available tonight, we'll have to count you as a sub which means we can't guarantee a spot at this time.</p>";
+                        message += "<p>We may not place you on a team up until a few minutes before game time.</p>";
+                        message += "<p>Keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
                     } else {
-                        message = "<p class='card-text'>Since you're only available one week, we'll have to count you as a sub which means we can't guarantee a spot at this time.</p>";
-                        message += "<p class='card-text'>We may not place you on a team up until a few minutes before game time.</p>";
-                        message += "<p class='card-text'>On game day, keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
+                        message = "<p>Since you're only available one week, we'll have to count you as a sub which means we can't guarantee a spot at this time.</p>";
+                        message += "<p>We may not place you on a team up until a few minutes before game time.</p>";
+                        message += "<p>On game day, keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
                     }
 
                     return message;
                 } else {
                    if (this.subSignupAllowed) {
-                        message = "<p class='card-text'>Since the cycle has already started, we'll count you as sub for each week and can't guarantee a spot at this time.</p>";
-                        message += "<p class='card-text'>We may not place you on a team up until a few minutes before game time each week.</p>";
-                        message += "<p class='card-text'>On each game day, keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
+                        message = "<p>Since the cycle has already started, we'll count you as sub for each week and can't guarantee a spot at this time.</p>";
+                        message += "<p>We may not place you on a team up until a few minutes before game time each week.</p>";
+                        message += "<p>On each game day, keep an eye on your email/phone as we will definitely email/text you an update before game time.</p>";
 
                         return message;
                    }
@@ -719,7 +827,7 @@
 
                 if (! this.signingUpForToday) {
                     if (this.cycleSignupAllowed && this.cycleSignupLate) {
-                        return "<p class='card-text'>Cycle sign-up closed earlier, but we should be able to fit you in.</p>";
+                        return "<p>Cycle sign-up closed earlier, but we should be able to fit you in.</p>";
                     }
                 }
 
@@ -729,17 +837,17 @@
                 if (this.numOfWeeksSigningUp > 1
                     && this.cycleSignupAllowed
                     && this.cycleSignupLate) {
-                        message = "<p class='card-text'>Sign-up closed earlier, but we should be able to fit you in for tonight.</p>";
-                        message += "<p class='card-text'>Keep an eye out for an email/text confirming your spot before heading out.</p>";
+                        message = "<p>Sign-up closed earlier, but we should be able to fit you in for tonight.</p>";
+                        message += "<p>Keep an eye out for an email/text confirming your spot before heading out.</p>";
 
                         return message;
                 }
 
                 // at this point, if they are signing up for tonight and are super late, show them super late message
                 if (this.cycleSignupSuperLate || this.subSignupSuperLate) {
-                        message = "<p class='card-text'>Whoa! Game time is " + moment(this.gameToday.starts_at).fromNow() + " and we're probably on our way to fields.</p>";
-                        message += "<p class='card-text'>We may still have some spots for tonight but can't guarantee it.</p>";
-                        message += "<p class='card-text'>Finish your sign-up and try texting us to see if a spot is open.</p>";
+                        message = "<p>Whoa! Game time is " + moment(this.gameToday.starts_at).fromNow() + " and we're probably on our way to fields.</p>";
+                        message += "<p>We may still have some spots for tonight but can't guarantee it.</p>";
+                        message += "<p>Finish your sign-up and try texting us to see if a spot is open.</p>";
 
                         return message;
                 }
