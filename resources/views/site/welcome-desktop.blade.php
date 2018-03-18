@@ -70,9 +70,12 @@
                 </div>
                 @if(($current_cycle->status() == 'SIGNUP_OPEN'
                     || $current_cycle->status() == 'SIGNUP_CLOSED'
-                    || $current_cycle->status() == 'IN_PROGRESS')
-                )
-                    @if(!$current_cycle->isSubbing(auth()->user()))
+                    || $current_cycle->status() == 'IN_PROGRESS'))
+                    @if(auth()->check() && $current_cycle->signups->contains(auth()->user()))
+                       <div class="col">
+                            <a class="btn btn-primary w-100" href="{{ route('cycle.signup.create', 'current') }}" style="text-decoration: none">Edit sign-up</a>
+                        </div>
+                    @elseif(!$current_cycle->isSubbing(auth()->user()))
                        <div class="col">
                             <a class="btn btn-primary w-100" href="{{ route('cycle.signup.create', 'current') }}" style="text-decoration: none">Sign up</a>
                         </div>
@@ -136,9 +139,12 @@
                     </div>
                     @if($current_cycle->status() == 'SIGNUP_OPEN'
                         || $current_cycle->status() == 'SIGNUP_CLOSED'
-                        || $current_cycle->status() == 'IN_PROGRESS'
-                    )
-                        @if(!$current_cycle->isSubbing(auth()->user()))
+                        || $current_cycle->status() == 'IN_PROGRESS')
+                        @if(auth()->check() && $current_cycle->signups->contains(auth()->user()))
+                           <div class="col">
+                                <a class="btn btn-primary w-100" href="{{ route('cycle.signup.create', 'current') }}" style="text-decoration: none">Edit sign-up</a>
+                            </div>
+                        @elseif(!$current_cycle->isSubbing(auth()->user()))
                            <div class="col">
                                 <a class="btn btn-primary w-100" href="{{ route('cycle.signup.create', 'current') }}" style="text-decoration: none">Sign up</a>
                             </div>
