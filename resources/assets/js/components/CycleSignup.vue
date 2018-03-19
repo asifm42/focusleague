@@ -251,8 +251,8 @@
                 <div v-if="show == 'note'" key="note">
                     <div class="card">
                         <div class="card-body">
+                            <h6 class="text-center">Anything else you want to tell us?</h6>
                             <div class="form-group">
-                              <label for="note">Anything else you want to tell us?</label>
                               <textarea class="form-control" id="note" rows="6" placeholder="Optional note" @change="noteChange"></textarea>
                             </div>
                         </div>
