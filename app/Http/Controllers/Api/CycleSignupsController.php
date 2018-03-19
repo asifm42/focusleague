@@ -56,6 +56,7 @@ class CycleSignupsController extends Controller
             'div_pref_second'   => $request->input('div_pref_second'),
             'will_captain'      => $request->input('will_captain'),
             'note'              => $request->input('note'),
+            'payment_method'    => $request->input('payment_method'),
         ]);
 
         foreach ($request->input('weeks') as $week){
