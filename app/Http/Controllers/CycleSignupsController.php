@@ -135,7 +135,7 @@ class CycleSignupsController extends Controller
 
         // fire off event
 
-        Former::populate($signup);
+        // Former::populate($signup);
         return view('cycles.signups.edit')
                 ->withCycle($cycle)
                 ->withUser($user)
