@@ -3,14 +3,14 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
                 <transition name="fade" mode="out-in">
-                    <div class="jumbotron m-2" v-if="show == 'intro'" key="intro">
+                    <div class="jumbotron" v-if="show == 'intro'" key="intro">
                         <h4>Great to have you, {{ user.nickname }}!</h4>
                         <p>We just need some information to sign you up for Cycle {{ cycle.name }}.</p>
 
                         <button class="btn btn-primary btn-block" v-on:click="clickContinue">Let's get started!</button>
                     </div>
                     <div v-if="show == 'div_pref'" key="div_pref">
-                    <div class="card m-2" >
+                    <div class="card" >
                         <div class="card-body">
                             <h4 class="text-center">Division Preference</h4>
                             <div class="row">
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                         </div>
@@ -70,14 +70,14 @@
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1" v-if="editMode">
+                    <div class="row mt-3" v-if="editMode">
                         <div class="col">
                             <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
                         </div>
                     </div>
                 </div>
                 <div v-if="show == 'availability'" key="availability">
-                    <div class="card m-2">
+                    <div class="card">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <h4 class="text-center mb-5">Which weeks are you available?</h4>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                         </div>
@@ -112,23 +112,23 @@
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue" :disabled="this.numOfWeeksSigningUp == 0 ? true : false">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1" v-if="editMode">
+                    <div class="row mt-3" v-if="editMode">
                         <div class="col">
                             <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="jumbotron m-2" v-if="show == 'sub_message'" key="sub_message">
+                <div class="jumbotron" v-if="show == 'sub_message'" key="sub_message">
                     <h4 class="text-center">Sub sign-up</h4>
                     <div class="text-warning" v-html="sub_message">
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col">
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1" v-if="editMode">
+                    <div class="row mt-3" v-if="editMode">
                         <div class="col">
                             <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
                         </div>
@@ -136,7 +136,7 @@
                 </div>
 
                 <div v-if="show == 'captain'" key="captain">
-                    <div class="card m-2">
+                    <div class="card">
                         <div class="card-body">
                             <h4 class="text-center">Captain</h4>
                             <p>Awesome. Since you are available all 3 weeks, you're eligible to captain. Interested?</p>
@@ -181,7 +181,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                         </div>
@@ -189,7 +189,7 @@
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue" :disabled="this.will_captain == null ? true : false">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1" v-if="editMode">
+                    <div class="row mt-3" v-if="editMode">
                         <div class="col">
                             <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
                         </div>
@@ -197,7 +197,7 @@
                 </div>
 
                 <div v-if="show == 'payment'" key="payment">
-                    <div class="card m-2">
+                    <div class="card">
                         <div class="card-body">
                             <h4 class="text-center">Payment Method</h4>
                             <p class="card-text">Once you are placed on a team, your account will be charged ${{ fees }}.</p>
@@ -216,7 +216,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                         </div>
@@ -224,7 +224,7 @@
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue" :disabled="this.payment_method == '' ? true : false">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1" v-if="editMode">
+                    <div class="row mt-3" v-if="editMode">
                         <div class="col">
                             <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
                         </div>
@@ -232,16 +232,16 @@
                 </div>
 
 
-                <div class="jumbotron m-2" v-if="show == 'late_message'" key="late_message">
+                <div class="jumbotron" v-if="show == 'late_message'" key="late_message">
                     <h4 class="text-center">Late Sign-up</h4>
                     <div class="text-danger" v-html="late_message">
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col">
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1" v-if="editMode">
+                    <div class="row mt-3" v-if="editMode">
                         <div class="col">
                             <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
                         </div>
@@ -249,7 +249,7 @@
                 </div>
 
                 <div v-if="show == 'note'" key="note">
-                    <div class="card m-2">
+                    <div class="card">
                         <div class="card-body">
                             <div class="form-group">
                               <label for="note">Anything else you want to tell us?</label>
@@ -257,7 +257,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                         </div>
@@ -265,14 +265,14 @@
                             <button class="btn btn-primary btn-block" v-on:click="clickContinue">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1" v-if="editMode">
+                    <div class="row mt-3" v-if="editMode">
                         <div class="col">
                             <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
                         </div>
                     </div>
                 </div>
                 <div v-if="show == 'confirm'" key="confirm">
-                    <div class="card m-2">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="text-center">Ok {{ user.nickname }}. Did we get everything right?</h5>
 
@@ -314,7 +314,7 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="row mt-3 px-1">
+                    <div class="row mt-3">
                         <div class="col">
                             <button v-if="status == 'creating'" class="btn btn-success btn-block" v-on:click="clickFinish">Yup, sign me up!</button>
                             <button v-if="status == 'sending'" class="btn btn-success btn-block" disabled>Working <i class="fa fa-spinner fa-spin fa-fw"></i></button>
@@ -323,10 +323,10 @@
                     </div>
                 </div>
 
-                    <div class="jumbotron m-2" v-if="show == 'success'" key="success">
+                    <div class="jumbotron" v-if="show == 'success'" key="success">
                         <h5>You're all signed up, {{ user.nickname }}.</h5>
                         <h5>See you at the fields!</h5>
-                        <div class="row mt-3 px-1">
+                        <div class="row mt-3">
                             <div class="col-6">
                                 <button class="btn btn-secondary btn-block" v-on:click="clickDashboard">Dashboard</button>
                             </div>
