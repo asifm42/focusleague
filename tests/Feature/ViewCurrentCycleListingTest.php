@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-class ViewCurrentCycleListing extends TestCase
+class ViewCurrentCycleListingTest extends TestCase
 {
     use DatabaseMigrations;
 
