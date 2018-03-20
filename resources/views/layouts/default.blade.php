@@ -9,6 +9,16 @@
 
     <meta name="description" content="The FOCUS League is a competitve ultimate frisbee league in Houston, TX." />
 
+  <meta property="og:url" content="focusleague.com">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FOCUS League">
+  <meta property="og:description" content="A competitive Ultimate league">
+  <meta property="og:image" content="https://focusleague.com/assets/img/open_graph_logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+
     <title>@yield('title')</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
