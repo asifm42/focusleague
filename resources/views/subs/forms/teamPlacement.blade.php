@@ -30,8 +30,8 @@
             <select name="team_id" class="form-control {{ $errors->has('team_id') ? 'is-invalid' : ''}}" id="team_id" aria-describedby="team_idHelp" placeholder="Required team_id" required>
                 <option disabled {{ old('team_id') ? '' : 'selected' }}>Required team</option>
                 @foreach($team_options as $key => $option)
-                <option value="{{ $key }}" {{ old('team_id') == $key || $sub->team->id == $key ? 'selected' : '' }}>{{ $option }}</option>
-                @endforeach
+                    <option value="{{ $key }}" {{ old('team_id') == $key || $sub->team && $sub->team->id == $key ? 'selected' : '' }}>{{ $option }}</option>
+                 @endforeach
             </select>
             <div id="team_idFeedback" class="invalid-feedback">{{ $errors->has('team_id') ? $errors->first('team_id') : '' }}</div>
         </div>
