@@ -11,20 +11,7 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-<div class="row">
-    <div class="col-xs-12">
-        <div class="text-center" style="margin:1em 0;">
-            <div class="alert alert-info">
-                <h5 style="color: #fff; margin:0">
-                    FOCUS League returns on<br>March 20th, 2018!
-                </h5>
-                <h5 style="color: #fff; margin:.5em 0 0 0">
-                    Registration for Cycle 2018-01<br>opens on March 14th, 2018
-                </h5>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START GAME STATUS ########## -->
 <div class="row">
