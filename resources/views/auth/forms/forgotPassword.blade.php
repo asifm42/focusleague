@@ -2,7 +2,6 @@
     <div class="col">
         <h3 class="text-center">Forgot your password?</h3>
          <form accept-charset="utf-8" class="form-vertical" method="POST" action="{{ url('password/email') }}">
-
             <div class="card">
                 <div class="card-body">
                     <p>Don't worry, it happens to all of us. Enter your email address below and we'll send you password reset instructions.</p>
