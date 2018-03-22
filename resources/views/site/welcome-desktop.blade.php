@@ -19,12 +19,12 @@
     @if($current_cycle && $current_cycle->gameToday())
         <div class="jumbotron" style="background-color: #ffff99;" >
 
-            <p class="lead">
+            <h3>
                 Cycle {{$current_cycle->name}} - Wk {{ $current_cycle->gameToday()->week_index() }}
-            </p>
-            <p>
-                8 pm Tonight
-            </p>
+            </h3>
+            <h4>
+                <small>8 pm Tonight</small>
+            </h4>
 
             @component('site.calendar-icon', [
                 'date' => $current_cycle->gameToday()->starts_at,
