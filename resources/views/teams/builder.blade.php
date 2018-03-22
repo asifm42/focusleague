@@ -7,76 +7,7 @@
 @stop
 
 @section('content')
-
-{{-- <div id="app"> --}}
-{{--     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h5>Cycle {{ $cycle->name }} Team Builder</h5>
-                <p>Create and add/remove players to teams</p>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col col-sm-3">
-
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-success">Teams</li>
-                @foreach($cycle->teams as $team)
-                    <li class = "list-group-item">{{ $team->name }} - {{ $team->division }} - <a href={{ route('teams.edit', $team->id) }}>Edit</a></li>
-                @endforeach
-                    <li class = "list-group-item"> <a href={{ route('teams.create') }}>Add Team</a></li>
-                </ul>
-
-                @if (!$cycle->teams_published)
-                    <button type="button" class="btn btn-primary btn-lg btn-block js-publish-teams mt-3" data-toggle="modal" data-target="#publishTeamsModal">
-                        Publish Teams
-                    </button>
-                @else
-                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#announceTeamsModal">
-                        Email Team Announcement
-                    </button>
-                    <a href="{{ route('cycle.teams.unpublish', $cycle->id) }}" class="btn btn-default btn-lg btn-block">Unpublish teams</a>
-                @endif
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col col-sm-6">
-                <signups-card title="Male signups" :signups="{{$cycle->signups->toJson()}}" gender="male" :cycle="{{$cycle->toJson()}}"
-                ></signups-card>
-            </div>
-            <div class="col col-sm-6">
-                <signups-card title="Female signups" :signups="{{$cycle->signups->toJson()}}" gender="female" :cycle="{{$cycle->toJson()}}"
-                ></signups-card>
-            </div>
-        </div>
-
-            @php
-                $teamCount = 0;
-            @endphp
-        @foreach($cycle->teams as $team)
-
-            @php
-                $teamCount++;
-            @endphp
-
-            @if ($teamCount === 1 || ($teamCount % 2) !== 0)
-                <div class="row mt-3">
-            @endif
-
-            <div class="col-12 col-sm-6">
-                <team-card :team="{{ $team->toJson() }}" :signups="{{$cycle->signups->toJson()}}"  :cycle="{{$cycle->toJson()}}"></team-card>
-            </div>
-
-            @if (($teamCount % 2) === 0 || ($teamCount) === $cycle->teams->count())
-                </div>
-            @endif
-        @endforeach
-    </div> --}}
     <team-builder :cycleid="{{ $cycle->id }}" :cycle-payload="{{ $cycle->toJson() }}"></team-builder>
-{{-- </div> --}}
 @endsection
 
 
