@@ -15,7 +15,7 @@
         </tr>
         @foreach( $signups as $signup )
             @if ($signup->id === auth()->user()->id)
-            <tr class="success">
+            <tr class="table-primary">
             @else
             <tr>
             @endif

@@ -44,7 +44,7 @@
         </tr>
         @foreach( $players as $player )
             @if ($player->user->id === auth()->user()->id)
-            <tr class="success">
+            <tr class="table-primary">
             @else
             <tr>
             @endif
