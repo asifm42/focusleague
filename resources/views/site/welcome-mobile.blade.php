@@ -126,14 +126,19 @@
                 <div class="col">
                     <a class="btn btn-primary w-100" href="{{ route('cycles.current') }}" style="text-decoration: none">Cycle Details</a>
                 </div>
-                @if(($current_cycle->status() == 'SIGNUP_OPEN'
+                @if($current_cycle->status() == 'SIGNUP_OPEN'
                     || $current_cycle->status() == 'SIGNUP_CLOSED'
-                    || $current_cycle->status() == 'IN_PROGRESS'))
-                    @if(auth()->check() && $current_cycle->signups->contains(auth()->user()))
+                    || $current_cycle->status() == 'IN_PROGRESS')
+
+                    @if (auth()->check() && $current_cycle->signups->contains(auth()->user()))
                        <div class="col">
-                            <a class="btn btn-primary w-100" href="{{ route('cycle.signup.create', 'current') }}" style="text-decoration: none">Edit sign-up</a>
+                            <a class="btn btn-primary w-100" href="{{ route('cycle.signup.edit', 'current') }}" style="text-decoration: none">Edit sign-up</a>
                         </div>
-                    @elseif(!$current_cycle->isSubbing(auth()->user()))
+                    @elseif (auth()->check() && $current_cycle->isSubbing(auth()->user()))
+                       <div class="col">
+                            <a class="btn btn-primary w-100" href="{{ route('cycle.subs.edit', 'current') }}" style="text-decoration: none">Edit sign-up</a>
+                        </div>
+                    @else
                        <div class="col">
                             <a class="btn btn-primary w-100" href="{{ route('cycle.signup.create', 'current') }}" style="text-decoration: none">Sign up</a>
                         </div>
