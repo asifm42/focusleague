@@ -377,15 +377,15 @@
                         <h5>You're all signed up, {{ user.nickname }}.</h5>
                         <h5>See you at the fields!</h5>
                         <div class="row mt-3">
-                            <div class="col-4">
+                            <div class="col-12 col-sm-4 my-2 my-sm-1">
                                 <button class="btn btn-primary btn-block" v-on:click="clickEditSignup">Edit sign-up</button>
                             </div>
                         <!-- </div>
                         <div class="row mt-3"> -->
-                            <div class="col-4">
+                            <div class="col-12 col-sm-4 my-2 my-sm-1">
                                 <button class="btn btn-primary btn-block" v-on:click="clickDashboard">Dashboard</button>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-sm-4 my-2 my-sm-1">
                                 <button class="btn btn-primary btn-block" v-on:click="clickCycleDetails">Cycle Details</button>
                             </div>
                         </div>
