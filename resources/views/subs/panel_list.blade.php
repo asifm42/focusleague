@@ -33,7 +33,7 @@
                         </li>
                     @else
                         <li>
-                            <span title="{{ $sub->name }}"=>{{$sub->getNicknameOrShortName()}}</span>
+                            <span title="{{ $sub->name }}">{{$sub->getNicknameOrShortName()}}</span>
 
                             @if (!empty($sub->pivot->note) && ($sub->id === auth()->user()->id) )
                                 &nbsp;&nbsp;<i class="fa fa-sticky-note text-warning"
