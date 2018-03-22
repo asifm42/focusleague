@@ -3,7 +3,7 @@
         @if (is_null($cycle_signup->pivot->team_id))
             <dd>You are signed up but not placed on a team yet.</dd>
         @else
-            <dd>You are on team: <em>{{ucwords($cycle->teams->find($cycle_signup->pivot->team_id)->name)}} {!! $cycle->teams->find($cycle_signup->pivot->team_id)->divisionIcon() !!}</em></dd>
+            <dd>Team <em>{{ucwords($cycle->teams->find($cycle_signup->pivot->team_id)->name)}} {!! $cycle->teams->find($cycle_signup->pivot->team_id)->divisionIcon() !!}</em></dd>
         @endif
 
         @if ($cycle_signup->captain)
