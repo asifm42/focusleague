@@ -107,7 +107,7 @@
                         </div>
                         <div class="row mt-3" v-if="this.status != 'updating'">
                             <div class="col-6">
-                                <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                                <button class="btn btn-secondary btn-block" v-on:click="clickBack" :disabled="(editMode && this.numOfWeeksSigningUp) == 0 ? true : false"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                             </div>
                             <div class="col-6">
                                 <button class="btn btn-primary btn-block" v-on:click="clickContinue" :disabled="this.numOfWeeksSigningUp == 0 ? true : false">Next <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
