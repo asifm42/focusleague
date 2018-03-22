@@ -47,7 +47,12 @@ class CycleSubsController extends Controller
                     'payment_method' => $request->input('payment_method')
                 ]);
             } else {
-                $week->subs()->attach(auth()->user()->id, ['note'=>$request->input('note')]);
+                $week->subs()->attach(auth()->user()->id, [
+                    'div_pref_first' => $request->input('div_pref_first'),
+                    'div_pref_second' => $request->input('div_pref_second'),
+                    'note' => $request->input('note'),
+                    'payment_method' => $request->input('payment_method')
+                ]);
 
                 $sub = Sub::findOrFail($week->subs()->where('user_id', auth()->user()->id)->first()->pivot->id);
 
