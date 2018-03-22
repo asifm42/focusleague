@@ -375,8 +375,9 @@
                     </div>
 
                     <div class="jumbotron" v-if="show == 'success'" key="success">
-                        <h5>You're all signed up, {{ user.nickname }}.</h5>
-                        <h5>See you at the fields!</h5>
+                        <h4 class="text-center text-success"><i class="fa fa-fw fa-5x fa-check-circle-o" aria-hidden="true"></i></h4>
+                        <h5 class="text-center">You're all signed up, {{ user.nickname }}.</h5>
+                        <h5 class="text-center">See you at the fields!</h5>
                         <div class="row mt-3">
                             <div class="col-12 col-sm-4 my-2 my-sm-1">
                                 <button class="btn btn-primary btn-block" v-on:click="clickEditSignup">Edit sign-up</button>
