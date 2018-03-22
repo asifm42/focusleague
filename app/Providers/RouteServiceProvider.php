@@ -31,6 +31,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         // Route::model('cycle', App\Models\Cycle::class);
+        Route::model('cyclesignup', App\Models\CycleSignup::class);
 
         Route::bind('cycle', function ($value) {
             if ($value === 'current') {
