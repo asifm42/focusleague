@@ -22,7 +22,7 @@
 @endif
 
 @if(isset($color))
-    <time datetime="{{ $datetime }}" class="icon {{ $class }}">
+    <time datetime="{{ $datetime }}" class="icon {{ $class }} {{ $color == 'red' ? 'border-danger' : '' }}">
         <em style="color: {{ $color }}">{{ $dayName }}</em>
         <strong style="background-color: {{ $color }}">{{ $month }}</strong>
         <span>{{ $dayNumber }}</span>
