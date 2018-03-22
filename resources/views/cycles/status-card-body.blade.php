@@ -15,16 +15,16 @@
     @endif
 
     @include('signups.self-status-table', ['cycle' => $cycle, 'cycle_signup' => $cycle_signup])
-
+        {{--
     @if ($cycle->status() === 'SIGNUP_OPEN')
         <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.edit', $cycle->id) }}">Edit sign up</a>
     @elseif ($cycle->status() === 'SIGNUP_CLOSED')
         <dd>Sign up is currently closed but you can still make changes.</dd>
         <a class="btn btn-success btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Edit sign up</a>
     @elseif ($cycle->status() === 'IN_PROGRESS')
-        <dd>Cycle is in progess. Need to update your sign-up info? <a href="{{ route('contact.create') }}">Contact us</a> and let us know.</dd>
-    @endif
+<dd>Cycle is in progess. Need to update your sign-up info? <a href="{{ route('contact.create') }}">Contact us</a> and let us know.</dd>
+    @endif --}}
+        <a class="btn btn-primary btn-block mt-3" href="{{ route('cycle.signup.edit', $cycle->id) }}">Edit sign up</a>
 @elseif($sub_weeks)
     <dd>You are signed up as a sub for the following weeks</dd>
 {{--     @foreach($sub_weeks as $sub_week)
