@@ -1,8 +1,8 @@
 <nav class="nav footer">
 
-    <div class="container-fluid">
         <div class="row">
             <div class="col">
+    <div class="container">
                 <ul class="nav flex-column">
                   <li class="nav-item">
                     <a  class="nav-link active" href="{{ route('site.home') }}"><i class="fa fa-fw fa-home"></i> Home</a>
