@@ -356,8 +356,9 @@
                     </div>
 
                     <div class="jumbotron" v-if="show == 'note-sent-success'" key="note-sent-success">
-                        <h5>We got your note. We'll be in touch.</h5>
-                        <h5> Thanks!</h5>
+                        <h4 class="text-center text-success"><i class="fa fa-fw fa-5x fa-check-circle-o" aria-hidden="true"></i></h4>
+                        <h5 class="text-center">We got your note. We'll be in touch.</h5>
+
                         <div class="row mt-3">
                             <div class="col-4">
                                 <button class="btn btn-primary btn-block" v-on:click="clickEditSignup">Edit sign-up</button>
