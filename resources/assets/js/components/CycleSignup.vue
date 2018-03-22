@@ -410,9 +410,9 @@
                         <h5>Your sign-up has been deleted.</h5>
                         <h5>We are sad to see you go.</h5>
                         <div class="row mt-3">
-                            <div class="col-4 d-none">
+                            <!-- <div class="col-4 d-none">
                                 <button class="btn btn-primary btn-block" v-on:click="clickRestore">Undo Delete</button>
-                            </div>
+                            </div> -->
                             <div class="col-6">
                                 <button class="btn btn-info btn-block" v-on:click="clickDashboard">Dashboard</button>
                             </div>
