@@ -946,16 +946,16 @@
                 if (this.signuporiginal) {
                     console.log('checking if signup dataHasChanged', this.signuporiginal);
 
-                    if (this.division_preference_first != this.signuporiginal.div_pref_first.toLowerCase()) return true;
-                    if (this.division_preference_second != this.signuporiginal.div_pref_second.toLowerCase()) return true;
+                    if (this.division_preference_first != this.signuporiginal.div_pref_first) return true;
+                    if (this.division_preference_second != this.signuporiginal.div_pref_second) return true;
                     if (this.payment_method != this.signuporiginal.payment_method) return true;
                     if (this.will_captain != this.signuporiginal.will_captain) return true;
                     if (this.note != this.signuporiginal.note) return true;
                 } else if (this.suboriginal) {
                     console.log('checking if sub dataHasChanged', this.suboriginal);
 
-                    if (this.division_preference_first != this.suboriginal[0].div_pref_first.toLowerCase()) return true;
-                    if (this.division_preference_second != this.suboriginal[0].div_pref_second.toLowerCase()) return true;
+                    if (this.division_preference_first != this.suboriginal[0].div_pref_first) return true;
+                    if (this.division_preference_second != this.suboriginal[0].div_pref_second) return true;
                     if (this.payment_method != this.suboriginal[0].payment_method) return true;
                     if (this.note != this.suboriginal[0].note) return true;
                 }
@@ -1188,11 +1188,13 @@
                     }
                 }) // 'weeksAttending': [],
 
-                // 'subSignup': false,
-                this.division_preference_first = this.signuporiginal.div_pref_first.toLowerCase(); // 'division_preference_first': '',
-                this.division_preference_second = !this.signuporiginal.div_pref_second
-                                                    ? this.signuporiginal.div_pref_second
-                                                    : this.signuporiginal.div_pref_second.toLowerCase(); // 'division_preference_second': '',
+                // convert div prefs to lowercase if they are a string
+                if (typeof(this.signuporiginal.div_pref_first) == 'string') this.signuporiginal.div_pref_first = this.signuporiginal.div_pref_first.toLowerCase();
+                if (typeof(this.signuporiginal.div_pref_second) == 'string') this.signuporiginal.div_pref_second = this.signuporiginal.div_pref_second.toLowerCase();
+
+                this.division_preference_first = this.signuporiginal.div_pref_first; // 'division_preference_first': '',
+                this.division_preference_second = this.signuporiginal.div_pref_second; // 'division_preference_second': '',
+
                 this.payment_method = this.signuporiginal.payment_method; // 'payment_method': "",
                 this.will_captain = this.signuporiginal.will_captain; // 'will_captain': null,
                 this.note = this.signuporiginal.note; // 'note': null,
@@ -1212,13 +1214,17 @@
 
                 this.subSignup = true; // 'subSignup': false,
 
+                // convert div prefs to lowercase if they are a string
+                if (typeof(this.suboriginal[0].div_pref_first) == 'string') this.suboriginal[0].div_pref_first = this.suboriginal[0].div_pref_first.toLowerCase();
+                if (typeof(this.suboriginal[0].div_pref_second) == 'string') this.suboriginal[0].div_pref_second = this.suboriginal[0].div_pref_second.toLowerCase();
+
                 // subs don't have division preference in db at the moment
                 this.division_preference_first = !this.suboriginal[0].div_pref_first
                                                     ? this.user.division_preference_first
-                                                    : this.suboriginal[0].div_pref_first.toLowerCase(); // 'division_preference_first': '',
+                                                    : this.suboriginal[0].div_pref_first; // 'division_preference_first': '',
                 this.division_preference_second = !this.suboriginal[0].div_pref_second
                                                     ? this.user.division_preference_second
-                                                    : this.suboriginal[0].div_pref_second.toLowerCase(); // 'division_preference_second': '',
+                                                    : this.suboriginal[0].div_pref_second; // 'division_preference_second': '',
 
                 this.payment_method = this.suboriginal[0].payment_method; // 'payment_method': "",
                 // 'will_captain': null,
