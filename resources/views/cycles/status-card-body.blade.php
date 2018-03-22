@@ -27,10 +27,14 @@
     @endif
 @elseif($sub_weeks)
     <dd>You are signed up as a sub for the following weeks</dd>
-    @foreach($sub_weeks as $sub_week)
+{{--     @foreach($sub_weeks as $sub_week)
         <dd><a href="{{ route('sub.edit', $sub_week['deets']->pivot->id) }}">{{ $sub_week['week']->starts_at->toFormattedDateString() }}</a></dd>
     @endforeach
-    <a class="btn btn-success btn-block" href="{{ route('sub.create', $cycle->id) }}">Add a Sub week</a>
+    <a class="btn btn-success btn-block" href="{{ route('sub.create', $cycle->id) }}">Add a Sub week</a> --}}
+    @foreach($sub_weeks as $sub_week)
+        <dd>{{ $sub_week['week']->starts_at->toFormattedDateString() }}</dd>
+    @endforeach
+    <a class="btn btn-primary btn-block" href="{{ route('cycle.subs.edit', $cycle->id) }}">Edit sign-up</a>
 @else
     <dd>You are NOT signed up.</dd>
     @if ($cycle->status() === 'SIGNUP_OPENS_LATER')
