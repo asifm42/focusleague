@@ -68,7 +68,6 @@ class SubsController extends Controller
      */
     public function store(Request $request, $id)
     {
-        // return $request->all();
         $cycle = Cycle::findOrFail($id);
         $cycle->load('weeks');
 
