@@ -38,7 +38,7 @@
 @else
     <dd>You are NOT signed up.</dd>
     @if ($cycle->status() === 'SIGNUP_OPENS_LATER')
-        <dd>Sign up opens at {{ $cycle->signup_opens_at->toDayDateTimeString() }}</dd>
+        <dd>Sign up opens on {{ $cycle->signup_opens_at->format('D, M j, Y') }}</dd>
     @elseif ($cycle->status() === 'SIGNUP_OPEN')
         <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
         <a class="btn btn-primary btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>

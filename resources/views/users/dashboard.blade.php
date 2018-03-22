@@ -85,7 +85,7 @@
                             @endif
                             <dt>Status</dt>
                             @if ($next_cycle->status() === 'SIGNUP_OPENS_LATER')
-                                <dd>Sign up opens at {{ $next_cycle->signup_opens_at->toDayDateTimeString() }}</dd>
+                                <dd>Sign up opens on {{ $next_cycle->signup_opens_at->format('D, M j, Y') }}</dd>
                                 <a class="btn btn-info btn-block mt-3" href="{{ route('cycles.view', $next_cycle->id) }}">Cycle Details</a>
                             @elseif ($next_cycle->status() === 'SIGNUP_OPEN')
                                 <dd>Sign up is currently open until {{ $next_cycle->signup_closes_at->toDayDateTimeString() }}</dd>
