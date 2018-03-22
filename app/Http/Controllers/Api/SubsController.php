@@ -48,6 +48,16 @@ class SubsController extends Controller
             'status' => 'success'
         ]);
         //return redirect()->route('users.dashboard');
+
+
+                // $sub->update([
+                //     'div_pref_first' => $request->input('div_pref_first'),
+                //     'div_pref_second' => $request->input('div_pref_second'),
+                //     'note' => $request->input('note'),
+                //     'payment_method' => $request->input('payment_method')
+                // ]);
+
+
     }
 
     /**
