@@ -129,7 +129,7 @@
         @endforeach
         @if($subs->count() > 0)
             <tr>
-                <th colspan=6 class="warning">
+                <th colspan=6 class="table-warning text-center">
                 @if(strtolower($team->division) === 'mixed')
                    @if(strtolower($subs->first()['user']['gender']) === 'male')
                         <i class="fa fa-male text-primary"></i>&nbsp;Subs
