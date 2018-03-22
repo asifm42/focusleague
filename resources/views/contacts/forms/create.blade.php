@@ -5,13 +5,13 @@
         <div class="card-body">
             <div class="form-group {{ $errors->has('name') ? 'has-danger' : ''}}">
                 <label for="name" class="required">Name</label>
-                <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" id="name" aria-describedby="nameHelp" placeholder="Required first & last name" required value="{{ auth()->check() ? auth()->user()->name : '' }}" {{ auth()->check() ? 'readonly' : '' }}>
+                <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" id="name" aria-describedby="nameHelp" placeholder="Required first & last name" required value="{{ auth()->check() ? auth()->user()->name : old('name', '') }}" {{ auth()->check() ? 'readonly' : '' }}>
                 <small id="nameHelp" class="form-text text-muted">Please provide first and last name.</small>
                 <div id="nameFeedback" class="invalid-feedback">{{ $errors->has('name') ? $errors->first('name') : '' }}</div>
             </div>
             <div class="form-group {{ $errors->has('email') ? 'has-danger' : ''}}">
                 <label for="email" class="required">Email</label>
-                <input name="email" type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" placeholder="Required email" required value="{{ auth()->check() ? auth()->user()->email : '' }}" {{ auth()->check() ? 'readonly' : '' }}>
+                <input name="email" type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" placeholder="Required email" required value="{{ auth()->check() ? auth()->user()->email : old('email', '') }}" {{ auth()->check() ? 'readonly' : '' }}>
                 <div id="emailFeedback" class="invalid-feedback">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
             </div>
             <div class="form-group {{ $errors->has('message') ? 'has-danger' : ''}}">
