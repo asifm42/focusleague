@@ -31,17 +31,19 @@
             ])
             @endcomponent
 
-            @if($current_cycle->gameToday()->updated_at->isToday() && $current_cycle->gameToday()->updated_at->lt(Carbon::now()))
-                <p class="m-0"><small>as of {{ $current_cycle->currentWeek()->updated_at->format('g:i A') }}</small></p>
-            @elseif(Carbon::now()->gt(Carbon::parse('8 am')))
-                <p class="m-0"><small>as of 8:00 am</small></p>
-            @endif
-
             @if($current_cycle->gameToday()->isRainedOut())
                 <h3 class="display-4 mb-0"><small>Game <span class="text-danger">OFF</span></small></h3>
             @else
                 <h3 class="display-4 mb-0"><small>Game <span class="text-info">ON</span></small></h3>
             @endif
+
+            <h5 class="text-muted">
+                @if($current_cycle->gameToday()->updated_at->isToday() && $current_cycle->gameToday()->updated_at->lt(Carbon::now()))
+                    <small>as of {{ $current_cycle->gameToday()->updated_at->format('g:i A') }}</small>
+                @elseif(Carbon::now()->gt(Carbon::parse('8 am')))
+                    <small>as of 8:00 am</small>
+                @endif
+            </h5>
 
             @if($current_cycle->gameToday()->hasStatus())
                 {!! $current_cycle->gameToday()->status() !!}
