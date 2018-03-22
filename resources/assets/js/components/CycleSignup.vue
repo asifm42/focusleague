@@ -99,10 +99,6 @@
                                                     <i class="fa fa-fw fa-times-circle " v-if="!weekAttending(week.id)"></i>
                                                     <i class="fa fa-fw fa-lock text-white" v-if="!inFuture(week.starts_at)"></i>
                                                 </div>
-                                               <!--  <div class="row justify-content-center mt-1" v-if="!inFuture(week.starts_at)">
-                                                    <i class="fa fa-fw fa-check-circle text-white" v-if="weekAttending(week.id)"></i>
-                                                    <i class="fa fa-fw fa-times-circle " v-if="!weekAttending(week.id)"></i>
-                                                </div> -->
                                             </div>
                                         </div>
                                      </div>
