@@ -41,13 +41,13 @@
         <dd>Sign up opens at {{ $cycle->signup_opens_at->toDayDateTimeString() }}</dd>
     @elseif ($cycle->status() === 'SIGNUP_OPEN')
         <dd>Sign up is currently open until {{ $cycle->signup_closes_at->toDayDateTimeString() }}</dd>
-        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
+        <a class="btn btn-primary btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
     @elseif ($cycle->status() === 'SIGNUP_CLOSED')
-        <dd>Sign up is currently closed. Still taking late signups or subs.</dd>
-        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
+        <dd>Sign up is currently closed. Still accepting late signups and subs.</dd>
+        <a class="btn btn-primary btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
     @elseif ($cycle->status() === 'IN_PROGRESS')
-        <dd>Cycle is in progess. Sign-ups are closed but you can sign up as a sub.</dd>
-        <a class="btn btn-success btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
+        <dd>Cycle is in progess. Still accepting subs.</dd>
+        <a class="btn btn-primary btn-block" href="{{ route('cycle.signup.create', $cycle->id) }}">Sign up</a>
     @elseif ($cycle->status() === 'COMPLETED')
         <dd>Completed</dd>
     @endif
