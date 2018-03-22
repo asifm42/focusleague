@@ -258,6 +258,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's signups
+     */
+    public function signups()
+    {
+        return $this->hasMany('App\Models\CycleSignup');
+                    // ->withPivot('id', 'div_pref_first', 'div_pref_second', 'note', 'team_id', 'captain', 'will_captain')
+                    // ->whereNull('cycle_user.deleted_at'); // for soft deletes
+    }
+
+    /**
      * Get all the teams the user has been placed on
      */
     public function teams()
