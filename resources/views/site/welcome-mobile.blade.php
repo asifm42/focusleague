@@ -26,7 +26,8 @@
             </h5>
 
             @component('site.calendar-icon', [
-                'date' => $current_cycle->gameToday()->starts_at
+                'date' => $current_cycle->gameToday()->starts_at,
+                'class' => 'icon-md'
             ])
             @endcomponent
 
