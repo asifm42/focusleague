@@ -394,7 +394,7 @@
                     </div>
 
                     <div class="jumbotron bg-danger text-white" v-if="show == 'deleteConfirm'" key="deleteConfirm">
-                        <h5 class="text-center"><i class="fa fa-fw fa-3x fa-exclamation-circle" aria-hidden="true"></i></h5>
+                        <h4 class="text-center"><i class="fa fa-fw fa-5x fa-exclamation-circle" aria-hidden="true"></i></h4>
                         <h5 class="text-center">Are you sure you want to delete your sign-up?</h5>
                         <div class="row mt-3">
                             <div class="col col-sm-6">
