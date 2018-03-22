@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Former\Facades\Former;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class ContactsController extends Controller
 {
@@ -49,6 +50,12 @@ class ContactsController extends Controller
             $request->input('email'),
             $request->input('message')
         ));
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
 
         flash()->success('Your contact has been recieved. We will be in touch soon. Thanks.');
 

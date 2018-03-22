@@ -20,6 +20,9 @@ Route::get('/user', function (Request $request) {
 Route::post('/cycles/{cycle}/signups',   'Api\CycleSignupsController@store')
     ->name('api.cycle.signups.store')
     ->middleware('auth:api');
+Route::delete('/cyclesignups/{cyclesignup}',   'Api\CycleSignupsController@destroy')
+    ->name('api.cyclesignups.delete')
+    ->middleware('auth:api');
 
 Route::post('/cycles/{cycle}/subs',        'Api\SubsController@store')
     ->name('api.sub.store')
