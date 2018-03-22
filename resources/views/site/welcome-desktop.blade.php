@@ -28,7 +28,6 @@
 
             @component('site.calendar-icon', [
                 'date' => $current_cycle->gameToday()->starts_at,
-                'color' => 'red',
                 'class' => 'icon-lg'
             ])
             @endcomponent
