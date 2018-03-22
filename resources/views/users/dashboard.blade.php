@@ -68,7 +68,7 @@
                 </div>
             @endif
             @if(!empty($next_cycle))
-                <div class="card">
+                <div class="card mt-2 mb-2">
                     <div class="card-header">Next Cycle</div>
                     <div class="card-body">
                         <dl class="mb-0">
