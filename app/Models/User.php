@@ -285,8 +285,7 @@ class User extends Authenticatable
     public function subs()
     {
         return $this->hasMany('App\Models\Sub')
-                    ->orderBy('week_id')
-                    ->withTimestamps();
+                    ->orderBy('week_id');
     }
     /**
      * Get the user's transactions
