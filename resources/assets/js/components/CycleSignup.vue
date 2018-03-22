@@ -115,7 +115,7 @@
                         </div>
                         <div class="row mt-3" v-if="editMode">
                             <div class="col">
-                                <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm">Back to Confirm</button>
+                                <button class="btn btn-warning btn-block" v-on:click="clickBackToConfirm" :disabled="this.numOfWeeksSigningUp == 0 ? true : false">Back to Confirm</button>
                             </div>
                         </div>
                     </div>
