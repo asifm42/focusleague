@@ -38,9 +38,9 @@
             @endif
 
             @if($current_cycle->gameToday()->isRainedOut())
-                <h3 class="display-4"><small>Game <span class="text-danger">OFF</span></small></h3>
+                <h3 class="display-4 mb-0"><small>Game <span class="text-danger">OFF</span></small></h3>
             @else
-                <h3 class="display-4"><small>Game <span class="text-info">ON</span></small></h3>
+                <h3 class="display-4 mb-0"><small>Game <span class="text-info">ON</span></small></h3>
             @endif
 
             @if($current_cycle->gameToday()->hasStatus())
