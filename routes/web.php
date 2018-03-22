@@ -117,6 +117,7 @@ Route::group(['middleware' => ['auth','historyprovided']], function() {
      */
     // Route::get(     'cycles/{id}/subs/signup',      ['as' => 'sub.create', 'uses' => 'SubsController@create']);
     // Route::post(    'cycles/{id}/subs',             ['as' => 'sub.store', 'uses' => 'SubsController@store']);
+    Route::get(    'cycles/{cycle}/subs/edit',             ['as' => 'cycle.subs.edit', 'uses' => 'CycleSubsController@edit']);
     Route::get(     'subs/{id}/edit',               ['as' => 'sub.edit', 'uses' => 'SubsController@edit']);
     // Route::patch(   'subs/{id}',                    ['as' => 'sub.update', 'uses' => 'SubsController@update']);
     // Route::put(     'subs/{id}',                    ['as' => 'sub.put', 'uses' => 'SubsController@update']);

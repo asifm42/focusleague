@@ -103,23 +103,39 @@ class SubsController extends Controller
      */
     public function edit(EditSubSignupFormRequest $request, $id)
     {
-        $sub = Sub::findOrFail($id);
-        $sub->load('user', 'week');
-        $user = $sub->user;
+        $user = auth()->user();
+        $cycle = Cycle::findOrFail($id);
+        $weeksSubbing = $user->subs->whereIn('week_id', $cycle->weeks->pluck('id'));
 
-        $cycle = $sub->week->cycle;
-        $cycle->load('weeks', 'signups', 'weeks.subs');
+        if (count($weeksSubbing) == 0) {
+            flash('You aren\'t signed up as a sub to play that cycle')->error();
 
-        if ( !empty( $cycle->signups()->find($user->id) ) ){
-            flash()->warning('You can not sign up as a sub because you are already signed up for this cycle.');
-            return redirect()->route('cycles.view', $cycle->id);
+            return redirect('/dashboard');
         }
 
-        Former::populate($sub);
-        return view('subs.edit')
-            ->withCycle($cycle)
-            ->withUser($user)
-            ->withSub($sub);
+        $weeksSubbing->load('week.cycle', 'user');
+        $cycle->load('weeks');
+
+        // if sign up is not open and user is not an admin, redirect back
+        // if ($cycle->status() !== "SIGNUP_OPEN" && ! $user->isAdmin()){
+        //     flash()->error('Sorry, editing your sign-up is not possible. Please use the contact us page to share your schedule change.');
+        //     return redirect()->back();
+        // }
+
+        // if ( auth()->user()->cannot('update', $signup) ) {
+        //     throw new UnauthorizedAccessException;
+        // }
+
+        // $availability = $user->availability()->whereIn('week_id', $cycle->weeks->pluck('id'))->get();
+
+        // fire off event
+
+        // Former::populate($signup);
+        return view('cycles.signups.edit')
+                ->withCycle($cycle)
+                ->withUser($user)
+                ->withWeeksSubbing($weeksSubbing)
+                ->withCost(config('focus.cost'));
     }
 
     /**

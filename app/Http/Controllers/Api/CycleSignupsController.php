@@ -41,40 +41,53 @@ class CycleSignupsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(StoreCycleSignupRequest $request, $id)
-    public function store(Request $request, $cycle)
+    public function store(StoreCycleSignupRequest $request, $cycle)
     {
         $user = auth()->user();
 
-        // If user already has a signup redirect to edit form
-        // if ($user->cycles()->find($cycle->id)) {
-        //     return redirect()->route('cycle.signup.edit', $cycle->id);
-        // }
+        // check to see if user already has a deleted signup at this point.
+        $signup = auth()->user()->signups()->onlyTrashed()->get()->whereIn('cycle_id', $cycle->id)->first();
 
-        $cycle->signups()->attach($user->id, [
-            'div_pref_first'    => $request->input('div_pref_first'),
-            'div_pref_second'   => $request->input('div_pref_second'),
-            'will_captain'      => $request->input('will_captain'),
-            'note'              => $request->input('note'),
-            'payment_method'    => $request->input('payment_method'),
-        ]);
+        if ($signup) {
+            $signup->restore();
 
-        foreach ($request->input('weeks') as $week){
-            $user->availability()->attach($week['id'], [
-                'attending' => $week['attending']
+            $signup->update([
+                'div_pref_first'    => $request->input('div_pref_first'),
+                'div_pref_second'   => $request->input('div_pref_second'),
+                'will_captain'      => $request->input('will_captain'),
+                'note'              => $request->input('note'),
             ]);
+
+            foreach ($request->input('weeks') as $week) {
+                $user->availability()->updateExistingPivot($week['id'], [
+                    'attending' => $week['attending']
+                ]);
+            }
+        } else {
+            $cycle->signups()->attach($user->id, [
+                'div_pref_first'    => $request->input('div_pref_first'),
+                'div_pref_second'   => $request->input('div_pref_second'),
+                'will_captain'      => $request->input('will_captain'),
+                'note'              => $request->input('note'),
+                'payment_method'    => $request->input('payment_method'),
+            ]);
+
+            foreach ($request->input('weeks') as $week) {
+                $user->availability()->attach($week['id'], [
+                    'attending' => $week['attending']
+                ]);
+            }
+
+            $signup_id = $cycle->signups()->find($user->id)->pivot->id;
+
+            $signup = CycleSignup::findOrFail($signup_id);
+
+            event(new UserSignedUpForCycle($user, $cycle, $signup));
         }
-
-        $signup_id = $cycle->signups()->find($user->id)->pivot->id;
-
-        $signup = CycleSignup::findOrFail($signup_id);
-
-        event(new UserSignedUpForCycle($user, $cycle, $signup));
 
         return response()->json([
             'status' => 'success'
         ]);
-        // return redirect()->route('cycles.view', $cycle->id);
     }
 
     /**
