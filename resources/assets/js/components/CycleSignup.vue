@@ -204,7 +204,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="text-center">Payment Method</h4>
-                                <p class="card-text">Once you are placed on a team, your account will be charged ${{ fees }}.</p>
+                                <p class="card-text" v-if="! this.subSignup">Once you are placed on a team, your account will be charged ${{ fees }}.</p>
+                                <p class="card-text" v-else>Sub fees are $10/week. Your account will be charged $10 each week that you are placed on a team.</p>
 
                                 <div class="form-group">
                                     <label for="payment_type" class="required">How do you plan to pay?</label>
