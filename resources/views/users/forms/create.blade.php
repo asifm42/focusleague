@@ -160,13 +160,7 @@
         </div>
     </div>
 
-    <input class="btn btn btn-primary btn-block" type="submit"
-        @if($edit === true)
-            value="Save"
-        @else
-            value="Sign up"
-        @endif
-    >
+    <input class="btn btn btn-primary btn-block" type="submit" value="{{ $edit ? 'Save' : 'Sign up'}}">
 
     {{ csrf_field() }}
 </form>
