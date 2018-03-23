@@ -142,33 +142,26 @@
                 <div id="division_preference_secondFeedback" class="invalid-feedback">{{ $errors->has('division_preference_second') ? $errors->first('division_preference_second') : '' }}</div>
             </div>
 
-            @if($edit === true)
-            <div class="form-group">
-                <label for="password" class="required">Password</label>
-                <input name="password" type="password" class="form-control password-js" id="password" aria-describedby="passwordHelp" placeholder="Fill out if changing">
-                <small id="passwordHelp" class="form-text text-muted">Fill out if changing. Minimum 8 characters. Case-sensitive.</small>
+            <div class="form-group {{ $errors->has('password') ? 'has-danger' : ''}}">
+                <label for="password" class="{{ $edit ? '' : 'required' }}">Password</label>
+                <input name="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : ''}} password-js" id="password" aria-describedby="passwordHelp" placeholder="{{ $edit ? 'Optional' : 'Required' }} password" {{ $edit ? '' : 'required' }}>
+                <small id="passwordHelp" class="form-text text-muted">{{ $edit ? 'Fill out if changing.' : '' }} Minimum 8 characters. Case-sensitive.</small>
+                <div id="passwordFeedback" class="invalid-feedback">{{ $errors->has('password') ? $errors->first('password') : '' }}</div>
             </div>
 
-            <div class="form-group">
-                <label for="password_confirmation" class="required">Password (again)</label>
-                <input name="password_confirmation" type="password" class="form-control password_confirmation-js" id="password_confirmation" aria-describedby="password_confirmationHelp" placeholder="Fill out if changing">
-                <small id="password_confirmationHelp" class="form-text text-muted">Fill out if changing. Minimum 8 characters. Case-sensitive.</small>
+            <div class="form-group mb-0 {{ $errors->has('password_confirmation') ? 'has-danger' : ''}}">
+                <label for="password_confirmation" class="{{ $edit ? '' : 'required' }}">Password (again)</label>
+                <input name="password_confirmation" type="password" class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : ''}} password_confirmation-js" id="password_confirmation" aria-describedby="password_confirmationHelp" placeholder="{{ $edit ? 'Required password confirmation IF changing' : 'Required password confirmation' }}" {{ $edit ? '' : 'required' }}>
+                @if($edit === true)
+                    <small id="password_confirmationHelp" class="form-text text-muted">Fill out if changing.</small>
+                @endif
+                <div id="password_confirmationFeedback" class="invalid-feedback">{{ $errors->has('password_confirmation') ? $errors->first('password_confirmation') : '' }}</div>
             </div>
 
-            @else
-            <div class="form-group">
-                <label for="password" class="required">Password</label>
-                <input name="password" type="password" class="form-control password-js" id="password" aria-describedby="passwordHelp" placeholder="Required password" required>
-                <small id="passwordHelp" class="form-text text-muted">Minimum 8 characters. Case-sensitive.</small>
-            </div>
 
-            <div class="form-group">
-                <label for="password_confirmation" class="required">Password (again)</label>
-                <input name="password_confirmation" type="password" class="form-control password_confirmation-js" id="password_confirmation" aria-describedby="password_confirmationHelp" placeholder="Required password confirmation">
-                <small id="password_confirmationHelp" class="form-text text-muted">Minimum 8 characters. Case-sensitive.</small>
-            </div>
 
-            @endif
+
+
         </div>
     </div>
 
