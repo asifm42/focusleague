@@ -80,7 +80,11 @@ class UltimateHistoryController extends Controller
      */
     public function edit($id)
     {
-        return view('ultimate_history.edit')->withUser(auth()->user());
+        $user = User::findOrFail($id);
+
+        return view('ultimate_history.edit')
+                ->withUser($user)
+                ->withHistory($user->ultimateHistory);
     }
 
     /**
