@@ -42,11 +42,11 @@
                 <label for="mobile_carrier" class="required">Mobile Carrier</label>
                 <select name="mobile_carrier" class="form-control {{ $errors->has('mobile_carrier') ? 'is-invalid' : ''}}" id="mobile_carrier" aria-describedby="mobile_carrierHelp" placeholder="Required mobile carrier" required>
                     <option disabled {{ old('mobile_carrier') ? '' : 'selected' }}>Required mobile carrier</option>
-                    <option value="att" {{ old('mobile_carrier') == 'att' ? 'selected' : '' }}>AT&amp;T</option>
-                    <option value="tmobile" {{ old('mobile_carrier') == 'tmobile' ? 'selected' : '' }}>T-Mobile</option>
-                    <option value="verizon" {{ old('mobile_carrier') == 'verizon' ? 'selected' : '' }}>Verizon</option>
-                    <option value="sprint" {{ old('mobile_carrier') == 'sprint' ? 'selected' : '' }}>Sprint</option>
-                    <option value="other" {{ old('mobile_carrier') == 'other' ? 'selected' : '' }}>Other</option>
+                    <option value="att" {{ old('mobile_carrier', $user->mobile_carrier) == 'att' ? 'selected' : '' }}>AT&amp;T</option>
+                    <option value="tmobile" {{ old('mobile_carrier', $user->mobile_carrier) == 'tmobile' ? 'selected' : '' }}>T-Mobile</option>
+                    <option value="verizon" {{ old('mobile_carrier', $user->mobile_carrier) == 'verizon' ? 'selected' : '' }}>Verizon</option>
+                    <option value="sprint" {{ old('mobile_carrier', $user->mobile_carrier) == 'sprint' ? 'selected' : '' }}>Sprint</option>
+                    <option value="other" {{ old('mobile_carrier', $user->mobile_carrier) == 'other' ? 'selected' : '' }}>Other</option>
                 </select>
                 <small id="mobile_carrierHelp" class="form-text text-muted">For last-minute text communications.</small>
                 <div id="mobile_carrierFeedback" class="invalid-feedback">{{ $errors->has('mobile_carrier') ? $errors->first('mobile_carrier') : '' }}</div>
@@ -55,8 +55,8 @@
                 <label for="gender" class="required">Gender</label>
                 <select name="gender" class="form-control {{ $errors->has('gender') ? 'is-invalid' : ''}}" id="gender" aria-describedby="genderHelp" placeholder="Required gender" required>
                     <option disabled  {{ old('gender') ? '' : 'selected' }}>Required gender</option>
-                    <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-                    <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                    <option value="male" {{ old('gender', strtolower($user->gender)) == 'male' ? 'selected' : '' }}>Male</option>
+                    <option value="female" {{ old('gender', strtolower($user->gender)) == 'female' ? 'selected' : '' }}>Female</option>
                 </select>
                 <div id="genderFeedback" class="invalid-feedback">{{ $errors->has('gender') ? $errors->first('gender') : '' }}</div>
             </div>
@@ -69,8 +69,8 @@
                 <label for="dominant_hand" class="required">Dominant hand</label>
                 <select name="dominant_hand" class="form-control {{ $errors->has('dominant_hand') ? 'is-invalid' : ''}}" id="dominant_hand" aria-describedby="dominant_handHelp" placeholder="Required dominant hand" required>
                     <option disabled  {{ old('dominant_hand') ? '' : 'selected' }}="">Required dominant hand</option>
-                    <option value="left" {{ old('dominant_hand') == 'left' ? 'selected' : '' }}>Left</option>
-                    <option value="right" {{ old('dominant_hand') == 'right' ? 'selected' : '' }}>Right</option>
+                    <option value="left" {{ old('dominant_hand', strtolower($user->dominant_hand)) == 'left' ? 'selected' : '' }}>Left</option>
+                    <option value="right" {{ old('dominant_hand', strtolower($user->dominant_hand)) == 'right' ? 'selected' : '' }}>Right</option>
                 </select>
                 <div id="dominant_handFeedback" class="invalid-feedback">{{ $errors->has('dominant_hand') ? $errors->first('dominant_hand') : '' }}</div>
             </div>
@@ -114,7 +114,7 @@
                 <select name="height" class="form-control {{ $errors->has('height') ? 'is-invalid' : ''}}" id="height" aria-describedby="heightHelp" placeholder="Required height" required>
                     <option disabled {{ old('height') ? '' : 'selected' }}>Required height</option>
                     @foreach($heightOptions as $value => $option)
-                        <option value="{{ $value }}" {{ old('height') == $value ? 'selected' : '' }}>{{ $option }}</option>
+                        <option value="{{ $value }}" {{ old('height', $user->height) == $value ? 'selected' : '' }}>{{ $option }}</option>
                     @endforeach
                 </select>
                 <div id="heightFeedback" class="invalid-feedback">{{ $errors->has('height') ? $errors->first('height') : '' }}</div>
@@ -124,9 +124,9 @@
                 <label for="division_preference_first" class="required">Division preference first</label>
                 <select name="division_preference_first" class="form-control div_pref_1-js  {{ $errors->has('division_preference_first') ? 'is-invalid' : ''}}" id="division_preference_first" aria-describedby="division_preference_firstHelp" placeholder="Required first division preference" required>
                     <option disabled  {{ old('division_preference_first') ? '' : 'selected' }}>Required first division preference</option>
-                    <option value="mens" {{ old('division_preference_first') == 'mens' ? 'selected' : '' }}>Mens</option>
-                    <option value="mixed" {{ old('division_preference_first') == 'mixed' ? 'selected' : '' }}>Mixed</option>
-                    <option value="womens" {{ old('division_preference_first') == 'womens' ? 'selected' : '' }}>Womens</option>
+                    <option value="mens" {{ old('division_preference_first', strtolower($user->division_preference_first)) == 'mens' ? 'selected' : '' }}>Mens</option>
+                    <option value="mixed" {{ old('division_preference_first', strtolower($user->division_preference_first)) == 'mixed' ? 'selected' : '' }}>Mixed</option>
+                    <option value="womens" {{ old('division_preference_first', strtolower($user->division_preference_first)) == 'womens' ? 'selected' : '' }}>Womens</option>
                 </select>
                 <div id="division_preference_firstFeedback" class="invalid-feedback">{{ $errors->has('division_preference_first') ? $errors->first('division_preference_first') : '' }}</div>
             </div>
@@ -134,9 +134,9 @@
                 <label for="division_preference_second" class="required">Division preference second</label>
                 <select name="division_preference_second" class="form-control div_pref_2-js {{ $errors->has('division_preference_second') ? 'is-invalid' : ''}}" id="division_preference_second" aria-describedby="division_preference_secondHelp" placeholder="Optional second division preference" required>
                     <option disabled {{ old('division_preference_second') ? '' : 'selected' }}>Optional second division preference</option>
-                    <option value="mens" {{ old('division_preference_second') == 'mens' ? 'selected' : '' }}>Mens</option>
-                    <option value="mixed" {{ old('division_preference_second') == 'mixed' ? 'selected' : '' }}>Mixed</option>
-                    <option value="womens" {{ old('division_preference_second') == 'womens' ? 'selected' : '' }}>Womens</option>
+                    <option value="mens" {{ old('division_preference_second', strtolower($user->division_preference_second)) == 'mens' ? 'selected' : '' }}>Mens</option>
+                    <option value="mixed" {{ old('division_preference_second', strtolower($user->division_preference_second)) == 'mixed' ? 'selected' : '' }}>Mixed</option>
+                    <option value="womens" {{ old('division_preference_second', strtolower($user->division_preference_second)) == 'womens' ? 'selected' : '' }}>Womens</option>
                 </select>
                 <small id="division_preference_secondHelp" class="form-text text-muted">Leave this blank or select the same as your first preference if you prefer to sit out this cycle if your division is not available.</small>
                 <div id="division_preference_secondFeedback" class="invalid-feedback">{{ $errors->has('division_preference_second') ? $errors->first('division_preference_second') : '' }}</div>
