@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-12">
         <div>
-            <img src="{{ asset('assets/img/logo.png') }}" class="logo-welcome-desktop">
+            <img alt="FOCUS League" title="FOCUS League" src="{{ asset('assets/img/logo.png') }}" class="logo-welcome-desktop">
         </div>
         <h3>
             F<span class="text-secondary">ostering</span> O<span class="text-success">rganized</span> C<span class="text-danger">ompetitive</span> U<span class="text-warning">ltimate</span> S<span class="text-info">eries</span>
