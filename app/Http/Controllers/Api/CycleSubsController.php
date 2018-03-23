@@ -118,12 +118,12 @@ class CycleSubsController extends Controller
         }
 
         // If the user removes a week, then we need to delete that week
-
-        // for each week in the cycle, see if it is in the request weeks. if it is not, then we need to see if the user is signed up as a sub for that week and delete it.
+        // For each week in the cycle, see if it is in the request
+        // weeks. If it is not, then we need to see if the user
+        // is signed up as a sub for that week and delete it.
         foreach($cycle->weeks as $week) {
             $found = in_array($week->id, $request->input('weeks'));
             $sub = null;
-            \Debugbar::info($found);
             if (!$found) $sub = Sub::where('user_id', auth()->user()->id)->where('week_id', $week->id)->first();
 
             if ($sub) $sub->delete();
