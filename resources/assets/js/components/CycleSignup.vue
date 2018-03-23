@@ -1233,10 +1233,10 @@
                 this.show = 'confirm'; //'show': '',
             } else {
             // this.weeksAttending = _.map(this.cycle.weeks, 'id');
-                this.division_preference_first = this.user.division_preference_first;
+                this.division_preference_first = this.user.division_preference_first.toLowerCase();
                 this.division_preference_second = this.user.division_preference_second
-                    ? this.user.division_preference_second
-                    : this.user.division_preference_first ;
+                    ? this.user.division_preference_second.toLowerCase()
+                    : this.user.division_preference_first.toLowerCase() ;
 
                 this.editMode = false;
                 this.show = 'intro';
