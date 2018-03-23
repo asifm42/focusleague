@@ -385,8 +385,6 @@
                             <div class="col-12 col-sm-4 my-2 my-sm-1">
                                 <button class="btn btn-primary btn-block" v-on:click="clickEditSignup">Edit sign-up</button>
                             </div>
-                        <!-- </div>
-                        <div class="row mt-3"> -->
                             <div class="col-12 col-sm-4 my-2 my-sm-1">
                                 <button class="btn btn-primary btn-block" v-on:click="clickDashboard">Dashboard</button>
                             </div>
