@@ -209,6 +209,8 @@
             $('.cell_number-js').keyup(function(){
 
             });
+
+            $('.gender-js').trigger('change')
         })
     </script>
 @endpush
