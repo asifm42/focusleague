@@ -132,7 +132,7 @@
 
                     @if (auth()->check() && $current_cycle->signups->contains(auth()->user()))
                        <div class="col">
-                            <a class="btn btn-primary w-100" href="{{ route('cycle.signup.edit', 'current') }}" style="text-decoration: none">Edit sign-up</a>
+                            <a class="btn btn-primary w-100" href="{{ route('cycle.signup.edit', $current_cycle->id) }}" style="text-decoration: none">Edit sign-up</a>
                         </div>
                     @elseif (auth()->check() && $current_cycle->isSubbing(auth()->user()))
                        <div class="col">
