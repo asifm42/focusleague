@@ -25,14 +25,14 @@ class UserUpdateRequest extends Request
     {
         return [
             'name'                          => 'required|max:255',
-            'nickname'                      => 'min:3|unique:users,nickname,'.$this->route('id'),
+            'nickname'                      => 'nullable|min:3|unique:users,nickname,'.$this->route('id'),
             'gender'                        => 'required|in:male,female',
             'birthday'                      => 'required|date',
             'cell_number'                   => 'required|phone:LENIENT,US',
             'dominant_hand'                 => 'required|in:left,right',
             'height'                        => 'required|min:48|max:84|numeric',
             'division_preference_first'     => 'required|in:mens,mixed,womens',
-            'password'                      => 'confirmed|min:8'
+            'password'                      => 'nullable|confirmed|min:8'
         ];
     }
 
