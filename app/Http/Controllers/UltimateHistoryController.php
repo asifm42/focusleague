@@ -80,7 +80,6 @@ class UltimateHistoryController extends Controller
      */
     public function edit($id)
     {
-        Former::populate(auth()->user()->ultimateHistory);
         return view('ultimate_history.edit')->withUser(auth()->user());
     }
 
