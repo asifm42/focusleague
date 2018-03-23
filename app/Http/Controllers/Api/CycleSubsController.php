@@ -83,34 +83,55 @@ class CycleSubsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSubSignupRequest $request, $id)
+    public function update(Request $request, $cycle)
     {
-        // $sub = Sub::findOrFail($id);
-        // $sub->load('user', 'week');
-        // $user = $sub->user;
+        $cycle->load('weeks');
 
-        // $cycle = $sub->week->cycle;
-        // $cycle->load('weeks', 'signups', 'weeks.subs');
+        // Update all weeks sent with request
+        foreach($request->input('weeks') as $week){
+            $week = $cycle->weeks->find($week);
 
-        // $week = $cycle->weeks->find($request->input('week'));
+            // check to see if user already has a deleted sub at this point.
+            $sub = auth()->user()->subs()->withTrashed()->get()->whereIn('week_id', $week->id)->first();
 
-        // $sub->week()->associate($week);
-        // $sub->note = $request->input('note');
+            if ($sub) {
+                if ($sub->trashed()) $sub->restore();
+                $this->updateAllSubs(auth()->user(), $cycle, [
+                    'div_pref_first' => $request->input('div_pref_first'),
+                    'div_pref_second' => $request->input('div_pref_second'),
+                    'note' => $request->input('note'),
+                    'payment_method' => $request->input('payment_method')
+                ]);
+                $sub->refresh();
+            } else {
+                $week->subs()->attach(auth()->user()->id, [
+                    'div_pref_first' => $request->input('div_pref_first'),
+                    'div_pref_second' => $request->input('div_pref_second'),
+                    'note' => $request->input('note'),
+                    'payment_method' => $request->input('payment_method')
+                ]);
 
-        // $sub->save();
-        // // $week->subs()->attach(auth()->user()->id, ['note'=>$request->input('note')]);
+                $sub = Sub::findOrFail($week->subs()->where('user_id', auth()->user()->id)->first()->pivot->id);
+            }
 
-        // event(new UserUpdatedSubSignup(auth()->user(), $week, $sub));
+            event(new UserUpdatedSubSignup(auth()->user(), $week, $sub));
+        }
 
-        // if (auth()->user()->isAdmin()) {
-        //     flash()->success('<a href="'.route('sub.edit', $sub->id).'"">Sub signup for ' . $user->name . '</a> has been updated.');
+        // If the user removes a week, then we need to delete that week
 
-        //     return redirect()->route('users.show', $user->id);
-        // }
+        // for each week in the cycle, see if it is in the request weeks. if it is not, then we need to see if the user is signed up as a sub for that week and delete it.
+        foreach($cycle->weeks as $week) {
+            $found = in_array($week->id, $request->input('weeks'));
+            $sub = null;
+            \Debugbar::info($found);
+            if (!$found) $sub = Sub::where('user_id', auth()->user()->id)->where('week_id', $week->id)->first();
 
-        // flash()->success('Your sub signup has been updated.');
+            if ($sub) $sub->delete();
+        }
 
-        // return redirect()->route('users.dashboard');
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
     /**
