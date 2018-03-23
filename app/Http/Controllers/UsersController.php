@@ -182,7 +182,7 @@ class UsersController extends Controller
     public function edit(UserEditFormRequest $request) {
         $user = User::findOrFail($request->id);
         $data['user'] = $user;
-        Former::populate($user);
+
         return view('users.edit', $data );
     }
 
