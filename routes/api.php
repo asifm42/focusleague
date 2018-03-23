@@ -36,7 +36,7 @@ Route::post('/cycles/{cycle}/subs',        'Api\CycleSubsController@store')
 Route::put('/cycles/{cycle}/subs',        'Api\CycleSubsController@update')
     ->name('api.cycle.subs.put')
     ->middleware('auth:api');
-Route::patch('/cycles/{cycle}/subs}',        'Api\CycleSubsController@update')
+Route::patch('/cycles/{cycle}/subs',        'Api\CycleSubsController@update')
     ->name('api.cycle.subs.patch')
     ->middleware('auth:api');
 Route::delete('/cycles/{cycle}/subs',        'Api\CycleSubsController@destroy')
