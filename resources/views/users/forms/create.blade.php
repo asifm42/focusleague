@@ -26,19 +26,11 @@
                 <div id="nicknameFeedback" class="invalid-feedback">{{ $errors->has('nickname') ? $errors->first('nickname') : '' }}</div>
             </div>
 
-            @if($edit === true)
-                <div class="form-group {{ $errors->has('email') ? 'has-danger' : ''}}">
-                    <label for="email">Email</label>
-                    <input name="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" disabled value={{ $user->email }}>
-                    <div id="emailFeedback" class="invalid-feedback">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
-                </div>
-            @else
-                <div class="form-group {{ $errors->has('email') ? 'has-danger' : ''}}">
-                    <label for="email" class="required">Email</label>
-                    <input name="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" required placeholder="Required email" value={{ old('email') }}>
-                    <div id="emailFeedback" class="invalid-feedback">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
-                </div>
-            @endif
+            <div class="form-group {{ $errors->has('email') ? 'has-danger' : ''}}">
+                <label for="email" class="required">Email</label>
+                <input name="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" required placeholder="Required email" value={{ old('email', $user->email) }} {{ $edit ? 'readonly' : '' }}>
+                <div id="emailFeedback" class="invalid-feedback">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
+            </div>
 
             <div class="form-group {{ $errors->has('cell_number') ? 'has-danger' : ''}}">
                 <label for="cell_number" class="required">Cell number</label>
