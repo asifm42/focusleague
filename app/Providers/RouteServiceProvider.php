@@ -26,12 +26,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
 
         // Route::model('cycle', App\Models\Cycle::class);
-        Route::model('cyclesignup', App\Models\CycleSignup::class);
+        // Route::model('cyclesignup', App\Models\CycleSignup::class);
+        Route::bind('cyclesignup', function ($value) {
+            return App\Models\CycleSignup::withTrashed()->findOrFail($value);
+        });
 
         Route::bind('cycle', function ($value) {
             if ($value === 'current') {

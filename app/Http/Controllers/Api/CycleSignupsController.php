@@ -109,32 +109,29 @@ class CycleSignupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $cyclesignup)
     {
-        // if ($request->is('cycles/*')) {
-        //     $cycle = Cycle::findOrFail($id);
-        //     $user = auth()->user();
-        // } elseif ($request->is('cyclesignups/*')) {
-        //     $signup = CycleSignup::findOrFail($id);
-        //     $signup->load('cycle','user')->first();
-        //     $cycle = $signup->cycle;
-        //     $user = $signup->user;
-        // }
+        $cyclesignup->load('user');
+        $user = $cyclesignup->user;
 
-        // $cycle->signups()->updateExistingPivot($user->id, [
-        //     'div_pref_first'    => $request->input('div_pref_first'),
-        //     'div_pref_second'   => $request->input('div_pref_second'),
-        //     'will_captain'      => $request->input('will_captain'),
-        //     'note'              => $request->input('note'),
-        // ]);
+        if ($cyclesignup->trashed()) $cyclesignup->restore();
 
-        // foreach ($request->input('weeks') as $weekID => $attending){
-        //     $user->availability()->updateExistingPivot($weekID, [
-        //         'attending' => $attending
-        //     ]);
-        // }
+        $cyclesignup->update([
+            'div_pref_first'    => $request->input('div_pref_first'),
+            'div_pref_second'   => $request->input('div_pref_second'),
+            'will_captain'      => $request->input('will_captain'),
+            'note'              => $request->input('note'),
+        ]);
 
-        // return redirect()->route('cycles.view', $cycle->id);
+        foreach ($request->input('weeks') as $week) {
+            $user->availability()->updateExistingPivot($week['id'], [
+                'attending' => $week['attending']
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
     /**

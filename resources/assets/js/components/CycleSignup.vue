@@ -615,7 +615,7 @@
                 }
 
                 if (this.status == 'editing') {
-                    console.log('clickFinish', 'editing status - not implemented');
+                    console.log('clickFinish', 'editing status');
                     // Determine if signup is changing from player to sub or viceversa
                     if (this.signupTypeIsChanging) {
                         console.log('clickFinish - signupTypeIsChanging');
@@ -677,7 +677,7 @@
                         if (this.subSignup) {
                             url = '/api/cycles/' + this.cycle.name + '/subs';
                         } else {
-                            url = '/api/cyclesignups/' + this.suboriginal.id;
+                            url = '/api/cyclesignups/' + this.signuporiginal.id;
                         }
 
                         this.status = 'working';
