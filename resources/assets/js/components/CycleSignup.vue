@@ -125,7 +125,10 @@
                         <div class="text-warning" v-html="sub_message">
                         </div>
                         <div class="row mt-3">
-                            <div class="col">
+                            <div class="col-6">
+                                <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                            </div>
+                            <div class="col-6">
                                 <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                             </div>
                         </div>
@@ -238,7 +241,10 @@
                         <div class="text-danger" v-html="late_message">
                         </div>
                         <div class="row mt-3">
-                            <div class="col">
+                            <div class="col-6">
+                                <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
+                            </div>
+                            <div class="col-6">
                                 <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
                             </div>
                         </div>
