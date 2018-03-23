@@ -168,16 +168,6 @@
 @push('scripts')
     <script>
         $(document).ready( function () {
-            // For popovers on the navbar
-            // $('[data-toggle="popover"]').popover();
-            console.log('hello');
-            // $(function () {
-            //     $('#birthday_picker-js').datepicker({
-            //         uiLibrary: 'bootstrap4',
-            //         iconsLibrary: 'fontawesome'
-            //     });
-            // });
-
             var maleOptions = {
                 "mens":"Mens",
                 "mixed" : "Mixed"
