@@ -53,7 +53,7 @@
             </div>
             <div class="form-group {{ $errors->has('gender') ? 'has-danger' : ''}}">
                 <label for="gender" class="required">Gender</label>
-                <select name="gender" class="form-control {{ $errors->has('gender') ? 'is-invalid' : ''}}" id="gender" aria-describedby="genderHelp" placeholder="Required gender" required>
+                <select name="gender" class="form-control gender-js {{ $errors->has('gender') ? 'is-invalid' : ''}}" id="gender" aria-describedby="genderHelp" placeholder="Required gender" required>
                     <option disabled  {{ old('gender') ? '' : 'selected' }}>Required gender</option>
                     <option value="male" {{ old('gender', strtolower($user->gender)) == 'male' ? 'selected' : '' }}>Male</option>
                     <option value="female" {{ old('gender', strtolower($user->gender)) == 'female' ? 'selected' : '' }}>Female</option>
