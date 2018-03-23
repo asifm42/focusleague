@@ -117,6 +117,12 @@ class CycleSignupsController extends Controller
         if ($request->is('cycles/*')) {
             $user = auth()->user();
             $cycle = Cycle::findOrFail($id);
+
+            // If user already has a sub signup redirect to edit form
+            if ($cycle->isSubbing($user)) {
+                return redirect()->route('cycle.subs.edit', $cycle->id);
+            }
+
             $signup = CycleSignup::find($user->current_cycle_signup()->pivot->id);
         } elseif ($request->is('cyclesignups/*')) {
             $signup = CycleSignup::findOrFail($id);
