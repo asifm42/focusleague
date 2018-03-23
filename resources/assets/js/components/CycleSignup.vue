@@ -500,6 +500,13 @@
                 note.name = this.user.name;
                 note.email = this.user.email;
                 note.message = this.updateNote;
+
+                if (this.subSignup) {
+                    note.subject = 'Cycle ' + this.cycle.name + ' Sub Sign-up Update Contact';
+                } else {
+                    note.subject = 'Cycle ' + this.cycle.name + ' Player Sign-up Update Contact';
+                }
+
                 return note;
             },
             clickDelete: function (event) {
