@@ -157,11 +157,6 @@
                 @endif
                 <div id="password_confirmationFeedback" class="invalid-feedback">{{ $errors->has('password_confirmation') ? $errors->first('password_confirmation') : '' }}</div>
             </div>
-
-
-
-
-
         </div>
     </div>
 
