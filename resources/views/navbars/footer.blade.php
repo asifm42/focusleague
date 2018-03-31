@@ -49,6 +49,9 @@
                     <li class="nav-item">
                         <a class="nav-link px-1" href="{{ route('balance.details') }}"><i class="fa fa-fw fa-money"></i> Balance ({{ auth()->user()->getBalanceString() }})</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-1" href="{{ route('users.profile') }}"><i class="fa fa-fw fa-user-circle-o"></i> Profile &amp; History</a>
+                    </li>
                     @if (auth()->user()->isAdmin())
                         <li class="nav-item">
                             <a class="nav-link px-1" href="{{ route('admin.dashboard') }}"><i class="fa fa-fw fa-tachometer hidden-xs"></i> Admin Dashboard</a>

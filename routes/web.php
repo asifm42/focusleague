@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth','historyprovided']], function() {
     // following route is also in admin group. remove from there once page is updated with permissions
     // Route::get(     'users/{id}',       ['as' => 'users.show', 'uses' => 'UsersController@show']);
     Route::get(     'dashboard',        ['as' => 'users.dashboard', 'uses' => 'UsersController@dashboard']);
+    Route::get(     'profile',        ['as' => 'users.profile', 'uses' => 'ProfileController@show']);
 
     /*
      * Cycle Routes

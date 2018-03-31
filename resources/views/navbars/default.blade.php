@@ -67,6 +67,7 @@
                         @endif
                         <a class="dropdown-item {{ active_class(if_uri_pattern('dashboard', 'active')) }}" href="{{ route('users.dashboard') }}"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a>
                         <a class="dropdown-item {{ active_class(if_uri_pattern('balance', 'active')) }}" href="{{ route('balance.details') }}"><i class="fa fa-money"></i>&nbsp; Balance ({{ auth()->user()->getBalanceString() }})</a>
+                        <a class="dropdown-item {{ active_class(if_uri_pattern('profile', 'active')) }}" href="{{ route('users.profile') }}"><i class="fa fa-user-circle-o"></i>&nbsp; Profile &amp; History</a>
 
                         <div class="divider"></div>
                         @if (auth()->user()->isAdmin())
