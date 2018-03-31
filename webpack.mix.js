@@ -11,6 +11,19 @@ const { mix } = require('laravel-mix');
  |
  */
 
+if (mix.inProduction()) {
+    mix.version();
+    mix.options({
+        uglify: {
+            uglifyOptions: {
+                compress: {
+                    drop_console: true
+                }
+            }
+        }
+   });
+}
+
 mix.js('resources/assets/js/app.js', 'public/js')
     .extract([
         'lodash', 'jquery', 'bootstrap', 'vue', 'axios', 'moment', 'datatables.net', 'datatables.net-bs4', 'datatables.net-plugins/sorting/datetime-moment'
@@ -20,8 +33,3 @@ mix.js('resources/assets/js/app.js', 'public/js')
     })
    .sass('resources/assets/sass/app.scss', 'public/css')
    .sourceMaps();
-
-
-if (mix.inProduction()) {
-    mix.version();
-}
