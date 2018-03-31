@@ -7,10 +7,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use CanResetPassword, Notifiable, SoftDeletes;
+    use CanResetPassword, Notifiable, SoftDeletes, HasApiTokens;
 
     /**
      * The attributes that should be mutated to dates.
@@ -257,6 +258,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's signups
+     */
+    public function signups()
+    {
+        return $this->hasMany('App\Models\CycleSignup');
+                    // ->withPivot('id', 'div_pref_first', 'div_pref_second', 'note', 'team_id', 'captain', 'will_captain')
+                    // ->whereNull('cycle_user.deleted_at'); // for soft deletes
+    }
+
+    /**
      * Get all the teams the user has been placed on
      */
     public function teams()
@@ -284,8 +295,7 @@ class User extends Authenticatable
     public function subs()
     {
         return $this->hasMany('App\Models\Sub')
-                    ->orderBy('week_id')
-                    ->withTimestamps();
+                    ->orderBy('week_id');
     }
     /**
      * Get the user's transactions

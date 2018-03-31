@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-condensed table-striped">
+    <table class="table table-sm table-striped mb-0">
         <tr class="text-center">
             <th>Name</th>
             @if(isset($showDivisions) && $showDivisions === true)
@@ -15,7 +15,7 @@
         </tr>
         @foreach( $signups as $signup )
             @if ($signup->id === auth()->user()->id)
-            <tr class="success">
+            <tr class="table-primary">
             @else
             <tr>
             @endif
@@ -78,11 +78,11 @@
                 @if(auth()->user()->isAdmin())
                     @if ($signup->pivot->will_captain)
                         <td class="text-center">
-                            <i class="fa fa-thumbs-up fa-fw text-primary"></i>
+                            <i class="fa fa-thumbs-up fa-fw text-info"></i>
                         </td>
                     @else
                         <td class="text-center">
-                            <i class="fa fa-thumbs-down text-default"></i>
+                            <i class="fa fa-thumbs-down text-light"></i>
                         </td>
                     @endif
                 @endif

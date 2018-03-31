@@ -16,18 +16,20 @@ class ContactAlert extends Mailable implements ShouldQueue
     public $email;
     public $msg;
     public $timestamp;
+    public $subject;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $email, $msg)
+    public function __construct($name, $email, $msg, $subject = null)
     {
         $this->name = $name;
         $this->email = $email;
         $this->msg = $msg;
         $this->timestamp = Carbon::now()->toDayDateTimeString();
+        $this->subject = $subject ? $subject : 'FOCUS League Contact us page';
     }
 
     /**
@@ -40,7 +42,7 @@ class ContactAlert extends Mailable implements ShouldQueue
         return $this->from($this->email, $this->name)
                 ->to('asifm42@gmail.com', 'Asif Mohammed')
                 ->cc('gizmolito@gmail.com', 'Nick Carranza')
-                ->subject('FOCUS League Contact us page')
+                ->subject($this->subject)
                 ->text('emails.alert.contact');
     }
 }

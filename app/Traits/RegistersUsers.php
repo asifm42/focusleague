@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Events\UserRegistered;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,9 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return view('users.create');
+        $data['user'] = new User;
+
+        return view('users.create', $data);
     }
 
     /**

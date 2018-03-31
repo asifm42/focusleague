@@ -47,17 +47,12 @@ class CycleSignupsController extends Controller
         // If user already has a signup redirect to edit form
         if ($user->cycles()->find($cycle->id)) {
             return redirect()->route('cycle.signup.edit', $cycle->id);
-        }
-
-
-        // if sign up is not open and user is not an admin, redirect to edit page
-        if ($cycle->status() !== "SIGNUP_OPEN" && ! $user->isAdmin()){
-            flash()->error('Sorry, sign-up is closed for this cycle. You can sign up as a sub.');
-            return redirect()->route('sub.create', $cycle->id);
+        } else if ($cycle->isSubbing($user)) {
+            return redirect()->route('cycle.subs.edit', $cycle->id);
         }
 
         return view('cycles.signups.create')
-                ->withCycle($cycle)
+                ->withCycle($cycle->load('weeks'))
                 ->withUser($user)
                 ->withCost(config('focus.cost'));
     }
@@ -122,31 +117,43 @@ class CycleSignupsController extends Controller
         if ($request->is('cycles/*')) {
             $user = auth()->user();
             $cycle = Cycle::findOrFail($id);
-            $signup = CycleSignup::findOrFail($user->current_cycle_signup()->pivot->id);
+
+            // If user already has a sub signup redirect to edit form
+            if ($cycle->isSubbing($user)) {
+                return redirect()->route('cycle.subs.edit', $cycle->id);
+            }
+
+            $signup = CycleSignup::find($user->current_cycle_signup()->pivot->id);
         } elseif ($request->is('cyclesignups/*')) {
             $signup = CycleSignup::findOrFail($id);
-            $signup->load('cycle','user')->first();
+            // $signup->load('cycle.weeks','user')->first();
             $user = $signup->user;
             $cycle = $signup->cycle;
         }
 
+        $signup->load('cycle.weeks', 'user');
+        $cycle->load('weeks');
+
         // if sign up is not open and user is not an admin, redirect back
-        if ($cycle->status() !== "SIGNUP_OPEN" && ! $user->isAdmin()){
-            flash()->error('Sorry, editing your sign-up is not possible. Please use the contact us page to share your schedule change.');
-            return redirect()->back();
-        }
+        // if ($cycle->status() !== "SIGNUP_OPEN" && ! $user->isAdmin()){
+        //     flash()->error('Sorry, editing your sign-up is not possible. Please use the contact us page to share your schedule change.');
+        //     return redirect()->back();
+        // }
 
         if ( auth()->user()->cannot('update', $signup) ) {
             throw new UnauthorizedAccessException;
         }
 
+        $availability = $user->availability()->whereIn('week_id', $cycle->weeks->pluck('id'))->get();
+
         // fire off event
 
-        Former::populate($signup);
+        // Former::populate($signup);
         return view('cycles.signups.edit')
                 ->withCycle($cycle)
                 ->withUser($user)
                 ->withSignup($signup)
+                ->withAvailability($availability)
                 ->withCost(config('focus.cost'));
     }
 

@@ -1,5 +1,6 @@
 
 window._ = require('lodash');
+window.Popper = require('popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10,7 +11,7 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
+    require('bootstrap');
 } catch (e) {}
 
 /**
@@ -37,22 +38,22 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+// https://momentjs.com/
+window.moment = require('moment');
 
 // https://datatables.net/
 window.datatables = require('datatables.net');
-window.datatables_bs = require('datatables.net-bs');
-require("drmonty-datatables-plugins/sorting/datetime-moment");
-require("datatables.net-bs/css/dataTables.bootstrap.css");
+window.datatables_bs4 = require('datatables.net-bs4');
+require("datatables.net-plugins/sorting/datetime-moment");
+require("datatables.net-responsive");
 
-// https://momentjs.com/
-window.moment = require('moment');
 
 // https://twitter.github.io/typeahead.js/
 window.typeahead = require('typeahead.js');
 window.Bloodhound = require('bloodhound-js');
 
 // https://github.com/uxsolutions/bootstrap-datepicker
-window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
+// window.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
 
 // http://selectize.github.io/selectize.js/
 // window.selectize = require('selectize');

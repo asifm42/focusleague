@@ -1,0 +1,42 @@
+div.event  {
+/*    display: inline-block;
+    line-height: 5em;
+    vertical-align: top;*/
+    padding-left: 10px;
+    font-size: 1.1em;
+}
+
+.schedule > li {
+    display:block;
+    padding:8px;
+}
+
+.schedule-list > li {
+    display:flex;
+    align-items:center;
+    padding:10px;
+}
+
+.schedule-list > .list-group-item:first-child {
+    border-radius: 0;
+}
+
+.schedule-list > .list-group-item:last-child {
+    border-radius: 0;
+    border-bottom: 0;
+    display: block;
+    padding:8px;
+}
+
+.schedule {
+    max-height:433px;
+}
+
+.schedule-list {
+    max-height:365px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-bottom:solid #ddd 1px;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+}

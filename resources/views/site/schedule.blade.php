@@ -1,5 +1,5 @@
-
-        <ul class="list-group text-left schedule">
+<div class="card h-100 border-0">
+        <ul class="list-group list-group-flushtext-left schedule">
             <li class="list-group-item list-group-item-success text-center">
                 <h4 class="list-group-item-heading">
                     Schedule
@@ -8,7 +8,7 @@
                     Tuesdays, 8p-10p, at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3959319,15z/data=!4m2!3m1!1s0x0:0xfb9729c16219059c">Houston Sports Park</a>
                 </h6>
             </li>
-<div class="schedule-list">
+            <div class="schedule-list">
             <li class="list-group-item list-group-item-info">
                 <time datetime="2018-03-07" class="icon">
                   <em>Wednesday</em>
@@ -78,3 +78,4 @@
             </li>
           </div>
         </ul>
+</div>

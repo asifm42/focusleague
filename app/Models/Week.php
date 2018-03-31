@@ -41,7 +41,7 @@ class Week extends Model
      */
     public function week_index()
     {
-        return $this->index;
+        return $this->index();
     }
 
     /**

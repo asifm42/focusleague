@@ -13,9 +13,10 @@ const { mix } = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .extract([
-        'lodash', 'jquery', 'bootstrap-sass', 'vue', 'axios', 'datatables.net', 'datatables.net-bs', 'moment', 'drmonty-datatables-plugins',
+        'lodash', 'jquery', 'bootstrap', 'vue', 'axios', 'moment', 'datatables.net', 'datatables.net-bs4', 'datatables.net-plugins/sorting/datetime-moment'
     ])
     .autoload({
         jquery: ['$', 'window.jQuery', 'jQuery', 'jquery'],
     })
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .sourceMaps();
