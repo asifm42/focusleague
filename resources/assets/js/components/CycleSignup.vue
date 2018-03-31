@@ -284,6 +284,7 @@
                             <div class="card-body">
                                 <h5 class="text-center" v-if="this.status == 'creating' || this.dataHasChanged()">Ok {{ nicknameOrShortName }}. Did we get everything right?</h5>
                                 <h5 class="text-center" v-else-if="this.status == 'editing' || this.status == 'updating'">Ok {{ nicknameOrShortName }}. Here's what we got.</h5>
+                                <p class="text-center my-2" v-if="isLateSignup || this.subSignup"><span class="badge badge-warning mx-1" v-if="isLateSignup">Late</span><span class="badge badge-warning mx-1" v-if="this.subSignup">Sub</span></p>
                                 <dl>
                                     <dt class="text-muted">
                                         Division Preference
