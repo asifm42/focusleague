@@ -1070,7 +1070,7 @@
                 return this.cycle.teams_published;
             },
             teamsAreNotPublished() {
-                return !this.teamsPublished;
+                return !this.teamsArePublished;
             },
             gameToday() {
                 let gameToday = _.find(this.cycle.weeks, function(week) {
