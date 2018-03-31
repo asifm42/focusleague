@@ -10,7 +10,7 @@
             </li>
             <div class="schedule-list">
             <li class="list-group-item list-group-item-info">
-                <time datetime="2018-03-07" class="icon">
+                <time datetime="2018-03-14" class="icon">
                   <em>Wednesday</em>
                   <strong>March</strong>
                   <span>14</span>
