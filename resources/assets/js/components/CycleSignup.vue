@@ -537,7 +537,6 @@
                 // show sending state
                 this.status = 'sending';
 
-
                 if (this.signuporiginal) {
                     url = '/api/cyclesignups/' + this.signuporiginal.id;
                 } else if (this.suboriginal) {
@@ -584,8 +583,6 @@
                 //     this.back = this.show;
                 //     return this.show = 'confirmation';
                 // }
-
-
             },
             clickFinish: function() {
                 console.log('clickFinish');
