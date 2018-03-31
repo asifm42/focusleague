@@ -16,7 +16,7 @@ $factory->define(App\Models\Cycle::class, function (Faker\Generator $faker) {
 
     $arguments = func_get_args();
     if (isset($arguments[1]) && isset($arguments[1]['signup_opens_at'])) {
-        $signupOpen = $arguments[1]['signup_opens_at'];
+        $signupOpen = new Carbon($arguments[1]['signup_opens_at']);
     } else {
         if(Carbon::now()->dayOfWeek == Carbon::WEDNESDAY) {
             $signupOpen = Carbon::today();
