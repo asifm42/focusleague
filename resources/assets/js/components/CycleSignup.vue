@@ -4,7 +4,7 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <transition name="fade" mode="out-in">
                     <div class="jumbotron" v-if="show == 'intro'" key="intro">
-                        <h4>Great to have you, {{ user.nickname }}!</h4>
+                        <h4>Great to have you, {{ nicknameOrShortName }}!</h4>
                         <p>We just need some information to sign you up for Cycle {{ cycle.name }}.</p>
 
                         <button class="btn btn-primary btn-block" v-on:click="clickContinue">Let's get started!</button>
@@ -377,7 +377,7 @@
 
                     <div class="jumbotron" v-if="show == 'success'" key="success">
                         <h4 class="text-center text-success"><i class="fa fa-fw fa-5x fa-check-circle-o" aria-hidden="true"></i></h4>
-                        <h5 class="text-center">You're all signed up, {{ user.nickname }}.</h5>
+                        <h5 class="text-center">You're all signed up, {{ nicknameOrShortName }}.</h5>
                         <h5 class="text-center">See you at the fields!</h5>
                         <div class="row mt-3">
                             <div class="col-12 col-sm-4 my-2 my-sm-1">
@@ -981,6 +981,18 @@
             }
         },
         computed: {
+            nicknameOrShortName: function () {
+                var pieces = [];
+                console.log('nickname', this.user.nickname);
+                if (this.user.nickname) {
+                    return this.user.nickname;
+                } else if (this.user.name.split(' ').length > 1) {
+                    pieces = this.user.name.split(' ');
+                    return pieces[0].charAt(0).toUpperCase() + pieces[0].slice(1) + pieces[1].charAt(0).toUpperCase() + pieces[1].slice(1,3);
+                } else {
+                    return this.user.name;
+                }
+            },
             signupTypeIsChanging() {
                 return this.subToPlayer || this.playerToSub;
             },
