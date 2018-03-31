@@ -813,10 +813,7 @@
                 if (this.show == 'payment') {
                     this.back = 'payment';
 
-                    if (this.signingUpForToday && this.late_message) {
-                        if (this.cycleSignupLate
-                            || this.cycleSignupSuperLate
-                            || this.subSignupSuperLate)
+                    if (this.isLateSignup) {
                         return this.show = 'late_message';
                     }
 
@@ -980,6 +977,16 @@
             }
         },
         computed: {
+            isLateSignup: function () {
+                if (this.signingUpForToday && this.late_message) {
+                        if (this.cycleSignupLate
+                            || this.cycleSignupSuperLate
+                            || this.subSignupSuperLate) {
+                            return true;
+                        }
+                }
+                return false;
+            },
             nicknameOrShortName: function () {
                 var pieces = [];
                 console.log('nickname', this.user.nickname);
