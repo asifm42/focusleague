@@ -129,7 +129,7 @@
                                 <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                             </div>
                             <div class="col-6">
-                                <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
+                                <button class="btn btn-primary btn-block" v-on:click="clickContinue">Ok <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row mt-3" v-if="editMode">
@@ -246,7 +246,7 @@
                                 <button class="btn btn-secondary btn-block" v-on:click="clickBack"><i class="fa fa-long-arrow-left fa-fw" aria-hidden="true"></i> Back</button>
                             </div>
                             <div class="col-6">
-                                <button class="btn btn-primary btn-block" v-on:click="clickContinue">Got it. Let's Continue.</button>
+                                <button class="btn btn-primary btn-block" v-on:click="clickContinue">Ok <i class="fa fa-long-arrow-right fa-fw" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="row mt-3" v-if="editMode">
