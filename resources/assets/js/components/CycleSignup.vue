@@ -399,8 +399,6 @@
                             <div class="col col-sm-6">
                                 <button class="btn btn-primary btn-block" v-on:click="clickDeleteConfirm">Yes, Delete it.</button>
                             </div>
-                        </div>
-                        <div class="row mt-3">
                             <div class="col col-sm-6">
                                 <button class="btn btn-secondary btn-block" v-on:click="clickDeleteCancel">Cancel</button>
                             </div>
