@@ -710,7 +710,11 @@
                 return;
             },
             clickCancel: function() {
-                window.history.back();
+                if (document.referrer.includes("/signup") || document.referrer.includes("/sub")) {
+                    window.location.href = "/cycles/" + this.cycle.name;
+                } else {
+                    window.history.back();
+                }
             },
             clickBack: function() {
                 if (this.show != this.back) return this.show = this.back;
