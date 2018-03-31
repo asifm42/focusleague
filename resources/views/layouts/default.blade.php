@@ -28,7 +28,7 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1e3e47">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 
 @yield('styles')
@@ -40,13 +40,14 @@
 
 @include('flash::message')
 
-@yield('content')
+<div id="app">
+  @yield('content')
+</div>
 
 @include('layouts.footer')
-
-<script src="/js/manifest.js"></script>
-<script src="/js/vendor.js"></script>
-<script src="/js/app.js"></script>
+<script src="{{ mix('/js/manifest.js') }}"></script>
+<script src="{{ mix('/js/vendor.js') }}"></script>
+<script src="{{ mix('/js/app.js') }}"></script>
 
 <script>
     $(document).ready(function(){

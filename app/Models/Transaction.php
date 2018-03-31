@@ -22,7 +22,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'transacted_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'date'];
 
     /**
      * The attributes that are mass assignable.
@@ -74,33 +74,6 @@ class Transaction extends Model
     public function scopeOfType($query, $type)
     {
         return $query->where('type', $type);
-    }
-
-    /**
-     * Get the transaction date.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getDateAttribute($value)
-    {
-        $originalDate = $value;
-        return date("m-d-Y", strtotime($originalDate));
-    }
-
-    /**
-     * Set the transaction date.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function setDateAttribute($value)
-    {
-        if (empty($value)) {
-            $this->attributes['date'] = date("Y-m-d");
-        } else {
-            $this->attributes['date'] = date("Y-m-d", strtotime($value));
-        }
     }
 
     /**

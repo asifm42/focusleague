@@ -33,7 +33,9 @@ class UltimateHistoryController extends Controller
         if (auth()->user()->ultimateHistory) {
             return redirect()->route('users.ultimate_history.edit', auth()->user()->id);
         } else {
-            return view('ultimate_history.create')->withUser(auth()->user());
+            return view('ultimate_history.create')
+                ->withUser(auth()->user())
+                ->withHistory(new UltimateHistory);
         }
     }
 
@@ -78,8 +80,11 @@ class UltimateHistoryController extends Controller
      */
     public function edit($id)
     {
-        Former::populate(auth()->user()->ultimateHistory);
-        return view('ultimate_history.edit')->withUser(auth()->user());
+        $user = User::findOrFail($id);
+
+        return view('ultimate_history.edit')
+                ->withUser($user)
+                ->withHistory($user->ultimateHistory);
     }
 
     /**
@@ -89,7 +94,7 @@ class UltimateHistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUltimateHistoryRequest $request, $id)
     {
         $user = User::findOrFail($id);
         $history = $user->ultimateHistory;

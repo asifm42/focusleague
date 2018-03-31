@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Former\Facades\Former;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class ContactsController extends Controller
 {
@@ -28,12 +29,12 @@ class ContactsController extends Controller
      */
     public function create()
     {
-        if (auth()->check()){
-            $user = auth()->user();
-        } else {
-            $user = [];
-        }
-        Former::populate($user);
+        // if (auth()->check()){
+        //     $user = auth()->user();
+        // } else {
+        //     $user = [];
+        // }
+        // Former::populate($user);
         return view ('contacts.create');
     }
 
@@ -44,11 +45,20 @@ class ContactsController extends Controller
      */
     public function send(ContactRequest $request)
     {
+        $subject = $request->has('subject') ? $request->input('subject') : null;
+
         Mail::queue(new ContactAlert(
             $request->input('name'),
             $request->input('email'),
-            $request->input('message')
+            $request->input('message'),
+            $subject
         ));
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
 
         flash()->success('Your contact has been recieved. We will be in touch soon. Thanks.');
 

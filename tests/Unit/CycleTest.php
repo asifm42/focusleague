@@ -269,4 +269,31 @@ class CycleTest extends TestCase
         $this->assertEquals($cycle02->id, Cycle::findByName('2017-10')->id);
         $this->assertNull(Cycle::findByName('2017-06'));
     }
+
+    /** @test */
+    function can_determine_if_a_given_user_is_subbing_that_cycle()
+    {
+        // can see if a user is subbing that cycle
+        // a cycle with 3 weeks
+        $cycle = factory(Cycle::class)->create()->addWeeks(3);
+
+        // a user that will be subbing the second week
+        $sub = factory(User::class)->create();
+
+        // a user not subbing
+        $user = factory(User::class)->create();
+
+        // test that each function is false for each user
+        $this->assertFalse($cycle->isSubbing($sub));
+        $this->assertFalse($cycle->isSubbing($user));
+
+        // add first user to sub second week of cycle
+        $cycle->weeks->find(2)->subs()->attach($sub->id);
+
+        // test that first user is true for function
+        $this->assertTrue($cycle->fresh()->isSubbing($sub));
+
+        // test that second user is false for funciton
+        $this->assertFalse($cycle->fresh()->isSubbing($user));
+    }
 }

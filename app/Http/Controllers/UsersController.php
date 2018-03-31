@@ -63,7 +63,9 @@ class UsersController extends Controller
      */
     public function create(Request $request)
     {
-        return view('users.create');
+        $data['user'] = new User;
+
+        return view('users.create', $data);
     }
 
 
@@ -180,7 +182,7 @@ class UsersController extends Controller
     public function edit(UserEditFormRequest $request) {
         $user = User::findOrFail($request->id);
         $data['user'] = $user;
-        Former::populate($user);
+
         return view('users.edit', $data );
     }
 

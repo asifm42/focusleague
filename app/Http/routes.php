@@ -122,21 +122,22 @@ Route::group(['middleware' => ['web', 'guest']], function() {
     // Route::post(    'signup',                           ['as' => 'users.store', 'uses' => 'UsersController@store']);
 });
 
-// Ultimate history outside of historyprovided middleware or you'll be stuck in a loop
+// Ultimate history create is outside of historyprovided middleware or you'll be stuck in a loop
 Route::group(['middleware' => ['web','auth']], function() {
+    Route::get(     'ultimatehistory',                      ['as' => 'ultimate_history.create', 'uses' => 'UltimateHistoryController@create']);
+    Route::post(    'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.store', 'uses' => 'UltimateHistoryController@store']);
+});
+
+Route::group(['middleware' => ['web','auth','historyprovided']], function() {
+
     /*
      * Ultimate History Routes
      */
-    Route::get(     'ultimatehistory',                      ['as' => 'ultimate_history.create', 'uses' => 'UltimateHistoryController@create']);
     Route::get(     'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.show', 'uses' => 'UltimateHistoryController@show']);
-    Route::post(    'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.store', 'uses' => 'UltimateHistoryController@store']);
     Route::get(     'users/{id}/ultimatehistory/edit',      ['as' => 'users.ultimate_history.edit', 'uses' => 'UltimateHistoryController@edit']);
     Route::patch(   'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.update', 'uses' => 'UltimateHistoryController@update']);
     Route::put(     'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.put', 'uses' => 'UltimateHistoryController@update']);
     Route::delete(  'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.destroy', 'uses' => 'UltimateHistoryController@destroy']);
-});
-
-Route::group(['middleware' => ['web','auth','historyprovided']], function() {
 
     /*
      * User Routes
@@ -171,7 +172,7 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
      */
     Route::get(     'cycles/{id}/subs/signup',      ['as' => 'sub.create', 'uses' => 'SubsController@create']);
     Route::post(    'cycles/{id}/subs',             ['as' => 'sub.store', 'uses' => 'SubsController@store']);
-    Route::get(     'subs/{id}/edit',               ['as' => 'sub.edit', 'uses' => 'SubsController@edit']);
+    // Route::get(     'subs/{id}/edit',               ['as' => 'sub.edit', 'uses' => 'Api\SubsController@edit']);
     Route::patch(   'subs/{id}',                    ['as' => 'sub.update', 'uses' => 'SubsController@update']);
     Route::put(     'subs/{id}',                    ['as' => 'sub.put', 'uses' => 'SubsController@update']);
     Route::delete(  'subs/{id}',                    ['as' => 'sub.destroy', 'uses' => 'SubsController@destroy']);
@@ -285,6 +286,6 @@ Route::group(['middleware' => ['web','auth','admin']], function() {
 
 Route::group(['middleware' => ['api']], function() {
     Route::put(     'api/cyclesignups/{id}',         ['as' => 'api.cyclesignups.put', 'uses' => 'CycleSignupsController@apiUpdate']);
-    Route::get(     'api/cycles/{cycle}',         ['as' => 'api.cycles.get', 'uses' => 'CyclesController@apiGetJson']);
+    // Route::get(     'api/cycles/{cycle}',         ['as' => 'api.cycles.get', 'uses' => 'CyclesController@apiGetJson']);
 });
 

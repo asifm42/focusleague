@@ -2,20 +2,15 @@
 @section('title','FOCUS League – Admin Dashboard')
 
 @section('content')
-    <div class="page-header">
-        <div class="container">
-            <h4 class="hidden-md hidden-lg">Admin Dashboard</h4>
-            <h3 class="hidden-xs hidden-sm">Admin Dashboard</h3>
-            <p>Overview of system.</p>
-        </div>
-    </div>
     <div class="container">
+        <h4>Admin Dashboard</h4>
+        <p>Overview of system.</p>
         <div class="row">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-sm-6">
             @if(!empty($current_cycle))
-                <div class="panel panel-default">
-                    <div class="panel-heading">Current Cycle</div>
-                    <div class="panel-body">
+                <div class="card">
+                    <div class="card-header">Current Cycle</div>
+                    <div class="card-body">
                         <dl class="horizontal">
                             <dt>Name</dt>
                             <dd>{{ $current_cycle->name }}</dd>
@@ -26,18 +21,18 @@
                             <dt>Status</dt>
                             <dd>{{ $current_cycle->status() }}</dd>
                         </dl>
-                        <a href="{{ route('admin.cycle.details', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Admin overview</a>
-                            <a href="{{ route('cycle.teams.builder', $current_cycle->id) }}" class="btn btn-default btn-lg btn-block">Team Builder</a>
+                        <a href="{{ route('admin.cycle.details', $current_cycle->id) }}" class="btn btn-primary btn-lg btn-block">Admin overview</a>
+                            <a href="{{ route('cycle.teams.builder', $current_cycle->id) }}" class="btn btn-primary btn-lg btn-block">Team Builder</a>
                         @if (! $current_cycle->teams_publised)
-                            <a href="{{-- {{ route('games.create', $current_cycle->id) }} --}}" class="btn btn-default btn-lg btn-block">Schedule Builder</a>
+                            <a href="{{-- {{ route('games.create', $current_cycle->id) }} --}}" class="btn btn-primary btn-lg btn-block">Schedule Builder</a>
                         @endif
-<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#captainEmailsModal">
+<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#captainEmailsModal">
     Captain Email List
 </button>
-<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#subEmailsModal">
+<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#subEmailsModal">
     Sub Email List
 </button>
-<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#subAnnounceModal">
+<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#subAnnounceModal">
     Announce Subs to Subs and Captains
 </button>
                     </div>
@@ -46,13 +41,13 @@
             </div>
             <div class="col-xs-12 col-md-6">
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Admin Links</div>
-                    <div class="panel-body">
-                        <a href="{{ route('users.list') }}" class="btn btn-default btn-lg btn-block">See all users</a>
-                        <a href="{{ route('users.delinquent') }}" class="btn btn-default btn-lg btn-block">See delinquents</a>
-                        <a href="{{ route('posts.create') }}" class="btn btn-default btn-lg btn-block">Create a post</a>
-                        <a href="{{ route('transactions.create') }}" class="btn btn-default btn-lg btn-block">Post a transaction</a>
+                <div class="card">
+                    <div class="card-header">Admin Links</div>
+                    <div class="card-body">
+                        <a href="{{ route('users.list') }}" class="btn btn-primary btn-lg btn-block">See all users</a>
+                        <a href="{{ route('users.delinquent') }}" class="btn btn-primary btn-lg btn-block">See delinquents</a>
+                        <a href="{{ route('posts.create') }}" class="btn btn-primary btn-lg btn-block">Create a post</a>
+                        <a href="{{ route('transactions.create') }}" class="btn btn-primary btn-lg btn-block">Post a transaction</a>
                     </div>
                 </div>
 
@@ -105,18 +100,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="captainEmailsModalLabel">Cycle {{ $current_cycle->name }} Captain Emails</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 @foreach($current_cycle->teams as $team)
                     <ul class="list-unstyled">
                         <li style="border-bottom:solid 1px #ccc;"><strong>Team {{ $team->name }}</strong></li>
-                        <li>
                         @foreach($team->captains as $captain)
-                            {{ $captain->user->name . " <" . $captain->user->email . ">"}},
+                            <li>{{ $captain->user->name . " <" . $captain->user->email . ">"}}</li>,
                         @endforeach
-                        </li>
+                        @if(count($team->captains) == 0)
+                            <li class="text-danger">No captains selected</li>
+                        @endif
                     </ul>
                 @endforeach
             </div>
@@ -131,8 +127,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="subEmailsModalLabel">Cycle {{ $current_cycle->name }} Sub Emails</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
 
@@ -161,16 +157,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="subEmailsAnnounceLabel">Announce Subs for Cycle {{ $current_cycle->name }} - Wk{{$current_cycle->currentWeek()->index()}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <p>This will send an individual email to each sub on a team confirming their spot for tonight.</p>
                 <p>And it will send one email to all captains announcing this week's subs to them.</p>
             </div>
             <div class="modal-footer">
-                <a href="{{route('subs.announce', $current_cycle->currentWeek()->id)}}" type="button" class="btn btn-primary">Announce</a>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="{{route('subs.announce', $current_cycle->currentWeek()->id)}}" class="btn btn-primary">Announce</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

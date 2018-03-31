@@ -2,39 +2,27 @@
 @section('title','FOCUS League – Resend verification email')
 @section('content')
 
-    <div class="page-header">
-        <div class="container">
-            <h4 class="hidden-md hidden-lg">Resend verification email</h4>
-            <h3 class="hidden-xs hidden-sm">Resend verification email</h3>
-            <p>Complete the form below to resend the verification email</p>
-        </div>
-    </div>
-
     <div class="container">
-        <div class ="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
+        <div class ="row justify-content-center">
+            <div class="col col-md-6">
+                <form accept-charset="utf-8" class="form-vertical" method="POST" action="{{ route('users.resetVerificationCode') }}">
+                <h5 class='text-center'>Resend verification email</h5>
+                <div class="card">
 
-                    {!! Former::vertical_open()
-                        ->method('POST')
-                        ->action(route('users.resetVerificationCode'))
-                    !!}
-
-                    <div class="panel-body">
+                    <div class="card-body">
                         <p class="text-warning">Haven't received the verification email? Not finding it in your spam/junk folder? Don't worry, enter your email below and we'll resend it.</p>
-                        {!! Former::text('email')
-                            ->addClass('form-control')
-                            ->placeholder('Required email address')
-                            ->autofocus('autofocus')
-                        !!}
+                        <div class="form-group {{ $errors->has('email') ? 'has-danger' : ''}}">
+                            <label for="email" class="required">Email</label>
+                            <input name="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" required placeholder="Required email" value={{ old('email') }}>
+                            <div id="emailFeedback" class="invalid-feedback">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
+                        </div>
                     </div>
-
-                    <div class="panel-footer">
-                        {!! Form::submit('Send verification', array('class' => 'btn btn-primary')) !!}
-                    </div>
-
-                    {!! Former::close() !!}
                 </div>
+
+                    <input class="btn btn btn-primary btn-block mt-3" type="submit" value="Send verification">
+
+                    {{ csrf_field() }}
+                    </form>
             </div>
         </div>
     </div>

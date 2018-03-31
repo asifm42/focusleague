@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-condensed table-striped">
+    <table class="table table-sm table-striped mb-0">
 {{--     @if(strtolower($team->division) === 'mixed')
         <tr class="default"><th>
         @if(strtolower($players->first()->gender) === 'male')
@@ -44,7 +44,7 @@
         </tr>
         @foreach( $players as $player )
             @if ($player->user->id === auth()->user()->id)
-            <tr class="success">
+            <tr class="table-primary">
             @else
             <tr>
             @endif
@@ -129,7 +129,7 @@
         @endforeach
         @if($subs->count() > 0)
             <tr>
-                <th colspan=6 class="warning">
+                <th colspan=6 class="table-warning text-center">
                 @if(strtolower($team->division) === 'mixed')
                    @if(strtolower($subs->first()['user']['gender']) === 'male')
                         <i class="fa fa-male text-primary"></i>&nbsp;Subs

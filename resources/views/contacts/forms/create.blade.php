@@ -1,36 +1,27 @@
-<div class="panel panel-default">
-
-    <div class="panel-heading">
-        <h3 class="panel-title">Send us a message</h3>
+<h3 class="text-center">Contact Us</h3>
+<p class="text-center">Got a question or feedback? Get in touch!</p>
+<form accept-charset="utf-8" class="form-vertical" method="POST" action="{{ route('contact.send') }}">
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <div class="form-group {{ $errors->has('name') ? 'has-danger' : ''}}">
+                <label for="name" class="required">Name</label>
+                <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" id="name" aria-describedby="nameHelp" placeholder="Required first & last name" required value="{{ auth()->check() ? auth()->user()->name : old('name', '') }}" {{ auth()->check() ? 'readonly' : '' }}>
+                <small id="nameHelp" class="form-text text-muted">Please provide first and last name.</small>
+                <div id="nameFeedback" class="invalid-feedback">{{ $errors->has('name') ? $errors->first('name') : '' }}</div>
+            </div>
+            <div class="form-group {{ $errors->has('email') ? 'has-danger' : ''}}">
+                <label for="email" class="required">Email</label>
+                <input name="email" type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" placeholder="Required email" required value="{{ auth()->check() ? auth()->user()->email : old('email', '') }}" {{ auth()->check() ? 'readonly' : '' }}>
+                <div id="emailFeedback" class="invalid-feedback">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
+            </div>
+            <div class="form-group {{ $errors->has('message') ? 'has-danger' : ''}}">
+                <label for="message" class="required">Message</label>
+                <textarea name="message" class="form-control {{ $errors->has('message') ? 'is-invalid' : ''}}" id="message" rows="5" aria-describedby="messageHelp" placeholder="Required message" required>{{ old('message') }}</textarea>
+                <div id="messageFeedback" class="invalid-feedback">{{ $errors->has('message') ? $errors->first('message') : '' }}</div>
+            </div>
+        </div>
     </div>
+    <input class="btn btn btn-primary btn-block" type="submit" value="Send">
+    {{ csrf_field() }}
+</form>
 
-    <div class="panel-body">
-        {!! Former::vertical_open()
-            ->action(route('contact.send'))
-        !!}
-
-        {!! Former::text('name')
-            ->addClass('form-control')
-            ->placeholder('Required name')
-            ->autofocus('autofocus')
-            ->required()
-        !!}
-        {!! Former::text('email')
-            ->addClass('form-control')
-            ->placeholder('Required email')
-            ->required()
-        !!}
-        {!! Former::textarea('message')
-            ->addClass('form-control')
-            ->placeholder('Required message')
-            ->required()
-        !!}
-    </div>
-    <div class="panel-footer">
-        {!! Former::submit()
-            ->addClass('btn btn-primary')
-            ->value('Send')
-        !!}
-    </div>
-    {!! Former::close() !!}
-</div>

@@ -1,63 +1,68 @@
-<div class="panel panel-default">
+<form accept-charset="utf-8" class="form-vertical" method="POST"
+    @if ($edit === true)
+        action="{{ route('teams.update', $team->id) }}"
+    @else
+        action="{{ route('teams.store') }}"
+        @php
+            $team = new \App\Models\Team;
+        @endphp
+    @endif
+    >
 
-    <div class="panel-heading">
-        <h3 class="panel-title">Create team for Cycle {{ $cycle->name }}</h3>
+    @if ($edit === true)
+        {!! method_field('patch') !!}
+    @endif
+
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group {{ $errors->has('name') ? 'has-danger' : ''}}">
+                <label for="name" class="required">Team Name</label>
+
+                <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" id="name" aria-describedby="nameHelp" placeholder="Required team name" required value={{ old('name', $team->name) }}>
+
+                <div id="nameFeedback" class="invalid-feedback">{{ $errors->has('name') ? $errors->first('name') : '' }}</div>
+            </div>
+
+            @php
+                $divOptions = ['mens' => 'Mens', 'mixed' => 'Mixed', 'womens' => 'Womens'];
+            @endphp
+
+            <div class="form-group {{ $errors->has('division') ? 'has-danger' : ''}}">
+                <label for="division" class="required">Division</label>
+
+                <select name="division" class="form-control {{ $errors->has('division') ? 'is-invalid' : ''}}" id="division" aria-describedby="divisionHelp" placeholder="Required division" required>
+                    <option disabled {{ old('division') ? '' : 'selected' }}>Required division</option>
+                    @foreach($divOptions as $key => $option)
+                    <option value="{{ $key }}" {{ old('division', $team->division) == $key ? 'selected' : '' }}>{{ $option }}</option>
+                    @endforeach
+                </select>
+
+                <div id="divisionFeedback" class="invalid-feedback">{{ $errors->has('division') ? $errors->first('division') : '' }}</div>
+            </div>
+
+            <input class="form-control" type="hidden" name="cycle_id" value="{{ $cycle->id }}">
+
+        </div>
+
     </div>
+    @if($edit === true)
+        <div class="row mt-3">
+            <div class="col">
+                    <input class="btn btn btn-primary" type="submit" value="Save" >
+                    {{ csrf_field() }}
+                </form>
+            </div>
+            <div class="col">
+                <form accept-charset="utf-8" class="float-right" method="POST" action="{{ route('teams.destroy', $team->id) }}" >
+                    {!! method_field('delete') !!}
+                    <input class="btn btn btn-danger" type="submit" value="Delete" >
 
-    <div class="panel-body">
-        @if($edit === true)
-            {!! Former::vertical_open()
-                ->method('PATCH')
-                ->action(route('teams.update', $team->id))
-            !!}
-        @else
-            {!! Former::vertical_open()
-                ->action(route('teams.store'))
-            !!}
-        @endif
-
-        {!! Former::text('name')
-            ->label('Team Name')
-            ->addClass('form-control')
-            ->placeholder('Required team name')
-            ->required()
-        !!}
-        {!! Former::select('division')
-            ->options(['mens' => 'Mens', 'mixed' => 'Mixed', 'womens' => 'Womens'])
-            ->addClass('form-control')
-            ->placeholder('Required division')
-            ->required()
-        !!}
-        {!! Former::hidden('cycle_id')->value($cycle->id) !!}
-    </div>
-    <div class="panel-footer">
-        {!! Former::submit()
-            ->addClass('btn btn-primary')
-            ->value('Save')
-        !!}
-        {!! Former::close() !!}
-        @if($edit === true)
-
-            {!! Former::open()
-                ->method('DELETE')
-                ->class('pull-right')
-                ->action(route('teams.destroy', $team->id))
-            !!}
-            {!! Former::submit()
-                ->addClass('btn btn-danger')
-                ->value('Delete')
-            !!}
-            {!! Former::close() !!}
-        @endif
-    </div>
-</div>
-
-@push('scripts')
-    <script>
-        $(document).ready( function () {
-            // For popovers on the navbar
-            // $('[data-toggle="popover"]').popover();
-
-        })
-    </script>
-@endpush
+                    {{ csrf_field() }}
+                </form>
+            </div>
+        </div>
+    @else
+            <input class="btn btn btn-primary btn-block mt-3" type="submit" value="Save" >
+            {{ csrf_field() }}
+        </form>
+    @endif

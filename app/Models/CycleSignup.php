@@ -30,7 +30,7 @@ class CycleSignup extends Model
      * @var array
      */
     protected $fillable = [
-        'cycle_id', 'user_id', 'div_pref_first', 'div_pref_seconde', 'note', 'team_id', 'captain', 'will_captain'
+        'cycle_id', 'user_id', 'div_pref_first', 'div_pref_second', 'note', 'team_id', 'captain', 'will_captain'
     ];
 
     /**

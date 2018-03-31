@@ -28,13 +28,6 @@ class StoreCycleSignupRequest extends Request
             'will_captain'          => 'required',
             'weeks'                 => 'array',
             'note'                  => 'max:500',
-            // 'nickname'                      => 'unique:users,nickname|min:3',
-            // 'gender'                        => 'required|in:male,female',
-            // 'birthday'                      => 'required|date',
-            // 'cell_number'                   => 'required|phone:LENIENT,US',
-            // 'dominant_hand'                 => 'required|in:left,right',
-            // 'height'                        => 'required|min:48|max:84|numeric',
-            // 'password'                      => 'required|confirmed|min:8'
         ];
     }
 

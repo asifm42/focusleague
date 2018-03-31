@@ -22,7 +22,7 @@ class Sub extends Model
      * @var array
      */
     protected $fillable = [
-        'week_id', 'user_id', 'note', 'team_id'
+        'week_id', 'user_id', 'note', 'team_id', 'payment_method', 'div_pref_first', 'div_pref_second'
     ];
 
     /**

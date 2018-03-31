@@ -1,29 +1,21 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2 class="panel-title">Forgot password?</h2>
+<div class="row justify-content-center">
+    <div class="col">
+        <h3 class="text-center">Forgot your password?</h3>
+         <form accept-charset="utf-8" class="form-vertical" method="POST" action="{{ url('password/email') }}">
+            <div class="card">
+                <div class="card-body">
+                    <p>Don't worry, it happens to all of us. Enter your email address below and we'll send you password reset instructions.</p>
+
+                    <div class="form-group {{ $errors->has('email') ? 'has-danger' : ''}}">
+                        <label for="email" class="required">Email</label>
+                        <input name="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" id="email" aria-describedby="emailHelp" required placeholder="Required email">
+                        <div id="emailHelp" class="invalid-feedback">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
+                    </div>
+                </div>
+            </div>
+            <input class="btn btn btn-primary btn-block mt-3" type="submit" value="Send instructions">
+            {{ csrf_field() }}
+        </form>
     </div>
-    {!! Former::vertical_open()
-        ->action(url('password/email'))
-        ->method('POST')
-    !!}
-
-    <div class="panel-body">
-
-        {!! Former::text('email')
-            ->addClass('form-control')
-            ->placeholder('Required email address')
-            ->autofocus('autofocus')
-        !!}
-
-    </div>
-
-    <div class="panel-footer">
-        {!! Former::submit()
-            ->addClass('btn btn-primary')
-            ->value('Send instructions')
-        !!}
-    </div>
-
-    {!! Former::close() !!}
 </div>
 
