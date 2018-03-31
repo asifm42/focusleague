@@ -86,7 +86,7 @@
 
         nicknameOrShortName: function () {
             var pieces = [];
-            // console.log(this.signup.pivot);
+            console.log('nickname', this.signup.nickname);
             if (this.signup.nickname) {
                 return this.signup.nickname;
             } else if (this.signup.name.split(' ').length > 1) {
