@@ -125,6 +125,7 @@ Route::group(['middleware' => ['web', 'guest']], function() {
 // Ultimate history create is outside of historyprovided middleware or you'll be stuck in a loop
 Route::group(['middleware' => ['web','auth']], function() {
     Route::get(     'ultimatehistory',                      ['as' => 'ultimate_history.create', 'uses' => 'UltimateHistoryController@create']);
+    Route::post(    'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.store', 'uses' => 'UltimateHistoryController@store']);
 });
 
 Route::group(['middleware' => ['web','auth','historyprovided']], function() {
@@ -133,7 +134,6 @@ Route::group(['middleware' => ['web','auth','historyprovided']], function() {
      * Ultimate History Routes
      */
     Route::get(     'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.show', 'uses' => 'UltimateHistoryController@show']);
-    Route::post(    'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.store', 'uses' => 'UltimateHistoryController@store']);
     Route::get(     'users/{id}/ultimatehistory/edit',      ['as' => 'users.ultimate_history.edit', 'uses' => 'UltimateHistoryController@edit']);
     Route::patch(   'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.update', 'uses' => 'UltimateHistoryController@update']);
     Route::put(     'users/{id}/ultimatehistory',           ['as' => 'users.ultimate_history.put', 'uses' => 'UltimateHistoryController@update']);
