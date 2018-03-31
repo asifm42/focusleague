@@ -62,7 +62,7 @@
             </div>
             <div class="form-group {{ $errors->has('birthday') ? 'has-danger' : ''}}">
                 <label for="birthday" class="required">Birthday</label>
-                <input name="birthday" type="date" class="form-control {{ $errors->has('birthday') ? 'is-invalid' : ''}}" id="birthday" aria-describedby="birthdayHelp" placeholder="Required birthday" required value="{{ old('birthday', $user->birthday->format('Y-m-d')) }}">
+                <input name="birthday" type="date" class="form-control {{ $errors->has('birthday') ? 'is-invalid' : ''}}" id="birthday" aria-describedby="birthdayHelp" placeholder="Required birthday" required value="{{ old('birthday', $user->birthday ? $user->birthday->format('Y-m-d') : null) }}">
                 <div id="birthdayFeedback" class="invalid-feedback">{{ $errors->has('birthday') ? $errors->first('birthday') : '' }}</div>
             </div>
             <div class="form-group {{ $errors->has('dominant_hand') ? 'has-danger' : ''}}">
