@@ -9,7 +9,7 @@
                 </h6>
             </li>
             <div class="schedule-list">
-            <li class="list-group-item list-group-item-info">
+            <li class="list-group-item list-group-item-info rounded-0">
                 <time datetime="2018-03-14" class="icon">
                   <em>Wednesday</em>
                   <strong>March</strong>
