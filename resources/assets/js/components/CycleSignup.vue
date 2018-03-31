@@ -1049,7 +1049,7 @@
             cycleSignupAllowed() {
                 // time is before start time with a 30 minute grace period
                 console.log('cycleSignupAllowed', this.teamsAreNotPublished && moment().isBefore(moment(this.cycle.starts_at).add(30, 'minutes')));
-                return moment().isBefore(moment(this.cycle.starts_at).add(30, 'minutes'));
+                return this.teamsAreNotPublished && moment().isBefore(moment(this.cycle.starts_at).add(30, 'minutes'));
             },
             cycleSignupOpen() {
                 // time is before signup closes time
