@@ -282,8 +282,8 @@
                     <div v-if="show == 'confirm'" key="confirm">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="text-center" v-if="this.status == 'creating' || this.dataHasChanged()">Ok {{ user.nickname }}. Did we get everything right?</h5>
-                                <h5 class="text-center" v-else-if="this.status == 'editing' || this.status == 'updating'">Ok {{ user.nickname }}. Here's what we got.</h5>
+                                <h5 class="text-center" v-if="this.status == 'creating' || this.dataHasChanged()">Ok {{ nicknameOrShortName }}. Did we get everything right?</h5>
+                                <h5 class="text-center" v-else-if="this.status == 'editing' || this.status == 'updating'">Ok {{ nicknameOrShortName }}. Here's what we got.</h5>
                                 <dl>
                                     <dt class="text-muted">
                                         Division Preference
