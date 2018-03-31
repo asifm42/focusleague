@@ -816,7 +816,6 @@
                     if (this.isLateSignup) {
                         return this.show = 'late_message';
                     }
-
                     return this.show = 'note';
                 }
 
