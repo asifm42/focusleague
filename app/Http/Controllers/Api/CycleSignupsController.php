@@ -10,7 +10,6 @@ use App\Http\Requests\StoreCycleSignupRequest;
 use App\Models\Cycle;
 use App\Models\CycleSignup;
 use App\Models\User;
-use Former;
 use Illuminate\Http\Request;
 
 class CycleSignupsController extends Controller
