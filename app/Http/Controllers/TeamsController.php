@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Cycle;
 use App\Models\Team;
-use Former;
 
 class TeamsController extends Controller
 {

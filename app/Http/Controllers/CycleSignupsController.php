@@ -11,7 +11,6 @@ use App\Http\Requests\StoreCycleSignupRequest;
 use App\Models\Cycle;
 use App\Models\CycleSignup;
 use App\Models\User;
-use Former;
 
 class CycleSignupsController extends Controller
 {
@@ -148,7 +147,6 @@ class CycleSignupsController extends Controller
 
         // fire off event
 
-        // Former::populate($signup);
         return view('cycles.signups.edit')
                 ->withCycle($cycle)
                 ->withUser($user)

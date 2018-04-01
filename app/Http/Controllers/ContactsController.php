@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactRequest;
 use App\Mail\Alert\ContactAlert;
 use Carbon\Carbon;
-use Former\Facades\Former;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -34,7 +33,7 @@ class ContactsController extends Controller
         // } else {
         //     $user = [];
         // }
-        // Former::populate($user);
+
         return view ('contacts.create');
     }
 

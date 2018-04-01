@@ -11,7 +11,6 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\Cycle;
 use App\Models\User;
 use App\Updaters\UserUpdater;
-use Former;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller

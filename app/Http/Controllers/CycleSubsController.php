@@ -16,7 +16,6 @@ use App\Models\Transaction;
 use App\Models\Week;
 use App\Events\UserSignedUpAsASub;
 use App\Events\UserUpdatedSubSignup;
-use Former;
 
 class CycleSubsController extends Controller
 {

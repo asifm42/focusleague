@@ -13,7 +13,6 @@ use App\Models\Cycle;
 use App\Models\User;
 use App\Models\Week;
 use App\Updaters\TransactionUpdater;
-use Former;
 
 class TransactionsController extends Controller
 {
