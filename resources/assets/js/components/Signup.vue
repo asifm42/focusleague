@@ -130,16 +130,6 @@
         toggleCaptain: function(event) {
             console.log('clicked toggleCaptain', this, event);
 
-            // if (this.signup.pivot.captain == 0) {
-            //     this.signup.pivot.captain = 1;
-            //     console.log('was not captain', this.signup.pivot);
-            // }
-
-            // if (this.signup.pivot.captain == 1) {
-            //     this.signup.pivot.captain = 0;
-            //     console.log('was captain', this.signup.pivot);
-            // }
-            //
             this.signup.pivot.captain = ! this.signup.pivot.captain;
 
             this.updateCaptainOnServer(this.signup);
@@ -176,13 +166,6 @@
                     console.log(error);
                 });
             }
-
-            // $.ajax({
-            //     type: "PUT",
-            //     url: '../../api/cyclesignups/' + signup.pivot.id,
-            //     contentType: "application/json",
-            //     data: JSON.stringify({"team_id": signup.pivot.team_id})
-            // });
         },
 
         updateCaptainOnServer: function(signup) {
