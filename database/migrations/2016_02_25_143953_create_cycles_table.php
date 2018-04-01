@@ -19,7 +19,7 @@ class CreateCyclesTable extends Migration
             $table->timestamp('signup_closes_at')->nullable();;
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('format');
             $table->timestamps();
             $table->softDeletes();
