@@ -28,14 +28,28 @@
         <i class="fa fa-thumbs-down text-default" v-else></i>
     </td>
 
-            <select name="teamSelect" class="form-control form-control-sm" v-model="selected" v-on:change="teamSelectChange($event)">
-                <option disabled value>Team</option>
-                <option v-for="option in teamOptions" :value="option.value" :key="option.value">
     <td class="text-center align-middle">
+    <!--     <select name="teamSelect" class="form-control form-control-sm" v-model="selected" v-on:change="teamSelectChange($event)">
+            <option disabled value>Team</option>
+            <option v-for="option in teamOptions" :value="option.value" :key="option.value">
+                {{ option.text }}
+            </option>
+        </select> -->
+
+        <div class="dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-users"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <h6 class="dropdown-header">Move to</h6>
+                <a class="dropdown-item" v-for="option in teamOptions" :value="option.value" href="#" v-if="signup.pivot.team_id !== parseInt(option.value)" @click.prevent="addToTeam(parseInt(option.value))">
                     {{ option.text }}
-                </option>
-            </select>
-        </td>
+                </a>
+                <div class="dropdown-divider" v-if="onATeam"></div>
+                <a class="dropdown-item" value="0" href="#" v-if="onATeam" @click.prevent="removeFromTeam">Back To Signups</a>
+            </div>
+        </div>
+    </td>
 </tr>
 </template>
 
@@ -56,18 +70,17 @@
             return this.signup.pivot.team_id !== null;
         },
 
-        selected: {
-            get: function () {
-                return this.signup.pivot.team_id ? this.signup.pivot.team_id : 0;
-            },
-            set: function (v) {
-                ''
-            }
-        },
+        // selected: {
+        //     get: function () {
+        //         return this.signup.pivot.team_id ? this.signup.pivot.team_id : 0;
+        //     },
+        //     set: function (v) {
+        //         ''
+        //     }
+        // },
 
         teamOptions: function() {
             var content = [];
-            content.push({text:'Signups', value:'0'});
 
             for (let team of this.cycle.teams) {
                 var data = {};
@@ -83,6 +96,7 @@
                     content.push(data);
                 }
             }
+
             return content;
         },
 
@@ -101,20 +115,20 @@
     },
 
     methods: {
-        teamSelectChange: function(event) {
-            console.log('user selected a team', this, event);
+        // teamSelectChange: function(event) {
+        //     console.log('user selected a team', this, event);
 
-            if (event.target.type === 'select-one') {
-                var teamId = parseInt(event.target.value);
-                if (teamId === 0) {
-                    // remove from team
-                    return this.removeFromTeam();
-                }
-                if (teamId > 0) {
-                    return this.addToTeam(teamId)
-                }
-            }
-        },
+        //     if (event.target.type === 'select-one') {
+        //         var teamId = parseInt(event.target.value);
+        //         if (teamId === 0) {
+        //             // remove from team
+        //             return this.removeFromTeam();
+        //         }
+        //         if (teamId > 0) {
+        //             return this.addToTeam(teamId)
+        //         }
+        //     }
+        // },
         addToTeam: function(teamId) {
             console.log('adding to team', this, teamId);
 
