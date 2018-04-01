@@ -16,7 +16,6 @@ use App\Models\Transaction;
 use App\Models\Week;
 use App\Events\UserSignedUpAsASub;
 use App\Events\UserUpdatedSubSignup;
-use Former;
 
 class SubsController extends Controller
 {
@@ -130,7 +129,6 @@ class SubsController extends Controller
 
         // fire off event
 
-        // Former::populate($signup);
         return view('cycles.signups.edit')
                 ->withCycle($cycle)
                 ->withUser($user)
