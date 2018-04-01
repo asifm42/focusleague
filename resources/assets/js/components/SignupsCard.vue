@@ -3,29 +3,31 @@
         <div class="card-header">{{ title }}<span class="badge float-right">{{ count }}</span></div>
 
         <div class="card-body p-0">
-            <table class="table table-sm table-striped mb-0">
-                <tbody>
-                    <tr class="text-center">
-                        <th>Name</th>
-                        <th class="text-center">Div1</th>
-                        <th class="text-center">Div2</th>
-                        <th class="text-center" v-for="(week, key) in cycle.weeks" :key="week.id">Wk{{ key+1 }}</th>
-                        <th class="text-center"><i class="fa fa-star"></i></th>
-                        <th></th>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr is="signup" v-for="signup in notOnATeam" :cycle="cycle" :signup="signup" :key="signup.id"></tr>
-                </tbody>
-                <tbody>
-                <tr class="info">
-                    <th class="text-center" colspan=3>Total</th>
-                    <th class="text-center" v-for="count, key in weekCounts" :key='key'>{{count}}</th>
-                    <th class="text-center"></th>
-                    <th class="text-center"></th>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-sm table-striped mb-0">
+                    <tbody>
+                        <tr class="text-center">
+                            <th>Name</th>
+                            <th class="text-center">Div1</th>
+                            <th class="text-center">Div2</th>
+                            <th class="text-center" v-for="(week, key) in cycle.weeks" :key="week.id">Wk{{ key+1 }}</th>
+                            <th class="text-center"><i class="fa fa-star"></i></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr is="signup" v-for="signup in notOnATeam" :cycle="cycle" :signup="signup" :key="signup.id"></tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="info">
+                            <th class="text-center" colspan=3>Total</th>
+                            <th class="text-center" v-for="count, key in weekCounts" :key='key'>{{count}}</th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>

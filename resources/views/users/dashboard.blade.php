@@ -114,7 +114,7 @@
             </div>
             @endif
             </div>
-            @if($user->isAdmin())
+            @if(auth()->user()->isAdmin())
             <div class="row">
                 <div class="col-12 col-sm">
                     <div class="card mt-2 mb-2">

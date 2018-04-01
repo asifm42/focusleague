@@ -22,8 +22,8 @@
                      <tbody v-for="signup in players" v-if="team.division.toLowerCase() !== 'womens'">
                         <tr is="signup" :signup="signup" :cycle="cycle" v-if="signup.gender.toLowerCase() === 'male'"></tr>
                     </tbody>
-                    <tr class="warning" v-if="team.division.toLowerCase() === 'mixed'">
-                        <th colspan="5">Females</th>
+                    <tr class="bg-warning" v-if="team.division.toLowerCase() === 'mixed'">
+                        <th class="text-center" :colspan="5 + weekCounts.length"><i class="fa fa-female text-info"></i> Females</th>
                     </tr>
                     <tbody v-for="signup in players" v-if="team.division.toLowerCase() !== 'mens'">
                         <tr is="signup" :signup="signup" :cycle="cycle" v-if="signup.gender.toLowerCase() === 'female'"></tr>

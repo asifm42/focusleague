@@ -11,7 +11,7 @@
        <div class="row">
             <div class="col col-sm-3">
 
-                <ul class="list-group">
+                <ul class="list-group my-2">
                     <li class="list-group-item list-group-item-success">Teams</li>
                     <li class="list-group-item" v-for="team in cycle.teams" :key="team.id">
                         {{ team.name }}
@@ -21,14 +21,14 @@
                      <li class = "list-group-item"> <a href="/teams/create">Add Team</a></li>
                 </ul>
 
-                <button v-if="!cycle.teams_published" type="button" class="btn btn-primary btn-lg btn-block js-publish-teams mt-3" data-toggle="modal" data-target="#publishTeamsModal">
+                <button v-if="!cycle.teams_published" type="button" class="btn btn-primary btn-lg btn-block js-publish-teams my-2" data-toggle="modal" data-target="#publishTeamsModal">
                         Publish Teams
                 </button>
                 <div v-else>
-                <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#announceTeamsModal">
+                <button type="button" class="btn btn-primary btn-lg btn-block my-2" data-toggle="modal" data-target="#announceTeamsModal">
                         Email Team Announcement
                 </button>
-                <a :href="'/cycles/' + cycle.id + '/teams/unpublish'" class="btn btn-default btn-lg btn-block">Unpublish teams</a>
+                <a :href="'/cycles/' + cycle.id + '/teams/unpublish'" class="btn btn-default btn-lg btn-block my-2">Unpublish teams</a>
                     <!-- <a href="{{ route('cycle.teams.unpublish', $cycle->id) }}" class="btn btn-default btn-lg btn-block">Unpublish teams</a> -->
                 </div>
             </div>
@@ -36,17 +36,17 @@
 
         <div class="row mt-3">
             <div class="col col-sm-6">
-                <signups-card title="Male signups"  gender="male" :cycle="cycle"
+                <signups-card class="my-2" title="Male signups"  gender="male" :cycle="cycle"
                 ></signups-card>
             </div>
             <div class="col col-sm-6">
-                 <signups-card title="Female signups"  gender="female" :cycle="cycle"
+                 <signups-card class="my-2" title="Female signups"  gender="female" :cycle="cycle"
                 ></signups-card>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-12 col-sm-6" v-for="team in cycle.teams" :key="team.id" >
-                <team-card :team="team" :cycle="cycle"></team-card>
+                <team-card class="my-2"  :team="team" :cycle="cycle"></team-card>
             </div>
         </div>
  <!--
