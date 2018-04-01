@@ -29,7 +29,7 @@
         </td>
 
         <td class="text-center">
-            <select name="addTeam" class="form-control form-control-sm" v-model="selected" v-on:change="addToTeam($event)">
+            <select name="teamSelect" class="form-control form-control-sm" v-model="selected" v-on:change="teamSelectChange($event)">
                 <option disabled value>Team</option>
                 <option v-for="option in teamOptions" :value="option.value" :key="option.value">
                     {{ option.text }}
@@ -67,6 +67,8 @@
 
         teamOptions: function() {
             var content = [];
+            content.push({text:'Signups', value:'0'});
+
             for (let team of this.cycle.teams) {
                 var data = {};
                 data.text = team.name;
@@ -99,23 +101,32 @@
     },
 
     methods: {
-        addToTeam: function(event) {
-            console.log('clicked add to team', this, event);
+        teamSelectChange: function(event) {
+            console.log('user selected a team', this, event);
 
             if (event.target.type === 'select-one') {
-                // let signup = this.cycle.signups.find(signup => signup.id === this.signup.id);
-                // signup.pivot.team_id = parseInt(event.target.value);
-                this.signup.pivot.team_id = parseInt(event.target.value);
-                // this.selected = parseInt(event.target.value);
-                // this.$emit('addToTeam', {
-                //     signup: this.signup,
-                //     teamId: parseInt(event.target.value)
-                // });
-                // this.$dispatch('signupAddedToATeam', this.signup.id, event.target.value);
-                this.updateTeamOnServer(this.signup);
+                var teamId = parseInt(event.target.value);
+                if (teamId === 0) {
+                    // remove from team
+                    return this.removeFromTeam();
+                }
+                if (teamId > 0) {
+                    return this.addToTeam(teamId)
+                }
             }
         },
+        addToTeam: function(teamId) {
+            console.log('adding to team', this, teamId);
 
+            this.signup.pivot.team_id = teamId;
+            this.updateTeamOnServer(this.signup);
+        },
+        removeFromTeam: function() {
+            console.log('removing from team', this);
+
+            this.signup.pivot.team_id = null;
+            this.updateTeamOnServer(this.signup);
+        },
         toggleCaptain: function(event) {
             console.log('clicked toggleCaptain', this, event);
 
@@ -146,15 +157,26 @@
         },
 
         updateTeamOnServer: function(signup) {
-            axios.put('/api/cyclesignups/' + signup.pivot.id, {
-                'team_id': signup.pivot.team_id
-            })
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            if (signup.pivot.team_id == null) {
+                axios.delete('/api/cyclesignups/' + signup.pivot.id + '/team')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            } else {
+                axios.put('/api/cyclesignups/' + signup.pivot.id + '/team', {
+                    'team_id': signup.pivot.team_id
+                })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }
+
             // $.ajax({
             //     type: "PUT",
             //     url: '../../api/cyclesignups/' + signup.pivot.id,
