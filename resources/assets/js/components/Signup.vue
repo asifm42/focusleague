@@ -1,6 +1,6 @@
 <template>
 <tr>
-    <td class="pl-3"><!-- style="padding-left:5px"> -->
+    <td class="pl-3 align-middle"><!-- style="padding-left:5px"> -->
         <a title="signup.name" href="/users/signup.id">{{ nicknameOrShortName }}</a>
         <span v-if="signup.pivot.captain"><i class="fa fa-star text-warning"></i></span>
         <span v-if="signup.pivot.note"><i class="fa fa-sticky-note text-warning"
@@ -13,25 +13,25 @@
         </span>
     </td>
 
-    <td class="text-center">
+    <td class="text-center align-middle">
         <span v-html="teamDivisionIcon(signup.pivot.div_pref_first)"></span>
     </td>
-    <td class="text-center">
+    <td class="text-center align-middle">
         <span v-html="teamDivisionIcon(signup.pivot.div_pref_second)"></span>
     </td>
 
-    <td class="text-center" v-for="week in cycle.weeks"><i :class="availabilityIconClass(week)"></i></td>
+    <td class="text-center align-middle" v-for="week in cycle.weeks"><i :class="availabilityIconClass(week)"></i></td>
 
 
-        <td class="text-center" @click="toggleCaptain">
-            <i class="fa fa-thumbs-up fa-fw text-primary" v-if="signup.pivot.will_captain"></i>
-            <i class="fa fa-thumbs-down text-default" v-else></i>
-        </td>
+    <td class="text-center align-middle" @click="toggleCaptain">
+        <i class="fa fa-thumbs-up fa-fw text-primary" v-if="signup.pivot.will_captain"></i>
+        <i class="fa fa-thumbs-down text-default" v-else></i>
+    </td>
 
-        <td class="text-center">
             <select name="teamSelect" class="form-control form-control-sm" v-model="selected" v-on:change="teamSelectChange($event)">
                 <option disabled value>Team</option>
                 <option v-for="option in teamOptions" :value="option.value" :key="option.value">
+    <td class="text-center align-middle">
                     {{ option.text }}
                 </option>
             </select>
