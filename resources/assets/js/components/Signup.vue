@@ -37,7 +37,7 @@
         </select> -->
 
         <div class="dropdown">
-            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-users"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
