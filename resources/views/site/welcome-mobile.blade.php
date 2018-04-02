@@ -5,7 +5,11 @@
             <img alt="FOCUS League" title="FOCUS League" src="{{ asset('assets/img/logo.png') }}" class="logo-welcome-mobile">
         </div>
         <h6>
-            F<span class="text-info">ostering</span> O<span class="text-info">rganized</span> C<span class="text-info">ompetitive</span> U<span class="text-info">ltimate</span> S<span class="text-info">eries</span>
+            F<span style="opacity: 0.5;" class="text-info">ostering</span>
+            O<span style="opacity: 0.5;" class="text-info">rganized</span>
+            C<span style="opacity: 0.5;" class="text-info">ompetitive</span>
+            U<span style="opacity: 0.5;" class="text-info">ltimate</span>
+            S<span style="opacity: 0.5;" class="text-info">eries</span>
         </h6>
     </div>
 </div>
