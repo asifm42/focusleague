@@ -1,5 +1,5 @@
 <!-- ########## START FOCUS BANNER ########## -->
-<div class="row">
+<div class="row mb-2">
     <div class="col-12">
         <div>
             <img alt="FOCUS League" title="FOCUS League" src="{{ asset('assets/img/logo.png') }}" class="logo-welcome-mobile">
