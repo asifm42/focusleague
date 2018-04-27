@@ -113,8 +113,13 @@
                 </div>
             </div>
             @endif
-            </div>
-            @if(auth()->user()->isAdmin())
+            @if(empty($current_cycle) && empty($next_cycle))
+                <div class="col-12 col-sm my-2">
+                    @include('site.schedule')
+                </div>
+            @endif
+        </div>
+        @if(auth()->user()->isAdmin())
             <div class="row">
                 <div class="col-12 col-sm">
                     <div class="card mt-2 mb-2">
