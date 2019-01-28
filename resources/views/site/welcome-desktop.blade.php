@@ -15,7 +15,9 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-
+ <div class="alert alert-primary" role="alert">
+    <h1>Now on THURSDAYS!</h1>
+</div>
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START GAME STATUS ########## -->
 <div class="row">
