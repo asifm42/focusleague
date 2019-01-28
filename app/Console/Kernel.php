@@ -42,27 +42,32 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('emails:sendBalanceReminderEmail')
-                 ->weekly()->thursdays()->at('10:00')
+                 //->weekly()->thursdays()->at('10:00')
+                 ->weekly()->tuesdays()->at('10:00')
                  ->sendOutputTo(storage_path().'/logs/balanceReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendSignupOpenReminder')
-                 ->weekly()->fridays()->at('10:00')
+                 // ->weekly()->fridays()->at('10:00')
+                 ->weekly()->sundays()->at('10:00')
                  ->sendOutputTo(storage_path().'/logs/signupOpenReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendSignupOpenReminder')
-                 ->weekly()->mondays()->at('12:00')
+                 // ->weekly()->mondays()->at('12:00')
+                 ->weekly()->wednesdays()->at('12:00')
                  ->sendOutputTo(storage_path().'/logs/signupOpenReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendSignupClosingReminderEmail')
-                 ->weekly()->tuesdays()->at('10:00')
+                 // ->weekly()->tuesdays()->at('10:00')
+                 ->weekly()->thursdays()->at('10:00')
                  ->sendOutputTo(storage_path().'/logs/signupClosingReminderEmailLog_' . date('Y_m_d') . '.log')
                  ->emailOutputTo('asifm42@gmail.com');
 
         $schedule->command('emails:sendDelinquentsList')
-                 ->weekly()->tuesdays()->at('13:00');
+                 // ->weekly()->tuesdays()->at('13:00');
+                 ->weekly()->thursdays()->at('13:00');
 
         // $schedule->command('emails:sendNonReturnerReminderEmail')
         //          ->weekly()->tuesdays()->at('07:00')

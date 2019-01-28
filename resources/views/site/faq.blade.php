@@ -73,7 +73,7 @@
                             What is the schedule?
                         @endslot
                         @slot('answer')
-                            <p>Games will be hosted at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3981206,17z/data=!3m1!4b1!4m5!3m4!1s0x8640ead4ea8ecac5:0xfb9729c16219059c!8m2!3d29.6379651!4d-95.3959319">Houston Sports Park</a> on Tuesday nights, 8p-10p. The number of games each night will be determined by the format.</p>
+                            <p>Games will be hosted at the <a href="https://www.google.com/maps/place/Houston+Sports+Park/@29.6379651,-95.3981206,17z/data=!3m1!4b1!4m5!3m4!1s0x8640ead4ea8ecac5:0xfb9729c16219059c!8m2!3d29.6379651!4d-95.3959319">Houston Sports Park</a> on Thursday nights, 8p-10p. The number of games each night will be determined by the format.</p>
                         @endslot
                     @endcomponent
 

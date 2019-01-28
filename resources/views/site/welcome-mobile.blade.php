@@ -15,7 +15,9 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-
+ <div class="alert alert-primary" role="alert">
+    <h3>Now on</h3><h1>THURSDAYS!</h1>
+</div>
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START CYCLE STATUS ########## -->
 <div class="row">
