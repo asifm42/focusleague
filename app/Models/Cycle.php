@@ -155,7 +155,7 @@ class Cycle extends Model
      */
     public function currentWeek()
     {
-        $thisTuesday = new Carbon('this tuesday');
+        $thisTuesday = new Carbon('this thursday');
         $searchDate = $thisTuesday->format("Y-m-d").'%';
         $currentWeek = $this->weeks()->where('starts_at', 'like', $searchDate)->first();
 
