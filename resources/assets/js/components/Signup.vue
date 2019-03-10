@@ -183,7 +183,7 @@
         },
 
         updateCaptainOnServer: function(signup) {
-            axios.put('/api/cyclesignups/' + signup.pivot.id, {
+            axios.put('/api/cyclecaptains/' + signup.pivot.id, {
                 'captain': signup.pivot.captain
             })
             .then(response => {
