@@ -31,6 +31,10 @@ Route::delete('/cyclesignups/{cyclesignup}',   'Api\CycleSignupsController@destr
     ->middleware('auth:api');
 
 
+Route::put('/cyclecaptains/{cyclesignup}',   'Api\CycleCaptainsController@update')
+    ->name('api.cyclecaptains.put')
+    ->middleware('auth:api');
+
 Route::put('/cyclesignups/{cyclesignup}/team',   'Api\CycleSignupsTeamController@update')
     ->name('api.cyclesignups.team.put')
     ->middleware('auth:api');
