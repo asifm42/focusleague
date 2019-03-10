@@ -3,8 +3,8 @@ curl -s --user 'api:key-0fcbdb08fd52c5216420312b59c679a4' \
     https://api.mailgun.net/v3/mg.focusleague.com/messages \
     -F from='FOCUS League <support@focusleague.com>' \
     -F to='announce@mg.focusleague.com' \
-    -F subject='FOCUS League Rained Out - Tues, Mar 7' \
-    -F html='<rain-out-2017.html' \
+    -F subject='FOCUS League Rained Out - Thur, Feb 28' \
+    -F html='<rain-out-2019.html' \
     -F o:tag='game-status' \
     -F o:tracking=true \
     -F o:tracking-clicks=true \
