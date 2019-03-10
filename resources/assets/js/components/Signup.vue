@@ -1,7 +1,7 @@
 <template>
 <tr>
     <td class="pl-3 align-middle"><!-- style="padding-left:5px"> -->
-        <a title="signup.name" href="/users/signup.id">{{ nicknameOrShortName }}</a>
+        <a :title="signup.name" :href="'/users/' + signup.id">{{ nicknameOrShortName }}</a>
         <span v-if="signup.pivot.captain"><i class="fa fa-star text-warning"></i></span>
         <span v-if="signup.pivot.note"><i class="fa fa-sticky-note text-warning"
                     data-toggle="tooltip"
