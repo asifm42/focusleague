@@ -18,13 +18,13 @@
                     </time>
                     <div class="event m-auto">Cycle&nbsp;2019-01<br/>Registration&nbsp;Opens</div>
                 </li>
-                <li class="list-group-item d-flex flex-row">
+                <li class="list-group-item list-group-item-warning d-flex flex-row">
                     <time datetime="2019-02-28" class="icon">
                       <em>Thursday</em>
                       <strong>February</strong>
                       <span>28</span>
                     </time>
-                    <div class="event m-auto">Cycle&nbsp;2019-01 Wk1&nbsp;of&nbsp;3</div>
+                    <div class="event m-auto">Rained out</div>
                 </li>
                 <li class="list-group-item d-flex flex-row">
                     <time datetime="2019-03-07" class="icon">
@@ -32,7 +32,7 @@
                       <strong>March</strong>
                       <span>7</span>
                     </time>
-                    <div class="event m-auto">Cycle&nbsp;2019-01 Wk2&nbsp;of&nbsp;3</div>
+                    <div class="event m-auto">Cycle&nbsp;2019-01 Wk1&nbsp;of&nbsp;2</div>
                 </li>
                 <li class="list-group-item d-flex flex-row">
                     <time datetime="2019-03-14" class="icon">
@@ -40,7 +40,7 @@
                       <strong>March</strong>
                       <span>14</span>
                     </time>
-                    <div class="event m-auto">Cycle&nbsp;2018-01 Wk3&nbsp;of&nbsp;3</div>
+                    <div class="event m-auto">Cycle&nbsp;2018-01 Wk2&nbsp;of&nbsp;2</div>
                 </li>
                 <li class="list-group-item list-group-item-info d-flex flex-row">
                     <time datetime="2019-03-15" class="icon">
@@ -56,7 +56,7 @@
                       <strong>March</strong>
                       <span>21</span>
                     </time>
-                    <div class="event m-auto">Cycle&nbsp;2019-02 Wk1&nbsp;of&nbsp;3</div>
+                    <div class="event m-auto">Cycle&nbsp;2019-02 Wk1&nbsp;of&nbsp;2</div>
                 </li>
                 <li class="list-group-item d-flex flex-row">
                     <time datetime="2019-03-28" class="icon">
@@ -64,7 +64,15 @@
                       <strong>March</strong>
                       <span>28</span>
                     </time>
-                    <div class="event m-auto">Cycle&nbsp;2019-02 Wk2&nbsp;of&nbsp;3</div>
+                    <div class="event m-auto">Cycle&nbsp;2019-02 Wk2&nbsp;of&nbsp;2</div>
+                </li>
+                <li class="list-group-item list-group-item-info d-flex flex-row">
+                    <time datetime="2019-03-29" class="icon">
+                      <em>Friday</em>
+                      <strong>March</strong>
+                      <span>29</span>
+                    </time>
+                    <div class="event m-auto">Cycle&nbsp;2019-03<br/>Registration&nbsp;Opens</div>
                 </li>
                 <li class="list-group-item d-flex flex-row">
                     <time datetime="2019-04-04" class="icon">
@@ -72,18 +80,7 @@
                       <strong>April</strong>
                       <span>4</span>
                     </time>
-                    <div class="event m-auto">Cycle&nbsp;2019-02 Wk3&nbsp;of&nbsp;3</div>
-                </li>
-
-
-
-                <li class="list-group-item list-group-item-info d-flex flex-row">
-                    <time datetime="2019-04-05" class="icon">
-                      <em>Friday</em>
-                      <strong>April</strong>
-                      <span>5</span>
-                    </time>
-                    <div class="event m-auto">Cycle&nbsp;2019-03<br/>Registration&nbsp;Opens</div>
+                    <div class="event m-auto">Cycle&nbsp;2019-02 Wk1&nbsp;of&nbsp;2</div>
                 </li>
                 <li class="list-group-item d-flex flex-row">
                     <time datetime="2019-04-11" class="icon">
@@ -92,6 +89,14 @@
                       <span>11</span>
                     </time>
                     <div class="event m-auto">Cycle&nbsp;2019-03 Wk1&nbsp;of&nbsp;2</div>
+                </li>
+                <li class="list-group-item list-group-item-info d-flex flex-row">
+                    <time datetime="2019-04-12" class="icon">
+                      <em>Friday</em>
+                      <strong>April</strong>
+                      <span>12</span>
+                    </time>
+                    <div class="event m-auto">Cycle&nbsp;2019-04<br/>Registration&nbsp;Opens</div>
                 </li>
                 <li class="list-group-item list-group-item-warning d-flex flex-row">
                     <time datetime="2019-04-18" class="icon">
@@ -107,13 +112,21 @@
                       <strong>April</strong>
                       <span>25</span>
                     </time>
+                    <div class="event m-auto">Cycle&nbsp;2019-03 Wk1&nbsp;of&nbsp;2</div>
+                </li>
+                <li class="list-group-item d-flex flex-row">
+                    <time datetime="2019-05-02" class="icon">
+                      <em>Thursday</em>
+                      <strong>May</strong>
+                      <span>2</span>
+                    </time>
                     <div class="event m-auto">Cycle&nbsp;2019-03 Wk2&nbsp;of&nbsp;2</div>
                 </li>
 
             </div>
 
             <li class="list-group-item list-group-item-warning text-center">
-                <h5>May - Sept 2019 - No Games</h5>
+                <h5>TBD</h5>
             </li>
           </div>
         </ul>
