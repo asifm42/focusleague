@@ -15,6 +15,7 @@
             $transactionWeekId = $transaction->week ? $transaction->week->id : '';
             $transaction_type = $transaction->type;
             $transactionAmount = $transaction->amount_in_dollars;
+            $transactionDescription = $transaction->description;
         @endphp
     @else
         @php
@@ -25,6 +26,7 @@
             $transactionCycleId = "";// $transaction->cycle->id;
             $transactionWeekId = "";// $transaction->week->id;
             $transaction_type = "";
+            $transactionDescription = "";
             $transactionAmount = $balance;
         @endphp
     @endif
@@ -121,7 +123,14 @@
 
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea class="form-control js-description" id="description"  placeholder="Optional description"></textarea>
+          <textarea class="form-control js-description" id="description"  placeholder="Optional description" name="description">{{ old('description', $transactionDescription) }}</textarea>
+        </div>
+        <div class="form-group">
+            <h5 class="text-muted">Text Shortcuts</h5>
+            <ul>
+            <li><p class="text-muted">Cash to Asif at the fields</p></li>
+            <li><p class="text-muted">id:</p></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -220,45 +229,49 @@
                     case 'paypal':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('paypal');
-                        $('.js-description').val('id: ');
+                        // $('.js-description').val('id: ');
                         break;
                     case 'venmo':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('venmo');
-                        $('.js-description').val('');
+                        // $('.js-description').val('');
                         break;
                     case 'chase quickpay':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('chase quickpay');
-                        $('.js-description').val('');
+                        // $('.js-description').val('');
                         break;
                     case 'square cash':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('square cash');
-                        $('.js-description').val('');
+                        // $('.js-description').val('');
                         break;
                     case 'check':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('check');
-                        $('.js-description').val('');
+                        // $('.js-description').val('');
                         break;
                     case 'cash':
                         $('.js-type').val('payment');
                         $('.js-payment-type').val('cash');
-                        $('.js-description').val('Cash to Asif at the fields');
+                        // $('.js-description').val('Cash to Asif at the fields');
                         break;
                     case 'charge':
                         $('.js-type').val('charge');
                         $('.js-payment-type').val('');
-                        $('.js-description').val('');
+                        // $('.js-description').val('');
                         break;
                     case 'credit':
                         $('.js-type').val('credit');
                         $('.js-payment-type').val('');
-                        $('.js-description').val('');
+                        // $('.js-description').val('');
                         break;
                 }
             });
+
+            @if (isset($transaction) && isset($transaction->payment_type))
+                $('.js-transaction-type').find('option[value="{!! old('payment_type', $transaction->payment_type) !!}"]').prop('selected',true)
+            @endif
 
             $('.js-transaction-type').trigger('change');
 
