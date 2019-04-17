@@ -10,7 +10,7 @@
             </li>
             <div class="schedule-list">
               <div class="">
-                <li class="list-group-item list-group-item-info rounded-0 d-flex flex-row">
+                {{-- <li class="list-group-item list-group-item-info rounded-0 d-flex flex-row">
                     <time datetime="2019-02-22" class="icon">
                       <em>Friday</em>
                       <strong>February</strong>
@@ -89,7 +89,7 @@
                       <span>11</span>
                     </time>
                     <div class="event m-auto">Cycle&nbsp;2019-03 Wk1&nbsp;of&nbsp;2</div>
-                </li>
+                </li> --}}
                 <li class="list-group-item list-group-item-info d-flex flex-row">
                     <time datetime="2019-04-12" class="icon">
                       <em>Friday</em>
