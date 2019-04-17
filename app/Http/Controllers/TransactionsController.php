@@ -40,6 +40,28 @@ class TransactionsController extends Controller
         $data['balance'] = $user->getBalance();
         $data['balanceString'] = $user->getBalanceString();
 
+        //// For create transaction form ////
+        $data['typeahead_name'] = $user->name . " ( " . $user->getNicknameOrShortName() . ")";
+            $data['balance'] = $user->getBalanceInDollars();
+            $data['userId'] = $user->id;
+
+        $users = User::all();
+        $users->load('transactions');
+        $names = [];
+        foreach($users as $user){
+            $names[] = [
+                'id' => $user->id,
+                'name' => $user->name . " ( " . $user->getNicknameOrShortName() . ")",
+                'balance' => $user->getBalanceInDollars(),
+            ];
+        }
+
+        $data['users'] = $users;
+        $data['names'] = json_encode($names);
+        $data['cycles'] = Cycle::with('weeks')->get()->sortByDesc('signup_opens_at');
+        $data['currentCycle'] = Cycle::currentCycle();
+        $data['weeks'] = Week::with('cycle')->get()->sortByDesc('starts_at');
+        ////
         return view('transactions.index', $data);
     }
 
@@ -167,11 +189,12 @@ class TransactionsController extends Controller
     public function destroy($id)
     {
         $transaction = Transaction::findOrFail($id);
-
+        // $user = $transaction->user;
         $transaction->delete();
 
         flash()->success('Transaction deleted');
 
-        return redirect()->route('admin.dashboard');
+        // return redirect()->route('admin.dashboard');
+        return redirect()->route('users.balance', ['id' => $transaction->user->id]);
     }
 }
