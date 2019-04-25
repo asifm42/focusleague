@@ -15,9 +15,7 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
- <div class="alert alert-warning" role="alert">
-    <h3>No Game</h3><h3>Thursday, 4/18/19</h3>
-</div>
+
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START CYCLE STATUS ########## -->
 <div class="row">
