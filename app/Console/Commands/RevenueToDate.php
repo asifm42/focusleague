@@ -50,7 +50,7 @@ class RevenueToDate extends Command
         $outstanding = 0;
 
         $transactions = $transactions->filter(function ($transaction){
-            return $transaction->created_at->gt(Carbon::parse('2016-12-31'));
+            return $transaction->created_at->gt(Carbon::parse('2018-12-31'));
         });
 
         $cost = $weeks->filter(function ($week) {
