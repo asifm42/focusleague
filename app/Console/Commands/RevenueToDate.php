@@ -54,7 +54,7 @@ class RevenueToDate extends Command
         });
 
         $cost = $weeks->filter(function ($week) {
-                return $week->created_at->gt(Carbon::parse('2016-12-31'))
+                return $week->created_at->gt(Carbon::parse('2018-12-31'))
                     && $week->starts_at->lt(Carbon::now())
                     && !$week->isRainedOut();
             })->count() * (9500*2);
