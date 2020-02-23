@@ -183,4 +183,15 @@ class UserMailer extends Mailer
 
         // return $this->sendTo($user, $subject, $view, $data, $headers);
     }
+
+    /**
+     * Sends an announcement email to the user.
+     *
+     * @return void
+     */
+    public function sendAnnouncementEmail(User $user, $view_name, $subject)
+    {
+        Mail::to($user->email, $user->name)
+            ->queue(new Mailable\AnnouncementEmail($user, $view_name, $subject));
+    }
 }
