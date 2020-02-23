@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendAvailabilityEmail::class,
         \App\Console\Commands\SendDelinquentsListEmail::class,
         \App\Console\Commands\SendAvailabilitySurvey2017Email::class,
+        \App\Console\Commands\SendAnnouncementEmail::class,
     ];
 
     /**
