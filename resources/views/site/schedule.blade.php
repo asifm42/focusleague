@@ -74,6 +74,14 @@
                     </time>
                     <div class="event m-auto">Cycle&nbsp;2020-02 Wk2&nbsp;of&nbsp;4</div>
                 </li>
+                <li class="list-group-item list-group-item-warning d-flex flex-row">
+                    <time datetime="2019-04-16" class="icon">
+                      <em>Thursday</em>
+                      <strong>April</strong>
+                      <span>16</span>
+                    </time>
+                    <div class="event m-auto">No games.<br/>HSP closed for maintainance.</div>
+                </li>
                 <li class="list-group-item d-flex flex-row">
                     <time datetime="2020-04-23" class="icon">
                       <em>Thursday</em>
