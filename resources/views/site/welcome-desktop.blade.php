@@ -15,9 +15,9 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-<div class="alert alert-warning" role="alert">
+<div class="alert alert-info" role="alert">
   <h2 class="alert-heading">FOCUS League returns March 5, 2020!</h2>
-  <p>Aww yeah, time to dust off those cleats and start preppin' for the 2020 season. Come get some competitive reps at FOCUS League!</p><p>First game on Thursday, March 5th, 2020.</p><p>Registration opens on Friday, February 28th.</p>
+  <p>Aww yeah, time to dust off those cleats and start preppin' for the 2020 season. Come get some competitive reps at FOCUS League!</p>
 </div>
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START GAME STATUS ########## -->
