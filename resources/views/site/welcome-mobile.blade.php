@@ -15,10 +15,10 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-<div class="alert alert-info" role="alert">
+{{-- <div class="alert alert-info" role="alert">
   <h4 class="alert-heading">FOCUS League returns March 5, 2020!</h4>
   <p>Aww yeah, time to dust off those cleats and start preppin' for the 2020 season. Come get some competitive reps at FOCUS League!</p>
-</div>
+</div> --}}
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 <!-- ########## START CYCLE STATUS ########## -->
 <div class="row">
