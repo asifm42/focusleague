@@ -118,4 +118,26 @@ class CycleMailer extends Mailer
                 ->queue(new SubTeamAnnouncementEmail($week));
         }
     }
+
+
+    // /**
+    //  * Sends an announcment email to the registered players placed on a team .
+    //  *
+    //  * @return Illuminate\Database\Eloquent\Collection
+    //  */
+    // public static function sendCycleAnnouncementEmail($view_name, $subject)
+    // {
+    //     $cycle = Cycle::currentCycle();
+    //     $cycle->load('teams', 'teams.players', 'teams.players.user');
+
+    //     $mailer = new UserMailer;
+
+    //     return $cycle->teams->each(function ($team) use ($cycle, $mailer, $view_name, $subject) {
+    //         $team->players->each(function ($player) use ($cycle, $team, $mailer, $view_name, $subject) {
+    //             if ($player->user) {
+    //                 $mailer->sendAnnouncementEmail($player->user, $view_name, $subject);
+    //             }
+    //         });
+    //     });
+    // }
 }
