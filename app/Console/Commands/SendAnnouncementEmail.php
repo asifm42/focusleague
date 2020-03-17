@@ -40,7 +40,7 @@ class SendAnnouncementEmail extends Command
      */
     public function handle()
     {
-        $view = $this->ask('What is the name of the view?');
+        $view = $this->ask('What is the name of the view? (you may need to include namespace. ex: "emails/")');
 
         $this->info($view);
 
