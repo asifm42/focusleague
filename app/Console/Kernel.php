@@ -31,6 +31,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendAvailabilitySurvey2017Email::class,
         \App\Console\Commands\SendAnnouncementEmail::class,
         \App\Console\Commands\SendCycleAnnouncementEmail::class,
+        \App\Console\Commands\ApplyCovid19Credit::class,
+
     ];
 
     /**
