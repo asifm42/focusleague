@@ -15,12 +15,18 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-{{-- <div class="alert alert-info" role="alert">
-  <h4 class="alert-heading">FOCUS League returns March 5, 2020!</h4>
-  <p>Aww yeah, time to dust off those cleats and start preppin' for the 2020 season. Come get some competitive reps at FOCUS League!</p>
-</div> --}}
+<div class="alert alert-warning" role="alert">
+  <h4 class="alert-heading">Cycle 2020-01 Wk 3 & 4 Canceled</h4>
+  <p>2020 season on pause due to social distancing guidelines in an effort to slow down the spread of COVID-19.</p>
+</div>
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
+
+
+<!-- Temporarily commenting this out during Covid-19 pause -->
+
+
 <!-- ########## START CYCLE STATUS ########## -->
+{{--
 <div class="row">
     <div class="col-12">
     @if($current_cycle && $current_cycle->gameToday())
@@ -204,7 +210,14 @@
     @endif
     </div>
 </div>
+--}}
 <!-- ########## END CYCLE STATUS ########## -->
+
+
+<!-- ########## END Temp commenting for Covid ########## -->
+
+
+
 <!-- ########## START USER BUTTONS ROW ########## -->
 @if(auth()->check())
 <div class="row">

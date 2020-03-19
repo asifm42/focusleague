@@ -15,12 +15,19 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-{{-- <div class="alert alert-info hidden" role="alert">
-  <h2 class="alert-heading">FOCUS League returns March 5, 2020!</h2>
-  <p>Aww yeah, time to dust off those cleats and start preppin' for the 2020 season. Come get some competitive reps at FOCUS League!</p>
-</div> --}}
+<div class="alert alert-warning hidden" role="alert">
+  <h2 class="alert-heading">Cycle 2020-01 Wk 3 & 4 Canceled</h2>
+  <p>2020 season on pause due to social distancing guidelines in an effort to slow down the spread of COVID-19.</p>
+</div>
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
+
+
+
+<!-- Temporarily commenting this out during Covid-19 pause -->
+
+
 <!-- ########## START GAME STATUS ########## -->
+{{--
 <div class="row">
     <div class="col-12">
     @if($current_cycle && $current_cycle->gameToday())
@@ -65,10 +72,11 @@
                 </p>
             @endif
             <p>
+ --}}
                 {{-- <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=29.638154&lon=-95.396883&name=Houston Sports Park (77045)"> </iframe> --}}
 
                 {{-- <script type='text/javascript' src='https://darksky.net/widget/small/29.6379651,-95.3959319/us12/en.js?width=100%&height=150&title=Houston Sports Park&textColor=333333&bgColor=transparent&transparency=true&skyColor=333&fontFamily=Default&customFont=&units=us'></script> --}}
-
+{{--
                 <script type='text/javascript' src='https://darksky.net/widget/graph-bar/29.637965,-95.395932/us12/en.js?width=100%&height=400&title=Houston Sports Park&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Default&customFont=&units=us&timeColor=333333&tempColor=333333&currentDetailsOption=true'></script>
             </p>
             <div class="row">
@@ -106,9 +114,10 @@
     @endif
     </div>
 </div>
+--}}
 <!-- ########## END GAME STATUS ########## -->
 <!-- ########## START CYCLE STATUS ########## -->
-
+{{--
 <div class = "row justify-content-sm-center">
     <div class="col-12 col-sm-6 col-md-6">
     @if($current_cycle && !$current_cycle->gameToday())
@@ -222,7 +231,12 @@
     @endif
     </div>
 </div>
+--}}
 <!-- ########## END CYCLE STATUS ########## -->
+
+
+<!-- ########## END Temporary commenting ########## -->
+
 <!-- ########## START USER BUTTONS ROW ########## -->
 @if(auth()->check())
 <div class = "row">
