@@ -102,7 +102,7 @@ class ApplyRainOutCredit extends Command
             // if user is a captain, then factor in the 25% discount they received.
             if ($signup->pivot->captain == 1) {
                 $transaction->amount = round ( ($transaction->amount * 0.75), 2, PHP_ROUND_HALF_DOWN );
-                $transaction->amount = $transaction->amount * 0.75;
+                //$transaction->amount = $transaction->amount * 0.75;
                 $transaction->description = 'Rainout captain credit';
             }
 
