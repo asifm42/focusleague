@@ -35,7 +35,9 @@
 
 </head>
 <body id="@yield('bodyID')" class="@yield('class')">
-
+<div class="alert alert-warning hidden" role="alert">
+  <h5 class="text-center"><strong>Cycle 2020-02 TBD</strong>: 2020 season on pause until 4/30 due to social distancing guidelines in an effort to slow down the spread of COVID-19.</h5>
+</div>
 @include('navbars.default')
 
 @include('flash::message')
