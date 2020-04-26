@@ -15,10 +15,10 @@
 </div>
 <!-- ########## END FOCUS BANNER ########## -->
 <!-- ########## START FOCUS ANNOUNCEMENT ########## -->
-<div class="alert alert-warning hidden" role="alert">
+{{-- <div class="alert alert-warning hidden" role="alert">
   <h2 class="alert-heading">Cycle 2020-02 TBD</h2>
   <p>2020 season on pause until 4/30 due to social distancing guidelines in an effort to slow down the spread of COVID-19.</p>
-</div>
+</div> --}}
 <!-- ########## END FOCUS ANNOUNCEMENT ########## -->
 
 
