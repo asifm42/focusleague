@@ -1,4 +1,4 @@
-<?php
+s<?php
 
 namespace App\Http\Requests;
 
@@ -38,7 +38,8 @@ class UserStoreRequest extends Request
             'dominant_hand'                 => 'required|in:left,right',
             'height'                        => 'required|min:48|max:84|numeric',
             'division_preference_first'     => 'required|in:mens,mixed,womens',
-            'password'                      => 'required|confirmed|min:8'
+            'password'                      => 'required|confirmed|min:8',
+            'humancaptcha'                  => 'required|in:backhand,flick'
         ];
     }
 
