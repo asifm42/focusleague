@@ -158,7 +158,7 @@
                 <div id="password_confirmationFeedback" class="invalid-feedback">{{ $errors->has('password_confirmation') ? $errors->first('password_confirmation') : '' }}</div>
             </div>
             <div class="form-group mb-0 {{ $errors->has('humancaptcha') ? 'has-danger' : ''}}">
-                <label for="humancaptcha">What is the force?</label>
+                <label for="humancaptcha" class="required">What is the force?</label>
                 <input name="humancaptcha" type="text" class="form-control {{ $errors->has('humancaptcha') ? 'is-invalid' : ''}}" id="humancaptcha" aria-describedby="humancaptchaHelp" placeholder="Name one of the 2 common throws" value={{ old('humancaptcha', $user->humancaptcha) }}>
                 <small id="humancaptchaHelp" class="form-text text-muted">Just checking if a human is submitting this form.</small>
                 <div id="humancaptchaFeedback" class="invalid-feedback">{{ $errors->has('humancaptcha') ? $errors->first('humancaptcha') : '' }}</div>
