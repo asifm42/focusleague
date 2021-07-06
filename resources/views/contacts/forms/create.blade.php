@@ -19,6 +19,12 @@
                 <textarea name="message" class="form-control {{ $errors->has('message') ? 'is-invalid' : ''}}" id="message" rows="5" aria-describedby="messageHelp" placeholder="Required message" required>{{ old('message') }}</textarea>
                 <div id="messageFeedback" class="invalid-feedback">{{ $errors->has('message') ? $errors->first('message') : '' }}</div>
             </div>
+            <div class="form-group mb-0 {{ $errors->has('humancaptcha') ? 'has-danger' : ''}}">
+                <label for="humancaptcha" class="required">What is the force?</label>
+                <input name="humancaptcha" type="text" class="form-control {{ $errors->has('humancaptcha') ? 'is-invalid' : ''}}" id="humancaptcha" aria-describedby="humancaptchaHelp" placeholder="Name one of the 2 common throws" value={{ old('humancaptcha', $user->humancaptcha) }}>
+                <small id="humancaptchaHelp" class="form-text text-muted">Just checking if a human is submitting this form.</small>
+                <div id="humancaptchaFeedback" class="invalid-feedback">{{ $errors->has('humancaptcha') ? $errors->first('humancaptcha') : '' }}</div>
+            </div>
         </div>
     </div>
     <input class="btn btn btn-primary btn-block" type="submit" value="Send">
