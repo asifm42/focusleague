@@ -149,7 +149,7 @@
                 <div id="passwordFeedback" class="invalid-feedback">{{ $errors->has('password') ? $errors->first('password') : '' }}</div>
             </div>
 
-            <div class="form-group mb-0 {{ $errors->has('password_confirmation') ? 'has-danger' : ''}}">
+            <div class="form-group {{ $errors->has('password_confirmation') ? 'has-danger' : ''}}">
                 <label for="password_confirmation" class="{{ $edit ? '' : 'required' }}">Password (again)</label>
                 <input name="password_confirmation" type="password" class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : ''}} password_confirmation-js" id="password_confirmation" aria-describedby="password_confirmationHelp" placeholder="{{ $edit ? 'Required password confirmation IF changing' : 'Required password confirmation' }}" {{ $edit ? '' : 'required' }}>
                 @if($edit === true)
@@ -157,7 +157,7 @@
                 @endif
                 <div id="password_confirmationFeedback" class="invalid-feedback">{{ $errors->has('password_confirmation') ? $errors->first('password_confirmation') : '' }}</div>
             </div>
-            <div class="form-group {{ $errors->has('humancaptcha') ? 'has-danger' : ''}}">
+            <div class="form-group mb-0 {{ $errors->has('humancaptcha') ? 'has-danger' : ''}}">
                 <label for="humancaptcha">What is the force?</label>
                 <input name="humancaptcha" type="text" class="form-control {{ $errors->has('humancaptcha') ? 'is-invalid' : ''}}" id="humancaptcha" aria-describedby="humancaptchaHelp" placeholder="Name one of the 2 common throws" value={{ old('humancaptcha', $user->humancaptcha) }}>
                 <small id="humancaptchaHelp" class="form-text text-muted">Just checking if a human is submitting this form.</small>

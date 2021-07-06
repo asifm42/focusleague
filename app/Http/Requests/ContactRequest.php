@@ -27,7 +27,7 @@ class ContactRequest extends Request
             'name' => 'required|min:2|max:255',
             'email'=> 'required|email',
             'message' => 'required|min:10|max:1000',
-            'subject' => 'string|min:10|max:1000',,
+            'subject' => 'string|min:10|max:1000',
             'humancaptcha' => 'required|in:backhand,flick'
         ];
     }
